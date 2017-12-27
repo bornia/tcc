@@ -34,67 +34,82 @@
       <?php require('navbar-out.html'); ?> 
     </header>
 
-    <section class="container-wip" role="main">
-      <div class="row">
-        <div class="col-md-12">
-          <h1> Cadastre-se </h1>
-        </div>
-      </div>
-
-      <form method="" action="">
+    <div class="main container">
+      <section class="container-wip" role="main">
         <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label for="username"> Digite seu e-mail </label>
-              <input type="email" name="username" placeholder="exemplo@dominio.com" class="form-control" id="username" required>
-            </div>
+          <div class="col-md-11">
+            <h1> Cadastre-se </h1>
           </div>
-        </div>
 
-        <div class="row">      
-          <div class="col-md-12">
-            <div class="form-group">
-              <label for="senha"> Digite sua senha </label>
-              <input type="password" name="senha" placeholder="Senha" class="form-control" id="senha" required>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label for="confirmar_senha"> Confirme sua senha </label>
-              <input type="password" name="confirmar_senha" placeholder="Digite novamente sua senha" class="form-control" id="confirmar_senha" required>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">      
-          <div class="col-md-12">
-            <div class="form-group">
-              <label for="moeda"> País/Moeda </label>
-              <select name="moeda" class="form-control" id="moeda" required>
-                <option value=""> Brasil (R$) </option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <button type="submit" class="btn btn-default" id="btn-submit" title="Entrar no aplicativo"> Cadastrar </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-12 text-left">
+          <div class="col-md-1 text-right">
             <a href="login.php"> Voltar </a>
           </div>
         </div>
-      </form>
-    </section>
+
+        <form method="" action="">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="nome"> Nome </label>
+                <input type="text" name="nome" id="nome" placeholder="Primeiro e, se tiver, segundo nome" class="form-control" required>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="sobrenome"> Sobrenome </label>
+                <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome completo" class="form-control" required>
+              </div>
+            </div>
+          </div> <!-- Nome e sobrenome -->
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="email"> E-mail </label>
+                <input type="email" name="email" placeholder="exemplo@dominio.com" class="form-control" id="email" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">      
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="senha"> Senha </label>
+                <input type="password" name="senha" placeholder="Senha" class="form-control" id="senha" required>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="confirmar_senha"> Confirme sua senha </label>
+                <input type="password" name="confirmar_senha" placeholder="Digite novamente sua senha" class="form-control" id="confirmar_senha" onpaste="return false;" ondrop="return false;" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">      
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="moeda"> País </label>
+                <select name="moeda" class="form-control" id="moeda" required>
+                  <option value="none" disabled selected> Selecione a moeda do seu país... </option>
+                  <option value=""> Brasil (R$) </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <button type="submit" class="btn btn-default" id="btn-submit" title="Entrar no aplicativo"> Cadastrar </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

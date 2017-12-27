@@ -21,18 +21,22 @@ h1 {
 	font-size: 2.2em;
 }
 
+div.main {
+	padding-top: 4.2em;
+	padding-bottom: 4.2em;
+}
+
 .container-wip {
 	border-radius: 15px;
 	-webkit-border-radius: 15px;
 	-moz-border-radius: 15px;
 	background: #FFF;
-	margin-bottom: 1.4em;
 	padding: 2.5em 2em;
-	width: 40%;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	margin: 12em auto;
+    margin: 1.4em auto 0 auto;
+    width: 60%;
 }
 
 #btn-submit {
