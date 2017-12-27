@@ -1,0 +1,61 @@
+/*
+ * DIVS
+ */
+
+ html {
+ 	width: 100%;
+	height: 100%;
+ }
+
+body {
+	background: rgba(0,205,21,0.65);
+	font-family: "Gill Sans", Lucida, sans-serif;
+	background-attachment: fixed;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.container-wip {
+	border-radius: 15px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	background: #FFF;
+	margin-bottom: 1.4em;
+	padding: 2.5em 2em;
+	width: 30em;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	margin: 14em auto;
+}
+
+.container-brand {
+
+}
+
+.padding-normalize {
+	padding: 0 0;
+}
+
+/* FORMS LOGIN */
+
+#btn-submit {
+	width: 100%;
+	background: #F9775F;
+	color: #FFF;
+	font-size: 1.1em;
+	font-weight: 600;
+}
+
+#btn-signin {
+	text-align: right;
+}
+
+.font-xs {
+	font-size: 0.9em;
+}
+
+#brand { /* Imagem do logo */
+	
+}

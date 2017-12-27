@@ -1,0 +1,124 @@
+/*
+ * DIVS
+ */
+
+body {
+	background: rgba(0,205,21,0.65);
+	font-family: "Gill Sans", Lucida, sans-serif;
+	background-attachment: fixed;
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+}
+
+h1 {
+	color: #F9775F;
+	font-size: 2.2em;
+}
+
+.container-wip {
+	border-radius: 15px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	background: #FFF;
+	padding: 2.5em 2em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-top: 1.4em;
+}
+
+div.main {
+	padding-top: 4.2em;
+	padding-bottom: 4.2em;
+}
+
+/* RESUMO FINANCEIRO */
+
+#profile-picture {
+	border-radius: 1000px;
+	border: 3px solid #F9775F;
+	background-size: cover;
+	width: 10em;
+}
+
+.financial-summary-glyphicon {
+	font-size: 4em;
+}
+
+#glyphicon-export-color {
+	color: red;
+}
+
+#glyphicon-import-color {
+	color: green;
+}
+
+#financial-summary-format {
+	text-align: center;
+	padding-left: 2em;
+}
+
+.financial-summary-status {
+	color: #47525E;
+	font-size: 1.1em;
+}
+
+#value-to-receive {
+	color: #00A000;
+	font-weight: 600;
+}
+
+#value-to-pay {
+	color: #EF0000;
+	font-weight: 600;
+}
+
+/* MEUS EVENTOS */
+
+#btn-delete-div {
+
+}
+
+#btn-delete {
+	
+}
+
+#table-events {
+	margin-top: 2em;
+}
+
+.btn-crud {
+	height: 36px;
+	width: 40px;
+	border-radius: 5px;
+}
+
+#paginacao {
+	text-align: right;
+	font-weight: bold;
+}
+
+.change-cursor {
+	cursor: pointer;
+}
+
+/* MODAL ADICIONA EVENTO */
+
+#participantes {
+	height: 8em;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.item-participante {
+	margin: 0em 0em;
+}
+
+#friend-profile-picture {
+	width: 3.5em;
+	height: 3.5em;
+	border-radius: 3.5em;
+	-webkit-border-radius: 3.5em;
+	-moz-border-radius: 3.5em;
+}

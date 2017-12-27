@@ -1,0 +1,28 @@
+nav#navigation-menu {
+	background: rgba(0, 0, 0, 0.6);
+	border: none;
+	padding: 5px 0px;
+}
+
+#navigation-menu .navbar-nav>li>a {
+	color: white;
+	font-size: 1.1em;
+	font-weight: 600;
+}
+/*
+#navigation-menu .navbar-nav>li>a:link {
+	color: #F9775F;
+}*/
+/*
+#navigation-menu .navbar-nav>li>a:visited {
+	color: #F9775F;
+}*/
+
+#navigation-menu .navbar-nav>li>a:hover {
+	color: #F9775F;
+}
+/*
+#navigation-menu .navbar-nav>li>a:active {
+	color: #F9775F;
+	background: none;
+}*/
