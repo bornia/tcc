@@ -33,7 +33,15 @@ div.main {
     margin-top: 1.4em;
 }
 
-#legenda-foto-perfil {
-	font-weight: 100;
-	margin-top: 2%;
+#btn-foto-perfil {
+	width: 100%;
+}
+
+#btn-submit {
+	margin-top: 1em;
+	width: 100%;
+	background: #F9775F;
+	color: #FFF;
+	font-size: 1.1em;
+	font-weight: 600;
 }

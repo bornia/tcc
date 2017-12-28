@@ -29,7 +29,11 @@
     <![endif]-->
 
     <!-- Substitui/adiciona algumas formatações do bootstrap -->
-    <style type="text/css" rel="stylesheet"> </style>
+    <style type="text/css" rel="stylesheet">
+      .lowweight {
+        font-weight: 100;
+      }
+    </style>
   </head>
   <body>
   	<header role="banner">
@@ -37,42 +41,164 @@
     </header>
    
    	<div class="main container" role="main">
-      <section id="configuracoes-basicas" class="container-wip">
+      <section id="configuracoes-pessoais" class="container-wip">
+        <div class="row">
+          <div class="col-md-11">
+            <h1> Configurações </h1>
+          </div>
+        </div>
+
         <form method="" action="">
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-2">
               <div class="row">
                 <div class="col-md-12" align="center">           
                   <img id="foto-perfil" src="img/no-profile-picture.jpg" class="img-responsive img-rounded" style="width: 10em; height: 10em;" alt="Foto de perfil">
-                  <label id="legenda-foto-perfil" for="foto-perfil"> <a href=""> Editar Foto </a> </label>
+                  <input id="btn-foto-perfil" type="file" class="btn btn-link pull-right" accept="image/png, image/jpeg"> Editar Foto </input>
                 </div>
               </div> <!-- row - Foto de perfil -->
             </div> <!-- col - Foto de perfil -->
 
-            <div class="col-md-8">
+
+
+            <div class="col-md-4 col-md-offset-1">
               <div class="row">
-                <div class="col-md-5">
-                    <div class="form-group">
-                      <label for="nome"> Nome </label>
-                      <input type="text" name="nome" class="form-control" value="<?php echo $nome = 'Maria Paula' ?>">
-                    </div>
-                  </div>
+                <div class="panel">
+                  <h4> Dados Primários </h4>
+                </div>
+              </div>
 
-                  <div class="col-md-5 col-lg-offset-1">
-                    <div class="form-group">
-                      <label for="sobrenome"> Sobrenome </label>
-                      <input type="text" name="sobrenome" class="form-control" value="<?php echo $sobrenome = 'Oliveira da Silva' ?>">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="nome"> Nome </label>
+                    <input id="nome" type="text" name="nome" class="form-control" value="<?= $nome = 'Maria Paula Oliveira' ?>" required>
+                  </div>
+                </div>
+              </div> <!-- Nome -->
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="email"> E-mail </label>
+                    <input id="email" type="email" name="email" class="form-control" value="<?= $email = 'maria@gmail.com' ?>" autocomplete="off" required>
+                  </div>
+                </div>
+              </div> <!-- E-mail -->
+
+              <div class="row">      
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="pais_moeda"> País e Moeda </label>
+                    <?php require('paises_moedas.html'); ?>
+                  </div>
+                </div>
+              </div> <!-- Moeda -->
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="senha"> Senha </label>
+                    <button type="button" class="btn-link pull-right" aria-label="Editar senha"> Editar </button>
+                    <input id="senha" type="password" name="senha" class="form-control" value="<?= $senha = '123456789' ?>" readonly>
+                  </div>
+                </div>
+              </div> <!-- Senha -->
+            </div> <!-- Dados primários -->
+
+            <div class="col-md-4 col-md-offset-1">
+              <div class="row">
+                <div class="panel">
+                  <h4> Dados Secundários </h4>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="celular"> Celular </label>
+                    <input id="celular" type="tel" name="celular" class="form-inline form-control" placeholder="DD + número" pattern="[0-9]{11}" title="** Não insira espaços, letras e caracteres especiais. **" >
+                  </div>
+                </div> <!-- Celular -->
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="nascimento"> Data de Nascimento </label>
+                    <input id="nascimento" type="date" name="nascimento" class="form-control" max="2018-01-01">
+                  </div>
+                </div>
+              </div> <!-- Celular e data de nascimento -->
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="estado"> Estado </label>
+                    <select id="estado" name="estado" class="form-control">
+                      <option value="saopaulo"> São Paulo </option>
+                    </select>
+                  </div>
+                </div>
+              </div> <!-- Estado -->
+
+              <div class="row">
+                <div class="panel">
+                  <h4> Notificações <small> Receber notificões quando: </small> </h4>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div>
+                      <label class="lowweight">
+                        <input type="checkbox" name="notificacoes" value="">
+                        Um <u>grupo</u> for criado/modificado.
+                      </label>
+
+                      <span class="glyphicon glyphicon-info-sign pull-right" title="O usuário será notificado quando um grupo, no qual ele foi incluído, for criado, excluído ou sofrer qualquer tipo de modificação."> </span>
+                    </div>
+                  
+                    <div>
+                      <label class="lowweight">
+                        <input type="checkbox" name="notificacoes" value="">
+                        Um <u>evento</u> for incluído/alterado.
+                      </label>
+
+                      <span class="glyphicon glyphicon-info-sign pull-right" title="O usuário será notificado quando um evento, no qual ele foi incluído, for adicionado, excluído ou sofrer qualquer tipo de alteração."> </span>
+                    </div>
+
+                    <div>
+                      <label class="lowweight">
+                        <input type="checkbox" name="notificacoes" value="">
+                        Faltar 2 dias para uma conta expirar.
+                      </label>
+
+                      <span class="glyphicon glyphicon-info-sign pull-right" title="O usuário será notificado 2 dias antes de uma conta, na qual ele foi incluído, atingir sua data de pagamento."> </span>
+                    </div>
+
+                    <div>
+                      <label class="lowweight">
+                        <input type="checkbox" name="notificacoes" value="">
+                        Novas funcionalidades forem lançadas.
+                      </label>
+
+                      <span class="glyphicon glyphicon-info-sign pull-right" title="O usuário será notificado quando novas funcionalidades ficarem disponíveis."> </span>
                     </div>
                   </div>
-              </div> <!-- row - Informações básicas -->
-            </div> <!-- col - Informações básicas -->
+                </div>
+              </div> <!-- Notificações -->
+            </div> <!-- Dados secundários -->
           </div> <!-- Foto de perfil e informações básicas -->
-        </form>
-      </section> <!-- Configurações Básicas -->
 
-      <section id="configuracoes-notificacoes">
-        
-      </section> <!-- Configurações de Notificações -->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <button id="btn-submit" type="submit" class="btn btn-default pull-right"> Salvar Dados </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </section> <!-- Configurações Pessoais -->
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
