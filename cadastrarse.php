@@ -37,31 +37,20 @@
     <div class="main container">
       <section class="container-wip" role="main">
         <div class="row">
-          <div class="col-md-11">
+          <div class="col-md-12">
             <h1> Cadastre-se </h1>
-          </div>
-
-          <div class="col-md-1 text-right">
-            <a href="login.php"> Voltar </a>
           </div>
         </div>
 
         <form method="" action="">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
               <div class="form-group">
                 <label for="nome"> Nome </label>
-                <input type="text" name="nome" id="nome" placeholder="Primeiro e, se tiver, segundo nome" class="form-control" required>
+                <input type="text" name="nome" id="nome" placeholder="Nome que será exibido para os seus amigos" class="form-control" required>
               </div>
             </div>
-
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="sobrenome"> Sobrenome </label>
-                <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome completo" class="form-control" required>
-              </div>
-            </div>
-          </div> <!-- Nome e sobrenome -->
+          </div> <!-- Nome -->
 
           <div class="row">
             <div class="col-md-12">
@@ -91,11 +80,8 @@
           <div class="row">      
             <div class="col-md-12">
               <div class="form-group">
-                <label for="moeda"> País </label>
-                <select name="moeda" class="form-control" id="moeda" required>
-                  <option value="none" disabled selected> Selecione a moeda do seu país... </option>
-                  <option value=""> Brasil (R$) </option>
-                </select>
+                <label for="pais_moeda"> País </label>
+                <?php require('paises_moedas.html'); ?>
               </div>
             </div>
           </div>
