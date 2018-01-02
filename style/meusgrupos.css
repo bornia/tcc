@@ -26,6 +26,10 @@ div.main {
 	padding-bottom: 4.2em;
 }
 
+.group-name {
+	color: black;
+}
+
 .container-wip {
 	border-radius: 15px;
 	-webkit-border-radius: 15px;

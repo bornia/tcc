@@ -43,11 +43,7 @@
       }
     </style>
 
-    <script type="text/javascript">
-        function check_nchar() {
-          
-        }
-    </script>
+    <script type="text/javascript" src="js/meusgrupos.js"> </script>
   </head>
   <body>
   	<header role="banner">
@@ -81,11 +77,19 @@
               </div>
 
               <div class="modal-body">
+                <?php
+                  $limite_nome_grupo = 30;
+                  $limite_descricao_grupo = 190;
+                ?>
+
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="nome_grupo"> Nome do Grupo: </label>
-                      <input id="nome_grupo" type="text" name="nome_grupo" class="form-control" maxlength="60">
+                      <small class="sub-font pull-right">
+                        <span id="nchar_nome"> <?= $limite_nome_grupo ?> </span> caracteres restantes
+                      </small>
+                      <input id="nome_grupo" type="text" name="nome_grupo" class="form-control" maxlength="30" onkeyup="return check_nchar('nome_grupo', 'nchar_nome', <?= $limite_nome_grupo ?>);" onpaste="return false;">
                     </div>
                   </div>
                 </div>
@@ -94,7 +98,10 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for=""> Descrição: </label>
-                      <textarea class="form-control" style="min-width: 100%; max-width: 100%; max-height: 6em;" rows="3" maxlength="206"> </textarea>
+                      <small class="sub-font pull-right">
+                        <span id="nchar_descricao"> <?= $limite_descricao_grupo ?> </span> caracteres restantes
+                      </small>
+                      <textarea id="descricao_grupo" class="form-control" style="min-width: 100%; max-width: 100%; max-height: 6em;" rows="3" maxlength="190" onkeyup="return check_nchar('descricao_grupo', 'nchar_descricao', <?= $limite_descricao_grupo ?>);" onpaste="return false;"> </textarea>
                     </div>
                   </div>
                 </div>
@@ -106,138 +113,38 @@
               </div>
             </div> <!-- modal-content -->
           </div> <!-- modal-dialog -->
-        </form>
+        </form> <!-- fim do modal -->
 
         <div class="panel panel-default" style="overflow-y: auto;">
           <div class="panel-body">
-            <div class="row panel" style="padding-bottom: 0.8em;">
-              <div class="col-md-2" align="center">
-                <img src="img/no-profile-picture-160x120.jpg" class="img-responsive img-circle">
-              </div> <!-- Imagem do grupo -->
+            <a class="group-link" href="#">
+              <div class="row panel" style="padding-bottom: 0.8em;">
+                <div class="col-md-2" align="center">
+                  <img src="img/no-profile-picture-160x120.jpg" class="img-responsive img-circle">
+                </div> <!-- Imagem do grupo -->
 
-              <div class="col-md-9">
-                <div class="row">
-                  <div class="col-md-12">
-                    Nome do Grupo
+                <div class="col-md-10">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <span class="group-name"> Nome do Grupo </span>
+                    </div>
                   </div>
-                </div>
 
-                <div class="row">
-                  <div class="col-md-12">
-                    <small style="color: #C0C0C0;"> 7 Membros </small>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <small class="sub-font"> 7 Membros </small>
+                    </div>
                   </div>
-                </div>
-              </div> <!-- Nome, e-mail, número de participantes -->
-            </div> <!-- Grupo -->
-
-            <div class="row panel" style="padding-bottom: 0.8em;">
-              <div class="col-md-2" align="center">
-                <img src="img/no-profile-picture-160x120.jpg" class="img-responsive img-circle">
-              </div> <!-- Imagem do grupo -->
-
-              <div class="col-md-9">
-                <div class="row">
-                  <div class="col-md-12">
-                    Nome do Grupo
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-12">
-                    <small style="color: #C0C0C0;"> 7 Membros </small>
-                  </div>
-                </div>
-              </div> <!-- Nome, e-mail, número de participantes -->
-            </div> <!-- Grupo -->
-
-            <div class="row panel" style="padding-bottom: 0.8em;">
-              <div class="col-md-2" align="center">
-                <img src="img/no-profile-picture-160x120.jpg" class="img-responsive img-circle">
-              </div> <!-- Imagem do grupo -->
-
-              <div class="col-md-9">
-                <div class="row">
-                  <div class="col-md-12">
-                    Nome do Grupo
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-12">
-                    <small style="color: #C0C0C0;"> 7 Membros </small>
-                  </div>
-                </div>
-              </div> <!-- Nome, e-mail, número de participantes -->
-            </div> <!-- Grupo -->
-
-            <div class="row panel" style="padding-bottom: 0.8em;">
-              <div class="col-md-2" align="center">
-                <img src="img/no-profile-picture-160x120.jpg" class="img-responsive img-circle">
-              </div> <!-- Imagem do grupo -->
-
-              <div class="col-md-9">
-                <div class="row">
-                  <div class="col-md-12">
-                    Nome do Grupo
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-12">
-                    <small style="color: #C0C0C0;"> 7 Membros </small>
-                  </div>
-                </div>
-              </div> <!-- Nome, e-mail, número de participantes -->
-            </div> <!-- Grupo -->
-
-            <div class="row panel" style="padding-bottom: 0.8em;">
-              <div class="col-md-2" align="center">
-                <img src="img/no-profile-picture-160x120.jpg" class="img-responsive img-circle">
-              </div> <!-- Imagem do grupo -->
-
-              <div class="col-md-9">
-                <div class="row">
-                  <div class="col-md-12">
-                    Nome do Grupo
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-12">
-                    <small style="color: #C0C0C0;"> 7 Membros </small>
-                  </div>
-                </div>
-              </div> <!-- Nome, e-mail, número de participantes -->
-            </div> <!-- Grupo -->
-
-            <div class="row panel" style="padding-bottom: 0.8em;">
-              <div class="col-md-2" align="center">
-                <img src="img/no-profile-picture-160x120.jpg" class="img-responsive img-circle">
-              </div> <!-- Imagem do grupo -->
-
-              <div class="col-md-9">
-                <div class="row">
-                  <div class="col-md-12">
-                    Nome do Grupo
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-12">
-                    <small style="color: #C0C0C0;"> 7 Membros </small>
-                  </div>
-                </div>
-              </div> <!-- Nome, e-mail, número de participantes -->
-            </div> <!-- Grupo -->
+                </div> <!-- Nome, e-mail, número de participantes -->
+              </div> <!-- Grupo -->
+            </a>
           </div>
         </div>
-
-
       </section>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="bootstrap/js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
   </body>
