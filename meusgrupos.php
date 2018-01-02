@@ -28,58 +28,203 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <style type="text/css">
+      div.main {
+        height: 100%;
+      }
+
+      section.container-wip {
+        height: 100%;
+      }
+
+      div.panel {
+        height: 80%;
+      }
+    </style>
+
+    <script type="text/javascript">
+        function check_nchar() {
+          
+        }
+    </script>
   </head>
   <body>
   	<header role="banner">
       <?php require('navbar-in.html'); ?> 
     </header>
 
-    <div class="main container">
+    <div class="main container" >
       <section class="container-wip" role="main">
-        <!-- <div class="panel"> -->
-          <div class="row">
-            <div class="col-md-12">
-              <h1> Grupos </h1>
-            </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h1> Grupos </h1>
           </div>
-        <!-- </div> -->
+        </div>
 
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <div class="row">
-              <a href="" title="Adicionar um novo grupo">
-                <div class="col-md-4">
-                  <span id="plus-sign" class="glyphicon glyphicon-plus-sign"> </span>
-                  <span> Novo Grupo </span>
+        <div class="row">
+          <div class="col-md-12">
+            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#janela_novo_grupo" title="Adicionar novo grupo">
+              <span class="glyphicon glyphicon-plus-sign"> </span> Novo Grupo
+            </button>
+          </div>
+        </div>
+
+        <form class="modal fade" id="janela_novo_grupo"> <!-- Modal para adicionar novo evento -->
+          <div class="modal-dialog modal-md">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" title="Fechar">
+                  <span> &times; </span>
+                </button>
+                <h3 class="modal-title"> Novo Grupo </h3>
+              </div>
+
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="nome_grupo"> Nome do Grupo: </label>
+                      <input id="nome_grupo" type="text" name="nome_grupo" class="form-control" maxlength="60">
+                    </div>
+                  </div>
                 </div>
-              </a>
-            </div> <!-- Botão para adicionar novo grupo -->
-          </div>
 
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for=""> Descrição: </label>
+                      <textarea class="form-control" style="min-width: 100%; max-width: 100%; max-height: 6em;" rows="3" maxlength="206"> </textarea>
+                    </div>
+                  </div>
+                </div>
+              </div> <!-- modal-body -->
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
+                <button type="submit" class="btn btn-success"> Adicionar </button>
+              </div>
+            </div> <!-- modal-content -->
+          </div> <!-- modal-dialog -->
+        </form>
+
+        <div class="panel panel-default" style="overflow-y: auto;">
           <div class="panel-body">
-            <div class="row panel">
+            <div class="row panel" style="padding-bottom: 0.8em;">
               <div class="col-md-2" align="center">
                 <img src="img/no-profile-picture-160x120.jpg" class="img-responsive img-circle">
               </div> <!-- Imagem do grupo -->
 
               <div class="col-md-9">
-                <div class="row" style="margin-bottom: 1.5em;">
+                <div class="row">
                   <div class="col-md-12">
                     Nome do Grupo
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <small style="color: #C0C0C0;"> 7 Membros </small>
                   </div>
                 </div>
               </div> <!-- Nome, e-mail, número de participantes -->
             </div> <!-- Grupo -->
 
-            <div class="row panel">
+            <div class="row panel" style="padding-bottom: 0.8em;">
               <div class="col-md-2" align="center">
                 <img src="img/no-profile-picture-160x120.jpg" class="img-responsive img-circle">
               </div> <!-- Imagem do grupo -->
 
               <div class="col-md-9">
-                <div class="row" style="margin-bottom: 1.5em;">
+                <div class="row">
                   <div class="col-md-12">
                     Nome do Grupo
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <small style="color: #C0C0C0;"> 7 Membros </small>
+                  </div>
+                </div>
+              </div> <!-- Nome, e-mail, número de participantes -->
+            </div> <!-- Grupo -->
+
+            <div class="row panel" style="padding-bottom: 0.8em;">
+              <div class="col-md-2" align="center">
+                <img src="img/no-profile-picture-160x120.jpg" class="img-responsive img-circle">
+              </div> <!-- Imagem do grupo -->
+
+              <div class="col-md-9">
+                <div class="row">
+                  <div class="col-md-12">
+                    Nome do Grupo
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <small style="color: #C0C0C0;"> 7 Membros </small>
+                  </div>
+                </div>
+              </div> <!-- Nome, e-mail, número de participantes -->
+            </div> <!-- Grupo -->
+
+            <div class="row panel" style="padding-bottom: 0.8em;">
+              <div class="col-md-2" align="center">
+                <img src="img/no-profile-picture-160x120.jpg" class="img-responsive img-circle">
+              </div> <!-- Imagem do grupo -->
+
+              <div class="col-md-9">
+                <div class="row">
+                  <div class="col-md-12">
+                    Nome do Grupo
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <small style="color: #C0C0C0;"> 7 Membros </small>
+                  </div>
+                </div>
+              </div> <!-- Nome, e-mail, número de participantes -->
+            </div> <!-- Grupo -->
+
+            <div class="row panel" style="padding-bottom: 0.8em;">
+              <div class="col-md-2" align="center">
+                <img src="img/no-profile-picture-160x120.jpg" class="img-responsive img-circle">
+              </div> <!-- Imagem do grupo -->
+
+              <div class="col-md-9">
+                <div class="row">
+                  <div class="col-md-12">
+                    Nome do Grupo
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <small style="color: #C0C0C0;"> 7 Membros </small>
+                  </div>
+                </div>
+              </div> <!-- Nome, e-mail, número de participantes -->
+            </div> <!-- Grupo -->
+
+            <div class="row panel" style="padding-bottom: 0.8em;">
+              <div class="col-md-2" align="center">
+                <img src="img/no-profile-picture-160x120.jpg" class="img-responsive img-circle">
+              </div> <!-- Imagem do grupo -->
+
+              <div class="col-md-9">
+                <div class="row">
+                  <div class="col-md-12">
+                    Nome do Grupo
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <small style="color: #C0C0C0;"> 7 Membros </small>
                   </div>
                 </div>
               </div> <!-- Nome, e-mail, número de participantes -->
