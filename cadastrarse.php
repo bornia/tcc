@@ -19,7 +19,6 @@
     <link href="style/normalize.css" rel="stylesheet" type="text/css">
     <link href="style/cadastrarse.css" rel="stylesheet" type="text/css">
     <link href="style/navbar.css" rel="stylesheet" type="text/css">
-    <link href="style/inner-addon.css" rel="stylesheet" type="text/css">
     
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -42,7 +41,7 @@
           </div>
         </div>
 
-        <form method="" action="">
+        <form method="post" action="reqs/cadastrar_usuario.php">
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
