@@ -44,7 +44,7 @@
           <div class="col-md-12">
             <div class="form-group inner-addon left-addon">
               <label for="username" class="sr-only"> Email </label>
-              <input type="email" name="username" placeholder="Digite seu e-mail" class="form-control" id="username" required>
+              <input type="email" name="username" placeholder="Digite seu e-mail" class="form-control" id="username" autofocus required>
               <span class="glyphicon glyphicon-user"> </span>
             </div>
           </div>
