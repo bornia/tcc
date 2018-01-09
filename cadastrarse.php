@@ -86,6 +86,30 @@
           </div>
 
           <div class="row">
+            <div class="col-md-3">
+              <label for="conheceu_ferramenta"> Como ouviu falar da ferramenta? </label>
+            </div>
+
+            <div class="col-md-9">
+              <div class="form-group">
+                <select id="conheceu_ferramenta" class="form-control" onchange="verifica_opcao();">
+                  <option value="amigo"> Amigo </option>
+                  <option value="google"> Google </option>
+                  <option value="noticias"> Notícias </option>
+                  <option value="outro"> Outro... </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div id="conheceu_ferramenta_outro" class="row">
+            <div class="col-md-12">
+              <label id="conheceu_ferramenta_outro_label" for="conheceu_ferramenta_especificacao"> </label>
+              <input id="conheceu_ferramenta_especificacao" type="text" name="conheceu_ferramenta_especificacao" class="form-control" placeholder="">
+            </div>
+          </div>
+
+          <div class="row">
             <div class="col-md-12">
               <div class="form-group">
                 <button type="submit" class="btn btn-default" id="btn-submit" title="Entrar no aplicativo"> Cadastrar </button>
@@ -100,5 +124,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="js/cadastrarse.js"> </script>
   </body>
 </html>

@@ -39,6 +39,10 @@ div.main {
     width: 60%;
 }
 
+#conheceu_ferramenta_outro {
+	display: none;
+}
+
 #btn-submit {
 	margin-top: 1em;
 	width: 100%;
