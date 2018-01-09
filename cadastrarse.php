@@ -46,7 +46,7 @@
             <div class="col-md-12">
               <div class="form-group">
                 <label for="nome"> Nome </label>
-                <input type="text" name="nome" id="nome" placeholder="Nome que será exibido para os seus amigos" class="form-control" required>
+                <input type="text" name="nome" id="nome" placeholder="Nome que será exibido para os seus amigos" class="form-control" autofocus required>
               </div>
             </div>
           </div> <!-- Nome -->
@@ -92,22 +92,28 @@
 
             <div class="col-md-9">
               <div class="form-group">
-                <select id="conheceu_ferramenta" class="form-control" onchange="verifica_opcao();">
+                <select id="conheceu_ferramenta" class="form-control" onchange="especifica_opcao();" required>
                   <option value="amigo"> Amigo </option>
+                  <option value="artigo"> Artigo </option>
+                  <option value="jornal"> Jornal </option>
+                  <option value="forum"> Fórum </option>
                   <option value="google"> Google </option>
-                  <option value="noticias"> Notícias </option>
+                  <option value="noticias"> Notícia </option>
+                  <option value="propaganda"> Propaganda </option>
+                  <option value="revista"> Revista </option>
+                  <option value="yahoo"> Yahoo </option>
                   <option value="outro"> Outro... </option>
                 </select>
+              </div>
+
+              <div id="conheceu_ferramenta_outro" style="display: none;">
+                <label for="conheceu_ferramenta_especificacao" class="sr-only"> Especifique onde conheceu a ferramenta. </label>
+                <input id="conheceu_ferramenta_especificacao" type="text" name="conheceu_ferramenta_especificacao" class="form-control">
               </div>
             </div>
           </div>
 
-          <div id="conheceu_ferramenta_outro" class="row">
-            <div class="col-md-12">
-              <label id="conheceu_ferramenta_outro_label" for="conheceu_ferramenta_especificacao"> </label>
-              <input id="conheceu_ferramenta_especificacao" type="text" name="conheceu_ferramenta_especificacao" class="form-control" placeholder="">
-            </div>
-          </div>
+          
 
           <div class="row">
             <div class="col-md-12">

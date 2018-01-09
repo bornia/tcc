@@ -1,11 +1,14 @@
-/** Verifica por onde o usuário conheceu a ferramenta
+/** Exibe um campo de texto para o usuário especificar de onde conheceu a ferramenta.
 */
-function verifica_opcao() {
+function especifica_opcao() {
 	var opcao = $('#conheceu_ferramenta').val();
 
-	
-
-	if(opcao == 'noticias') {
-		$('conheceu_ferramenta_outro_label').html('noticias');
+	if(opcao == 'outro') {
+		$('#conheceu_ferramenta_outro').show();
+		$('#conheceu_ferramenta_especificacao').attr('placeholder', 'Especifique... (opcional)');
+		
+	}
+	else {
+		$('#conheceu_ferramenta_outro').hide();
 	}
 };
