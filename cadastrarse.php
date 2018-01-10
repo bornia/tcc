@@ -41,7 +41,7 @@
           </div>
         </div>
 
-        <form method="post" action="reqs/cadastrar_usuario.php">
+        <form id="form_login" method="post">
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
@@ -53,6 +53,8 @@
 
           <div class="row">
             <div class="col-md-12">
+              <div id="alerta_mensagem"> </div>
+
               <div class="form-group">
                 <label for="email"> E-mail </label>
                 <input type="email" name="email" placeholder="exemplo@dominio.com" class="form-control" id="email" required>
@@ -87,7 +89,7 @@
 
           <div class="row">
             <div class="col-md-3">
-              <label for="conheceu_ferramenta"> Como ouviu falar da ferramenta? </label>
+              <label for="conheceu_ferramenta"> Como conheceu a ferramenta? </label>
             </div>
 
             <div class="col-md-9">
@@ -113,12 +115,10 @@
             </div>
           </div>
 
-          
-
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <button type="submit" class="btn btn-default" id="btn-submit" title="Entrar no aplicativo"> Cadastrar </button>
+                <button type="button" class="btn btn-default" id="btn-submit" title="Entrar no aplicativo"> Cadastrar </button>
               </div>
             </div>
           </div>
@@ -130,7 +130,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
-
-    <script type="text/javascript" src="js/cadastrarse.js"> </script>
+    <!--  -->
+    <script type="text/javascript" src="js/cadastrarse.js"></script>
   </body>
 </html>

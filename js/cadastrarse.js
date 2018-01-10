@@ -12,3 +12,24 @@ function especifica_opcao() {
 		$('#conheceu_ferramenta_outro').hide();
 	}
 };
+
+/**
+  */
+$('#btn-submit').click(function() {
+	$.ajax({
+	    url: '../reqs/cadastrar_usuario.php',
+	    type: 'POST',
+	    data: $('#form_login').serialize()
+	})
+	.done(function(data) {
+	  	$('#alerta_mensagem').html(data);
+	})
+	.fail(function() {
+	  	console.log("error");
+	})
+	.always(function(data) {
+	  	console.log(data);
+	});
+});
+
+
