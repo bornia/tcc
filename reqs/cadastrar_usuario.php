@@ -24,16 +24,7 @@ $data = mysqli_fetch_array($res, MYSQLI_ASSOC);
 
 // Verifica se a consulta não retornou nenhum registro, isto é, se já existe um usuário com o mesmo e-mail
 if($data) {
-	echo '
-		<div class="alert alert-warning" role="alert">
-	        <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
-	          <span aria-hidden="true"> &times; </span>
-	        </button>
-	        <div>
-	          <em>O e-mail inserido já existe.</em> Por favor, escolha outro.
-	        </div>
-      	</div>
-	';
+	echo 'email';
 	return false;
 }
 
@@ -43,23 +34,14 @@ $sql = "INSERT INTO usr(nome, email, senha, pais_moeda, notificacoes) VALUES ('$
 // Executa a query
 $res = mysqli_query($con, $sql);
 
-
+// Se houve algum erro na execução da query
 if(!$res) {
-	echo '
-		<div class="alert alert-warning" role="alert">
-	        <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
-	          <span aria-hidden="true"> &times; </span>
-	        </button>
-	        <div>
-	          Problema com o banco de dados: <em>erro ao inserir novo usuário</em>.
-	        </div>
-      	</div>
-	';
+	echo 'banco';
 	return false;
 }
 
-//echo 'Usuário cadastrado com sucesso.';
-header('Location: ../cadastrado.php?usuario_cadastrado');
+echo 'cadastrado';
+
 return true;
 
 ?>

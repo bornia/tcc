@@ -17,7 +17,9 @@
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <!-- makes browsers render all elements more consistently and in line with modern standards -->
     <link href="style/normalize.css" rel="stylesheet" type="text/css">
+    <!--  -->
     <link href="style/cadastrarse.css" rel="stylesheet" type="text/css">
+    <!--  -->
     <link href="style/navbar.css" rel="stylesheet" type="text/css">
     
 
@@ -41,8 +43,9 @@
           </div>
         </div>
 
-        <form id="form_login" method="post">
+        <form id="form_login">
           <div class="row">
+            <div id="alerta_mensagem"> </div>
             <div class="col-md-12">
               <div class="form-group">
                 <label for="nome"> Nome </label>
@@ -53,14 +56,12 @@
 
           <div class="row">
             <div class="col-md-12">
-              <div id="alerta_mensagem"> </div>
-
               <div class="form-group">
                 <label for="email"> E-mail </label>
                 <input type="email" name="email" placeholder="exemplo@dominio.com" class="form-control" id="email" required>
               </div>
             </div>
-          </div>
+          </div> <!-- Mensagem de alerta -->
 
           <div class="row">      
             <div class="col-md-6">
@@ -68,14 +69,14 @@
                 <label for="senha"> Senha </label>
                 <input type="password" name="senha" placeholder="Senha" class="form-control" id="senha" required>
               </div>
-            </div>
+            </div> <!-- Senha -->
 
             <div class="col-md-6">
               <div class="form-group">
                 <label for="confirmar_senha"> Confirme sua senha </label>
                 <input type="password" name="confirmar_senha" placeholder="Digite novamente sua senha" class="form-control" id="confirmar_senha" onpaste="return false;" ondrop="return false;" required>
               </div>
-            </div>
+            </div> <!-- Confirmação da senha -->
           </div>
 
           <div class="row">      
@@ -85,7 +86,7 @@
                 <?php require('paises_moedas.html'); ?>
               </div>
             </div>
-          </div>
+          </div> <!-- Moeda -->
 
           <div class="row">
             <div class="col-md-3">
@@ -94,7 +95,7 @@
 
             <div class="col-md-9">
               <div class="form-group">
-                <select id="conheceu_ferramenta" class="form-control" onchange="especifica_opcao();" required>
+                <select id="conheceu_ferramenta" class="form-control" onchange="/*especifica_opcao();*/" required>
                   <option value="amigo"> Amigo </option>
                   <option value="artigo"> Artigo </option>
                   <option value="jornal"> Jornal </option>
@@ -104,33 +105,89 @@
                   <option value="propaganda"> Propaganda </option>
                   <option value="revista"> Revista </option>
                   <option value="yahoo"> Yahoo </option>
-                  <option value="outro"> Outro... </option>
+                  <option value="outro"> Outros meios </option>
                 </select>
               </div>
-
+              <!--
               <div id="conheceu_ferramenta_outro" style="display: none;">
                 <label for="conheceu_ferramenta_especificacao" class="sr-only"> Especifique onde conheceu a ferramenta. </label>
                 <input id="conheceu_ferramenta_especificacao" type="text" name="conheceu_ferramenta_especificacao" class="form-control">
-              </div>
+              </div> -->
             </div>
-          </div>
+          </div> <!-- Como conheceu a ferramenta -->
 
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <button type="button" class="btn btn-default" id="btn-submit" title="Entrar no aplicativo"> Cadastrar </button>
+                <button type="button" class="btn btn-default" id="btn-submit"> Cadastrar </button>
               </div>
             </div>
-          </div>
+          </div> <!-- Botão Cadastrar -->
         </form>
       </section>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="bootstrap/js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <!--  -->
     <script type="text/javascript" src="js/cadastrarse.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#btn-submit').click(function(){
+          $.ajax({
+            url: './reqs/cadastrar_usuario.php',
+            type: 'POST',
+            data: $('#form_login').serialize()
+          })
+          .done(function(data) {
+            if(data == 'email') {
+              $('#alerta_mensagem').html(
+                "<div class='alert alert-danger' role='alert'>" +
+                  "<button type='button' class='close' data-dismiss='alert' aria-label='Fechar'>" +
+                    "<span aria-hidden='true'> &times; </span>" +
+                  "</button>" +
+                  "<div>" +
+                    "<u>O <b>e-mail</b> inserido já existe.</u> Por favor, escolha outro." +
+                  "</div>" +
+                "</div>"
+              );
+            }
+            else if(data == 'banco') { 
+              $('#alerta_mensagem').html(
+                "<div class='alert alert-danger' role='alert'>" +
+                  "<button type='button' class='close' data-dismiss='alert' aria-label='Fechar'>" +
+                    "<span aria-hidden='true'> &times; </span>" +
+                  "</button>" +
+                  "<div>" +
+                    "Problema com o <b> banco de dados</b>: <u>erro ao inserir novo usuário</u>." +
+                  "</div>" +
+                "</div>"
+              );
+            }
+            else {
+              $('#alerta_mensagem').html(
+                "<div class='alert alert-success' role='alert'>" +
+                  "<button type='button' class='close' data-dismiss='alert' aria-label='Fechar'>" +
+                    "<span aria-hidden='true'> &times; </span>" +
+                  "</button>" +
+                  "<div>" +
+                    "<p> <b> Usuário cadastrado com sucesso! </b> Um <u>e-mail de confirmação</u> foi enviado para o seu e-mail para que a conta seja validada. </p> <p class='text-right'> Você está sendo redirecionado... </p>" +
+                  "</div>" +
+                "</div>"
+              );
+
+              setTimeout(function() {
+                location.href="login.php";
+              }, 5000);
+            }
+          });
+        }); // Função de clique
+
+
+      });
+    </script>
   </body>
 </html>
