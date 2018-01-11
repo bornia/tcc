@@ -117,13 +117,13 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="celular"> Celular </label>
-                    <input id="celular" type="tel" name="celular" class="form-inline form-control" placeholder="DD + número" pattern="[0-9]{11}" title="** Não insira espaços, letras e caracteres especiais. **" >
+                    <input id="celular" type="tel" name="celular" class="form-inline form-control" placeholder="DD+número" pattern="[0-9]{11}" title="** Não insira espaços, letras e caracteres especiais. ** O número de celular deve conter 11 dígitos. **" >
                   </div>
                 </div> <!-- Celular -->
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="nascimento"> Data de Nascimento </label>
+                    <label for="nascimento"> Nascimento </label>
                     <input id="nascimento" type="date" name="nascimento" class="form-control" max="2018-01-01">
                   </div>
                 </div>
@@ -155,7 +155,9 @@
                         Um <u>grupo</u> for criado/modificado.
                       </label>
 
-                      <span class="glyphicon glyphicon-info-sign pull-right" title="O usuário será notificado quando um grupo, no qual ele foi incluído, for criado, excluído ou sofrer qualquer tipo de modificação."> </span>
+                      <button class="btn btn-link btn-xs pull-right" data-toggle="tooltip" title="O usuário será notificado quando um grupo, no qual ele foi incluído, for criado, excluído ou sofrer qualquer tipo de modificação." data-placement="left">
+                        <span class="glyphicon glyphicon-info-sign"> </span>
+                      </button>
                     </div>
                   
                     <div>
@@ -164,7 +166,9 @@
                         Um <u>evento</u> for incluído/alterado.
                       </label>
 
-                      <span class="glyphicon glyphicon-info-sign pull-right" title="O usuário será notificado quando um evento, no qual ele foi incluído, for adicionado, excluído ou sofrer qualquer tipo de alteração."> </span>
+                      <button class="btn btn-link btn-xs pull-right" data-toggle="tooltip" title="O usuário será notificado quando um evento, no qual ele foi incluído, for adicionado, excluído ou sofrer qualquer tipo de alteração." data-placement="left">
+                        <span class="glyphicon glyphicon-info-sign"> </span>
+                      </button>
                     </div>
 
                     <div>
@@ -173,16 +177,20 @@
                         Faltar 2 dias para uma conta expirar.
                       </label>
 
-                      <span class="glyphicon glyphicon-info-sign pull-right" title="O usuário será notificado 2 dias antes de uma conta, na qual ele foi incluído, atingir sua data de pagamento."> </span>
+                      <button class="btn btn-link btn-xs pull-right" data-toggle="tooltip" title="O usuário será notificado 2 dias antes de uma conta, na qual ele foi incluído, atingir sua data de pagamento." data-placement="left">
+                        <span class="glyphicon glyphicon-info-sign"> </span>
+                      </button>
                     </div>
 
                     <div>
                       <label class="lowweight">
                         <input type="checkbox" name="notificacoes" value="">
-                        Novas funcionalidades forem lançadas.
+                        Surgirem novas funcionalidades.
                       </label>
 
-                      <span class="glyphicon glyphicon-info-sign pull-right" title="O usuário será notificado quando novas funcionalidades ficarem disponíveis."> </span>
+                      <button class="btn btn-link btn-xs pull-right" data-toggle="tooltip" title="O usuário será notificado quando novas funcionalidades ficarem disponíveis." data-placement="left">
+                        <span class="glyphicon glyphicon-info-sign"> </span>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -207,6 +215,6 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Meus Eventos JavaScript -->
-    <script src="js/myevents.js" type="text/javascript"> </script>
+    <script src="js/configuracoes.js" type="text/javascript"> </script>
   </body>
 </html>
