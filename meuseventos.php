@@ -19,7 +19,7 @@
     <link href="style/normalize.css"    rel="stylesheet" type="text/css">
     <link href="style/navbar.css"       rel="stylesheet" type="text/css">
     <link href="style/myevents.css"     rel="stylesheet" type="text/css">
-    <link href="style/inner-addon.css"  rel="stylesheet" type="text/css">
+    <!-- <link href="style/inner-addon.css"  rel="stylesheet" type="text/css"> -->
     
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -96,10 +96,10 @@
 
           <div class="row">
             <div class="col-md-4"> <!-- busca de eventos -->
-              <div class="form-group inner-addon right-addon">
+              <div class="input-group">
                 <label for="search-bar" class="sr-only"> Barra de Pesquisa </label>
-                <input type="text" placeholder="Buscar por título de evento" class="form-control" id="search-bar">
-                <span class="glyphicon glyphicon-search"> </span>
+                <span class="input-group-addon"> <i class="glyphicon glyphicon-search"> </i> </span>
+                <input id="search-bar" type="search" class="form-control" placeholder="Buscar por título de evento">
               </div>
             </div>
 
@@ -111,9 +111,9 @@
 
                 <div class="col-md-9 col-xs-8">
                   <select class="form-control" arial-label="Ordenar eventos de acordo com o critério selecionado." id="ordem">
-                    <option value=""> Título </option>
-                    <option value=""> Total </option>
-                    <option value="" selected> Última Modificação </option>
+                    <option value="titulo"> Título </option>
+                    <option value="total"> Total </option>
+                    <option value="modificacao" selected> Última Modificação </option>
                   </select>
                 </div>
               </div>
@@ -127,8 +127,8 @@
                 
                 <div class="col-md-9">
                   <select class="form-control" arial-label="Listar eventos abertos ou fechados, dependendo da opção selecionada.">
-                    <option value="open"> Abertos </option>
-                    <option value="closed"> Fechados </option>
+                    <option value="abertos"> Abertos </option>
+                    <option value="fechados"> Fechados </option>
                   </select>
                 </div>
               </div>
