@@ -117,7 +117,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="celular"> Celular </label>
-                    <input id="celular" type="tel" name="celular" class="form-inline form-control" placeholder="DD+número" pattern="[0-9]{11}" title="** Não insira espaços, letras e caracteres especiais. ** O número de celular deve conter 11 dígitos. **" >
+                    <input id="celular" type="tel" name="celular" class="form-inline form-control" placeholder="DD+número" pattern="[0-9]{11}" title=" ** Não insira espaços, letras e caracteres especiais. &#013; ** O número de celular deve conter 11 dígitos. **" data-toggle="tooltip" data-placement="bottom">
                   </div>
                 </div> <!-- Celular -->
 
@@ -151,7 +151,7 @@
                   <div class="form-group">
                     <div>
                       <label class="lowweight">
-                        <input type="checkbox" name="notificacoes" value="">
+                        <input type="checkbox" name="notificacoes" value="grupo_criado_modificado">
                         Um <u>grupo</u> for criado/modificado.
                       </label>
 
@@ -162,7 +162,7 @@
                   
                     <div>
                       <label class="lowweight">
-                        <input type="checkbox" name="notificacoes" value="">
+                        <input type="checkbox" name="notificacoes" value="evento_incluido_alterado">
                         Um <u>evento</u> for incluído/alterado.
                       </label>
 
@@ -173,7 +173,7 @@
 
                     <div>
                       <label class="lowweight">
-                        <input type="checkbox" name="notificacoes" value="">
+                        <input type="checkbox" name="notificacoes" value="conta_expirar">
                         Faltar 2 dias para uma conta expirar.
                       </label>
 
@@ -184,7 +184,7 @@
 
                     <div>
                       <label class="lowweight">
-                        <input type="checkbox" name="notificacoes" value="">
+                        <input type="checkbox" name="notificacoes" value="novas_funcionalidades">
                         Surgirem novas funcionalidades.
                       </label>
 
@@ -210,7 +210,7 @@
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="bootstrap/js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
 
