@@ -43,9 +43,12 @@
           </div>
         </div>
 
+        <div class="row" id="container_alerta_mensagem">
+          <div id="alerta_mensagem"> </div>
+        </div>
+
         <form id="form_login">
           <div class="row">
-            <div id="alerta_mensagem"> </div>
             <div class="col-md-12">
               <div class="form-group">
                 <label for="nome"> Nome </label>
@@ -170,14 +173,13 @@
             else {
               $('#alerta_mensagem').html(
                 "<div class='alert alert-success' role='alert'>" +
-                  "<button type='button' class='close' data-dismiss='alert' aria-label='Fechar'>" +
-                    "<span aria-hidden='true'> &times; </span>" +
-                  "</button>" +
                   "<div>" +
                     "<p> <b> Usuário cadastrado com sucesso! </b> Um <u>e-mail de confirmação</u> foi enviado para o seu e-mail para que a conta seja validada. </p> <p class='text-right'> Você está sendo redirecionado... </p>" +
                   "</div>" +
                 "</div>"
               );
+
+              $('#form_login').hide();
 
               setTimeout(function() {
                 location.href="login.php";
