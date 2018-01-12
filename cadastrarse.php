@@ -95,7 +95,7 @@
 
             <div class="col-md-9">
               <div class="form-group">
-                <select id="conheceu_ferramenta" class="form-control" onchange="/*especifica_opcao();*/" required>
+                <select id="conheceu_ferramenta" name="conheceu_ferramenta" class="form-control" onchange="/*especifica_opcao();*/" required>
                   <option value="amigo"> Amigo </option>
                   <option value="artigo"> Artigo </option>
                   <option value="jornal"> Jornal </option>

@@ -11,11 +11,12 @@ CREATE TABLE usr (
 	celular CHAR(11) NULL,
 	nascimento CHAR(10) NULL,
 	estado VARCHAR(30) NULL,
-	notificacoes VARCHAR(7) NOT NULL -- Separador: vírgula (,) sem espaços
+	notificacoes VARCHAR(7) NOT NULL, -- Separador: vírgula (,) sem espaços
 	/*
 		Ligado 1/-1 Desligado ------ Um grupo for criado/modificado
 		Ligado 2/-2 Desligado ------ Um evento for incluído/alterado
 		Ligado 3/-3 Desligado ------ Faltar 2 dias para uma conta expirar
 		Ligado 4/-4 Desligado ------ Novas funcionalidades forem lançadas
 	*/
+	conheceu_ferramenta VARCHAR(10) NOT NULL
 );
