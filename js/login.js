@@ -1,4 +1,6 @@
 $(document).ready(function() {
+
+	/** Envia a requisição assíncrona */
 	$('#btn-submit').click(function() {
 		$.ajax({
 			url: './reqs/validar_login.php',
@@ -7,7 +9,7 @@ $(document).ready(function() {
 		})
 		.done(function(data) {
 			switch(data) {
-				case 'query':
+				case 'query': // Problema na execução da query
 					$('#container_alerta_mensagem').html(
 		                "<div class='alert alert-danger' role='alert'>" +
 		                  "<button type='button' class='close' data-dismiss='alert' aria-label='Fechar'>" +
@@ -19,7 +21,7 @@ $(document).ready(function() {
 		                "</div>"
 	              	);
 					break;
-				case 'invalido':
+				case 'invalido': // Login inválido
 					$('#container_alerta_mensagem').html(
 		                "<div class='alert alert-danger' role='alert'>" +
 		                  "<button type='button' class='close' data-dismiss='alert' aria-label='Fechar'>" +
@@ -31,7 +33,7 @@ $(document).ready(function() {
 		                "</div>"
 	              	);
 					break;
-				default:
+				default: // Logado com sucesso
 					location.href = "./meusgrupos.php";
 			}
 		});

@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once('classes/db.class.php');
 
 // Instancia a classe db para executar o seu método e fazer a conexão com o banco de dados
@@ -9,7 +11,7 @@ $con = (new db())->conecta_mysql();
 $user = array($_POST['usuario'], md5($_POST['senha']));
 
 // Prepara a query
-$sql = "SELECT usr_id, nome, email, senha FROM usr WHERE email = '$user[0]' AND senha = '$user[1]';";
+$sql = "SELECT * FROM usr WHERE email = '$user[0]' AND senha = '$user[1]';";
 
 $res = mysqli_query($con, $sql);
 
@@ -26,8 +28,16 @@ if(!isset($data)) {
 	return false;
 }
 
-$_SESSION['id'] = $data['id'];
+$_SESSION['id'] = $data['usr_id'];
 $_SESSION['nome'] = $data['nome'];
+$_SESSION['email'] = $data['email'];
+$_SESSION['senha'] = $data['senha'];
+$_SESSION['pais_moeda'] = $data['pais_moeda'];
+$_SESSION['celular'] = $data['celular'];
+$_SESSION['nascimento'] = $data['nascimento'];
+$_SESSION['estado'] = $data['estado'];
+$_SESSION['notificacoes'] = $data['notificacoes'];
+$_SESSION['conheceu_ferramenta'] = $data['conheceu_ferramenta'];
 
 return true;
 
