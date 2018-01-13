@@ -1,3 +1,15 @@
+<?php
+
+$sessao_validada = require_once('reqs/validar_sessao.php');
+
+if($sessao_validada) {
+  $limite_nome_grupo = 30;
+  $limite_descricao_grupo = 190;
+}
+
+return true;
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -78,8 +90,7 @@
 
               <div class="modal-body">
                 <?php
-                  $limite_nome_grupo = 30;
-                  $limite_descricao_grupo = 190;
+                  
                 ?>
 
                 <div class="row">
