@@ -68,7 +68,7 @@
             <div class="col-md-12">
               <div class="form-group">
                 <label for="email"> E-mail </label>
-                <input type="email" name="email" placeholder="exemplo@dominio.com" class="form-control" id="email" required>
+                <input id="email" type="email" name="email" placeholder="exemplo@dominio.com" class="form-control" required>
               </div>
             </div>
           </div> <!-- Mensagem de alerta -->
@@ -77,7 +77,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="senha"> Senha </label>
-                <input type="password" name="senha" placeholder="Crie sua senha" class="form-control" id="senha" maxlength="32" required>
+                <input id="senha" type="password" name="senha" placeholder="Mínimo de 6 caracteres" class="form-control" minlength="6" maxlength="32" required>
                 <small class="pull-right">
                   <span id="senha_contador"> 32 </span> caracteres restantes
                 </small>
@@ -87,7 +87,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="confirmar_senha"> Confirme sua senha </label>
-                <input type="password" name="confirmar_senha" placeholder="Digite novamente a senha criada" class="form-control" id="confirmar_senha" onpaste="return false;" ondrop="return false;" maxlength="32" required>
+                <input id="confirmar_senha" type="password" name="confirmar_senha" placeholder="Digite novamente a senha criada" class="form-control" onpaste="return false;" ondrop="return false;" minlength="6" maxlength="32" required>
                 <small class="pull-right">
                   <span id="confirmar_senha_contador"> 32 </span> caracteres restantes
                 </small>
@@ -110,6 +110,7 @@
                 <label for="conheceu_ferramenta"> Como conheceu a ferramenta? </label>
               
                 <select id="conheceu_ferramenta" name="conheceu_ferramenta" class="form-control" onchange="/*especifica_opcao();*/" required>
+                  <option value="" disabled selected> Selecione uma opção... </option>
                   <option value="amigo"> Amigo </option>
                   <option value="artigo"> Artigo </option>
                   <option value="jornal"> Jornal </option>
