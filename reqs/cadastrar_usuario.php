@@ -6,7 +6,7 @@ require_once('classes/db.class.php');
 $con = (new db())->conecta_mysql();
 
 // Organiza as informações de cadastro do usuário
-$user = array($_POST['nome'], $_POST['email'], $_POST['senha'], $_POST['pais_moeda'], $_POST['conheceu_ferramenta']);
+$user = array($_POST['nome'], $_POST['email'], md5($_POST['senha']), $_POST['pais_moeda'], $_POST['conheceu_ferramenta']);
 
 // Consulta para ver se o e-mail já existe
 $sql = "SELECT email, senha FROM usr WHERE email = '$user[1]';";
@@ -40,7 +40,7 @@ if(!$res) {
 	return false;
 }
 
-echo 'cadastrado';
+//echo 'cadastrado';
 
 return true;
 

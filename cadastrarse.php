@@ -12,6 +12,8 @@
       ** O width=device-width, initial-scale=1 ajuda o conteúdo da página conforme o tamanho do viewport.
     -->
     <title> WIP | Cadastrar-se </title>
+
+    
     
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -29,6 +31,11 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="bootstrap/js/jquery.min.js"> </script>
+    <!--  -->
+    <script type="text/javascript" src="js/cadastrarse.js"> </script>
   </head>
   <body>
   	<header role="banner">
@@ -47,7 +54,7 @@
           <div id="alerta_mensagem"> </div>
         </div>
 
-        <form id="form_login">
+        <form id="form_cadastro">
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
@@ -70,14 +77,20 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="senha"> Senha </label>
-                <input type="password" name="senha" placeholder="Senha" class="form-control" id="senha" required>
+                <input type="password" name="senha" placeholder="Crie sua senha" class="form-control" id="senha" maxlength="32" required>
+                <small class="pull-right">
+                  <span id="senha_contador"> 32 </span> caracteres restantes
+                </small>
               </div>
             </div> <!-- Senha -->
 
             <div class="col-md-6">
               <div class="form-group">
                 <label for="confirmar_senha"> Confirme sua senha </label>
-                <input type="password" name="confirmar_senha" placeholder="Digite novamente sua senha" class="form-control" id="confirmar_senha" onpaste="return false;" ondrop="return false;" required>
+                <input type="password" name="confirmar_senha" placeholder="Digite novamente a senha criada" class="form-control" id="confirmar_senha" onpaste="return false;" ondrop="return false;" maxlength="32" required>
+                <small class="pull-right">
+                  <span id="confirmar_senha_contador"> 32 </span> caracteres restantes
+                </small>
               </div>
             </div> <!-- Confirmação da senha -->
           </div>
@@ -92,12 +105,10 @@
           </div> <!-- Moeda -->
 
           <div class="row">
-            <div class="col-md-3">
-              <label for="conheceu_ferramenta"> Como conheceu a ferramenta? </label>
-            </div>
-
-            <div class="col-md-9">
+            <div class="col-md-12">
               <div class="form-group">
+                <label for="conheceu_ferramenta"> Como conheceu a ferramenta? </label>
+              
                 <select id="conheceu_ferramenta" name="conheceu_ferramenta" class="form-control" onchange="/*especifica_opcao();*/" required>
                   <option value="amigo"> Amigo </option>
                   <option value="artigo"> Artigo </option>
@@ -130,66 +141,7 @@
       </section>
     </div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="bootstrap/js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <!--  -->
-    <script type="text/javascript" src="js/cadastrarse.js"></script>
-
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $('#btn-submit').click(function(){
-          $.ajax({
-            url: './reqs/cadastrar_usuario.php',
-            type: 'POST',
-            data: $('#form_login').serialize()
-          })
-          .done(function(data) {
-            if(data == 'email') {
-              $('#alerta_mensagem').html(
-                "<div class='alert alert-danger' role='alert'>" +
-                  "<button type='button' class='close' data-dismiss='alert' aria-label='Fechar'>" +
-                    "<span aria-hidden='true'> &times; </span>" +
-                  "</button>" +
-                  "<div>" +
-                    "<u>O <b>e-mail</b> inserido já existe.</u> Por favor, escolha outro." +
-                  "</div>" +
-                "</div>"
-              );
-            }
-            else if(data == 'banco') { 
-              $('#alerta_mensagem').html(
-                "<div class='alert alert-danger' role='alert'>" +
-                  "<button type='button' class='close' data-dismiss='alert' aria-label='Fechar'>" +
-                    "<span aria-hidden='true'> &times; </span>" +
-                  "</button>" +
-                  "<div>" +
-                    "Problema com o <b> banco de dados</b>: <u>erro ao inserir novo usuário</u>." +
-                  "</div>" +
-                "</div>"
-              );
-            }
-            else {
-              $('#alerta_mensagem').html(
-                "<div class='alert alert-success' role='alert'>" +
-                  "<div>" +
-                    "<p> <b> Usuário cadastrado com sucesso! </b> Um <u>e-mail de confirmação</u> foi enviado para o seu e-mail para que a conta seja validada. </p> <p class='text-right'> Você está sendo redirecionado... </p>" +
-                  "</div>" +
-                "</div>"
-              );
-
-              $('#form_login').hide();
-
-              setTimeout(function() {
-                location.href="login.php";
-              }, 5000);
-            }
-          });
-        }); // Função de clique
-
-
-      });
-    </script>
   </body>
 </html>
