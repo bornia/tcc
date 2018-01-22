@@ -1,5 +1,6 @@
 <?php
 
+
 $sessao_validada = require_once('reqs/validar_sessao.php');
 
 if($sessao_validada) {
@@ -7,7 +8,6 @@ if($sessao_validada) {
   $limite_descricao_grupo = 190;
 }
 
-return true;
 ?>
 
 <!DOCTYPE html>
@@ -55,6 +55,9 @@ return true;
       }
     </style>
 
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <!--  -->
     <script type="text/javascript" src="js/meusgrupos.js"> </script>
   </head>
   <body>
@@ -128,12 +131,8 @@ return true;
 
         <div class="panel panel-default" style="overflow-y: auto;">
           <div class="panel-body">
-            <a class="group-link" href="#">
+            <a class="detalhes" href="#" data-trigger="hover"  data-toggle="popover" title="Popover Header" data-content="Some content inside the popover" data-placement="right">
               <div class="row panel" style="padding-bottom: 0.8em;">
-                <div class="col-md-2" align="center">
-                  <img src="img/no-profile-picture-160x120.jpg" class="img-responsive img-circle">
-                </div> <!-- Imagem do grupo -->
-
                 <div class="col-md-10">
                   <div class="row">
                     <div class="col-md-8">
@@ -154,8 +153,6 @@ return true;
       </section>
     </div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="bootstrap/js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
   </body>

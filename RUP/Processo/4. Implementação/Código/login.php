@@ -66,7 +66,6 @@
 
           <div class="col-md-12">
             <div class="form-group">
-              <span class="sr-only"> Login </span>
               <button type="button" class="btn btn-default" id="btn-submit" class="col-md-12" title="Entrar no aplicativo"> Entrar </button>
             </div>
           </div>  
@@ -75,8 +74,8 @@
 
       <div class="row">
         <div class="col-md-12">
-          <div class="col-md-6 padding-normalize font-xs"> <a href="#"> Esqueceu sua senha? </a> </div>
-          <div class="col-md-6 padding-normalize font-xs" id="btn-signin"> <a href="cadastrarse.php"> Cadastre-se </a> </div>
+          <div class="col-xs-6 padding-normalize font-xs"> <a href="#"> Esqueceu sua senha? </a> </div>
+          <div class="col-xs-6 padding-normalize font-xs" id="btn-signin"> <a href="cadastrarse.php"> Cadastre-se </a> </div>
         </div>
       </div>
     </section>

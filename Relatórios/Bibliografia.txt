@@ -1,0 +1,16 @@
+Antipadrões
+
+https://sourcemaking.com/antipatterns
+https://www.slideshare.net/ivanricarte/antipadroes
+
+Padrões de Projeto
+
+http://www.javacamp.org/designPattern/
+https://sourcemaking.com/design_patterns
+https://github.com/lovelock/phpqqgroup/blob/master/Java/GoF%20Design%20Patterns%20-%20with%20examples%20using%20Java%20and%20UML2.pdf
+https://www.slideshare.net/ivanricarte/padroes1
+
+Code Smells
+
+https://sourcemaking.com/refactoring/smells
+https://www.slideshare.net/ivanricarte/refatorao-code-smells
