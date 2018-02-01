@@ -11,7 +11,7 @@
       ** O viewport é todo o conteúdo da página que é exibida pelo browser.
       ** O width=device-width, initial-scale=1 ajuda o conteúdo da página conforme o tamanho do viewport.
     -->
-    <title> WIP </title>
+    <title> OurBills </title>
     
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -31,6 +31,11 @@
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="bootstrap/js/jquery.min.js"></script>
+    <!--  -->
+    <script type="text/javascript" src="bootstrap/tether/tether.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    
     <!--  -->
     <script type="text/javascript" src="js/login.js"> </script>
   </head>
@@ -79,8 +84,5 @@
         </div>
       </div>
     </section>
-
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>
