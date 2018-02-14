@@ -28,16 +28,6 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="bootstrap/js/jquery.min.js"></script>
-    <!--  -->
-    <script type="text/javascript" src="bootstrap/tether/tether.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    
-    <!--  -->
-    <script type="text/javascript" src="js/login.js"> </script>
   </head>
   <body>
   	<header role="banner">
@@ -51,8 +41,8 @@
 
       <div class="row" id="container_alerta_mensagem"> </div>
 
-      <div class="row">
-        <form id="form_login" role="form">
+      <form id="form_login" role="form">
+        <div class="row">
           <div class="col-md-12">
             <div class="form-group inner-addon left-addon">
               <label for="username" class="sr-only"> Email </label>
@@ -60,7 +50,9 @@
               <span class="glyphicon glyphicon-user"> </span>
             </div>
           </div>
+        </div>
 
+        <div class="row">
           <div class="col-md-12">
             <div class="form-group  inner-addon left-addon"> 
               <label for="password" class="sr-only"> Password </label>
@@ -68,21 +60,35 @@
               <span class="glyphicon glyphicon-lock"> </span>
             </div>
           </div>
+        </div>
 
+        <div class="row">
           <div class="col-md-12">
             <div class="form-group">
               <button type="button" class="btn btn-default" id="btn-submit" class="col-md-12" title="Entrar no aplicativo"> Entrar </button>
             </div>
-          </div>  
-        </form>
-      </div> <!-- row form -->
+          </div>
+        </div>
+      </form>
 
       <div class="row">
-        <div class="col-md-12">
-          <div class="col-xs-6 padding-normalize font-xs"> <a href="#"> Esqueceu sua senha? </a> </div>
-          <div class="col-xs-6 padding-normalize font-xs" id="btn-signin"> <a href="cadastrarse.php"> Cadastre-se </a> </div>
-        </div>
+          <div class="col-xs-6 padding-normalize font-xs">
+            <a href="#"> Esqueceu sua senha? </a>
+          </div>
+
+          <div class="col-xs-6 padding-normalize font-xs text-right">
+            <a href="cadastrarse.php"> Cadastre-se </a>
+          </div>
       </div>
     </section>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <!--  -->
+    <script type="text/javascript" src="bootstrap/tether/tether.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!--  -->
+    <script type="text/javascript" src="js/login.js"> </script>
   </body>
 </html>
