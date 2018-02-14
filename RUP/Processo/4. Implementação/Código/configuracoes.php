@@ -149,7 +149,7 @@
                       <div class="col-1">
                         <button type="button" class="btn btn-link btn-sm float-right" data-toggle="tooltip" data-placement="left" title="O usuário será notificado quando um grupo, no qual ele foi incluído, for criado, excluído ou sofrer qualquer tipo de modificação.">
                           <small>
-                            <span class="oi oi-info align-top" title="Mais informações." aria-hidden="true"></span>
+                            <span class="oi oi-info align-top" aria-label="Mais informações."></span>
                           </small>
                         </button>
                       </div>
@@ -166,7 +166,7 @@
                       <div class="col-1">
                         <button type="button" class="btn btn-link btn-sm float-right" data-toggle="tooltip" data-placement="left" title="O usuário será notificado quando um evento, no qual ele foi incluído, for adicionado, excluído ou sofrer qualquer tipo de alteração.">
                           <small>
-                            <span class="oi oi-info align-top" title="Mais informações." aria-hidden="true"></span>
+                            <span class="oi oi-info align-top" aria-label="Mais informações."></span>
                           </small>
                         </button>
                       </div>
@@ -183,7 +183,7 @@
                       <div class="col-1">
                         <button type="button" class="btn btn-link btn-sm float-right" data-toggle="tooltip" data-placement="left" title="O usuário será notificado 2 dias antes de uma conta, na qual ele foi incluído, atingir sua data de pagamento.">
                           <small>
-                            <span class="oi oi-info align-top" title="Mais informações." aria-hidden="true"></span>
+                            <span class="oi oi-info align-top" aria-label="Mais informações."></span>
                           </small>
                         </button>
                       </div>
@@ -200,7 +200,7 @@
                       <div class="col-1">
                         <button type="button" class="btn btn-link btn-sm float-right" data-toggle="tooltip" data-placement="left" title="O usuário será notificado quando novas funcionalidades ficarem disponíveis.">
                           <small>
-                            <span class="oi oi-info align-top" title="Mais informações." aria-hidden="true"></span>
+                            <span class="oi oi-info align-top" aria-label="Mais informações."></span>
                           </small>
                         </button>
                       </div>
