@@ -24,9 +24,7 @@
     <div class="main container">
       <section class="container-wip" role="main">
         <div class="row">
-          <div class="col-md-12">
-            <h1> Cadastre-se </h1>
-          </div>
+          <h1> Cadastre-se </h1>
         </div>
 
         <div class="row" id="container_alerta_mensagem">
