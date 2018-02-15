@@ -1,93 +1,94 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="pt-br">
   <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--
-      * The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
-      * A segunda tag é utilizar para criar uma compatibilidade com o Internet Explorer.
-      * A terceira tag é utiliza para criar designs responsivos.
-      ** O viewport é todo o conteúdo da página que é exibida pelo browser.
-      ** O width=device-width, initial-scale=1 ajuda o conteúdo da página conforme o tamanho do viewport.
-    -->
-    <title> OurBills </title>
-    
-    <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--  -->
+    <link href="open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
     <!-- makes browsers render all elements more consistently and in line with modern standards -->
     <link href="style/normalize.css" rel="stylesheet" type="text/css">
-    <link href="style/login.css" rel="stylesheet" type="text/css">
+    <!--  -->
     <link href="style/navbar.css" rel="stylesheet" type="text/css">
-    <link href="style/inner-addon.css" rel="stylesheet" type="text/css">
-    
+    <!--  -->
+    <link href="style/login.css" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <title> Entrar • OurBills </title>
   </head>
+
   <body>
-  	<header role="banner">
-      <?php require("navbar-out.html"); ?> 
+    <header role="banner">
+      <?php require('navbar-out.html'); ?> 
     </header>
 
-    <section class="container-wip" role="main">
+    <div class="container container-wip" role="main">
+      <!-- 
       <div class="row container-brand">
           <img src="#" class="img-responsive" id="brand">
       </div>
+       -->
 
-      <div class="row" id="container_alerta_mensagem"> </div>
+      <div class="row" id="container_alerta_mensagem" aria-label="Mensagem de erro."> </div>
 
       <form id="form_login" role="form">
         <div class="row">
-          <div class="col-md-12">
-            <div class="form-group inner-addon left-addon">
-              <label for="username" class="sr-only"> Email </label>
-              <input type="email" name="usuario" placeholder="Digite seu e-mail" class="form-control" id="username" autofocus required>
-              <span class="glyphicon glyphicon-user"> </span>
+          <div class="col">
+            <div class="input-group form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text oi oi-person align-middle"> </span>
+              </div>
+
+              <label id="user_email_label" for="user_email" class="sr-only"> Digite seu e-mail </label>
+              <input type="text" name="usuario" class="form-control" id="user_email" placeholder="E-mail" aria-label="E-mail do usuário." aria-labelledby="user_email_label" autofocus required>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="input-group form-group"> 
+              <div class="input-group-prepend">
+                <span class="input-group-text oi oi-lock-locked align-middle"> </span>
+              </div>
+
+              <label id="user_password_label" for="password" class="sr-only"> Digite sua senha </label>
+              <input type="password" name="senha" class="form-control" id="password" placeholder="Digite sua senha"   aria-label="Senha do usuário." aria-labelledby="user_password_label" required>
             </div>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-12">
-            <div class="form-group  inner-addon left-addon"> 
-              <label for="password" class="sr-only"> Password </label>
-              <input type="password" name="senha" placeholder="Digite sua senha" class="form-control" id="password" required>
-              <span class="glyphicon glyphicon-lock"> </span>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-12">
+          <div class="col">
             <div class="form-group">
-              <button type="button" class="btn btn-default" id="btn-submit" class="col-md-12" title="Entrar no aplicativo"> Entrar </button>
+              <button type="button" class="btn btn-default" id="btn-submit" class="col" title="Entrar no aplicativo"> Entrar </button>
             </div>
           </div>
         </div>
       </form>
 
       <div class="row">
-          <div class="col-xs-6 padding-normalize font-xs">
+          <div class="col font-xs">
             <a href="#"> Esqueceu sua senha? </a>
           </div>
 
-          <div class="col-xs-6 padding-normalize font-xs text-right">
+          <div class="col font-xs text-right">
             <a href="cadastrarse.php"> Cadastre-se </a>
           </div>
       </div>
-    </section>
+    </div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="bootstrap/js/jquery.min.js"></script>
-    <!--  -->
-    <script type="text/javascript" src="bootstrap/tether/tether.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- Personal -->
     <!--  -->
     <script type="text/javascript" src="js/login.js"> </script>
   </body>
