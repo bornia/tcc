@@ -23,11 +23,10 @@ body {
 	background: #FFF;
 	margin-bottom: 1.4em;
 	padding: 2.5em 2em;
-	width: 30em;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	margin: 14em auto;
+	margin: 20% auto;
 }
 
 .container-brand {
@@ -54,4 +53,30 @@ body {
 
 #brand { /* Imagem do logo */
 	
+}
+
+/* ---------- MEDIA QUERIES ----------*/
+
+@media screen and (max-width: 767px) {
+	.container-wip {
+		width: 90%;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.container-wip {
+		width: 40%;
+	}
+}
+
+@media screen and (min-width: 992px) {
+	.container-wip {
+		width: 40%;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.container-wip {
+		width: 40%;
+	}
 }
