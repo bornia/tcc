@@ -13,7 +13,7 @@ body {
 	background-attachment: fixed;
 	width: 100%;
 	height: 100%;
-	overflow: hidden;
+	overflow: auto;
 }
 
 h1 {
@@ -22,6 +22,7 @@ h1 {
 }
 
 div.main {
+	height: 100%;
 	padding-top: 4.2em;
 	padding-bottom: 4.2em;
 }
@@ -40,19 +41,31 @@ div.main {
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin: 1.4em auto 0 auto;
-    width: 40%;
+    
+    
 }
 
 .sub-font {
 	color: #C0C0C0;
 }
+
+#lista-de-grupos {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#numero-de-membros {
+	font-size: 0.7em;
 }
 
 #btn-submit {
-	margin-top: 1em;
-	width: 100%;
 	background: #F9775F;
 	color: #FFF;
-	font-size: 1.1em;
+	font-size: 0.8em;
 	font-weight: 600;
+}
+
+#ultima-atualizacao {
+	font-size: 0.71em;
 }

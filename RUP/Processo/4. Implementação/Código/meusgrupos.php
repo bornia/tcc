@@ -10,85 +10,59 @@ if($sessao_validada) {
 
 ?>
 
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="pt-br">
   <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--
-      * The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
-      * A segunda tag é utilizar para criar uma compatibilidade com o Internet Explorer.
-      * A terceira tag é utiliza para criar designs responsivos.
-      ** O viewport é todo o conteúdo da página que é exibida pelo browser.
-      ** O width=device-width, initial-scale=1 ajuda o conteúdo da página conforme o tamanho do viewport.
-    -->
-    <title> WIP | Meus Grupos </title>
-    
-    <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--  -->
+    <link href="open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
     <!-- makes browsers render all elements more consistently and in line with modern standards -->
     <link href="style/normalize.css" rel="stylesheet" type="text/css">
-    <link href="style/meusgrupos.css" rel="stylesheet" type="text/css">
-    <link href="style/navbar.css" rel="stylesheet" type="text/css">
-    <link href="style/inner-addon.css" rel="stylesheet" type="text/css">
-    
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <style type="text/css">
-      div.main {
-        height: 100%;
-      }
-
-      section.container-wip {
-        height: 100%;
-      }
-
-      div.panel {
-        height: 80%;
-      }
-    </style>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="bootstrap/js/jquery.min.js"></script>
     <!--  -->
-    <script type="text/javascript" src="js/meusgrupos.js"> </script>
+    <link href="style/navbar.css" rel="stylesheet" type="text/css">
+    <!--  -->
+    <link href="style/meusgrupos.css" rel="stylesheet" type="text/css">
+
+    <title> Grupos • OurBills </title>
   </head>
+
   <body>
-  	<header role="banner">
+    <header role="banner">
       <?php require('navbar-in.html'); ?> 
     </header>
 
     <div class="main container" >
-      <section class="container-wip" role="main">
+      <section class="container-wip" role="main" style="">
         <div class="row">
-          <div class="col-md-12">
-            <h1> Grupos </h1>
-          </div>
+          <h1> Grupos </h1>
         </div>
 
         <div class="row">
-          <div class="col-md-12">
-            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#janela_novo_grupo" title="Adicionar novo grupo">
-              <span class="glyphicon glyphicon-plus-sign"> </span> Novo Grupo
+          <div class="col">
+            <button type="button" class="btn btn-success btn-sm mb-1" data-toggle="modal" data-target="#janela_novo_grupo" title="Adicionar novo grupo">
+              <span class="oi oi-plus" aria-labelledby="novo-grupo"> </span>
+              <span id="novo-grupo"> Novo Grupo </span>
             </button>
           </div>
         </div>
 
-        <form class="modal fade" id="janela_novo_grupo"> <!-- Modal para adicionar novo evento -->
-          <div class="modal-dialog modal-md">
+        <!-- ========== Modal para adicionar novo evento ========== -->
+
+        <form class="modal fade" id="janela_novo_grupo" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" title="Fechar">
-                  <span> &times; </span>
-                </button>
                 <h3 class="modal-title"> Novo Grupo </h3>
+
+                <button type="button" class="close" data-dismiss="modal" title="Fechar">
+                  <span aria-hidden="true"> &times; </span>
+                </button>   
               </div>
 
               <div class="modal-body">
@@ -97,7 +71,7 @@ if($sessao_validada) {
                 ?>
 
                 <div class="row">
-                  <div class="col-md-12">
+                  <div class="col">
                     <div class="form-group">
                       <label for="nome_grupo"> Nome do Grupo: </label>
                       <small class="sub-font pull-right">
@@ -109,7 +83,7 @@ if($sessao_validada) {
                 </div>
 
                 <div class="row">
-                  <div class="col-md-12">
+                  <div class="col">
                     <div class="form-group">
                       <label for=""> Descrição: </label>
                       <small class="sub-font pull-right">
@@ -123,37 +97,92 @@ if($sessao_validada) {
 
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
-                <button type="submit" class="btn btn-success"> Adicionar </button>
+                <button type="submit" class="btn btn-success"> Criar Grupo </button>
               </div>
             </div> <!-- modal-content -->
           </div> <!-- modal-dialog -->
-        </form> <!-- fim do modal -->
+        </form>
 
-        <div class="panel panel-default" style="overflow-y: auto;">
-          <div class="panel-body">
-            <a class="detalhes" href="#" data-trigger="hover"  data-toggle="popover" title="Popover Header" data-content="Some content inside the popover" data-placement="right">
-              <div class="row panel" style="padding-bottom: 0.8em;">
-                <div class="col-md-10">
-                  <div class="row">
-                    <div class="col-md-8">
-                      <span class="group-name"> Nome do Grupo </span>
+        <!-- ========== FIM DO MODAL ========== -->
+
+        <div class="row">
+          <div class="col mb-2">
+            <div class="list-group pre-scrollable" id="lista-de-grupos" role="tablist" style="overflow: auto;">
+              <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
+              <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+              <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+              <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                <div class="card border-0">
+                  <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col">
+                        <h5 class="card-title"> Nome do Grupo </h5>
+                      </div>
+
+                      <div class="col">
+                        <span class="text-muted float-right align-text-bottom" id="numero-de-membros">
+                          7 Membros
+                        </span>
+                      </div>
                     </div>
+
+                    <div class="row">
+                      <div class="col">
+                        <p class="card-text"> <small> Descrição do grupo. </small> </p>
+                      </div>
+                    </div>                    
                   </div>
 
-                  <div class="row">
-                    <div class="col-md-12">
-                      <small class="sub-font"> 7 Membros </small>
+                  <div class="card-footer border-light">
+                    <div class="row">
+                      <div class="col">
+                        <small class="text-muted" id="ultima-atualizacao"> Última atualização há 3 minutos </small>
+                      </div>
+
+                      <div class="col">
+                        <a href="#" class="btn btn-sm float-right" id="btn-submit">
+                          <span class="oi oi-account-login" aria-labelledby="entrar-no-grupo"> </span>
+                          <span id="entrar-no-grupo"> Entrar no Grupo </span>
+                        </a>
+                      </div>
                     </div>
                   </div>
-                </div> <!-- Nome, e-mail, número de participantes -->
-              </div> <!-- Grupo -->
-            </a>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                Grupo 2
+              </div>
+
+              <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+                Grupo 3
+              </div>
+
+              <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
+                Grupo 4
+              </div>
+            </div>
           </div>
         </div>
+        
       </section>
     </div>
 
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- Personal -->
+    <!--  -->
+    <script type="text/javascript" src="js/meusgrupos.js"> </script>
   </body>
 </html>
