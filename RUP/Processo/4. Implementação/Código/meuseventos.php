@@ -1,252 +1,175 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="pt-br">
   <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--
-      * The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
-      * A segunda tag é utilizar para criar uma compatibilidade com o Internet Explorer.
-      * A terceira tag é utiliza para criar designs responsivos.
-      ** O viewport é todo o conteúdo da página que é exibida pelo browser.
-      ** O width=device-width, initial-scale=1 ajuda o conteúdo da página conforme o tamanho do viewport.
-    -->
-    <title> WIP | Meus Eventos </title>
-    
-    <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <!-- makes browsers render all elements more consistently and in line with modern standards. -->
-    <link href="style/normalize.css"    rel="stylesheet" type="text/css">
-    <link href="style/navbar.css"       rel="stylesheet" type="text/css">
-    <link href="style/myevents.css"     rel="stylesheet" type="text/css">
-    <!-- <link href="style/inner-addon.css"  rel="stylesheet" type="text/css"> -->
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--  -->
+    <link href="open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+    <!-- makes browsers render all elements more consistently and in line with modern standards -->
+    <link href="style/normalize.css" rel="stylesheet" type="text/css">
+    <!--  -->
+    <link href="style/navbar.css" rel="stylesheet" type="text/css">
+    <!--  -->
+    <link href="style/meuseventos.css" rel="stylesheet" type="text/css">
 
-    <!-- Substitui/adiciona algumas formatações do bootstrap -->
-    <style type="text/css" rel="stylesheet">
-      #img-financial-summary {
-        padding-left: 3%;
-      }
-
-      .modal-title {
-        color: #F9775F;
-      }
-
-      #submenu-user-options {
-        margin-top: 0.3em;
-      }
-    </style>
+    <title> Eventos • OurBills </title>
   </head>
+
   <body>
-  	<header role="banner">
+    <header role="banner">
       <?php require("navbar-in.html"); ?> 
     </header>
+
+    <!-- ========== RESUMO FINANCEIRO ========== -->
    
-   	<div class="main container" role="main">
+    <div class="main container" role="main">
       <section id="resumo-financeiro">
         <div class="container-wip">
-        	<div class="row">
-      			<div class="col-md-12">
-      				<h1> Resumo </h1>
-      			</div>
-        	</div> <!-- row -->
+          <div class="row">
+            <h1> Resumo do Grupo <small class="text-muted"> Rep da sua mãe </small> </h1>
+          </div>
 
-        	<div class="row" id="financial-summary-format">
-        		<div class="col-md-3" id="img-financial-summary"> 
-        			<img src="img/no-profile-picture.jpg" class="img-responsive" id="profile-picture" alt="Profile Picture">
-        		</div> <!-- Foto de perfil -->
+          <!-- ========== VALOR A SER RECEBIDO ========== -->
 
-        		<div class="col-md-4">
-      				<p class="financial-summary-glyphicon" id="glyphicon-import-color">
-      					<span class="glyphicon glyphicon-import"> </span>
-      				</p>
+          <div class="row">
+            <div class="col" data-toggle="tooltip" data-placement="bottom" title="Clique para saber mais sobre quem deve pagá-lo.">
+              <button class="btn btn-info bg-white btn-block">
+                <span class="oi oi-arrow-thick-top text-success font-weight-bold" aria-labelledby="a-receber"> </span>
+                <span class="text-secondary text-size-responsive" id="a-receber">
+                  Você deve receber <span class="text-success font-weight-bold"> R$ 00,00 reais</span>.
+                </span>
+              </button>
+            </div> 
 
-      				<p class="financial-summary-status">
-      					Você tem de receber <span id="value-to-receive"> R$ 00,00 reais</span>.
-      				</p>
-        		</div> <!-- A receber -->
+            <!-- ========== VALOR A SER PAGO ========== -->
 
-        		<div class="col-md-5">
-      				<p class="financial-summary-glyphicon" id="glyphicon-export-color">
-      					<span class="glyphicon glyphicon-export"> </span>
-      				</p>
+            <div class="col" data-toggle="tooltip" data-placement="bottom" title="Clique para saber mais sobre quem você deve pagar.">
+              <button class="btn btn-info bg-white btn-block">
+                <span class="oi oi-arrow-thick-bottom text-danger font-weight-bold" aria-labelledby="a-pagar"> </span>
+                <span class="text-secondary text-size-responsive" id="a-pagar">
+                  Você deve pagar <span class="text-danger font-weight-bold"> R$ 00,00 reais</span>.
+                </span>
+              </button>
+            </div>
 
-      				<p class="financial-summary-status">
-      					Você tem de pagar <span id="value-to-pay"> R$ 00,00 reais</span>.
-      				</p>
-        		</div> <!-- A pagar -->
-        	</div> <!-- row financial-summary-format -->
-        </div> <!-- container-wip -->
-      </section> <!-- Resumo Financeiro -->
+          </div> 
+        </div>
+      </section>
+
+      <!-- ========== EVENTOS ========== -->
 
       <section id="meus-eventos">
         <div class="container-wip">
           <div class="row">
-            <div class="col-md-12">
-              <h1> Eventos </h1>
-            </div>
+            <h1> Eventos </h1>
           </div> <!-- row -->
 
-          <div class="row">
-            <div class="col-md-4"> <!-- busca de eventos -->
-              <div class="input-group">
-                <label for="search-bar" class="sr-only"> Barra de Pesquisa </label>
-                <span class="input-group-addon"> <i class="glyphicon glyphicon-search"> </i> </span>
-                <input id="search-bar" type="search" class="form-control" placeholder="Buscar por título de evento">
+          <div class="row mb-2">
+
+            <!-- ========== BARRA DE PESQUISA DE EVENTOS ========== -->
+
+            <div class="col-12 col-md-5">
+              <label for="barra-de-pesquisa-label" class="text-muted font-weight-bold mt-2"> Pesquisa </label>
+
+              <div class="input-group" id="barra-de-pesquisa-label">
+                <input type="text" class="form-control text-size-responsive" placeholder="Procure pelo nome" aria-label="Barra de pesquisa de eventos." aria-describedby="barra-de-pesquisa-icone">
+
+                <div class="input-group-apend">
+                  <button class="btn btn-outline-secondary" type="button" aria-label="Pesquisar.">
+                    <span class="oi oi-magnifying-glass"> </span>
+                  </button>
+                </div>
               </div>
             </div>
 
-            <div class="col-md-3 form-group"> <!-- ordena eventos -->
-              <div class="row">
-                <div class="col-md-3 col-xs-2">
-                  <label for="ordem"> Ordem: </label>
-                </div>
+            <!-- ========== ORDENAR EVENTOS ========== -->
 
-                <div class="col-md-9 col-xs-8">
-                  <select class="form-control" arial-label="Ordenar eventos de acordo com o critério selecionado." id="ordem">
+            <div class="col-12 col-md-4">
+              <div class="row">
+                <div class="col">
+                  <label class="text-muted font-weight-bold mt-2" for="ordem"> Ordem </label>
+
+                  <select class="form-control text-size-responsive" arial-label="Ordenar eventos de acordo com o critério selecionado." id="ordem">
                     <option value="titulo"> Título </option>
                     <option value="total"> Total </option>
-                    <option value="modificacao" selected> Última Modificação </option>
+                    <option value="modificacao" selected> <small> Última Modificação </small> </option>
                   </select>
                 </div>
               </div>
             </div>
 
-            <div class="col-md-3 form-group"> <!-- eventos abertos/fechados -->
+            <!-- ========== STATUS DOS EVENTOS ========== -->
+
+            <div class="col-12 col-md-3">
               <div class="row">
-                <div class="col-md-3">
-                  <label for="ordem"> Status: </label>
-                </div>
-                
-                <div class="col-md-9">
-                  <select class="form-control" arial-label="Listar eventos abertos ou fechados, dependendo da opção selecionada.">
+                <div class="col">
+                  <label class="text-muted font-weight-bold mt-2" for="status"> Status </label>
+
+                  <select class="form-control text-size-responsive" arial-label="" id="status">
+                    <option value="todos"> Todos </option>
                     <option value="abertos"> Abertos </option>
                     <option value="fechados"> Fechados </option>
                   </select>
                 </div>
               </div>
             </div>
-
-            <div class="col-md-2 text-right"> <!-- adicionar eventos -->
-              <button type="button" class="form-control btn btn-success btn-crud" data-toggle="modal" data-target="#janela-adicionar-evento" title="Adicionar novo evento">
-                <span class="glyphicon glyphicon-plus" aria-label="Pequeno ícone simbolizando um botão de adicionar."> </span>
-              </button>
-                
-              <form class="modal fade" id="janela-adicionar-evento"> <!-- Modal para adicionar novo evento -->
-                <div class="modal-dialog modal-md">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" title="Fechar">
-                        <span> &times; </span>
-                      </button>
-                      <h3 class="modal-title"> Novo Evento </h3>
-                    </div>
-
-                    <div class="modal-body">
-                      <div class="form-group">
-                        <label for="titulo"> Título do Evento: </label>
-                        <input type="text" class="form-control" id="titulo" placeholder="Digite o nome do evento">
-                      </div>
-
-                      <div class="form-group">
-                        <div class="row">
-                          <div class="col-md-5">
-                            <label for="participantes"> Selecione os Participantes: </label>
-                          </div>
-
-                          <div class="col-md-7">
-                            <div class="form-group">
-                              <label class="sr-only" for="buscar-email-participante">
-                                Buscar E-mail do Participante:
-                              </label>
-                               <input type="text" placeholder="Busque pelo e-mail" class="form-control" id="buscar-email-participante">
-                            </div>
-                          </div>
-                        </div>
-
-                        <div id="participantes"> 
-                          <div class="row item-participante">
-                            <div class="col-md-2" >
-                              <img src="img/no-profile-picture.jpg" class="img-responsive" id="friend-profile-picture" alt="Profile Picture" title="E-mail do usuário"> 
-                            </div>
-
-                            <div class="col-md-6" style="padding: 0.25em 0em;">
-                              <span>
-                                Guilherme Bornia Miranda <br>
-                                guilhermeborniamiranda@gmail.com
-                              </span>
-                            </div>
-
-                            <div class="col-md-4">
-                              <div class="row" style="padding: 0.67em 0em;">
-                                <div class="col-md-12 permissoes-container">
-                                  <label class="sr-only" for="dpbox-permissoes">
-                                    Defina as permissões do usuário:
-                                  </label>
-                                  <select class="form-control" id="dpbox-permissoes">
-                                    <option name="proprietario"> É proprietário </option>
-                                    <option name="visualizar"> Pode visualizar </option>
-                                    <option name="editar"> Pode editar </option>
-                                  </select>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> <!-- participantes -->
-                      </div>
-                    </div> <!-- modal-body -->
-
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
-                      <button type="submit" class="btn btn-success"> Adicionar </button>
-                    </div>
-                  </div> <!-- modal-content -->
-                </div> <!-- modal-dialog -->
-              </form>
-            </div> <!-- col -->
           </div> <!-- row -->
+
+          <div class="row">
+
+            <!-- ========== BOTÃO PARA CRIAR UM NOVO EVENTO ========== -->
+
+            <div class="col">
+              <button type="button" class="btn btn-success mb-2 float-right" id="btn-criar-evento" title="Criar evento." data-toggle="modal" data-target="#janela-criar-evento">
+                <span class="oi oi-plus text-white" aria-labelledby="btn-criar-evento" aria-describedby="btn-criar-evento-descricao"> </span>
+                <span class="sr-only" id="btn-criar-evento-descricao"> Criar evento. </span>
+              </button>
+
+              <!-- ========== BOTÃO PARA EXCLUIR EVENTO(S) ========== -->
+
+              <button type="button" class="btn btn-danger mb-2 float-right" id="btn-excluir-evento" title="Excluir evento." data-toggle="modal" data-target="#janela-excluir-evento">
+                <span class="oi oi-trash text-white" aria-labelledby="btn-excluir-evento" aria-describedby="btn-excluir-evento-descricao"> </span>
+                <span class="sr-only" id="btn-excluir-evento-descricao"> Excluir evento. </span>
+              </button>
+            </div>
+          </div>
+
+          <!-- ========== TABELA DE EVENTOS ========== -->
 
           <div class="row" id="table-events">
             <div class="col-md-12 table-responsive">
-              <table class="table table-stripped table-hover" summary="Lista de eventos cadastrados com indicações sobre a data da última modificação e sobre o total de gastos em relação a cada evento.">
+              <table class="table table-stripped table-hover text-size-responsive" summary="Lista de eventos cadastrados com indicações sobre a data da última modificação e sobre o total de gastos em relação a cada evento.">
                 <caption class="sr-only">
                   Lista de Eventos
                 </caption>
 
                 <thead>
                   <tr>
-                    <th>
+                    <th class="align-middle">
                       <input type="checkbox" title="Selecionar todos" value="todo-item-selecionado" onclick="return toggle_all_checkboxes(this);">
                     </th>
-                    <th>                  Título                              </th>
-                    <th>                  Total                               </th>
-                    <th>                  Última Modificação                  </th>
-                    <th>                  Opções                              </th>
+                    <th class="align-middle"> Título </th>
+                    <th class="align-middle"> Última Modificação </th>
+                    <th class="align-middle"> Opções </th>
                   </tr>
                 </thead>
 
                 <tbody>
                   <tr>
-                    <td>
+                    <td class="align-middle">
                       <input aria-label="Marque o item" type="checkbox" name="item" value="item-selecionado-1" onchange="return verify_checkbox_status(this);">
                     </td>
-                    <td class="change-cursor" onclick="return redirect_page();"> REP - Aluguel de Julho </td>
-                    <td class="change-cursor" onclick="return redirect_page();"> R$ 17.389,56 </td>
-                    <td class="change-cursor" onclick="return redirect_page();"> 27/10/2017 as 15:18:35 </td>
-                    <td>
-                      <button type="button" class="btn btn-warning btn-crud" title="Editar evento">
-                        <span class="glyphicon glyphicon-pencil"> </span>
-                      </button>
-
-                      <button type="button" class="btn btn-danger btn-crud" title="Excluir evento" data-toggle="modal" data-target="#janela-excluir-evento">
-                        <span class="glyphicon glyphicon-remove"> </span>
+                    <td class="change-cursor align-middle" onclick="return redirect_page();"> REP - Aluguel de Julho </td>
+                    <td class="change-cursor align-middle" onclick="return redirect_page();"> 27/10/2017 as 15:18:35 </td>
+                    <td class="align-middle">
+                      <button type="button" class="btn btn-warning" id="btn-editar-evento" title="Editar evento.">
+                        <span class="oi oi-pencil text-white" aria-labelledby="btn-editar-evento" aria-describedby="btn-editar-evento-descricao"> </span>
+                        <span class="sr-only" id="btn-editar-evento-descricao"> Editar evento. </span>
                       </button>
                     </td>
                   </tr>
@@ -255,14 +178,103 @@
             </div>
           </div> <!-- row -->
 
-          <form class="modal fade" id="janela-excluir-evento"> <!-- Modal para adicionar novo evento -->
-            <div class="modal-dialog modal-md">
-              <div class="modal-content">
+          <!-- ========== MODAL PARA CRIAR UM NOVO EVENTO ========== -->
+
+          <form class="modal fade" tabindex="-1" id="janela-criar-evento">
+            <div class="modal-dialog modal-md modal-dialog-centered">
+              <div class="modal-content text-size-responsive">
                 <div class="modal-header">
+                  <h3 class="modal-title"> Novo Evento </h3>
+
                   <button type="button" class="close" data-dismiss="modal" title="Fechar">
                     <span> &times; </span>
                   </button>
+                </div>
+
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="titulo" class="font-weight-bold"> Título do Evento </label>
+                    <input type="text" class="form-control text-size-responsive" id="titulo" placeholder="Digite o nome do evento">
+                  </div>
+
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-4">
+                        <label for="participantes" class="font-weight-bold"> Participantes </label>
+                      </div>
+
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="sr-only" for="buscar-email-participante">
+                            Buscar E-mail do Participante:
+                          </label>
+                           <input type="text" placeholder="Busque pelo e-mail" class="form-control text-size-responsive" id="buscar-email-participante">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div id="participantes"> 
+                      <div class="row item-participante mt-3">
+                        <div class="col-12 col-md-7" style="/*padding: 0.25em 0em;*/">
+                          <div class="row">
+                            <div class="col-2">
+                              <div class="form-check">
+                                <label for="" class="sr-only"> Selecione esta opção para retirar o participante da lista do novo evento. </label>
+                                <input type="checkbox" class="form-check-input" id="check-participante-1" name="retirar-da-lista" value="participante1">
+                              </div>
+                            </div>
+
+                            <div class="col">
+                              <div class="row">
+                                <span class="text-truncate"> Guilherme Bornia Miranda </span>
+                              </div> 
+
+                              <div class="row">
+                                <small class="text-truncate"> guilhermeborniamiranda@gmail.com </small>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-12 col-md-5">
+                          <div class="row mt-1">
+                            <div class="col permissoes-container">
+                              <label class="sr-only" for="dpbox-permissoes">
+                                Defina as permissões do usuário:
+                              </label>
+                              <select class="form-control text-size-responsive" id="dpbox-permissoes">
+                                <option name="proprietario"> É dono </option>
+                                <option name="editar"> Pode editar </option>
+                                <option name="visualizar"> Pode ver </option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div> <!-- participantes -->
+                  </div>
+                </div> <!-- modal-body -->
+
+                <div class="modal-footer" style="border: 1px solid red;">
+                  <button type="button" class="btn btn-danger mr-4"> Retirar </button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
+                  <button type="submit" class="btn btn-success"> Adicionar </button>
+                </div>
+              </div> <!-- modal-content -->
+            </div> <!-- modal-dialog -->
+          </form>
+
+          <!-- ========== MODAL PARA EXCLUIR EVENTOS ========== -->
+
+          <form class="modal fade" tabindex="-1" id="janela-excluir-evento"> <!-- Modal para adicionar novo evento -->
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
                   <h3 class="modal-title"> Excluir Evento </h3>
+
+                  <button type="button" class="close" data-dismiss="modal" title="Fechar">
+                    <span aria-hidden="true"> &times; </span>
+                  </button>
                 </div>
 
                 <div class="modal-body">
@@ -277,23 +289,44 @@
             </div> <!-- modal-dialog -->
           </form>
 
+          <!-- ========== PAGINAÇÃO DE EVENTOS ========== -->
+
           <div class="row">
-            <div class="col-md-12">
-              <p id="paginacao">
-                Páginas: <span class="numero-da-pagina" aria-label="Número da página."> </span>
-              </p>
+            <div class="col">
+              <nav class="float-right mt-2" aria-label="Barra de navegação das páginas dos eventos.">
+                <ul class="pagination pagination-sm">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                  </li>
+                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
+
         </div> <!-- container-wip -->
       </section> <!-- Meus Eventos -->
     </div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-    <!-- Meus Eventos JavaScript -->
-    <script src="js/myevents.js" type="text/javascript"> </script>
+    <!-- Personal -->
+    <!--  -->
+    <script src="js/meuseventos.js" type="text/javascript"> </script>
   </body>
 </html>

@@ -2,7 +2,7 @@
  * Redireciona o usuário para consultar mais informações acerca do evento clicado na tabela.
 */
 function redirect_page() {
-	window.location.href = 'event.php';
+	window.location.href = 'evento.php';
 }
 
 /*
@@ -32,21 +32,19 @@ function verify_checkbox_status(element) {
  * Muda a função do botão de adicionar evento para poder excluir os eventos marcados.
 */
 function change_add_btn_function() {
-	document.getElementById("btn-crud-add").innerHTML = 
-		"<button type='button' class='btn btn-danger btn-crud' title='Excluir evento'" +
-		"data-toggle='modal' data-target='#janela-excluir-evento'>" +
-			"<span class='glyphicon glyphicon-remove'> </span>" +
-        "</button>";
+	$('#btn-excluir-evento').fadeIn();
+	$('#btn-criar-evento').hide();
 }
 
 /*
  * Devolve a função do botão de adicionar evento.
 */
 function giveback_add_btn_function() {
-	document.getElementById("btn-crud-add").innerHTML =
-		"<button type='button' class='form-control btn btn-success btn-crud'" +
-		"data-toggle='modal' data-target='#janela-adicionar-evento' title='Adicionar novo evento'>" +
-			"<span class='glyphicon glyphicon-plus' aria-label='Pequeno ícone simbolizando um" +
-			"botão de deletar.'> </span>" +
-		"</button>";
+	$('#btn-excluir-evento').hide();
+	$('#btn-criar-evento').fadeIn();
 }
+
+$(document).ready(function() {
+	$('#btn-excluir-evento').hide();
+	$('[data-toggle="tooltip"]').tooltip();
+});
