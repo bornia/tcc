@@ -1,35 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="pt-br">
   <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--
-      * The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
-      * A segunda tag é utilizar para criar uma compatibilidade com o Internet Explorer.
-      * A terceira tag é utiliza para criar designs responsivos.
-      ** O viewport é todo o conteúdo da página que é exibida pelo browser.
-      ** O width=device-width, initial-scale=1 ajuda o conteúdo da página conforme o tamanho do viewport.
-    -->
-    <title> WIP | Gastos </title>
-    
-    <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--  -->
+    <link href="open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
     <!-- makes browsers render all elements more consistently and in line with modern standards -->
     <link href="style/normalize.css" rel="stylesheet" type="text/css">
-    <link href="style/event.css" rel="stylesheet" type="text/css">
+    <!--  -->
     <link href="style/navbar.css" rel="stylesheet" type="text/css">
-    
+    <!--  -->
+    <link href="style/evento.css" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <title> Gastos • OurBills </title>
   </head>
+
   <body>
-  	<header role="banner">
+    <header role="banner">
       <?php require("navbar-in.html"); ?> 
     </header>
 
@@ -37,112 +29,222 @@
       <section id="gastos">
         <div class="container-wip">
           <div class="row">
-            <div class="col-md-11">
+            <div class="col-8">
               <h1> Gastos </h1>
             </div>
 
-            <div class="col-md-1 text-right">
-              <a href=""> Voltar </a>
+            <div class="col text-right">
+              <a href="meuseventos.php">
+                <div class="d-md-none font-weight-bold">
+                  <h3>
+                    <span class="oi oi-arrow-thick-left" aria-label="Voltar a Meus Eventos"> </span>
+                  </h3>
+                </div>                
+
+                <div class="d-none d-md-block">
+                  <h7>
+                    <span class="oi oi-arrow-thick-left" aria-describedby="voltar-meus-eventos"> </span>
+                    <span id="voltar-meus-eventos"> Voltar a Meus Eventos </span>
+                  </h7>
+                </div>
+              </a>
             </div>
           </div>
 
           <div class="row">
-            <div class="col-md-3 col-md-offset-7 form-group"> <!-- ordena eventos -->
-              <div class="row">
-                <div class="col-md-3 col-xs-2">
-                  <label for="ordem"> Ordem: </label>
-                </div>
+            <div class="col-8 col-md-3"> <!-- ordena eventos -->
+              <div class="form-group">
+                <label for="ordem" class="font-weight-bold text-muted"> Ordem </label>
 
-                <div class="col-md-9 col-xs-8">
-                  <select class="form-control" arial-label="Ordenar eventos de acordo com o critério selecionado." id="ordem">
-                    <option value="" selected> Data de Pagamento </option>
-                    <option value=""> Título </option>
-                    <option value=""> Valor </option>
-                  </select>
-                </div>
+                <select class="form-control text-size-responsive" arial-label="Ordenar eventos de acordo com o critério selecionado." id="ordem">
+                  <option value="" selected> Data de Pagamento </option>
+                  <option value=""> Título </option>
+                  <option value=""> Valor </option>
+                </select>
               </div>
             </div>
 
-            <div class="col-md-2 text-right"> <!-- adicionar eventos -->
-              <button type="button" class="form-control btn btn-success btn-crud" data-toggle="modal" data-target="#janela-adicionar-evento" title="Adicionar novo gasto">
-                <span class="glyphicon glyphicon-plus"> </span>
-              </button>
+            <div class="col text-right"> <!-- adicionar eventos -->
+              <div class="form-group">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#janela-adicionar-gasto" title="Adicionar novo gasto">
+                  <span class="oi oi-plus text-white"> </span>
+                </button>
+              </div>
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-md-12 table-responsive">
+          <!-- ========== TABELA DE GASTOS ========== -->
+
+            <div class="table-responsive">
               <table class="table table-stripped table-hover" summary="">
                 <caption class="sr-only">
-                  Título da Tabela
+                  Gastos do evento x do grupo y
                 </caption>
 
                 <thead>
                   <tr>
-                    <th aria-label="Marque para excluir um ou mais itens">
+                    <th class="align-middle" aria-label="Marque para excluir um ou mais itens">
                       <input type="checkbox" value="todo-item-selecionado" onclick="return toggle_all_checkboxes(this);">
                     </th>
-                    <th> Descrição </th>
-                    <th> Categoria </th>
-                    <th> Data de <br> Pagamento </th>
-                    <th> Valor </th>
-                    <th> Opções </th>
+                    <th class="align-middle"> Descrição </th>
+                    <th class="align-middle"> Categoria </th>
+                    <th class="align-middle"> Prazo </th>
+                    <th class="align-middle"> Valor </th>
+                    <th class="align-middle"> Opções </th>
                   </tr>
                 </thead>
 
                 <tbody>
                   <tr>
-                    <td>
-                      <input aria-label="Marque o item" type="checkbox" name="item" value="item-selecionado-1" onchange="return verify_checkbox_status(this);">
+                    <td class="align-middle">
+                      <input aria-label="Marque o item" type="checkbox" name="item" value="item-selecionado-1">
                     </td>
-                    <td class="change-cursor adjust-width" onclick="return redirect_page();"> REP </td>
-                    <td class="change-cursor adjust-width" onclick="return redirect_page();"> Comida </td>
-                    <td class="change-cursor adjust-width" onclick="return redirect_page();"> 27/10/2017 </td>
-                    <td class="change-cursor adjust-width" onclick="return redirect_page();"> R$ 32,34 </td>
-                    <td>
-                      <button type="button" class="btn btn-warning btn-crud" title="Editar gasto">
-                        <span class="glyphicon glyphicon-pencil"> </span>
-                      </button>
+                    <td class="change-cursor adjust-width align-middle"> REP </td>
+                    <td class="change-cursor adjust-width align-middle"> Comida </td>
+                    <td class="change-cursor adjust-width align-middle"> 27/10/2017 </td>
+                    <td class="change-cursor adjust-width align-middle"> R$ 32,34 </td>
+                    <td class="align-middle">
+                      <button type="button" class="btn btn-warning" title="Editar gasto">
+                        <span class="sr-only" id="btn-editar-evento-descricao"> Editar gasto. </span>
 
-                      <button type="button" class="btn btn-danger btn-crud" title="Excluir gasto" data-toggle="modal" data-target="#janela-excluir-gasto">
-                        <span class="glyphicon glyphicon-remove"> </span>
+                        <span class="oi oi-pencil text-white" aria-labelledby="btn-editar-gasto" aria-describedby="btn-editar-evento-descricao"> </span>
                       </button>
                     </td>
                   </tr>
                 </tbody>
               </table>
-            </div> <!-- col table-responsive -->
+            </div> <!-- table-responsive -->
 
-            <form class="modal fade" id="janela-excluir-gasto"> <!-- Modal para adicionar novo evento -->
-              <div class="modal-dialog modal-md">
+            <!-- ========== MODAL PARA ADICIONAR NOVO GASTO ========== -->
+
+            <form class="modal fade" id="janela-adicionar-gasto" tabindex="-1" role="dialog">
+              <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
+                    <h3 class="modal-title"> Novo Gasto </h3>
+
                     <button type="button" class="close" data-dismiss="modal" title="Fechar">
                       <span> &times; </span>
-                    </button>
-                    <h3 class="modal-title"> Excluir Gasto </h3>
+                    </button>    
                   </div>
 
-                  <div class="modal-body">
-                    <p> Tem certeza que deseja excluir o gasto selecionado? </p>
-                  </div> <!-- modal-body -->
+                  <div class="modal-body text-size-responsive">
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="descricao-novo-gasto" class="font-weight-bold"> Descrição </label>
+
+                          <input type="text" class="form-control text-size-responsive" id="descricao-novo-gasto" aria-describedby="descricao-novo-gasto-help" maxlength="30" placeholder="(Opcional) Descreva o gasto">
+
+                          <span id="descricao-novo-gasto-help" class="sr-only"> Se desejar, descreva o gasto em poucas palavras. </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="categoria-novo-gasto" class="font-weight-bold"> Categoria </label>
+                            <select class="form-control text-size-responsive" id="categoria-novo-gasto">
+                              <option> Alimentação </option>
+                            </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- ========== LISTA DE PARTICIPANTES ========== -->
+
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="participantes" class="font-weight-bold" aria-describedby="aria-quem-dividira">
+                            Participantes
+                            <small class="text-muted" id="aria-quem-dividira"> Entre quem será dividido? </small>
+                          </label>
+
+                          <div id="participantes"> 
+                            <div class="row item-participante text-size-responsive form-group">
+                              <div class="col-12 col-md-7">
+                                <div class="row">
+                                  <div class="col-2">
+                                    <div class="form-check">
+                                      <label for="check-participante-1" class="sr-only"> Selecione esta opção para incluir o participante no novo gasto. </label>
+                                      <input type="checkbox" class="form-check-input" id="check-participante-1" name="retirar-da-lista" value="participante1">
+                                    </div>
+                                  </div>
+
+                                  <div class="col">
+                                    <div class="row">
+                                      <span class="text-truncate"> Membro 1 do Grupo </span>
+                                    </div> 
+
+                                    <div class="row">
+                                      <small class="text-truncate"> email@exemplo.com </small>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div> <!-- participantes -->
+                        </div>
+                      </div>
+                    </div>
+
+                    
+                  </div>
 
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
-                    <button type="submit" class="btn btn-danger"> Excluir </button>
+                    <button type="submit" class="btn btn-success"> Adicionar </button>
                   </div>
                 </div> <!-- modal-content -->
               </div> <!-- modal-dialog -->
             </form>
 
-          </div> <!-- row -->
+            <!-- ========== MODAL PARA EXCLUIR GASTO ========== -->
+
+          <form class="modal fade" id="janela-excluir-gasto" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title"> Excluir Gasto </h3>
+
+                  <button type="button" class="close" data-dismiss="modal" title="Fechar">
+                    <span> &times; </span>
+                  </button>    
+                </div>
+
+                <div class="modal-body">
+                  <p> Tem certeza que deseja excluir o gasto selecionado? </p>
+                </div> <!-- modal-body -->
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
+                  <button type="submit" class="btn btn-danger"> Excluir </button>
+                </div>
+              </div> <!-- modal-content -->
+            </div> <!-- modal-dialog -->
+          </form>
         </div>
       </section>
     </div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- Personal -->
+    <!--  -->
+    <script type="text/javascript" src=""> </script>
   </body>
 </html>

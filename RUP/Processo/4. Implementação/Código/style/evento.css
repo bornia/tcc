@@ -37,12 +37,6 @@ div.main {
  * GASTOS
 */
 
-.btn-crud {
-	height: 36px;
-	width: 40px;
-	border-radius: 5px;
-}
-
 .change-cursor {
 	cursor: pointer;
 }
@@ -54,4 +48,19 @@ tr td {
 td.adjust-width {
 	min-width: 5em;
 	max-width: 10em;
+}
+
+/* TIPOGRAFIA RESPONSIVA */
+
+
+@media screen and (max-width: 767px) {
+	.text-size-responsive {
+		font-size: 0.85em;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.text-size-responsive {
+		font-size: 1em;
+	}
 }
