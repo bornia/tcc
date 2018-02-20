@@ -196,67 +196,9 @@
                     <label for="titulo" class="font-weight-bold"> Título do Evento </label>
                     <input type="text" class="form-control text-size-responsive" id="titulo" placeholder="Digite o nome do evento">
                   </div>
-
-                  <div class="form-group">
-                    <div class="row">
-                      <div class="col-4">
-                        <label for="participantes" class="font-weight-bold"> Participantes </label>
-                      </div>
-
-                      <div class="col">
-                        <div class="form-group">
-                          <label class="sr-only" for="buscar-email-participante">
-                            Buscar E-mail do Participante:
-                          </label>
-                           <input type="text" placeholder="Busque pelo e-mail" class="form-control text-size-responsive" id="buscar-email-participante">
-                        </div>
-                      </div>
-                    </div>
-
-                    <div id="participantes"> 
-                      <div class="row item-participante mt-3">
-                        <div class="col-12 col-md-7" style="/*padding: 0.25em 0em;*/">
-                          <div class="row">
-                            <div class="col-2">
-                              <div class="form-check">
-                                <label for="" class="sr-only"> Selecione esta opção para retirar o participante da lista do novo evento. </label>
-                                <input type="checkbox" class="form-check-input" id="check-participante-1" name="retirar-da-lista" value="participante1">
-                              </div>
-                            </div>
-
-                            <div class="col">
-                              <div class="row">
-                                <span class="text-truncate"> Guilherme Bornia Miranda </span>
-                              </div> 
-
-                              <div class="row">
-                                <small class="text-truncate"> guilhermeborniamiranda@gmail.com </small>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="col-12 col-md-5">
-                          <div class="row mt-1">
-                            <div class="col permissoes-container">
-                              <label class="sr-only" for="dpbox-permissoes">
-                                Defina as permissões do usuário:
-                              </label>
-                              <select class="form-control text-size-responsive" id="dpbox-permissoes">
-                                <option name="proprietario"> É dono </option>
-                                <option name="editar"> Pode editar </option>
-                                <option name="visualizar"> Pode ver </option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div> <!-- participantes -->
-                  </div>
                 </div> <!-- modal-body -->
 
-                <div class="modal-footer" style="border: 1px solid red;">
-                  <button type="button" class="btn btn-danger mr-4"> Retirar </button>
+                <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
                   <button type="submit" class="btn btn-success"> Adicionar </button>
                 </div>
