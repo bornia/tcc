@@ -117,46 +117,48 @@
 
             <!-- ========== MODAL PARA ADICIONAR NOVO GASTO ========== -->
 
-            <form class="modal fade" id="janela-adicionar-gasto" tabindex="-1" role="dialog">
+            <form class="modal fade" id="janela-adicionar-gasto" tabindex="-1" role="dialog" aria-labelledby="Janela para adicionar um novo gasto no evento." aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h3 class="modal-title"> Novo Gasto </h3>
 
-                    <button type="button" class="close" data-dismiss="modal" title="Fechar">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span> &times; </span>
                     </button>    
                   </div>
 
                   <div class="modal-body text-size-responsive">
-                    <div class="row">
-                      <div class="col">
-                        <div class="form-group">
-                          <label for="descricao-novo-gasto" class="font-weight-bold"> Descrição </label>
+                    <div class="form-group row">
+                      <label for="descricao-novo-gasto" class="col-sm-2 col-form-label font-weight-bold"> Descrição </label>
 
-                          <input type="text" class="form-control text-size-responsive" id="descricao-novo-gasto" aria-describedby="descricao-novo-gasto-help" maxlength="30" placeholder="(Opcional) Descreva o gasto">
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control text-size-responsive" id="descricao-novo-gasto" aria-describedby="descricao-novo-gasto-help" maxlength="30" placeholder="(Opcional) Descreva o gasto">
+                      </div>
 
-                          <span id="descricao-novo-gasto-help" class="sr-only"> Se desejar, descreva o gasto em poucas palavras. </span>
-                        </div>
+                      <span id="descricao-novo-gasto-help" class="sr-only"> Se desejar, descreva o gasto em poucas palavras. </span>
+                    </div>
+
+                    <div class="form-group row">
+                      <label for="categoria-novo-gasto" class="col-sm-2 col-form-label font-weight-bold"> Categoria </label>
+                      <div class="col-sm-10">
+                        <select class="form-control text-size-responsive" id="categoria-novo-gasto">
+                          <option> Alimentação </option>
+                        </select>
                       </div>
                     </div>
 
-                    <div class="row">
-                      <div class="col">
-                        <div class="form-group">
-                          <label for="categoria-novo-gasto" class="font-weight-bold"> Categoria </label>
-                            <select class="form-control text-size-responsive" id="categoria-novo-gasto">
-                              <option> Alimentação </option>
-                            </select>
-                        </div>
+                    <div class="form-group row">
+                      <label for="prazo-novo-gasto" class="col-sm-2 col-form-label font-weight-bold"> Prazo </label>
+                      <div class="col-sm-10">
+                        <input type="date" class="form-control text-size-responsive" id="prazo-novo-gasto">
                       </div>
                     </div>
 
-                    <div class="row">
-                      <div class="col">
-                        <div class="form-group">
-                          
-                        </div>
+                    <div class="form-group row">
+                      <label for="" class="col-sm-2 col-form-label font-weight-bold"> Valor </label>
+                      <div class="col-sm-10">
+                        <input type="number" class="form-control text-size-responsive" id="valor-novo-gasto" min="0.01" step="0.01" placeholder="Moeda">
                       </div>
                     </div>
 
@@ -193,13 +195,11 @@
                                 </div>
                               </div>
                             </div>
-                          </div> <!-- participantes -->
+                          </div> <!-- 1 participante -->
                         </div>
                       </div>
-                    </div>
-
-                    
-                  </div>
+                    </div> <!-- participantes -->  
+                  </div> <!-- end row -->
 
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
@@ -245,6 +245,6 @@
 
     <!-- Personal -->
     <!--  -->
-    <script type="text/javascript" src=""> </script>
+    <script type="text/javascript" src="js/evento.js"> </script>
   </body>
 </html>
