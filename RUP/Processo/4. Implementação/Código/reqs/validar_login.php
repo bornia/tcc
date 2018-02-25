@@ -11,7 +11,7 @@ $con = (new db())->conecta_mysql();
 $user = array($_POST['usuario'], md5($_POST['senha']));
 
 // Prepara a query
-$sql = "SELECT * FROM usr WHERE email = '$user[0]' AND senha = '$user[1]';";
+$sql = "SELECT * FROM usuarios WHERE email = '$user[0]' AND senha = '$user[1]';";
 
 $res = mysqli_query($con, $sql);
 
@@ -28,7 +28,7 @@ if(!isset($data)) {
 	return false;
 }
 
-$_SESSION['id'] = $data['usr_id'];
+$_SESSION['id'] = $data['usuario_id'];
 $_SESSION['nome'] = $data['nome'];
 $_SESSION['email'] = $data['email'];
 $_SESSION['senha'] = $data['senha'];

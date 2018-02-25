@@ -9,7 +9,7 @@ $con = (new db())->conecta_mysql();
 $user = array($_POST['nome'], $_POST['email'], md5($_POST['senha']), $_POST['pais_moeda'], $_POST['conheceu_ferramenta']);
 
 // Consulta para ver se o e-mail já existe
-$sql = "SELECT email, senha FROM usr WHERE email = '$user[1]';";
+$sql = "SELECT email, senha FROM usuarios WHERE email = '$user[1]';";
 
 // Executa a query
 $res = mysqli_query($con, $sql);
@@ -29,7 +29,7 @@ if($data) {
 }
 
 // Query para inserir um novo usuário
-$sql = "INSERT INTO usr(nome, email, senha, pais_moeda, notificacoes, conheceu_ferramenta) VALUES ('$user[0]', '$user[1]', '$user[2]', '$user[3]', '1,2,3,4', '$user[4]');";
+$sql = "INSERT INTO usuarios(nome, email, senha, pais_moeda, notificacoes, conheceu_ferramenta) VALUES ('$user[0]', '$user[1]', '$user[2]', '$user[3]', '1,2,3,4', '$user[4]');";
 
 // Executa a query
 $res = mysqli_query($con, $sql);
