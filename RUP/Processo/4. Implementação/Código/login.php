@@ -43,7 +43,7 @@
               </div>
 
               <label id="user_email_label" for="user_email" class="sr-only"> Digite seu e-mail </label>
-              <input type="text" name="usuario" class="form-control" id="user_email" placeholder="E-mail" aria-label="E-mail do usuário." aria-labelledby="user_email_label" autofocus required>
+              <input type="email" name="usuario" class="form-control" id="user_email" placeholder="E-mail" aria-label="E-mail do usuário." aria-labelledby="user_email_label" autofocus required>
             </div>
 
           </div>
