@@ -2,18 +2,17 @@
 
 session_start();
 
-// Apaga todas as variáveis da sessão
-$_SESSION = array();
+$token = md5(session_id());
 
-// Se é preciso matar a sessão, então os cookies de sessão também devem ser apagados
-foreach($_COOKIE as $key=>$ck){
-   setcookie($key, $ck, time() - 3600);
+if(isset($_GET['token']) /*&& $_GET['token'] === $token*/) {
+   // limpe tudo que for necessário na saída.
+   // Eu geralmente não destruo a seção, mas invalido os dados da mesma
+   // para evitar algum "necromancer" recuperar dados. Mas simplifiquemos:
+   session_destroy();
+   header("location: ../login.php");
+   exit();
 }
 
-// Destrói a sessão
-session_destroy();
-
-// Por último, redireciona a página
-header('./login.php');
+header("location: ../login.php");
 
 ?>
