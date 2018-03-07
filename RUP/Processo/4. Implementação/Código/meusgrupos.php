@@ -5,7 +5,7 @@ $sessao_validada = require_once('reqs/validar_sessao.php');
 
 if($sessao_validada) {
   $limite_nome_grupo = 30;
-  $limite_descricao_grupo = 190;
+  $limite_descricao_grupo = 100;
 }
 
 ?>
@@ -43,18 +43,91 @@ if($sessao_validada) {
           <h1> Grupos </h1>
         </div>
 
+        <!-- ========== GRUPOS E SEUS DADOS ========== -->
+
         <div class="row">
           <div class="col">
-            <button type="button" class="btn btn-success btn-sm mb-1" data-toggle="modal" data-target="#janela_novo_grupo" title="Adicionar novo grupo">
-              <span class="oi oi-plus" aria-labelledby="novo-grupo"> </span>
-              <span id="novo-grupo"> Novo Grupo </span>
-            </button>
+
+            <!-- ========== BOTÕES ========== -->
+
+            <div class="row">
+              <div class="col">
+                <button type="button" class="btn btn-success btn-sm mb-1" data-toggle="modal" data-target="#janela_novo_grupo" aria-labelledby="btn-novo-grupo">
+                  <span class="oi oi-plus text-size-responsive" aria-labelledby="novo-grupo"> </span>
+                  <span id="btn-novo-grupo" class="text-size-responsive"> Criar Grupo </span>
+                </button>
+
+                <button type="button" class="btn btn-sm btn-danger float-right" data-toggle="modal" data-target="#janela_excluir_grupo" aria-labelledby="btn-excluir-grupo" onclick="buscar_titulo_grupo();">
+                  <span class="oi oi-trash text-size-responsive"> </span>
+                  <span class="text-size-responsive" id="btn-excluir-grupo"> Excluir Grupo </span>
+                </button>
+              </div>
+            </div>
+
+            <!-- ========== LISTA DE GRUPOS ========== -->
+          
+            <div class="row">
+              <div class="col">
+                <div class="nav flex-column nav-pills mt-2 pre-scrollable" id="lista-de-grupos" role="tablist" aria-orientation="vertical">
+                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+
+                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
+
+                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+
+                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+
+                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+
+                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
+
+                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+
+                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+
+                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+
+                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
+
+                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+
+                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+
+                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+
+                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
+
+                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+
+                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+
+                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+
+                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
+
+                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+
+                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ========== DADOS DOS GRUPOS ========== -->
+
+          <div class="col">
+            <div class="tab-content" id="lista-de-grupos-detalhes">
+              <div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">Home</div>
+              <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">profile</div>
+              <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+              <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+            </div>
           </div>
         </div>
 
-        <!-- ========== Modal para adicionar novo evento ========== -->
+        <!-- ========== MODAL PARA ADICIONAR NOVO GRUPO ========== -->
 
-        <form class="modal fade" id="janela_novo_grupo" tabindex="-1" role="dialog">
+        <form class="modal fade text-size-responsive" id="janela_novo_grupo" tabindex="-1" role="dialog">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -66,168 +139,91 @@ if($sessao_validada) {
               </div>
 
               <div class="modal-body">
-                <?php
-                  
-                ?>
+                <div class="container-fluid">
+                  <div class="row"> <div class="col"> <div id="alerta_mensagem_submit"> </div> </div> </div>
 
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="nome_grupo" class="font-weight-bold"> Nome do Grupo </label>
-                      <small class="sub-font pull-right">
-                        <span id="nchar_nome"> <?= $limite_nome_grupo ?> </span> caracteres restantes
-                      </small>
-                      <input id="nome_grupo" type="text" name="nome_grupo" class="form-control" maxlength="30" onkeyup="return check_nchar('nome_grupo', 'nchar_nome', <?= $limite_nome_grupo ?>);" onpaste="return false;">
-                    </div>
-                  </div>
-                </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="nome_grupo" class="font-weight-bold"> Título do Grupo </label>
 
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group">
-                      <label for="" class="font-weight-bold"> Descrição </label>
-                      <small class="sub-font pull-right">
-                        <span id="nchar_descricao"> <?= $limite_descricao_grupo ?> </span> caracteres restantes
-                      </small>
-                      <textarea id="descricao_grupo" class="form-control" style="min-width: 100%; max-width: 100%; max-height: 6em;" rows="3" maxlength="190" onkeyup="return check_nchar('descricao_grupo', 'nchar_descricao', <?= $limite_descricao_grupo ?>);" onpaste="return false;"> </textarea>
-                    </div>
-                  </div>
-                </div>
+                        <span id="nchar_nome" class="badge badge-secondary" aria-label="Caracteres restantes."> <?= $limite_nome_grupo ?> </span>
+                        
 
-                <div class="row">
-                  <div class="col-4">
-                    <label for="participantes" class="font-weight-bold"> Participantes </label>
-                  </div>
-
-                  <div class="col">
-                    <div class="form-group">
-                      <label class="sr-only" for="buscar-email-participante">
-                        Buscar E-mail do Participante:
-                      </label>
-                       <input type="text" placeholder="Busque pelo e-mail" class="form-control text-size-responsive" id="buscar-email-participante">
-                    </div>
-                  </div>
-                </div>
-
-                <div id="participantes"> 
-                  <div class="row item-participante mt-3">
-                    <div class="col-12 col-md-7" style="/*padding: 0.25em 0em;*/">
-                      <div class="row">
-                        <div class="col-2">
-                          <div class="form-check">
-                            <label for="check-participante-1" class="sr-only"> Selecione esta opção para retirar o participante da lista do novo evento. </label>
-                            <input type="checkbox" class="form-check-input" id="check-participante-1" name="retirar-da-lista" value="participante1">
-                          </div>
-                        </div>
-
-                        <div class="col">
-                          <div class="row">
-                            <span class="text-truncate"> Membro 1 </span>
-                          </div> 
-
-                          <div class="row">
-                            <small class="text-truncate"> guilhermeborniamiranda@gmail.com </small>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-12 col-md-5">
-                      <div class="row mt-1">
-                        <div class="col permissoes-container">
-                          <label class="sr-only" for="dpbox-permissoes">
-                            Defina as permissões do usuário:
-                          </label>
-                          <select class="form-control text-size-responsive" id="dpbox-permissoes">
-                            <option name="proprietario"> É dono </option>
-                            <option name="editar"> Pode editar </option>
-                            <option name="visualizar"> Pode ver </option>
-                          </select>
-                        </div>
+                        <input type="text" class="form-control text-size-responsive" id="nome_grupo" name="titulo_grupo" maxlength="<?= $limite_nome_grupo ?>" onkeyup="return check_nchar('nome_grupo', 'nchar_nome', <?= $limite_nome_grupo ?>);">
                       </div>
                     </div>
                   </div>
-                </div> <!-- participantes -->
+
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="descricao_grupo" class="font-weight-bold"> Descrição </label>
+
+                        <span id="nchar_descricao" class="badge badge-secondary" aria-label="Caracteres restantes."> <?= $limite_descricao_grupo ?> </span>
+
+                        <textarea class="form-control text-size-responsive" id="descricao_grupo" name="descricao_grupo" rows="3" maxlength="<?= $limite_descricao_grupo ?>)" onkeyup="return check_nchar('descricao_grupo', 'nchar_descricao', <?= $limite_descricao_grupo ?>);"> </textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col">
+                      <span id="alerta_mensagem"> </span>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-4">
+                      <label for="participantes" class="font-weight-bold"> Membros </label>
+                    </div>
+
+                    <div class="col">
+                      <div class="form-group">
+                        <label class="sr-only" for="buscar-email-participante">
+                          Buscar e-mail do membro:
+                        </label>
+
+                         <input type="email" placeholder="Insira o e-mail e tecle Enter" class="form-control text-size-responsive" id="buscar-email-participante" onkeypress="incluir_membro(event);" data-toggle="tooltip" data-placement="top" title="Ao pressionar Enter, o membro será incluído na lista abaixo.">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="todos-membros-novos"> </div> <!-- participantes -->
+                </div>
               </div> <!-- modal-body -->
 
               <div class="modal-footer">
-                <button type="button" class="btn btn-danger mr-3"> Retirar </button>
-                <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
-                <button type="submit" class="btn btn-success"> Criar Grupo </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="limpar_formulario();"> Cancelar </button>
+                <button type="button" class="btn btn-success" onclick="criar_grupo();"> Criar Grupo </button>
               </div>
             </div> <!-- modal-content -->
           </div> <!-- modal-dialog -->
-        </form>
+        </form> 
 
-        <!-- ========== FIM DO MODAL ========== -->
+        <!-- ========== MODAL PARA EXCLUIR GRUPO ATIVO ========== -->
 
-        <div class="row">
-          <div class="col mb-2">
-            <div class="list-group pre-scrollable" id="lista-de-grupos" role="tablist" style="overflow: auto;">
-              <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
-              <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
-              <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
-              <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="tab-content" id="nav-tabContent">
-              <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-                <div class="card border-0">
-                  <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col">
-                        <h5 class="card-title"> Nome do Grupo </h5>
-                      </div>
-
-                      <div class="col">
-                        <span class="text-muted float-right align-text-bottom" id="numero-de-membros">
-                          7 Membros
-                        </span>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col">
-                        <p class="card-text"> <small> Descrição do grupo. </small> </p>
-                      </div>
-                    </div>                    
-                  </div>
-
-                  <div class="card-footer border-light">
-                    <div class="row">
-                      <div class="col">
-                        <small class="text-muted" id="ultima-atualizacao"> Última atualização há 3 minutos </small>
-                      </div>
-
-                      <div class="col">
-                        <a href="#" class="btn btn-sm float-right" id="btn-submit">
-                          <span class="oi oi-account-login" aria-labelledby="entrar-no-grupo"> </span>
-                          <span id="entrar-no-grupo"> Entrar no Grupo </span>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+        <form class="modal fade" id="janela_excluir_grupo" tabindex="-1" role="dialog" aria-labelledby="janela_excluir_grupo_titulo" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="janela_excluir_grupo_titulo"> Excluir Grupo </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                  <span aria-hidden="true"> &times; </span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="container-fluid">
+                  Tem certeza que deseja excluir o grupo <span class="font-weight-bold font-italic" id="aux-grupo-titulo"> </span>?
                 </div>
               </div>
-
-              <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-                Grupo 2
-              </div>
-
-              <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-                Grupo 3
-              </div>
-
-              <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
-                Grupo 4
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancelar </button>
+                <button type="button" class="btn btn-danger"> Excluir Grupo </button>
               </div>
             </div>
           </div>
-        </div>
-        
+        </form>
       </section>
     </div>
 
