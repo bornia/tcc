@@ -59,9 +59,9 @@ if($sessao_validada) {
               </div>
 
               <div class="col">
-                <button type="button" class="btn btn-sm btn-danger btn-block float-right" data-toggle="modal" data-target="#janela_excluir_grupo" aria-labelledby="btn-excluir-grupo" onclick="marcar_excluir_grupos();">
+                <button type="button" class="btn btn-sm btn-danger btn-block float-right" data-toggle="modal" data-target="#janela_excluir_grupo" aria-labelledby="btn-excluir-grupo-titulo" onclick="marcar_excluir_grupos();">
                   <span class="oi oi-trash text-size-responsive"> </span>
-                  <span class="text-size-responsive" id="btn-excluir-grupo"> Excluir Grupo </span>
+                  <span class="text-size-responsive" id="btn-excluir-grupo-titulo"> Excluir Grupo </span>
                 </button>
               </div>
             </div>
@@ -192,12 +192,12 @@ if($sessao_validada) {
               </div>
               <div class="modal-body">
                 <div class="container-fluid">
-                  Tem certeza que deseja excluir <span id="aux-grupo-titulo"></span>?
+                  <span id="aux-grupo-titulo"></span>
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancelar </button>
-                <button type="button" class="btn btn-danger"> Excluir Grupo </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-disabled="false"> Cancelar </button>
+                <button type="button" class="btn btn-danger" id="btn-excluir-grupo" aria-disabled="false" onclick="excluir_grupos();"> Excluir Grupo </button>
               </div>
             </div>
           </div>

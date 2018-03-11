@@ -34,7 +34,7 @@ while($data = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
   		</th>
 
 	  	<td>
-	    	<input class='align-middle' type='checkbox' id='check-grupo" . $data['grupo_id'] . "'  name='lista-exclusao-grupos' value='vcheck-grupo" . $data['grupo_id'] . "' >
+	    	<input class='align-middle' type='checkbox' id='check-grupo" . $data['grupo_id'] . "'  name='lista-exclusao-grupos' value='" . $data['grupo_id'] . "' >
   		</td>
 	</tr>
 \n\n";
@@ -88,7 +88,7 @@ while($data = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
   		</th>
 
 	  	<td>
-	    	<input class='align-middle' type='checkbox' id='check-grupo" . $data['grupo_id'] . "'  name='lista-exclusao-grupos' value='vcheck-grupo" . $data['grupo_id'] . "' >
+	    	<input class='align-middle' type='checkbox' id='check-grupo" . $data['grupo_id'] . "'  name='lista-exclusao-grupos' value='" . $data['grupo_id'] . "' >
   		</td>
 	</tr>
 \n\n";

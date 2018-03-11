@@ -261,12 +261,34 @@ function atualizar_lista_grupos() {
 
 /**
 */
+function excluir_grupos() {
+	var selectedItems = [];
+	$("input[type=checkbox][name='lista-exclusao-grupos']:checked").each(function(){
+		selectedItems.push($(this).val());
+	});
+
+	$.ajax({
+		url: './reqs/deletar_grupos.php',
+		type: 'POST',
+		data: {grupos: selectedItems},
+	})
+	.done(function() {
+		atualizar_lista_grupos();
+		$('#janela_excluir_grupo').modal('hide');
+	})
+	.fail(function() {})
+	.always(function() {});
+	
+}
+
+/**
+*/
 function seleciona_grupo(element) {
 	seleciona_linha_grupo(element.id);
 	seleciona_detalhe_grupo(element.id);
 }
 
-/**
+/** Verifica quantos grupos estão marcados para exclusão para poder mostrar a mensagem correta ao usuário bem como impedir que seja excluído zero grupos.
 */
 function marcar_excluir_grupos() {
 	var qtd_grupos = 0;
@@ -275,10 +297,26 @@ function marcar_excluir_grupos() {
 		qtd_grupos++;
 	});
 
-	if(qtd_grupos == 1)
-		$('#aux-grupo-titulo').html('<u>o grupo selecionado</u>');
+	if(qtd_grupos == 0) {
+		$('#aux-grupo-titulo').html('Não há <u>nenhum grupo selecionado</u>.');
+		if(!$('#btn-excluir-grupo').hasClass('disabled')) {
+			$('#btn-excluir-grupo').addClass('disabled');
+			$('#btn-excluir-grupo').attr("aria-disabled", true);
+		}
+
+		return false;
+	}
+	else if(qtd_grupos == 1)
+		$('#aux-grupo-titulo').html('Tem certeza que deseja excluir <u>o grupo selecionado</u>?');
 	else
-		$('#aux-grupo-titulo').html('<u>todos os <strong>' + qtd_grupos + '</strong> selecionados</u>');
+		$('#aux-grupo-titulo').html('Tem certeza que deseja excluir <u>todos os <strong>' + qtd_grupos + '</strong> selecionados</u>');
+
+	if($('#btn-excluir-grupo').hasClass('disabled')) {
+		$('#btn-excluir-grupo').removeClass('disabled');
+		$('#btn-excluir-grupo').attr("aria-disabled", false);
+	}
+
+	return true;
 }
 
 /* ===================================================================== */
