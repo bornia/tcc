@@ -46,18 +46,20 @@ if($sessao_validada) {
         <!-- ========== GRUPOS E SEUS DADOS ========== -->
 
         <div class="row">
-          <div class="col">
+          <div class="col-12 col-md-6">
 
             <!-- ========== BOTÕES ========== -->
 
             <div class="row">
               <div class="col">
-                <button type="button" class="btn btn-success btn-sm mb-1" data-toggle="modal" data-target="#janela_novo_grupo" aria-labelledby="btn-novo-grupo">
+                <button type="button" class="btn btn-success btn-sm mb-1 btn-block" data-toggle="modal" data-target="#janela_novo_grupo" aria-labelledby="btn-novo-grupo">
                   <span class="oi oi-plus text-size-responsive" aria-labelledby="novo-grupo"> </span>
                   <span id="btn-novo-grupo" class="text-size-responsive"> Criar Grupo </span>
                 </button>
+              </div>
 
-                <button type="button" class="btn btn-sm btn-danger float-right" data-toggle="modal" data-target="#janela_excluir_grupo" aria-labelledby="btn-excluir-grupo" onclick="buscar_titulo_grupo();">
+              <div class="col">
+                <button type="button" class="btn btn-sm btn-danger btn-block float-right" data-toggle="modal" data-target="#janela_excluir_grupo" aria-labelledby="btn-excluir-grupo" onclick="marcar_excluir_grupos();">
                   <span class="oi oi-trash text-size-responsive"> </span>
                   <span class="text-size-responsive" id="btn-excluir-grupo"> Excluir Grupo </span>
                 </button>
@@ -66,61 +68,37 @@ if($sessao_validada) {
 
             <!-- ========== LISTA DE GRUPOS ========== -->
           
-            <div class="row">
-              <div class="col">
-                <div class="nav flex-column nav-pills mt-2 pre-scrollable" id="lista-de-grupos" role="tablist" aria-orientation="vertical">
-                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+            <div class='row'>
+              <div class='col table-responsive' >
+                <table class='table mt-2'>
+                  <caption class='sr-only'> Lista de Grupos </caption>
 
-                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
+                  <colgroup>
+                    <col width='100%' />
+                    <col width='0%' />
+                  </colgroup>
 
-                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+                  <thead class='sr-only'>
+                    <tr>
+                      <th scope='col'>Título do Grupo</th>
+                      <th scope='col'>Opções</th>
+                    </tr>
+                  </thead>
 
-                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+                  <tbody id='lista-de-grupos'>
 
-                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
-
-                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
-
-                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
-
-                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
-
-                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
-
-                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
-
-                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
-
-                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
-
-                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
-
-                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
-
-                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
-
-                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
-
-                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
-
-                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
-
-                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
-
-                  <a class="nav-link border-bottom border-light item-grupo" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
-                </div>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
 
           <!-- ========== DADOS DOS GRUPOS ========== -->
 
-          <div class="col">
-            <div class="tab-content" id="lista-de-grupos-detalhes">
-              <div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">Home</div>
-              <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">profile</div>
-              <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-              <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+          <div class='col-12 col-md-6'>
+            <div class='tab-content pt-3' id='lista-de-grupos-detalhes'>
+              <div class='d-block' id='ref-grupo1'>home</div>
+              <div class='d-none' id='ref-grupo2'>profile</div>
             </div>
           </div>
         </div>
@@ -214,7 +192,7 @@ if($sessao_validada) {
               </div>
               <div class="modal-body">
                 <div class="container-fluid">
-                  Tem certeza que deseja excluir o grupo <span class="font-weight-bold font-italic" id="aux-grupo-titulo"> </span>?
+                  Tem certeza que deseja excluir <span id="aux-grupo-titulo"></span>?
                 </div>
               </div>
               <div class="modal-footer">

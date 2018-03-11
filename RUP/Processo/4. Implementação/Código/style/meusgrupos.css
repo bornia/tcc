@@ -27,6 +27,12 @@ div.main {
 	padding-bottom: 4.2em;
 }
 
+table {
+	box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+}
+
 .group-name {
 	color: black;
 }
@@ -42,26 +48,39 @@ div.main {
     -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin: 1.4em auto 0 auto;
     height: 100%;
-    
 }
 
-.item-grupo {
-	
+.table-max-width {
+	max-width:1px;
+}
+
+.table-text-control {
+	white-space: nowrap;
+	text-overflow:ellipsis;
+	overflow: hidden;
+	max-width:100%;
+}
+
+.btn-none {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	border-color: none;
+	text-align: left!important;
+}
+
+.btn-third {
+	color: #000;
+}
+
+.btn-third:focus {
+	outline: 0!important;
 }
 
 #descricao_grupo {
 	min-width: 100%;
 	max-width: 100%;
 	max-height: 6em;
-}
-
-#lista-de-grupos {
-	box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    -webkit-box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    -moz-box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    
-    max-height: 100%;
-    
 }
 
 #numero-de-membros {
@@ -73,11 +92,22 @@ div.main {
 	color: #FFF;
 	font-size: 0.8em;
 	font-weight: 600;
+	-webkit-transition-duration: 0.2s;
+	-moz-transition-duration: 0.2s;
+	-o-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+}
+
+#btn-submit:hover {
+	background-color: #EA7F6C; /* Green */
+    color: white;
 }
 
 #ultima-atualizacao {
 	font-size: 0.71em;
 }
+
+
 
 /* TIPOGRAFIA RESPONSIVA */
 

@@ -131,6 +131,22 @@ function validar_formulario() {
 	return validado;
 }
 
+/**
+*/
+function seleciona_linha_grupo(grupoId) {
+	$('.bg-primary').toggleClass('bg-primary bg-white')
+	$('#linha-' + grupoId).toggleClass('bg-white bg-primary')
+}
+
+/**
+*/
+function seleciona_detalhe_grupo(grupoId) {
+	$('.d-block').toggleClass('d-block d-none');
+	$('#ref-' + grupoId).toggleClass('d-none d-block');
+	$('.d-block').hide();
+	$('.d-block').fadeIn();
+}
+
 /* ===================================================================== */
 /* ============================== EVENTOS ============================== */
 /* ===================================================================== */
@@ -194,14 +210,6 @@ function retirar_membro(membro) {
 	contador_membros--;
 }
 
-/** Busca pelo título grupo selecionado para exibí-lo no modal de excluir um grupo.
-*/
-function buscar_titulo_grupo() {
-	var titulo = $('.list-group-item.active').html();
-
-	$('#aux-grupo-titulo').html(titulo);
-}
-
 /**
 */
 function limpar_formulario() {
@@ -251,7 +259,38 @@ function atualizar_lista_grupos() {
 	.always(function() {});
 }
 
+/**
+*/
+function seleciona_grupo(element) {
+	seleciona_linha_grupo(element.id);
+	seleciona_detalhe_grupo(element.id);
+}
+
+/**
+*/
+function marcar_excluir_grupos() {
+	var qtd_grupos = 0;
+
+	$("input[type=checkbox][name='lista-exclusao-grupos']:checked").each(function(){
+		qtd_grupos++;
+	});
+
+	if(qtd_grupos == 1)
+		$('#aux-grupo-titulo').html('<u>o grupo selecionado</u>');
+	else
+		$('#aux-grupo-titulo').html('<u>todos os <strong>' + qtd_grupos + '</strong> selecionados</u>');
+}
+
 /* ===================================================================== */
 /* ===================== AUXILIARES DE REQUISIÇÕES ===================== */
 /* ===================================================================== */
 
+
+
+/* ===================================================================== */
+/* ============================== OUTROS =============================== */
+/* ===================================================================== */
+
+$(document).ready(function() {
+	atualizar_lista_grupos();
+});
