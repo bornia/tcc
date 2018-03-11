@@ -18,19 +18,24 @@ if(!$res) {
 	return false;
 } 
 
+$tabela = "";
 $titulo = "";
 $detalhes = "";
 
-
-while($data = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-	$datetime = explode(" ", strval($data['ultima_att']));
-// $data['grupo_id']	
-	if(empty($titulo)) {
-		$titulo .=
+if(!mysqli_num_rows($res)) {
+	ob_clean();
+	echo 'Nenhum grupo';
+}
+else {
+	while($data = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+		$datetime = explode(" ", strval($data['ultima_att']));
+	// $data['grupo_id']	
+		if(empty($titulo)) {
+			$titulo .=
 "
 	<tr id='linha-grupo" . $data['grupo_id'] . "' class='bg-primary'>
   		<th class='table-max-width' scope='row'>
-    		<button type='button' class='btn-sm btn-block btn-third btn-none table-text-control' id='grupo" . $data['grupo_id'] . "' onclick='seleciona_grupo(this);'> " . $data['titulo'] . " </button>
+    		<button type='button' class='btn-sm btn-block btn-third btn-none table-text-control text-size-responsive' id='grupo" . $data['grupo_id'] . "' onclick='seleciona_grupo(this);'> " . $data['titulo'] . " </button>
   		</th>
 
 	  	<td>
@@ -39,7 +44,7 @@ while($data = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
 	</tr>
 \n\n";
 
-		$detalhes .=
+			$detalhes .=
 "<div class='d-block' id='ref-grupo" . $data['grupo_id'] . "'>
 	<div class='card border-0'>
 		<div class='card-body'>
@@ -78,13 +83,13 @@ while($data = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
 		</div>
 	</div>
 </div>\n\n";
-	}
-	else {
-		$titulo .=
+		}
+		else {
+			$titulo .=
 "
 	<tr id='linha-grupo" . $data['grupo_id'] . "' class='bg-white'>
   		<th class='table-max-width' scope='row'>
-    		<button type='button' class='btn-sm btn-block btn-third btn-none table-text-control' id='grupo" . $data['grupo_id'] . "' onclick='seleciona_grupo(this);'> " . $data['titulo'] . " </button>
+    		<button type='button' class='btn-sm btn-block btn-third btn-none table-text-control text-size-responsive' id='grupo" . $data['grupo_id'] . "' onclick='seleciona_grupo(this);'> " . $data['titulo'] . " </button>
   		</th>
 
 	  	<td>
@@ -93,7 +98,7 @@ while($data = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
 	</tr>
 \n\n";
 
-		$detalhes .=
+			$detalhes .=
 "
 <div class='d-none' id='ref-grupo" . $data['grupo_id'] . "'>
 		<div class='card border-0'>
@@ -134,12 +139,38 @@ while($data = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
 		</div>
 	</div>
 \n\n";
-	}	
+		}
+	}
+
+	$tabela =
+"
+    <div class='table-responsive'>
+      	<table class='table'>
+        	<caption class='sr-only'> Lista de Grupos </caption>
+
+	        <colgroup>
+	          	<col width='100%' />
+	          	<col width='0%' />
+	        </colgroup>
+
+	        <thead class='sr-only'>
+	          	<tr>
+	            	<th scope='col'>Título do Grupo</th>
+	            	<th scope='col'>Opções</th>
+	          	</tr>
+	        </thead>
+
+	        <tbody>
+	        	" . $titulo . "
+	        </tbody>
+      	</table>
+    </div>
+\n\n";
+
+	ob_clean();
+
+	echo json_encode(array('titulos' => $tabela, 'detalhes' => $detalhes));
 }
-
-ob_clean();
-
-echo json_encode(array('titulos' => $titulo, 'detalhes' => $detalhes));
 
 return true;
 

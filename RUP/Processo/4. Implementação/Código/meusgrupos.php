@@ -69,26 +69,8 @@ if($sessao_validada) {
             <!-- ========== LISTA DE GRUPOS ========== -->
           
             <div class='row'>
-              <div class='col table-responsive' >
-                <table class='table mt-2'>
-                  <caption class='sr-only'> Lista de Grupos </caption>
+              <div class='col p-0' id='lista-de-grupos'>
 
-                  <colgroup>
-                    <col width='100%' />
-                    <col width='0%' />
-                  </colgroup>
-
-                  <thead class='sr-only'>
-                    <tr>
-                      <th scope='col'>Título do Grupo</th>
-                      <th scope='col'>Opções</th>
-                    </tr>
-                  </thead>
-
-                  <tbody id='lista-de-grupos'>
-
-                  </tbody>
-                </table>
               </div>
             </div>
           </div>
@@ -97,8 +79,7 @@ if($sessao_validada) {
 
           <div class='col-12 col-md-6'>
             <div class='tab-content pt-3' id='lista-de-grupos-detalhes'>
-              <div class='d-block' id='ref-grupo1'>home</div>
-              <div class='d-none' id='ref-grupo2'>profile</div>
+
             </div>
           </div>
         </div>
@@ -111,7 +92,7 @@ if($sessao_validada) {
               <div class="modal-header">
                 <h3 class="modal-title"> Novo Grupo </h3>
 
-                <button type="button" class="close" data-dismiss="modal" title="Fechar">
+                <button type="button" class="close" data-dismiss="modal" title="Fechar" onclick="limpar_formulario();">
                   <span aria-hidden="true"> &times; </span>
                 </button>   
               </div>
