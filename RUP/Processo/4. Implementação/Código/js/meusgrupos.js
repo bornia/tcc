@@ -119,7 +119,7 @@ function validar_formulario() {
 		validado = false;
 	}
 
-	if(contador_membros <= 2) { // Significa que tem pelo menos 1 membro no grupo
+	if(contador_membros < 2) { // Verifica se tem pelo menos 1 membro no grupo
 		$('#alerta_mensagem_submit').html(
 			$('#alerta_mensagem_submit').html() +
 			formatar_texto_alerta('warning', 'Inclua <u>pelo menos <b>um membro</b></u> ao novo grupo.')
@@ -214,12 +214,17 @@ function retirar_membro(membro) {
 */
 function limpar_formulario() {
 	$('#janela_novo_grupo').each(function() { this.reset();	});
-	
+
 	for(contador_membros; contador_membros > 0; contador_membros--) {
 		$('#item-membro-' + contador_membros).remove();
 	}
 
 	$('#alerta_mensagem_submit').html("");
+
+	$('#nchar_nome').html("30");
+	$('#nchar_descricao').html("100");
+
+	contador_membros = 1;
 }
 
 /** Faz a inserção do novo grupo no banco de dados e atualiza a lista de grupos bem como seus dados.
