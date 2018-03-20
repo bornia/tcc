@@ -240,7 +240,7 @@ function criar_grupo() {
 			atualizar_lista_grupos();
 		})
 		.fail(function() {
-			console.log("error");
+			console.log('erro');
 		})
 		.always(function() {
 			$('#janela_novo_grupo').modal('hide');
