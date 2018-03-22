@@ -40,54 +40,10 @@ $res = mysqli_query($con, $sql);
 
 // Propriedades do e-mail
 $subject = "OurBills: um novo grupo está te chamando!";
-$body = "
-	<html>
-	  <head>
-	    <!-- Required meta tags -->
-	    <meta charset='utf-8'>
-
-	    <style type='text/css'>
-	      body {
-	        text-align: center;
-	      }
-
-	      a {
-	        background-color: #28a745;
-	        border-color: #28a745;
-	        display: inline-block;
-	        font-weight: 400;
-	        text-align: center;
-	        white-space: nowrap;
-	        vertical-align: middle;
-	        -webkit-user-select: none;
-	        -moz-user-select: none;
-	        -ms-user-select: none;
-	        user-select: none;
-	        border: 1px solid transparent;
-	        padding: .375rem .75rem;
-	        font-size: 1rem;
-	        line-height: 1.5;
-	        border-radius: .25rem;
-	        transition: background-color 0.5s ease;
-	        text-decoration: none;
-	      }
-
-	      a:hover {
-	        background-color: green;
-	      }
-	    </style>
-	  </head>
-
-	  <body>
-	    <p> Você foi adicionado no grupo TÍTULO com PERMISSÃO para apenas visualizar os seus dados. </p>
-	    <a href='http://localhost/tcc/RUP/Processo/4.%20Implementa%C3%A7%C3%A3o/C%C3%B3digo/meusgrupos.php' style='color: #fff;' target='_blank'> Entrar no Grupo </a>
-	  </body>
-	</html>
-";
 $altBody = "Caso não seja suportado o HTML, aqui vai a mensagem em texto.";
 
 // Envia notificação por e-mail
-foreach ($grupo[2] as $email) {
+foreach ($grupo[2] as $key => $email) {
 	//dados de envio de e-mail
 	$mail->addAddress($email); //e-mails que receberam a mesagem
 	
@@ -95,7 +51,50 @@ foreach ($grupo[2] as $email) {
 	$mail->isHTML(true); //formato da mensagem de e-mail
 	$mail->SetFrom('guilhermeborniamiranda@gmail.com', 'OurBills');
 	$mail->Subject = utf8_decode($subject); //assunto
-	$mail->Body    = $body; //Se o formato da mensagem for HTML você poderá utilizar as tags do HTML no corpo do e-mail
+	$mail->Body    = "
+		<html>
+		  <head>
+		    <!-- Required meta tags -->
+		    <meta charset='utf-8'>
+
+		    <style type='text/css'>
+		      body {
+		        text-align: center;
+		      }
+
+		      a {
+		        background-color: #28a745;
+		        border-color: #28a745;
+		        display: inline-block;
+		        font-weight: 400;
+		        text-align: center;
+		        white-space: nowrap;
+		        vertical-align: middle;
+		        -webkit-user-select: none;
+		        -moz-user-select: none;
+		        -ms-user-select: none;
+		        user-select: none;
+		        border: 1px solid transparent;
+		        padding: .375rem .75rem;
+		        font-size: 1rem;
+		        line-height: 1.5;
+		        border-radius: .25rem;
+		        transition: background-color 0.5s ease;
+		        text-decoration: none;
+		      }
+
+		      a:hover {
+		        background-color: green;
+		      }
+		    </style>
+		  </head>
+
+		  <body>
+		    <p> Você foi adicionado no grupo TÍTULO com PERMISSÃO para apenas visualizar os seus dados. </p>
+		    <a href='http://localhost/tcc/RUP/Processo/4.%20Implementa%C3%A7%C3%A3o/C%C3%B3digo/cadastrarse.php?emailRef=" .  $email . "&grupoId=" . $last_id . "&permissao=" . $grupo[3][$key] . "' style='color: #fff;' target='_blank'> Entrar no Grupo </a>
+		  </body>
+		</html>
+		";
 	$mail->AltBody = utf8_decode($altBody); //texto alternativo caso o html não seja suportado
 	
 	//envio e testes
