@@ -41,6 +41,7 @@ if($sessao_validada) {
       <section class="container-wip" role="main" style="">
         <div class="row">
           <h1> Grupos </h1>
+          <span id="aux_usuario_email" style="display: none;"> <?= $_SESSION['email']; ?> </span>
         </div>
 
         <!-- ========== GRUPOS E SEUS DADOS ========== -->
