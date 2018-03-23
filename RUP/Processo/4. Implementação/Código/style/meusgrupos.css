@@ -89,6 +89,35 @@ table {
 	max-height: 6em;
 }
 
+#caixa-pesquisa-usuarios {
+	height: auto;
+	background: #fff;
+	border-radius: 5px;
+	float: left;
+	position: absolute;
+	z-index: 100;
+	width: 90%;
+	border: 1px solid #DDD;
+	margin: 0 0;
+}
+
+#lista-pesquisa-usuarios {
+	height: auto;
+	float: left;
+	list-style: none;
+	width: 100%;
+	padding: 0;
+}
+
+#lista-pesquisa-usuarios li {
+	border-bottom: 1px solid #DDD;
+}
+
+#lista-pesquisa-usuarios li:hover {
+	background-color: rgba(135,206,250, 0.2);
+	cursor: pointer;
+}
+
 #numero-de-membros {
 	font-size: 0.7em;
 }

@@ -69,9 +69,9 @@ function formatar_texto_novo_membro(ordem, email) {
                   "</label>" +
 
                   "<select class='form-control form-control-sm text-size-responsive' id='dpbox-permissoes' name='permissoes[]'>" +
-                    "<option value='dono'> É dono </option>" +
-                    "<option value='editar'> Pode editar </option>" +
-                    "<option value='ver'> Pode ver </option>" +
+                    "<option value='1'> Pode ver </option>" +
+                    "<option value='2'> Pode editar </option>" +
+                    "<option value='3'> É dono </option>" +
                   "</select>" +
                 "</div>" +
               "</div>" +
@@ -151,6 +151,13 @@ function seleciona_detalhe_grupo(grupoId) {
 /* ============================== EVENTOS ============================== */
 /* ===================================================================== */
 
+/**
+*/
+
+function prepara_modal_novo_grupo() {
+	//document.getElementById("nome_grupo").focus();
+}
+
 /** Verifica quantos caracteres ainda podem ser digitados baseado no limite determinado.
  * element_checked O texto do ID referente ao campo que terá seus caracteres contados.
  * element_nchar O texto do ID referente ao campo que mostrará quantos caracteres ainda podem ser digitados.
@@ -168,6 +175,47 @@ function check_nchar(element_checked, element_nchar, limite) {
 	return true;
 }
 
+/**
+*/
+function buscar_membro(id) {
+	var email = $('#' + id).val();
+
+	if(email === '') {
+		$('#lista-pesquisa-usuarios').html('');
+		return false;
+	}
+
+	$.ajax({
+		url: './reqs/buscar_usuario.php',
+		type: 'POST',
+		data: {usuario_email: email},
+	})
+	.done(function(data) {
+		if(data == '') {
+			$('#caixa-pesquisa-usuarios').hide();
+		}
+		else {
+			$('#caixa-pesquisa-usuarios').show();
+			$('#lista-pesquisa-usuarios').html(data);
+		}
+	})
+	.fail(function() {
+		console.log("error");
+	})
+	.always(function() {
+		console.log("complete");
+	});
+
+	return true;
+}
+
+/**
+*/
+function seleciona_pesquisa_usuario(email) {
+	$('#buscar-email-participante').val(email);
+	$('#caixa-pesquisa-usuarios').hide();
+}
+
 /** Insere um novo membro na lista de membros do novo grupo quando a tecla Enter for pressionada.
  * event Referência ao evento do teclado.
 */
@@ -178,6 +226,14 @@ function incluir_membro(event) {
 		if(!verificar_email($('#buscar-email-participante'))) { // Verifica se o e-mail foi digitado corretamente
 			$('#alerta_mensagem').html( // Exibe um alerta
 				formatar_texto_alerta('warning', 'Digite um <u>e-mail válido</u>.')
+			);
+
+			return false;
+		}
+		
+		if($('#aux_usuario_email').html() == $('#buscar-email-participante').val()) {
+			$('#alerta_mensagem').html( // Exibe um alerta
+				formatar_texto_alerta('warning', 'Você será <u>automaticamente incluído</u> no grupo. <strong>Adicione os outros membros</strong>.')
 			);
 
 			return false;
@@ -345,4 +401,10 @@ function marcar_excluir_grupos() {
 
 $(document).ready(function() {
 	atualizar_lista_grupos();
+	$('#caixa-pesquisa-usuarios').hide();
+	
+	  $('html,body').focusout(function() {
+	  	$('#caixa-pesquisa-usuarios').hide();
+	  	$('#lista-pesquisa-usuarios').html("");
+	  });
 });
