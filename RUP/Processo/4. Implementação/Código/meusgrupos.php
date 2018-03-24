@@ -53,7 +53,7 @@ if($sessao_validada) {
 
             <div class="row">
               <div class="col">
-                <button type="button" class="btn btn-success btn-sm mb-1 btn-block" data-toggle="modal" data-target="#janela_novo_grupo" aria-labelledby="btn-novo-grupo">
+                <button type="button" class="btn btn-success btn-sm mb-1 btn-block" data-toggle="modal" data-target="#janela_novo_grupo" aria-labelledby="btn-novo-grupo" onclick="prepara_modal_novo_grupo();">
                   <span class="oi oi-plus text-size-responsive" aria-labelledby="novo-grupo"> </span>
                   <span id="btn-novo-grupo" class="text-size-responsive"> Criar Grupo </span>
                 </button>
@@ -144,7 +144,13 @@ if($sessao_validada) {
                           Buscar e-mail do membro:
                         </label>
 
-                         <input type="email" placeholder="Insira o e-mail e tecle Enter" class="form-control text-size-responsive" id="buscar-email-participante" onkeypress="incluir_membro(event);" data-toggle="tooltip" data-placement="top" title="Ao pressionar Enter, o membro será incluído na lista abaixo.">
+                        <input type="text" placeholder="Insira o e-mail e tecle Enter" class="form-control text-size-responsive" id="buscar-email-participante" onkeyup="return buscar_membro(this.id);" onkeypress="incluir_membro(event);" data-toggle="tooltip" data-placement="top" title="Ao pressionar Enter, o membro será incluído na lista abaixo.">
+
+                        <div class="row" id="caixa-pesquisa-usuarios">
+                          <ul id="lista-pesquisa-usuarios">
+
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </div>

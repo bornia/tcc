@@ -199,12 +199,8 @@ function buscar_membro(id) {
 			$('#lista-pesquisa-usuarios').html(data);
 		}
 	})
-	.fail(function() {
-		console.log("error");
-	})
-	.always(function() {
-		console.log("complete");
-	});
+	.fail(function() {})
+	.always(function() {});
 
 	return true;
 }
@@ -214,6 +210,7 @@ function buscar_membro(id) {
 function seleciona_pesquisa_usuario(email) {
 	$('#buscar-email-participante').val(email);
 	$('#caixa-pesquisa-usuarios').hide();
+	$('#buscar-email-participante').get(0).focus();
 }
 
 /** Insere um novo membro na lista de membros do novo grupo quando a tecla Enter for pressionada.
@@ -403,8 +400,9 @@ $(document).ready(function() {
 	atualizar_lista_grupos();
 	$('#caixa-pesquisa-usuarios').hide();
 	
-	  $('html,body').focusout(function() {
-	  	$('#caixa-pesquisa-usuarios').hide();
-	  	$('#lista-pesquisa-usuarios').html("");
-	  });
+  	$('html>body').click(function(event) {
+  		if($('#caixa-pesquisa-usuarios').css('display') != 'none') {
+  			$('#caixa-pesquisa-usuarios').hide();
+  		}
+  	});
 });
