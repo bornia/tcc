@@ -177,21 +177,22 @@ function check_nchar(element_checked, element_nchar, limite) {
 
 /**
 */
-function buscar_membro(id) {
-	var email = $('#' + id).val();
+function buscar_entre_membros(id) {
+	var email = $('#' + id);
 
-	if(email === '') {
-		$('#lista-pesquisa-usuarios').html('');
+	if(email.val() == '') {
+		$('#caixa-pesquisa-usuarios').hide();
 		return false;
 	}
 
 	$.ajax({
-		url: './reqs/buscar_usuario.php',
+		url: './reqs/buscar_entre_usuarios.php',
 		type: 'POST',
-		data: {usuario_email: email},
+		data: {usuario_email: email.val()}
 	})
 	.done(function(data) {
 		if(data == '') {
+			$('#lista-pesquisa-usuarios').html('');
 			$('#caixa-pesquisa-usuarios').hide();
 		}
 		else {
@@ -213,24 +214,78 @@ function seleciona_pesquisa_usuario(email) {
 	$('#buscar-email-participante').get(0).focus();
 }
 
+/**
+*/
+function buscar_membro(email) {
+	var membro_existe;
+
+	$.ajax({
+		url: './reqs/buscar_entre_usuarios.php',
+		type: 'POST',
+		data: {usuario_email: email},
+		async: false
+	})
+	.done(function(data) {
+		membro_existe = data;
+	})
+	.fail(function() {})
+	.always(function() {});
+
+	return membro_existe;
+}
+
+/**
+*/
+function verifica_novos_membros_adicionados() {
+	var novo_email_obj = $('#buscar-email-participante');
+	var email_ja_existe = true;
+
+	$("input[type='text'][name='membros[]'").each(function(index, element) {
+		if(novo_email_obj.val() == $(element).val()) {
+			email_ja_existe =  false;
+			return true;
+		}
+	});
+
+	return email_ja_existe;
+}
+
 /** Insere um novo membro na lista de membros do novo grupo quando a tecla Enter for pressionada.
  * event Referência ao evento do teclado.
 */
 function incluir_membro(event) {
 	var key = event.which || event.keyCode;
+	var novo_email_obj = $('#buscar-email-participante');
+	var alerta_mensagem_obj = $('#alerta_mensagem');
 
 	if(key == 13) {
-		if(!verificar_email($('#buscar-email-participante'))) { // Verifica se o e-mail foi digitado corretamente
-			$('#alerta_mensagem').html( // Exibe um alerta
+		if(!verificar_email(novo_email_obj)) { // Verifica se o e-mail foi digitado corretamente
+			alerta_mensagem_obj.html( // Exibe um alerta
 				formatar_texto_alerta('warning', 'Digite um <u>e-mail válido</u>.')
 			);
 
 			return false;
 		}
-		
-		if($('#aux_usuario_email').html() == $('#buscar-email-participante').val()) {
-			$('#alerta_mensagem').html( // Exibe um alerta
+
+		if($('#aux_usuario_email').val() == novo_email_obj.val()) { // Verifica se o usuário está adicionando ele próprio
+			alerta_mensagem_obj.html( // Exibe um alerta
 				formatar_texto_alerta('warning', 'Você será <u>automaticamente incluído</u> no grupo. <strong>Adicione os outros membros</strong>.')
+			);
+
+			return false;
+		}
+
+		if(!buscar_membro(novo_email_obj.val())) { // Verifica se o usuário está cadastrado no Banco de Dados
+			alerta_mensagem_obj.html( // Exibe um alerta
+				formatar_texto_alerta('warning', '<strong>Não existe um usuário com esse e-mail</strong>. <u>Escolha outro entre as opções disponíveis na caixa de pesquisa</u>.')
+			);
+
+			return false;
+		}
+
+		if(!verifica_novos_membros_adicionados()) {
+			alerta_mensagem_obj.html( // Exibe um alerta
+				formatar_texto_alerta('warning', 'Esse membro <u>já foi adicionado</u>.')
 			);
 
 			return false;
@@ -240,12 +295,12 @@ function incluir_membro(event) {
 			$('#separador-membro-' + (contador_membros - 1)).css('display', 'block');
 
 		$('#todos-membros-novos').append( // Acrescenta o novo membro a lista
-			formatar_texto_novo_membro(contador_membros, $('#buscar-email-participante').val())
+			formatar_texto_novo_membro(contador_membros, novo_email_obj.val())
 		);
 
 		contador_membros++;
 
-		$('#buscar-email-participante').val('');
+		novo_email_obj.val('');
 
 		return true;
 	}
@@ -292,9 +347,7 @@ function criar_grupo() {
 		.done(function() {
 			atualizar_lista_grupos();
 		})
-		.fail(function() {
-			console.log('erro');
-		})
+		.fail(function() {})
 		.always(function() {
 			$('#janela_novo_grupo').modal('hide');
 
@@ -303,7 +356,7 @@ function criar_grupo() {
 	}
 }
 
-/**
+/** Faz uma requisição ao Banco de Dados para obter todos os grupos criados pelo usuário e dos quais ele participa.
 */
 function atualizar_lista_grupos() {
 	$.ajax({
@@ -326,11 +379,11 @@ function atualizar_lista_grupos() {
 	.always(function() {});
 }
 
-/**
+/** Obtém todas as checkboxes selecionadas para exclusão, manda a requisição ao Banco de Dados e atualiza a lista de grupos.
 */
 function excluir_grupos() {
 	var selectedItems = [];
-	$("input[type=checkbox][name='lista-exclusao-grupos']:checked").each(function(){
+	$("input[type=checkbox][name='lista-exclusao-grupos']:checked").each(function() {
 		selectedItems.push($(this).val());
 	});
 

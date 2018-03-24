@@ -41,7 +41,7 @@ if($sessao_validada) {
       <section class="container-wip" role="main" style="">
         <div class="row">
           <h1> Grupos </h1>
-          <span id="aux_usuario_email" style="display: none;"> <?= $_SESSION['email']; ?> </span>
+          <span style="display: none;"> <input id="aux_usuario_email" type='text' value="<?= $_SESSION['email']; ?>" readonly> </span>
         </div>
 
         <!-- ========== GRUPOS E SEUS DADOS ========== -->
@@ -144,7 +144,7 @@ if($sessao_validada) {
                           Buscar e-mail do membro:
                         </label>
 
-                        <input type="text" placeholder="Insira o e-mail e tecle Enter" class="form-control text-size-responsive" id="buscar-email-participante" onkeyup="return buscar_membro(this.id);" onkeypress="incluir_membro(event);" data-toggle="tooltip" data-placement="top" title="Ao pressionar Enter, o membro será incluído na lista abaixo.">
+                        <input type="text" placeholder="Insira o e-mail e tecle Enter" class="form-control text-size-responsive" id="buscar-email-participante" onkeyup="return buscar_entre_membros(this.id);" onkeypress="incluir_membro(event);" data-toggle="tooltip" data-placement="top" title="Ao pressionar Enter, o membro será incluído na lista abaixo.">
 
                         <div class="row" id="caixa-pesquisa-usuarios">
                           <ul id="lista-pesquisa-usuarios">
