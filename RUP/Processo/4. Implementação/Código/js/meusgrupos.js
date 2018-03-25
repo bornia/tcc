@@ -344,7 +344,9 @@ function criar_grupo() {
 			type: 'POST',
 			data: $('#janela_novo_grupo').serialize()
 		})
-		.done(function() {
+		.done(function(novos_membros_emails) {
+			var parsed = JSON.parse(novos_membros_emails);
+			enviar_notificacao_email(parsed);
 			atualizar_lista_grupos();
 		})
 		.fail(function() {})
@@ -354,6 +356,22 @@ function criar_grupo() {
 			limpar_formulario();
 		});
 	}
+}
+
+/**
+*/
+function enviar_notificacao_email(emails) {
+	$.ajax({
+		url: './reqs/envia_email_novo_grupo.php',
+		type: 'POST',
+		data: {membros_emails: emails},
+	})
+	.done(function(data) {
+		console.log(data);
+	})
+	.fail(function() {})
+	.always(function() {});
+	
 }
 
 /** Faz uma requisição ao Banco de Dados para obter todos os grupos criados pelo usuário e dos quais ele participa.
@@ -379,9 +397,26 @@ function atualizar_lista_grupos() {
 	.always(function() {});
 }
 
+/**
+*/
+function verifica_permissao_usuario() {
+	$.ajax({
+		url: './reqs/busca_permissao_grupo_usuario.php',
+		type: 'POST',
+		async: false
+	})
+	.done(function(data) {
+		console.log(data);
+	})
+	.fail(function() {})
+	.always(function() {});
+}
+
 /** Obtém todas as checkboxes selecionadas para exclusão, manda a requisição ao Banco de Dados e atualiza a lista de grupos.
 */
 function excluir_grupos() {
+	verifica_permissao_usuario();
+/*
 	var selectedItems = [];
 	$("input[type=checkbox][name='lista-exclusao-grupos']:checked").each(function() {
 		selectedItems.push($(this).val());
@@ -398,7 +433,8 @@ function excluir_grupos() {
 	})
 	.fail(function() {})
 	.always(function() {});
-	
+
+	return true;*/
 }
 
 /**

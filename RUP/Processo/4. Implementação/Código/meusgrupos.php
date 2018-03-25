@@ -41,7 +41,10 @@ if($sessao_validada) {
       <section class="container-wip" role="main" style="">
         <div class="row">
           <h1> Grupos </h1>
-          <span style="display: none;"> <input id="aux_usuario_email" type='text' value="<?= $_SESSION['email']; ?>" readonly> </span>
+          <div style="display: none;">
+            <input id="aux_usuario_email" type='text' value="<?= $_SESSION['email']; ?>" readonly>
+            <input id="aux_usuario_id" type='text' value="<?= $_SESSION['id']; ?>" readonly>
+          </div>
         </div>
 
         <!-- ========== GRUPOS E SEUS DADOS ========== -->

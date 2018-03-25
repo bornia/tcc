@@ -3,108 +3,62 @@
 session_start();
 
 require_once('classes/db.class.php');
-require_once('envia_email_novo_grupo.php');
 
 // Instancia a classe db para executar o seu método e fazer a conexão com o banco de dados
 $con = (new db())->conecta_mysql();
 
 // Organiza as informações do novo grupo
-$user_id = $_SESSION['id'];
-$grupo = array($_POST['titulo_grupo'], $_POST['descricao_grupo'], $_POST['membros'], $_POST['permissoes']);
+$user_id 			= $_SESSION['id'];
+$grupo_titulo 		= $_POST['titulo_grupo'];
+$grupo_descricao 	= $_POST['descricao_grupo'];
+$grupo_membros 		= $_POST['membros'];
+$grupo_permissoes 	= $_POST['permissoes'];
 
 // Consulta para ver se o usuário já criou ou se já participa de um grupo com esse nome
-$sql = "SELECT titulo FROM grupos JOIN usuario_pertence_grupo ON (grupo_id = grupo_id_ref) WHERE usuario_id_ref = $user_id AND titulo = '$grupo[0]';";
+$sql = "SELECT titulo FROM grupos JOIN usuario_pertence_grupo ON (grupo_id = grupo_id_ref) WHERE usuario_id_ref = $user_id AND titulo = '$grupo_titulo';";
 
 // Executa a query
 $res = mysqli_query($con, $sql);
 
 // Se o grupo já existe
 if(mysqli_num_rows($res) > 0) {
+	ob_clean();
 	echo '<u>Já existe um grupo</u>, do qual você participa, com esse título.';
 	return false;
 }
 
 // Se o grupo não existe
 // Insere o novo grupo
-$sql = "INSERT INTO grupos(titulo, descricao) VALUES ('$grupo[0]', '$grupo[1]');";
+$sql = "INSERT INTO grupos(titulo, descricao) VALUES ('$grupo_titulo', '$grupo_descricao');";
 
 // Executa a query
 $res = mysqli_query($con, $sql);
 
-// Insere o criador do grupo no grupo
-$last_id = mysqli_insert_id($con);
-$sql = "INSERT INTO usuario_pertence_grupo(grupo_id_ref, usuario_id_ref, permissao) VALUES ($last_id, $user_id, 3);";
+if(!$res) {
+	ob_clean();
+	echo 'erro ao inserir novo grupo';
 
-// Executa a query
-$res = mysqli_query($con, $sql);
-
-// Propriedades do e-mail
-$subject = "OurBills: um novo grupo está te chamando!";
-$altBody = "Caso não seja suportado o HTML, aqui vai a mensagem em texto.";
-
-// Envia notificação por e-mail
-foreach ($grupo[2] as $key => $email) {
-	//dados de envio de e-mail
-	$mail->addAddress($email); //e-mails que receberam a mesagem
-	
-	//configuração da mensagem
-	$mail->isHTML(true); //formato da mensagem de e-mail
-	$mail->SetFrom('guilhermeborniamiranda@gmail.com', 'OurBills');
-	$mail->Subject = utf8_decode($subject); //assunto
-	$mail->Body    = "
-		<html>
-		  <head>
-		    <!-- Required meta tags -->
-		    <meta charset='utf-8'>
-
-		    <style type='text/css'>
-		      body {
-		        text-align: center;
-		      }
-
-		      a {
-		        background-color: #28a745;
-		        border-color: #28a745;
-		        display: inline-block;
-		        font-weight: 400;
-		        text-align: center;
-		        white-space: nowrap;
-		        vertical-align: middle;
-		        -webkit-user-select: none;
-		        -moz-user-select: none;
-		        -ms-user-select: none;
-		        user-select: none;
-		        border: 1px solid transparent;
-		        padding: .375rem .75rem;
-		        font-size: 1rem;
-		        line-height: 1.5;
-		        border-radius: .25rem;
-		        transition: background-color 0.5s ease;
-		        text-decoration: none;
-		      }
-
-		      a:hover {
-		        background-color: green;
-		      }
-		    </style>
-		  </head>
-
-		  <body>
-		    <p> Você foi adicionado no grupo TÍTULO com PERMISSÃO para apenas visualizar os seus dados. </p>
-		    <a href='http://localhost/tcc/RUP/Processo/4.%20Implementa%C3%A7%C3%A3o/C%C3%B3digo/cadastrarse.php?emailRef=" .  $email . "&grupoId=" . $last_id . "&permissao=" . $grupo[3][$key] . "' style='color: #fff;' target='_blank'> Entrar no Grupo </a>
-		  </body>
-		</html>
-		";
-	$mail->AltBody = utf8_decode($altBody); //texto alternativo caso o html não seja suportado
-	
-	//envio e testes
-	if(!$mail->send()) { //Neste momento duas ações são feitas, primeiro o send() (envio da mensagem) que retorna true ou false, se retornar false (não enviado) juntamente com o operador de negação "!" entra no bloco if.
-		echo 'A mensagem não pode ser enviada ';
-		echo 'Mailer Error: ' . $mail->ErrorInfo;
-	} else {
-		echo 'A mensagem foi enviada com sucesso!';
-	}
+	return false;
 }
+
+// Obtém o id do último grupo inserido no banco
+$last_id = mysqli_insert_id($con);
+
+// Adiciona o criador do grupo no grupo como 'dono'
+$sql = "INSERT INTO usuario_pertence_grupo(grupo_id_ref, usuario_id_ref, permissao) VALUES ($last_id, $user_id, 3)";
+$res = mysqli_query($con, $sql);
+
+// Adiciona os demais membros
+foreach ($grupo_membros as $key => $value) {
+	$sql = "SELECT usuario_id FROM usuarios WHERE email = '$value';";
+	$res = mysqli_query($con, $sql);
+	$usuario_id = (mysqli_fetch_array($res, MYSQLI_ASSOC)['usuario_id']);
+	$sql = "INSERT INTO usuario_pertence_grupo(grupo_id_ref, usuario_id_ref, permissao) VALUES ($last_id, $usuario_id, $grupo_permissoes[$key])";
+	$res = mysqli_query($con, $sql);
+}
+
+ob_clean();
+echo json_encode($grupo_membros);
 
 return true;
 
