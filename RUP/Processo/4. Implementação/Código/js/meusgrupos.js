@@ -399,42 +399,54 @@ function atualizar_lista_grupos() {
 
 /**
 */
-function verifica_permissao_usuario() {
+function verifica_permissao_usuario(grupos_ids) {
+	var grupos_permitidos;
+
 	$.ajax({
 		url: './reqs/busca_permissao_grupo_usuario.php',
 		type: 'POST',
+		data: {grupos: grupos_ids},
+		//dataType: 'json',
 		async: false
 	})
-	.done(function(data) {
-		console.log(data);
+	.done(function(grupos) {
+		var grupos_json_parsed = jQuery.parseJSON(grupos);
+		console.log(grupos_json_parsed.proibidos);
+		$('#alerta_excluir_grupos').html(
+			formatar_texto_alerta('primary', '<strong>Não foi possível excluir</strong> os grupos XXX, pois <u>você não tem a permissão de dono</u> sobre eles.')
+		);
+
+		grupos_permitidos = grupos_json_parsed.permitidos_ids;
 	})
 	.fail(function() {})
 	.always(function() {});
+
+	return grupos_permitidos;
 }
 
 /** Obtém todas as checkboxes selecionadas para exclusão, manda a requisição ao Banco de Dados e atualiza a lista de grupos.
 */
 function excluir_grupos() {
-	verifica_permissao_usuario();
-/*
-	var selectedItems = [];
+	var grupos_selecionados = [];
 	$("input[type=checkbox][name='lista-exclusao-grupos']:checked").each(function() {
-		selectedItems.push($(this).val());
+		grupos_selecionados.push($(this).val());
 	});
 
+	var grupos_permitidos = verifica_permissao_usuario(grupos_selecionados);
+/*
 	$.ajax({
 		url: './reqs/deletar_grupos.php',
 		type: 'POST',
-		data: {grupos: selectedItems},
+		data: {grupos: grupos_permitidos},
 	})
 	.done(function() {
 		atualizar_lista_grupos();
 		$('#janela_excluir_grupo').modal('hide');
 	})
 	.fail(function() {})
-	.always(function() {});
+	.always(function() {});*/
 
-	return true;*/
+	return true;
 }
 
 /**

@@ -37,13 +37,19 @@ if($sessao_validada) {
       <?php require('navbar-in.html'); ?> 
     </header>
 
-    <div class="main container" >
+    <div class="main container">
+
+      <!-- ========== MENSAGEM DE ALERTA ========== -->
+
+      <div id="alerta_excluir_grupos"> </div>
+
+      <!-- ========== CONTAINER-WIP ========== -->
+
       <section class="container-wip" role="main" style="">
         <div class="row">
           <h1> Grupos </h1>
           <div style="display: none;">
             <input id="aux_usuario_email" type='text' value="<?= $_SESSION['email']; ?>" readonly>
-            <input id="aux_usuario_id" type='text' value="<?= $_SESSION['id']; ?>" readonly>
           </div>
         </div>
 
