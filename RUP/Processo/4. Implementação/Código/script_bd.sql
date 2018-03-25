@@ -2,7 +2,7 @@ CREATE DATABASE wip;
 
 USE wip;
 
-CREATE TABLE usr (
+CREATE TABLE usuarios (
 	usuario_id INT NOT NULL AUTO_INCREMENT,
 	nome VARCHAR(50) NOT NULL,
 	email VARCHAR(100) NOT NULL UNIQUE, -- Serve para o usuário fazer login
