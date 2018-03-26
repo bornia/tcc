@@ -7,7 +7,9 @@ require_once ('classes/db.class.php');
 // Instancia a classe db para executar o seu método e fazer a conexão com o banco de dados
 $con = (new db())->conecta_mysql();
 
-$sql = "SELECT * FROM grupos;";
+$usuario_id = $_SESSION['id'];
+
+$sql = "SELECT * FROM grupos WHERE grupo_id IN (SELECT grupo_id_ref FROM usuario_pertence_grupo WHERE usuario_id_ref = $usuario_id);";
 
 // Executa a query
 $res = mysqli_query($con, $sql);
