@@ -41,7 +41,7 @@ if($sessao_validada) {
 
       <!-- ========== MENSAGEM DE ALERTA ========== -->
 
-      <div id="alerta_excluir_grupos"> </div>
+      <div id="alerta_info_grupos"> </div>
 
       <!-- ========== CONTAINER-WIP ========== -->
 

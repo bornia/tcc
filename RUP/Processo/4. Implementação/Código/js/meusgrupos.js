@@ -367,7 +367,9 @@ function enviar_notificacao_email(emails) {
 		data: {membros_emails: emails},
 	})
 	.done(function(data) {
-		console.log(data);
+		$('#alerta_info_grupos').html(
+			formatar_texto_alerta('info', 'Os membros adicionados serão <u>notificados por e-mail</u>.')
+		);
 	})
 	.fail(function() {})
 	.always(function() {});
@@ -413,7 +415,7 @@ function verifica_permissao_usuario(grupos_ids) {
 		var grupos_json_parsed = jQuery.parseJSON(grupos);
 		
 		if(grupos_json_parsed.proibidos.length != 0) {
-			$('#alerta_excluir_grupos').html(
+			$('#alerta_info_grupos').html(
 				formatar_texto_alerta('primary', '<strong>Não foi possível excluir</strong> os grupos <i>' + grupos_json_parsed.proibidos.join() + '</i>. <u>Você não tem a permissão de dono</u> sobre eles.')
 			);
 		}

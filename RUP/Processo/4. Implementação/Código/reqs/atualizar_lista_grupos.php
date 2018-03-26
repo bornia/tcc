@@ -18,7 +18,7 @@ $res = mysqli_query($con, $sql);
 if(!$res) {
 	echo 'erro ao atualizar lista de grupos';
 	return false;
-} 
+}
 
 $tabela = "";
 $titulo = "";
@@ -31,23 +31,28 @@ if(!mysqli_num_rows($res)) {
 else {
 	while($data = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
 		$datetime = explode(" ", strval($data['ultima_att']));
-	// $data['grupo_id']	
+		$grupo_id = $data['grupo_id'];
+
+		$sql = "SELECT COUNT(usuario_id_ref) AS qtd_membros FROM usuario_pertence_grupo WHERE grupo_id_ref = $grupo_id;";
+		$res2 = mysqli_query($con, $sql);
+		$qtd_membros = mysqli_fetch_array($res2, MYSQLI_ASSOC);
+	
 		if(empty($titulo)) {
 			$titulo .=
 "
-	<tr id='linha-grupo" . $data['grupo_id'] . "' class='bg-primary'>
+	<tr id='linha-grupo" . $grupo_id . "' class='bg-primary'>
   		<th class='table-max-width' scope='row'>
-    		<button type='button' class='btn-sm btn-block btn-third btn-none table-text-control text-size-responsive' id='grupo" . $data['grupo_id'] . "' onclick='seleciona_grupo(this);'> " . $data['titulo'] . " </button>
+    		<button type='button' class='btn-sm btn-block btn-third btn-none table-text-control text-size-responsive' id='grupo" . $grupo_id . "' onclick='seleciona_grupo(this);'> " . $data['titulo'] . " </button>
   		</th>
 
 	  	<td>
-	    	<input class='align-middle' type='checkbox' id='check-grupo" . $data['grupo_id'] . "'  name='lista-exclusao-grupos' value='" . $data['grupo_id'] . "' >
+	    	<input class='align-middle' type='checkbox' id='check-grupo" . $grupo_id . "'  name='lista-exclusao-grupos' value='" . $grupo_id . "' >
   		</td>
 	</tr>
 \n\n";
 
 			$detalhes .=
-"<div class='d-block' id='ref-grupo" . $data['grupo_id'] . "'>
+"<div class='d-block' id='ref-grupo" . $grupo_id . "'>
 	<div class='card border-0'>
 		<div class='card-body'>
 			<div class='row'>
@@ -57,7 +62,7 @@ else {
 
 		    	<div class='col'>
 		      		<span class='text-muted float-right' id='numero-de-membros'>
-		        	7 Membros
+		        	" . $qtd_membros['qtd_membros'] . " membros
 		      		</span>
 		    	</div>
 			</div>
@@ -112,7 +117,7 @@ else {
 
 			    	<div class='col'>
 			      		<span class='text-muted float-right' id='numero-de-membros'>
-			        	7 Membros
+			        	" . $qtd_membros['qtd_membros'] . " membros
 			      		</span>
 			    	</div>
 				</div>
