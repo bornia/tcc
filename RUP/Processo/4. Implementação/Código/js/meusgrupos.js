@@ -411,10 +411,12 @@ function verifica_permissao_usuario(grupos_ids) {
 	})
 	.done(function(grupos) {
 		var grupos_json_parsed = jQuery.parseJSON(grupos);
-		console.log(grupos_json_parsed.proibidos);
-		$('#alerta_excluir_grupos').html(
-			formatar_texto_alerta('primary', '<strong>Não foi possível excluir</strong> os grupos XXX, pois <u>você não tem a permissão de dono</u> sobre eles.')
-		);
+		
+		if(grupos_json_parsed.proibidos.length != 0) {
+			$('#alerta_excluir_grupos').html(
+				formatar_texto_alerta('primary', '<strong>Não foi possível excluir</strong> os grupos <i>' + grupos_json_parsed.proibidos.join() + '</i>. <u>Você não tem a permissão de dono</u> sobre eles.')
+			);
+		}
 
 		grupos_permitidos = grupos_json_parsed.permitidos_ids;
 	})
@@ -433,7 +435,7 @@ function excluir_grupos() {
 	});
 
 	var grupos_permitidos = verifica_permissao_usuario(grupos_selecionados);
-/*
+
 	$.ajax({
 		url: './reqs/deletar_grupos.php',
 		type: 'POST',
@@ -444,7 +446,7 @@ function excluir_grupos() {
 		$('#janela_excluir_grupo').modal('hide');
 	})
 	.fail(function() {})
-	.always(function() {});*/
+	.always(function() {});
 
 	return true;
 }
