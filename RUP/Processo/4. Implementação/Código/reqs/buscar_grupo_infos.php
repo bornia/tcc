@@ -7,7 +7,7 @@ require_once ('classes/db.class.php');
 // Instancia a classe db para executar o seu método e fazer a conexão com o banco de dados
 $con = (new db())->conecta_mysql();
 
-$sql = "SELECT titulo FROM GRUPOS WHERE ". $_POST['grupo_id'] . ";";
+$sql = "SELECT titulo FROM GRUPOS WHERE grupo_id = ". $_POST['grupo_id'] . ";";
 
 // Executa a query
 $res = mysqli_query($con, $sql);
