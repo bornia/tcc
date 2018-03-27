@@ -1,3 +1,17 @@
+<?php
+
+$sessao_validada = require_once('reqs/validar_sessao.php'); // sessio_start()
+
+if($sessao_validada) {
+
+  // Se o id do grupo existir então empty() retorna false e o usuário não será redirecionado, pois não há erro.
+  if(empty($_POST['grupo_id'])) {
+    header('Location: meusgrupos.php');
+  }
+}
+
+?>
+
 <!doctype html>
 
 <html lang="pt-br">
@@ -28,10 +42,24 @@
     <!-- ========== RESUMO FINANCEIRO ========== -->
    
     <div class="main container" role="main">
+
+      <!-- ========== AUXILIARES ========== -->
+
+      <input type="text" id="info_grupo_id" readonly value="<?= $_POST['grupo_id'] ?>" style="display: none;">
+
+      <!-- ============================ -->
+
       <section id="resumo-financeiro">
         <div class="container-wip">
-          <div class="row">
-            <h1> Resumo do Grupo <small class="text-muted"> Rep da sua mãe </small> </h1>
+          <div class="row" >
+            <h1 style="width: 100%;">
+              Resumo do Grupo
+              <small>
+                <small class="text-muted float-right pr-4">
+                  <small class="info_grupo_titulo text-size-responsive" style="vertical-align: bottom;"> </small>
+                </small>
+              </small>
+            </h1>
           </div>
 
           <!-- ========== VALOR A SER RECEBIDO ========== -->
@@ -66,7 +94,14 @@
       <section id="meus-eventos">
         <div class="container-wip">
           <div class="row">
-            <h1> Eventos </h1>
+            <h1 style="width: 100%;">
+              Eventos
+             <small>
+                <small class="text-muted float-right pr-4">
+                  <small class="info_grupo_titulo text-size-responsive" style="vertical-align: bottom;"> </small>
+                </small>
+              </small>
+            </h1>
           </div> <!-- row -->
 
           <div class="row mb-2">
@@ -180,7 +215,7 @@
 
           <!-- ========== MODAL PARA CRIAR UM NOVO EVENTO ========== -->
 
-          <form class="modal fade" tabindex="-1" id="janela-criar-evento">
+          <form class="modal fade" tabindex="-1" id="janela-criar-evento" ac>
             <div class="modal-dialog modal-md modal-dialog-centered">
               <div class="modal-content text-size-responsive">
                 <div class="modal-header">
@@ -200,7 +235,7 @@
 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
-                  <button type="submit" class="btn btn-success"> Adicionar </button>
+                  <button type="button" class="btn btn-success"> Adicionar </button>
                 </div>
               </div> <!-- modal-content -->
             </div> <!-- modal-dialog -->
@@ -225,7 +260,7 @@
 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
-                  <button type="submit" class="btn btn-danger"> Excluir </button>
+                  <button type="button" class="btn btn-danger"> Excluir </button>
                 </div>
               </div> <!-- modal-content -->
             </div> <!-- modal-dialog -->

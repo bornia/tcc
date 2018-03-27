@@ -52,7 +52,7 @@ else {
 \n\n";
 
 			$detalhes .=
-"<div class='d-block' id='ref-grupo" . $grupo_id . "'>
+"<form class='d-block' id='ref-grupo" . $grupo_id . "' action='meuseventos.php' method='POST'>
 	<div class='card border-0'>
 		<div class='card-body'>
 			<div class='row'>
@@ -81,7 +81,7 @@ else {
 		    	</div>
 
 		    	<div class='col-12 col-md-7'>
-		      		<button class='btn btn-sm btn-block float-right' id='btn-submit'>
+		      		<button class='btn btn-sm btn-block float-right btn-submit' type='submit' name='grupo_id' value='" . $grupo_id . "'>
 		        		<span class='oi oi-account-login' class='text-size-responsive' aria-labelledby='entrar-no-grupo'> </span>
 		        		<span id='entrar-no-grupo' class='text-size-responsive'> Entrar no Grupo </span>
 		      		</button>
@@ -89,7 +89,7 @@ else {
 		  	</div>
 		</div>
 	</div>
-</div>\n\n";
+</form>\n\n";
 		}
 		else {
 			$titulo .=
@@ -107,7 +107,7 @@ else {
 
 			$detalhes .=
 "
-<div class='d-none' id='ref-grupo" . $data['grupo_id'] . "'>
+<form class='d-none' id='ref-grupo" . $grupo_id . "' action='meuseventos.php' method='POST'>
 		<div class='card border-0'>
 			<div class='card-body'>
 				<div class='row'>
@@ -136,7 +136,7 @@ else {
 			    	</div>
 
 			    	<div class='col-12 col-md-7'>
-			      		<button class='btn btn-sm btn-block float-right' id='btn-submit'>
+			      		<button class='btn btn-sm btn-block float-right btn-submit' type='submit' name='grupo_id' value='" . $grupo_id . "'>
 			        		<span class='oi oi-account-login' class='text-size-responsive' aria-labelledby='entrar-no-grupo'> </span>
 			        		<span id='entrar-no-grupo' class='text-size-responsive'> Entrar no Grupo </span>
 			      		</button>
@@ -144,7 +144,7 @@ else {
 			  	</div>
 			</div>
 		</div>
-	</div>
+	</form>
 \n\n";
 		}
 	}
