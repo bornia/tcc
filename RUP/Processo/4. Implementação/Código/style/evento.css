@@ -52,7 +52,6 @@ td.adjust-width {
 
 /* TIPOGRAFIA RESPONSIVA */
 
-
 @media screen and (max-width: 767px) {
 	.text-size-responsive {
 		font-size: 0.85em;

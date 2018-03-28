@@ -46,6 +46,7 @@ if($sessao_validada) {
       <!-- ========== AUXILIARES ========== -->
 
       <input type="text" id="info_grupo_id" readonly value="<?= $_POST['grupo_id'] ?>" style="display: none;">
+      <div id="alerta_mensagem"> </div>
 
       <!-- ============================ -->
 
@@ -69,7 +70,7 @@ if($sessao_validada) {
               <button class="btn btn-info bg-white btn-block">
                 <span class="oi oi-arrow-thick-top text-success font-weight-bold" aria-labelledby="a-receber"> </span>
                 <span class="text-secondary text-size-responsive" id="a-receber">
-                  Você deve receber <span class="text-success font-weight-bold"> R$ 00,00 reais</span>.
+                  A receber <span class="text-success font-weight-bold"> R$ 00,00 reais</span>.
                 </span>
               </button>
             </div> 
@@ -80,7 +81,7 @@ if($sessao_validada) {
               <button class="btn btn-info bg-white btn-block">
                 <span class="oi oi-arrow-thick-bottom text-danger font-weight-bold" aria-labelledby="a-pagar"> </span>
                 <span class="text-secondary text-size-responsive" id="a-pagar">
-                  Você deve pagar <span class="text-danger font-weight-bold"> R$ 00,00 reais</span>.
+                  A pagar <span class="text-danger font-weight-bold"> R$ 00,00 reais</span>.
                 </span>
               </button>
             </div>
@@ -215,7 +216,7 @@ if($sessao_validada) {
 
           <!-- ========== MODAL PARA CRIAR UM NOVO EVENTO ========== -->
 
-          <form class="modal fade" tabindex="-1" id="janela-criar-evento" ac>
+          <form class="modal fade" id="janela-criar-evento" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-md modal-dialog-centered">
               <div class="modal-content text-size-responsive">
                 <div class="modal-header">
@@ -229,13 +230,13 @@ if($sessao_validada) {
                 <div class="modal-body">
                   <div class="form-group">
                     <label for="titulo" class="font-weight-bold"> Título do Evento </label>
-                    <input type="text" class="form-control text-size-responsive" id="titulo" placeholder="Digite o nome do evento">
+                    <input type="text" class="form-control text-size-responsive" id="titulo" name="titulo_evento" placeholder="Digite o nome do evento">
                   </div>
                 </div> <!-- modal-body -->
 
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
-                  <button type="button" class="btn btn-success"> Adicionar </button>
+                  <button type="button" class="btn btn-secondary text-size-responsive" data-dismiss="modal"> Cancelar </button>
+                  <button type="button" class="btn btn-success text-size-responsive" onclick="adicionar_novo_evento();" data-dismiss="modal"> Adicionar </button>
                 </div>
               </div> <!-- modal-content -->
             </div> <!-- modal-dialog -->
@@ -243,7 +244,7 @@ if($sessao_validada) {
 
           <!-- ========== MODAL PARA EXCLUIR EVENTOS ========== -->
 
-          <form class="modal fade" tabindex="-1" id="janela-excluir-evento"> <!-- Modal para adicionar novo evento -->
+          <form class="modal fade" id="janela-excluir-evento" tabindex="-1" role="dialog"> <!-- Modal para adicionar novo evento -->
             <div class="modal-dialog modal-sm modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
