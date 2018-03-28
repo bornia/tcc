@@ -47,3 +47,27 @@ CREATE TABLE usuario_pertence_grupo (
 	FOREIGN KEY(grupo_id_ref) REFERENCES grupos(grupo_id),
 	FOREIGN KEY (usuario_id_ref) REFERENCES usuarios(usuario_id)
 );
+
+CREATE TABLE eventos (
+	evento_id INT NOT NULL,
+	titulo VARCHAR(40) NOT NULL,
+	ultima_att DATETIME DEFAULT CURRENT_TIMESTAMP,
+	total DECIMAL DEFAULT 0,
+	status TINYINT DEFAULT 1,
+	/*
+		0 ------ Evento fechado/finalizado
+		1 ------ Evento aberto/funcionando
+	*/
+
+	PRIMARY KEY(eventos_id)
+);
+
+CREATE TABLE evento_pertence_grupo (
+	evento_grupo_id INT NOT NULL,
+	grupo_id_ref INT NOT NULL,
+	evento_id_ref INT NOT NULL,
+
+	PRIMARY KEY(evento_grupo_id),
+	FOREIGN KEY(grupo_id_ref) REFERENCES grupos(grupo_id),
+	FOREIGN KEY (evento_id_ref) REFERENCES eventos(evento_id)
+);
