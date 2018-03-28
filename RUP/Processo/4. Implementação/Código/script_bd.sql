@@ -49,7 +49,7 @@ CREATE TABLE usuario_pertence_grupo (
 );
 
 CREATE TABLE eventos (
-	evento_id INT NOT NULL,
+	evento_id INT NOT NULL AUTO_INCREMENT,
 	titulo VARCHAR(40) NOT NULL,
 	ultima_att DATETIME DEFAULT CURRENT_TIMESTAMP,
 	total DECIMAL DEFAULT 0,
@@ -59,11 +59,11 @@ CREATE TABLE eventos (
 		1 ------ Evento aberto/funcionando
 	*/
 
-	PRIMARY KEY(eventos_id)
+	PRIMARY KEY(evento_id)
 );
 
 CREATE TABLE evento_pertence_grupo (
-	evento_grupo_id INT NOT NULL,
+	evento_grupo_id INT NOT NULL AUTO_INCREMENT,
 	grupo_id_ref INT NOT NULL,
 	evento_id_ref INT NOT NULL,
 
