@@ -15,7 +15,7 @@ $res = mysqli_query($con, $sql);
 // Se houve algum erro na execução da query
 if(!$res) {
 	ob_clean();
-	echo 'Houve um erro ao tentar criar o novo evento. Por gentileza, contate o suporte.';
+	echo '<u>Houve um erro ao tentar criar o novo evento</u>. Por gentileza, <strong>contate o suporte</strong>.';
 	return false;
 }
 

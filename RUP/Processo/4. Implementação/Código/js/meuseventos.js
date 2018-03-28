@@ -83,9 +83,14 @@ function adicionar_novo_evento() {
 		type: 'POST',
 		data: {titulo: $('#titulo').val()}
 	})
-	.done(function(response) {
-		console.log(response);
-		//atualizar_lista_eventos();
+	.done(function(alerta) {
+		if(alerta.length != 0) {
+			$('#alerta_mensagem').html(
+				formatar_texto_alerta('danger', alerta)
+			);
+		} else {
+			//atualizar_lista_eventos();
+		}
 	});
 }
 
