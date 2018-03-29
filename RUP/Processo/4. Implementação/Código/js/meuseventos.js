@@ -19,7 +19,7 @@ function verify_checkbox_status(element) {
 	}
 }
 
-/**
+/** Limpa todos os campos do modal de adicionar um novo evento.
 */
 function limpar_formulario() {
 	document.getElementById('janela-criar-evento').reset();
@@ -110,7 +110,7 @@ function adicionar_novo_evento() {
 /* ======================== OUTRAS REQUISIÇÕES ========================= */
 /* ===================================================================== */
 
-/**
+/** Busca o título do grupo no Banco e o exibe na página.
 */
 function buscar_grupo_infos() {
 	$.ajax({
@@ -123,7 +123,7 @@ function buscar_grupo_infos() {
 	});
 }
 
-/**
+/** Quando o modal para adicionar um novo evento é carregado (fim de todas as transições) seta-se o foco para o input do título do evento.
 */
 function trigger_exibir_modal_novo_evento() {
 	$('#janela-criar-evento').on('shown.bs.modal', function() {
@@ -131,7 +131,7 @@ function trigger_exibir_modal_novo_evento() {
 	})
 }
 
-/**
+/** Quando o modal para adicionar um novo evento termina de ocultar-se (fim de todas as transições) limpa-se todo os campos do modal.
 */
 function trigger_esconder_modal_novo_evento() {
 	$('#janela-criar-evento').on('hidden.bs.modal', function(e) {
