@@ -125,7 +125,15 @@ function buscar_grupo_infos() {
 
 /**
 */
-function trigger_esconder_modal() {
+function trigger_exibir_modal_novo_evento() {
+	$('#janela-criar-evento').on('shown.bs.modal', function() {
+		document.getElementById("titulo").focus();
+	})
+}
+
+/**
+*/
+function trigger_esconder_modal_novo_evento() {
 	$('#janela-criar-evento').on('hidden.bs.modal', function(e) {
 	  limpar_formulario();
 	})
@@ -141,5 +149,6 @@ $(document).ready(function() {
 	buscar_grupo_infos();
 	atualizar_lista_eventos();
 	$('[data-toggle="tooltip"]').tooltip();
-	trigger_esconder_modal();
+	trigger_exibir_modal_novo_evento();
+	trigger_esconder_modal_novo_evento();
 });
