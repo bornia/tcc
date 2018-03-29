@@ -69,19 +69,31 @@ function giveback_add_btn_function() {
 	$('#btn-criar-evento').fadeIn();
 }
 
-/**
+/** Reescreve o html do body da tabela de eventos incluindo o evento que foi adicionado ao banco de dados.
 */
 function atualizar_lista_eventos() {
-	// body...
+	$.ajax({
+		url: './reqs/atualizar_lista_eventos.php',
+		type: 'POST',
+		data: {grupo_id: $('#info_grupo_id').val()}
+	})
+	.done(function(data) {
+		try {
+			var parsed = JSON.parse(data);
+			$('#tabela-corpo-eventos').html(parsed.eventos);
+		} catch(e_alerta) {
+			$('#tabela-corpo-eventos').html(data);
+		}
+	});
 }
 
-/**
+/** Cadastra um novo evento no banco de dados e, se der errado, emite um alerta.
 */
 function adicionar_novo_evento() {
 	$.ajax({
 		url: './reqs/adicionar_evento.php',
 		type: 'POST',
-		data: {titulo: $('#titulo').val()}
+		data: {titulo: $('#titulo').val(), grupo_id: $('#info_grupo_id').val()},
 	})
 	.done(function(alerta) {
 		if(alerta.length != 0) {
@@ -89,7 +101,7 @@ function adicionar_novo_evento() {
 				formatar_texto_alerta('danger', alerta)
 			);
 		} else {
-			//atualizar_lista_eventos();
+			atualizar_lista_eventos();
 		}
 	});
 }
@@ -127,6 +139,7 @@ function trigger_esconder_modal() {
 $(document).ready(function() {
 	$('#btn-excluir-evento').hide();
 	buscar_grupo_infos();
+	atualizar_lista_eventos();
 	$('[data-toggle="tooltip"]').tooltip();
 	trigger_esconder_modal();
 });

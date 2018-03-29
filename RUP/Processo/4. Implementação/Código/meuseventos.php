@@ -189,26 +189,15 @@ if($sessao_validada) {
                     <th class="align-middle">
                       <input type="checkbox" title="Selecionar todos" value="todo-item-selecionado" onclick="return toggle_all_checkboxes(this);">
                     </th>
-                    <th class="align-middle"> Título </th>
-                    <th class="align-middle"> Última Modificação </th>
-                    <th class="align-middle"> Opções </th>
+                    <th class="align-middle"> Título              </th>
+                    <th class="align-middle text-center"> Total               </th>
+                    <th class="align-middle text-center"> Última modificação  </th>
+                    <th class="align-middle"> Opções              </th>
                   </tr>
                 </thead>
 
-                <tbody>
-                  <tr>
-                    <td class="align-middle">
-                      <input aria-label="Marque o item" type="checkbox" name="item" value="item-selecionado-1" onchange="return verify_checkbox_status(this);">
-                    </td>
-                    <td class="change-cursor align-middle" onclick="return redirect_page();"> REP - Aluguel de Julho </td>
-                    <td class="change-cursor align-middle" onclick="return redirect_page();"> 27/10/2017 as 15:18:35 </td>
-                    <td class="align-middle">
-                      <button type="button" class="btn btn-warning" id="btn-editar-evento" title="Editar evento.">
-                        <span class="oi oi-pencil text-white" aria-labelledby="btn-editar-evento" aria-describedby="btn-editar-evento-descricao"> </span>
-                        <span class="sr-only" id="btn-editar-evento-descricao"> Editar evento. </span>
-                      </button>
-                    </td>
-                  </tr>
+                <tbody id="tabela-corpo-eventos">
+
                 </tbody>
               </table>
             </div>
