@@ -62,7 +62,7 @@ if($sessao_validada) {
 
             <div class="row">
               <div class="col">
-                <button type="button" class="btn btn-success btn-sm mb-1 btn-block" data-toggle="modal" data-target="#janela_novo_grupo" aria-labelledby="btn-novo-grupo" onclick="prepara_modal_novo_grupo();">
+                <button type="button" class="btn btn-success btn-sm mb-1 btn-block" data-toggle="modal" data-target="#janela_novo_grupo" aria-labelledby="btn-novo-grupo">
                   <span class="oi oi-plus text-size-responsive" aria-labelledby="novo-grupo"> </span>
                   <span id="btn-novo-grupo" class="text-size-responsive"> Criar Grupo </span>
                 </button>

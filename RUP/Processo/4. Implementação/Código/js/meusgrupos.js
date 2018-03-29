@@ -153,9 +153,10 @@ function seleciona_detalhe_grupo(grupoId) {
 
 /**
 */
-
-function prepara_modal_novo_grupo() {
-	//document.getElementById("nome_grupo").focus();
+function trigger_exibir_modal_novo_grupo() {
+	$('#janela_novo_grupo').on('shown.bs.modal', function() {
+		document.getElementById("nome_grupo").focus();
+	})
 }
 
 /** Verifica quantos caracteres ainda podem ser digitados baseado no limite determinado.
@@ -510,4 +511,6 @@ $(document).ready(function() {
   			$('#caixa-pesquisa-usuarios').hide();
   		}
   	});
+
+  	trigger_exibir_modal_novo_grupo();
 });
