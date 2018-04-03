@@ -33,7 +33,7 @@ else {
 
 		$eventos .= 
 "<tr>
-    <td class='align-middle'> <input aria-label='Marque o item' type='checkbox' name='item' value='item-selecionado-1' onchange='return verify_checkbox_status(this);'> </td>
+    <td class='align-middle'> <input aria-label='Marque o item' type='checkbox' name='item' value='item-selecionado-1' onchange='verificar_todos_status_checkboxes();'> </td>
     <td class='change-cursor align-middle' onclick='return redirect_page();'> " . $row['titulo'] . " </td>
     <td class='change-cursor align-middle text-center' onclick='return redirect_page();'> " . $row['total'] . " </td>
     <td class='change-cursor align-middle text-center' onclick='return redirect_page();'> " . $datetime[0] . " as " . $datetime[1] . " </td>

@@ -8,15 +8,36 @@ function redirect_page() {
 	window.location.href = 'evento.php';
 }
 
-/** Verifica se existem checkboxes selecionados na tabela.
+/** Verifica se existe pelo menos um checkbox selecionado na tabela. 
 */
-function verify_checkbox_status(element) {
-	if(element.checked) {
-		change_add_btn_function();
+function verificar_todos_status_checkboxes() {
+	var nenhum_selecionado = true;
+
+	$("input[type=checkbox][name='item']").each(function(index, element) {
+		if(element.checked) {
+			mostrar_botao_excluir_evento();
+			nenhum_selecionado = false;
+			return false;
+		}
+	});
+
+	if(nenhum_selecionado) {
+		$('#checkbox-excluir-todos-eventos').prop('checked', false);
+		mostrar_botao_adicionar_evento();
 	}
-	else {
-		giveback_add_btn_function();
-	}
+}
+
+/** Retorna a quantidade de eventos marcados para exclusão.
+*/
+function obtem_quantidade_eventos_marcados() {
+	var contador = 0;
+
+	$("input[type=checkbox][name='item']").each(function(index, element) {
+		if(element.checked)
+			contador++;
+	});
+
+	return contador;
 }
 
 /** Limpa todos os campos do modal de adicionar um novo evento.
@@ -48,23 +69,26 @@ function formatar_texto_alerta(tipo, mensagem) {
 /** Marca/desmarca todas os checkboxes do corpo da tabela caso o checkbox do cabeçalho seja marcado/desmarcado.
 */
 function toggle_all_checkboxes(element) {
-	checkboxes = document.getElementsByName('item');
+	$("input[type=checkbox][name='item']").each(function(index, item) {
+		item.checked = element.checked;
+	});
 
-	for(var i = 0; i < checkboxes.length; i++) {
-		checkboxes[i].checked = element.checked;
-	}
+	if(element.checked)
+		mostrar_botao_excluir_evento();
+	else
+		mostrar_botao_adicionar_evento();
 }
 
 /** Muda a função do botão de adicionar evento para poder excluir os eventos marcados.
 */
-function change_add_btn_function() {
-	$('#btn-excluir-evento').fadeIn();
+function mostrar_botao_excluir_evento() {
 	$('#btn-criar-evento').hide();
+	$('#btn-excluir-evento').fadeIn();
 }
 
 /** Devolve a função do botão de adicionar evento.
 */
-function giveback_add_btn_function() {
+function mostrar_botao_adicionar_evento() {
 	$('#btn-excluir-evento').hide();
 	$('#btn-criar-evento').fadeIn();
 }
@@ -139,6 +163,20 @@ function trigger_esconder_modal_novo_evento() {
 	})
 }
 
+/**
+*/
+function trigger_exibir_modal_excluir_evento() {
+	$('#janela-excluir-evento').on('shown.bs.modal', function() {
+		var quantidade_eventos_marcados = obtem_quantidade_eventos_marcados();
+
+		if(quantidade_eventos_marcados == 1) {
+			$('#legenda_quantidade_itens_marcados').html("o evento selecionado");
+		} else {
+			$('#legenda_quantidade_itens_marcados').html("os <strong>" + quantidade_eventos_marcados + " eventos selecionados</strong>");
+		}
+	})
+}
+
 /* ===================================================================== */
 /* ============================== OUTROS =============================== */
 /* ===================================================================== */
@@ -151,4 +189,5 @@ $(document).ready(function() {
 	$('[data-toggle="tooltip"]').tooltip();
 	trigger_exibir_modal_novo_evento();
 	trigger_esconder_modal_novo_evento();
+	trigger_exibir_modal_excluir_evento();
 });

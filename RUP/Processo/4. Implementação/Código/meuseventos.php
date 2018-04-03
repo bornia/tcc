@@ -187,7 +187,7 @@ if($sessao_validada) {
                 <thead>
                   <tr>
                     <th class="align-middle">
-                      <input type="checkbox" title="Selecionar todos" value="todo-item-selecionado" onclick="return toggle_all_checkboxes(this);">
+                      <input type="checkbox" id="checkbox-excluir-todos-eventos" title="Selecionar todos" value="todo-item-selecionado" onclick="toggle_all_checkboxes(this);">
                     </th>
                     <th class="align-middle"> Título              </th>
                     <th class="align-middle text-center"> Total               </th>
@@ -245,12 +245,14 @@ if($sessao_validada) {
                 </div>
 
                 <div class="modal-body">
-                  <p> Tem certeza que deseja excluir o evento selecionado? </p>
+                  <p>
+                    Tem certeza que deseja <u>excluir</u> <span id="legenda_quantidade_itens_marcados"> </span>?
+                  </p>
                 </div> <!-- modal-body -->
 
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
-                  <button type="button" class="btn btn-danger"> Excluir </button>
+                  <button type="button" class="btn btn-secondary text-size-responsive" data-dismiss="modal"> Cancelar </button>
+                  <button type="button" class="btn btn-danger text-size-responsive"> Excluir </button>
                 </div>
               </div> <!-- modal-content -->
             </div> <!-- modal-dialog -->
