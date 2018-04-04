@@ -11,17 +11,12 @@ function redirect_page() {
 /** Verifica se existe pelo menos um checkbox selecionado na tabela. 
 */
 function verificar_todos_status_checkboxes() {
-	var nenhum_selecionado = true;
+	var todos_selecionados 		= $("input[type=checkbox][name='item']:checked").length;
+	var todos_nao_selecionados 	= $("input[type=checkbox][name='item']:not(:checked)").length;
 
-	$("input[type=checkbox][name='item']").each(function(index, element) {
-		if(element.checked) {
-			mostrar_botao_excluir_evento();
-			nenhum_selecionado = false;
-			return false;
-		}
-	});
-
-	if(nenhum_selecionado) {
+	if(todos_selecionados > 0) {
+		mostrar_botao_excluir_evento();
+	} else {
 		$('#checkbox-excluir-todos-eventos').prop('checked', false);
 		mostrar_botao_adicionar_evento();
 	}
@@ -30,14 +25,7 @@ function verificar_todos_status_checkboxes() {
 /** Retorna a quantidade de eventos marcados para exclusão.
 */
 function obtem_quantidade_eventos_marcados() {
-	var contador = 0;
-
-	$("input[type=checkbox][name='item']").each(function(index, element) {
-		if(element.checked)
-			contador++;
-	});
-
-	return contador;
+	return $("input[type=checkbox][name='item']:checked").length;;
 }
 
 /** Limpa todos os campos do modal de adicionar um novo evento.
@@ -109,6 +97,8 @@ function atualizar_lista_eventos() {
 			$('#tabela-corpo-eventos').html(data);
 		}
 	});
+
+	$('#checkbox-excluir-todos-eventos').prop('checked', false);
 }
 
 /** Cadastra um novo evento no banco de dados e, se der errado, emite um alerta.
@@ -128,6 +118,37 @@ function adicionar_novo_evento() {
 			atualizar_lista_eventos();
 		}
 	});
+}
+
+/** Obtém os valores de todas os eventos selecionados e faz uma requisição ao Banco de Dados para excluir esses eventos.
+*/
+function excluir_eventos() {
+	var usuario_id 				= $('#info_usuario_id');
+	var grupo_id 				= $('#info_grupo_id');
+	var alerta 					= $("#alerta_mensagem");
+	var eventos_selecionados 	= [];
+
+	$("input[type=checkbox][name='item']:checked").each(function() {
+		eventos_selecionados.push($(this).val());
+	});
+
+	$.ajax({
+		url: './reqs/deletar_evento.php',
+		type: 'POST',
+		data: {eventos_ids: eventos_selecionados, grupo_id: grupo_id.val(), usuario_id: usuario_id.val()},
+	})
+	.done(function(mensagem) {
+		if(mensagem.length != 0)
+			alerta.html(formatar_texto_alerta("danger", mensagem));
+		else
+			atualizar_lista_eventos();
+	})
+	.fail(function() {console.log("error"); })
+	.always(function() {
+		$('#janela-excluir-evento').modal('hide');
+		mostrar_botao_adicionar_evento();
+	});
+	
 }
 
 /* ===================================================================== */
@@ -163,7 +184,7 @@ function trigger_esconder_modal_novo_evento() {
 	})
 }
 
-/**
+/** Quando o modal para excluir um evento é carregado atualiza-se a semântica da mensagem conforme a quantidade de eventos marcados.
 */
 function trigger_exibir_modal_excluir_evento() {
 	$('#janela-excluir-evento').on('shown.bs.modal', function() {

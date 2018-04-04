@@ -45,7 +45,8 @@ if($sessao_validada) {
 
       <!-- ========== AUXILIARES ========== -->
 
-      <input type="text" id="info_grupo_id" readonly value="<?= $_POST['grupo_id'] ?>" style="display: none;">
+      <input type="text" id="info_grupo_id"   readonly value="<?= $_POST['grupo_id']  ?>" style="display: none;">
+      <input type="text" id="info_usuario_id" readonly value="<?= $_SESSION['id']     ?>" style="display: none;">
       <div id="alerta_mensagem"> </div>
 
       <!-- ============================ -->
@@ -252,7 +253,7 @@ if($sessao_validada) {
 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary text-size-responsive" data-dismiss="modal"> Cancelar </button>
-                  <button type="button" class="btn btn-danger text-size-responsive"> Excluir </button>
+                  <button type="button" class="btn btn-danger text-size-responsive" onclick="excluir_eventos();"> Excluir </button>
                 </div>
               </div> <!-- modal-content -->
             </div> <!-- modal-dialog -->

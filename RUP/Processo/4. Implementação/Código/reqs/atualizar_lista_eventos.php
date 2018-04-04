@@ -10,7 +10,7 @@ $con = (new db())->conecta_mysql();
 $grupo_id = $_POST['grupo_id'];
 
 // Busca os eventos pertencentes a um determinado grupo
-$sql = "SELECT titulo,ultima_att,total FROM eventos WHERE evento_id IN (SELECT evento_id_ref FROM evento_pertence_grupo WHERE grupo_id_ref = $grupo_id)";
+$sql = "SELECT evento_id,titulo,ultima_att,total FROM eventos WHERE evento_id IN (SELECT evento_id_ref FROM evento_pertence_grupo WHERE grupo_id_ref = $grupo_id)";
 
 // Executa a query
 $res = mysqli_query($con, $sql);
@@ -33,7 +33,7 @@ else {
 
 		$eventos .= 
 "<tr>
-    <td class='align-middle'> <input aria-label='Marque o item' type='checkbox' name='item' value='item-selecionado-1' onchange='verificar_todos_status_checkboxes();'> </td>
+    <td class='align-middle'> <input aria-label='Marque o item' type='checkbox' name='item' value='" . $row['evento_id'] . "' onchange='verificar_todos_status_checkboxes();'> </td>
     <td class='change-cursor align-middle' onclick='return redirect_page();'> " . $row['titulo'] . " </td>
     <td class='change-cursor align-middle text-center' onclick='return redirect_page();'> " . $row['total'] . " </td>
     <td class='change-cursor align-middle text-center' onclick='return redirect_page();'> " . $datetime[0] . " as " . $datetime[1] . " </td>
