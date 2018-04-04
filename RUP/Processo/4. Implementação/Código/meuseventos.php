@@ -220,7 +220,8 @@ if($sessao_validada) {
                 <div class="modal-body">
                   <div class="form-group">
                     <label for="titulo" class="font-weight-bold"> Título do Evento </label>
-                    <input type="text" class="form-control text-size-responsive" id="titulo" name="titulo_evento" placeholder="Digite o nome do evento">
+                    <span id="nchar_titulo" class="badge badge-secondary" aria-label="Caracteres restantes."> 40 </span>
+                    <input type="text" class="form-control text-size-responsive" id="titulo" name="titulo_evento" placeholder="Digite o nome do evento" maxlength="40" onkeyup="return check_nchar(this.id, 'nchar_titulo', 40);">
                   </div>
                 </div> <!-- modal-body -->
 

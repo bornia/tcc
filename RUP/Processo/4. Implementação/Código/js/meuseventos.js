@@ -54,6 +54,23 @@ function formatar_texto_alerta(tipo, mensagem) {
 /* ============================== EVENTOS ============================== */
 /* ===================================================================== */
 
+/** Verifica quantos caracteres ainda podem ser digitados baseado no limite determinado.
+ * element_checked O texto do ID referente ao campo que terá seus caracteres contados.
+ * element_nchar O texto do ID referente ao campo que mostrará quantos caracteres ainda podem ser digitados.
+ * limite A quantidade máxima de caracteres que pode ser digitada.
+*/
+function check_nchar(element_checked, element_nchar, limite) {
+	var campo_contador = document.getElementById(element_nchar);
+	var nome_grupo = document.getElementById(element_checked).value;
+	var max_tam = limite - nome_grupo.length;
+
+	if(max_tam == -1)
+	  return false;
+
+	campo_contador.innerHTML = max_tam;
+	return true;
+}
+
 /** Marca/desmarca todas os checkboxes do corpo da tabela caso o checkbox do cabeçalho seja marcado/desmarcado.
 */
 function toggle_all_checkboxes(element) {
