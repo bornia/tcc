@@ -212,6 +212,16 @@ function trigger_exibir_modal_excluir_evento() {
 		} else {
 			$('#legenda_quantidade_itens_marcados').html("os <strong>" + quantidade_eventos_marcados + " eventos selecionados</strong>");
 		}
+	
+		document.getElementById("modal-btn-excluir-evento").focus();
+	})
+}
+
+/** Quando o modal para editar um evento é carregado (fim de todas as transições) seta-se o foco para o primeiro input do formulário.
+*/
+function trigger_exibir_modal_editar_evento() {
+	$('#janela-editar-evento').on('shown.bs.modal', function() {
+		document.getElementById("editar-titulo").focus();
 	})
 }
 
@@ -228,4 +238,5 @@ $(document).ready(function() {
 	trigger_exibir_modal_novo_evento();
 	trigger_esconder_modal_novo_evento();
 	trigger_exibir_modal_excluir_evento();
+	trigger_exibir_modal_editar_evento()
 });

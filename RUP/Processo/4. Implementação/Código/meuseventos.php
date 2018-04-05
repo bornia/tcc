@@ -204,6 +204,32 @@ if($sessao_validada) {
             </div>
           </div> <!-- row -->
 
+          <!-- ========== PAGINAÇÃO DE EVENTOS ========== -->
+
+          <div class="row">
+            <div class="col">
+              <nav class="float-right mt-2" aria-label="Barra de navegação das páginas dos eventos.">
+                <ul class="pagination pagination-sm">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                  </li>
+                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
           <!-- ========== MODAL PARA CRIAR UM NOVO EVENTO ========== -->
 
           <form class="modal fade" id="janela-criar-evento" tabindex="-1" role="dialog">
@@ -254,37 +280,46 @@ if($sessao_validada) {
 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary text-size-responsive" data-dismiss="modal"> Cancelar </button>
-                  <button type="button" class="btn btn-danger text-size-responsive" onclick="excluir_eventos();"> Excluir </button>
+                  <button type="button" class="btn btn-danger text-size-responsive" id="modal-btn-excluir-evento" onclick="excluir_eventos();"> Excluir </button>
                 </div>
               </div> <!-- modal-content -->
             </div> <!-- modal-dialog -->
           </form>
 
-          <!-- ========== PAGINAÇÃO DE EVENTOS ========== -->
+          <!-- ========== MODAL PARA EDITAR EVENTOS ========== -->
 
-          <div class="row">
-            <div class="col">
-              <nav class="float-right mt-2" aria-label="Barra de navegação das páginas dos eventos.">
-                <ul class="pagination pagination-sm">
-                  <li class="page-item disabled">
-                    <a class="page-link" href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                  </li>
-                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                      <span class="sr-only">Next</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
+          <form class="modal fade" id="janela-editar-evento" tabindex="-1" role="dialog"> <!-- Modal para adicionar novo evento -->
+            <div class="modal-dialog modal-bg modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title"> Editar Evento </h3>
+
+                  <button type="button" class="close" data-dismiss="modal" title="Fechar">
+                    <span aria-hidden="true"> &times; </span>
+                  </button>
+                </div>
+
+                <div class="modal-body">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="editar-titulo" class="font-weight-bold"> Alterar Título </label>
+                          <input type="text" class="form-control" id="editar-titulo" aria-describedby="editar-titulo-help" placeholder="Novo título do evento">
+                          <small id="editar-titulo-help" class="form-text text-muted sr-only">Preencha este campo com o novo título do evento.</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> <!-- modal-body -->
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary text-size-responsive" data-dismiss="modal"> Cancelar </button>
+                  <button type="button" class="btn btn-warning text-size-responsive" onclick=""> Editar </button>
+                </div>
+              </div> <!-- modal-content -->
+            </div> <!-- modal-dialog -->
+          </form>
 
         </div> <!-- container-wip -->
       </section> <!-- Meus Eventos -->

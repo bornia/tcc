@@ -37,7 +37,7 @@ else {
     <td class='change-cursor align-middle' onclick='return redirect_page();'> " . $row['titulo'] . " </td>
     <td class='change-cursor align-middle text-center' onclick='return redirect_page();'> " . $row['total'] . " </td>
     <td class='change-cursor align-middle text-center' onclick='return redirect_page();'> " . $datetime[0] . " as " . $datetime[1] . " </td>
-    <td class='align-middle'> <button type='button' class='btn btn-warning' id='btn-editar-evento' title='Editar evento.'> <span class='oi oi-pencil text-white' aria-labelledby='btn-editar-evento' aria-describedby='btn-editar-evento-descricao'> </span> <span class='sr-only' id='btn-editar-evento-descricao'> Editar evento. </span> </button> </td>
+    <td class='align-middle'> <button type='button' class='btn btn-warning' id='btn-editar-evento' title='Editar evento.' data-toggle='modal' data-target='#janela-editar-evento'> <span class='oi oi-pencil text-white' aria-labelledby='btn-editar-evento' aria-describedby='btn-editar-evento-descricao'> </span> <span class='sr-only' id='btn-editar-evento-descricao'> Editar evento. </span> </button> </td>
 </tr>\n\n";
 	}
 
