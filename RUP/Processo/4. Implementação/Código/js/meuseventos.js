@@ -30,8 +30,8 @@ function obtem_quantidade_eventos_marcados() {
 
 /** Limpa todos os campos do modal de adicionar um novo evento.
 */
-function limpar_formulario() {
-	document.getElementById('janela-criar-evento').reset();
+function limpar_formulario(form_id) {
+	document.getElementById(form_id).reset();
 }
 
 /** Formata o tipo e a mensagem do alerta.
@@ -168,6 +168,41 @@ function excluir_eventos() {
 	
 }
 
+/** Quando o botão para editar um evento é clicado, atualiza-se o id do evento no atributo do botão Editar dentro do modal.
+*/
+function altera_eventoId_botao_editar_evento(element) {
+	$('#info-evento-id').val($('#' + element.id).data('evento_id'));
+}
+
+/**
+*/
+function editar_evento(element) {
+	var usuario_id 		= $('#info_usuario_id');
+	var grupo_id 		= $('#info_grupo_id');
+	var alerta 			= $("#alerta_mensagem");
+	var evento_id 		= $('#info-evento-id');
+	var evento_titulo	= $('#editar-titulo');
+
+	$.ajax({
+		url: './reqs/editar_evento.php',
+		type: 'POST',
+		data: {evento_id: evento_id.val(), grupo_id: grupo_id.val(), usuario_id: usuario_id.val(), evento_titulo: evento_titulo.val()},
+	})
+	.done(function(mensagem) {
+		if(mensagem.length != 0)
+			alerta.html(formatar_texto_alerta("danger", mensagem));
+		else
+			atualizar_lista_eventos();
+	})
+	.fail(function() {
+		console.log("error");
+	})
+	.always(function() {
+		$('#janela-editar-evento').modal('hide');
+	});
+	
+}
+
 /* ===================================================================== */
 /* ======================== OUTRAS REQUISIÇÕES ========================= */
 /* ===================================================================== */
@@ -197,7 +232,7 @@ function trigger_exibir_modal_novo_evento() {
 */
 function trigger_esconder_modal_novo_evento() {
 	$('#janela-criar-evento').on('hidden.bs.modal', function(e) {
-	  limpar_formulario();
+	  limpar_formulario('janela-criar-evento');
 	})
 }
 
@@ -225,6 +260,14 @@ function trigger_exibir_modal_editar_evento() {
 	})
 }
 
+/** Quando o modal para adicionar um novo evento termina de ocultar-se (fim de todas as transições) limpa-se todo os campos do modal.
+*/
+function trigger_esconder_modal_editar_evento() {
+	$('#janela-editar-evento').on('hidden.bs.modal', function(e) {
+	  limpar_formulario('janela-editar-evento');
+	})
+}
+
 /* ===================================================================== */
 /* ============================== OUTROS =============================== */
 /* ===================================================================== */
@@ -235,8 +278,12 @@ $(document).ready(function() {
 	buscar_grupo_infos();
 	atualizar_lista_eventos();
 	$('[data-toggle="tooltip"]').tooltip();
+	
 	trigger_exibir_modal_novo_evento();
 	trigger_esconder_modal_novo_evento();
+
 	trigger_exibir_modal_excluir_evento();
-	trigger_exibir_modal_editar_evento()
+
+	trigger_exibir_modal_editar_evento();
+	trigger_esconder_modal_editar_evento()
 });

@@ -244,10 +244,16 @@ if($sessao_validada) {
                 </div>
 
                 <div class="modal-body">
-                  <div class="form-group">
-                    <label for="titulo" class="font-weight-bold"> Título do Evento </label>
-                    <span id="nchar_titulo" class="badge badge-secondary" aria-label="Caracteres restantes."> 40 </span>
-                    <input type="text" class="form-control text-size-responsive" id="titulo" name="titulo_evento" placeholder="Digite o nome do evento" maxlength="40" onkeyup="return check_nchar(this.id, 'nchar_titulo', 40);">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="titulo" class="font-weight-bold"> Título do Evento </label>
+                          <span id="nchar_titulo" class="badge badge-secondary" aria-label="Caracteres restantes."> 40 </span>
+                          <input type="text" class="form-control text-size-responsive" id="titulo" name="titulo_evento" placeholder="Digite o nome do evento" maxlength="40" onkeyup="return check_nchar(this.id, 'nchar_titulo', 40);">
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div> <!-- modal-body -->
 
@@ -262,7 +268,7 @@ if($sessao_validada) {
           <!-- ========== MODAL PARA EXCLUIR EVENTOS ========== -->
 
           <form class="modal fade" id="janela-excluir-evento" tabindex="-1" role="dialog"> <!-- Modal para adicionar novo evento -->
-            <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-dialog modal-bg modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
                   <h3 class="modal-title"> Excluir Evento </h3>
@@ -273,9 +279,15 @@ if($sessao_validada) {
                 </div>
 
                 <div class="modal-body">
-                  <p>
-                    Tem certeza que deseja <u>excluir</u> <span id="legenda_quantidade_itens_marcados"> </span>?
-                  </p>
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col">
+                        <p>
+                          Tem certeza que deseja <u>excluir</u> <span id="legenda_quantidade_itens_marcados"> </span>?
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div> <!-- modal-body -->
 
                 <div class="modal-footer">
@@ -301,11 +313,22 @@ if($sessao_validada) {
 
                 <div class="modal-body">
                   <div class="container-fluid">
+                    <div class="row" style="display: none;">
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="info-evento-id" class="font-weight-bold sr-only"> ID do Evento </label>
+                          <input type="text" class="form-control" id="info-evento-id" aria-describedby="info-evento-id-help" placeholder="Novo título do evento" readonly>
+                          <small id="info-evento-id-help" class="form-text text-muted sr-only">Campo criado apenas para auxiliar com o ID do evento selecionado.</small>
+                        </div>
+                      </div>
+                    </div>
+
                     <div class="row">
                       <div class="col">
                         <div class="form-group">
                           <label for="editar-titulo" class="font-weight-bold"> Alterar Título </label>
-                          <input type="text" class="form-control" id="editar-titulo" aria-describedby="editar-titulo-help" placeholder="Novo título do evento">
+                          <span id="nchar-editar-titulo" class="badge badge-secondary" aria-label="Caracteres restantes."> 40 </span>
+                          <input type="text" class="form-control" id="editar-titulo" aria-describedby="editar-titulo-help" placeholder="Novo título do evento" maxlength="40" onkeyup="return check_nchar(this.id, 'nchar-editar-titulo', 40);">
                           <small id="editar-titulo-help" class="form-text text-muted sr-only">Preencha este campo com o novo título do evento.</small>
                         </div>
                       </div>
@@ -315,7 +338,7 @@ if($sessao_validada) {
 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary text-size-responsive" data-dismiss="modal"> Cancelar </button>
-                  <button type="button" class="btn btn-warning text-size-responsive" onclick=""> Editar </button>
+                  <button type="button" class="btn btn-warning text-size-responsive" id="modal-btn-editar-evento" onclick="editar_evento(this);"> Editar </button>
                 </div>
               </div> <!-- modal-content -->
             </div> <!-- modal-dialog -->
