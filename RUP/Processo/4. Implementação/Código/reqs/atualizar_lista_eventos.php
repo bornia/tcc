@@ -7,16 +7,19 @@ require_once ('classes/db.class.php');
 // Instancia a classe db para executar o seu método e fazer a conexão com o banco de dados
 $con = (new db())->conecta_mysql();
 
-$grupo_id = $_POST['grupo_id'];
+$grupo_id 			= $_POST['grupo_id'];
+$texto_pesquisado 	= $_POST['texto_pesquisado'];
+$ordem 				= $_POST['ordem'];
 
 // Busca os eventos pertencentes a um determinado grupo
-$sql = "SELECT evento_id,titulo,ultima_att,total FROM eventos WHERE evento_id IN (SELECT evento_id_ref FROM evento_pertence_grupo WHERE grupo_id_ref = $grupo_id)";
+$sql = "SELECT evento_id,titulo,ultima_att,total FROM eventos WHERE evento_id IN (SELECT evento_id_ref FROM evento_pertence_grupo WHERE grupo_id_ref = $grupo_id) AND titulo LIKE '%$texto_pesquisado%' ORDER BY $ordem DESC";
 
 // Executa a query
 $res = mysqli_query($con, $sql);
 
 // Se houve algum erro na execução da query
 if(!$res) {
+	ob_clean();
 	echo '<u>Houve um erro ao tentar atualizar a lista de eventos</u>. Por gentileza, <strong>contate o suporte</strong>.';
 	return false;
 }
@@ -25,7 +28,7 @@ $eventos = "";
 
 if(!mysqli_num_rows($res)) {
 	ob_clean();
-	echo "<tr> <td class='align-middle text-center' colspan='5'> Nenhum evento foi criado.</td> </tr>";
+	echo "<tr> <td class='align-middle text-center' colspan='5'> Nenhum evento.</td> </tr>";
 }
 else {
 	while($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {

@@ -114,11 +114,11 @@ if($sessao_validada) {
               <label for="barra-de-pesquisa-label" class="text-muted font-weight-bold mt-2"> Pesquisa </label>
 
               <div class="input-group" id="barra-de-pesquisa-label">
-                <input type="text" class="form-control text-size-responsive" placeholder="Procure pelo nome" aria-label="Barra de pesquisa de eventos." aria-describedby="barra-de-pesquisa-icone">
-
-                <div class="input-group-apend">
-                  <button class="btn btn-outline-secondary" type="button" aria-label="Pesquisar.">
-                    <span class="oi oi-magnifying-glass"> </span>
+                <input type="text" class="form-control text-size-responsive" id="barra-de-pesquisa" placeholder="Procure pelo título do evento" aria-label="Barra de pesquisa de eventos." onkeyup="atualizar_lista_eventos();">
+                
+                <div class="input-group-prepend">
+                  <button type="button" class="btn btn-sm btn-none" onclick="apagar_texto('barra-de-pesquisa');" aria-describedby="barra-de-pesquisa-icone">
+                    <span class="close" id="barra-de-pesquisa-icone" aria-label="Apagar todo o texto da pesquisa."> &times; </span>
                   </button>
                 </div>
               </div>
@@ -131,7 +131,7 @@ if($sessao_validada) {
                 <div class="col">
                   <label class="text-muted font-weight-bold mt-2" for="ordem"> Ordem </label>
 
-                  <select class="form-control text-size-responsive" arial-label="Ordenar eventos de acordo com o critério selecionado." id="ordem">
+                  <select class="form-control text-size-responsive" arial-label="Ordenar eventos de acordo com o critério selecionado." id="ordem" onchange="atualizar_lista_eventos();">
                     <option value="titulo"> Título </option>
                     <option value="total"> Total </option>
                     <option value="modificacao" selected> <small> Última Modificação </small> </option>

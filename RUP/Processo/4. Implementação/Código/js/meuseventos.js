@@ -104,7 +104,11 @@ function atualizar_lista_eventos() {
 	$.ajax({
 		url: './reqs/atualizar_lista_eventos.php',
 		type: 'POST',
-		data: {grupo_id: $('#info_grupo_id').val()}
+		data: {
+			grupo_id: 			$('#info_grupo_id').val(),
+			texto_pesquisado: 	$('#barra-de-pesquisa').val(),
+			ordem: 				($('#ordem').val() == 'titulo' ? 'titulo' : ($('#ordem').val() == 'total' ? 'total' : 'ultima_att'))
+		}
 	})
 	.done(function(data) {
 		try {
@@ -200,7 +204,12 @@ function editar_evento(element) {
 	.always(function() {
 		$('#janela-editar-evento').modal('hide');
 	});
-	
+}
+
+/**
+*/
+function apagar_texto(input_id) {
+	$('#' + input_id).val("");
 }
 
 /* ===================================================================== */

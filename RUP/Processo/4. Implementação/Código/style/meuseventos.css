@@ -35,6 +35,11 @@ div.main {
 
 /* MEUS EVENTOS */
 
+.btn-none {
+	border: none !important;
+	background: none !important;
+}
+
 #paginacao {
 	text-align: right;
 	font-weight: bold;
