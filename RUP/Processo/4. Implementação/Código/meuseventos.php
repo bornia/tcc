@@ -288,12 +288,6 @@ if($sessao_validada) {
                   <div class="container-fluid">
                     <div class="row">
                       <div class="col">
-                        <div id="alerta-janela-excluir-evento"> </div>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col">
                         <p>
                           Tem certeza que deseja <u>excluir</u> <span id="legenda_quantidade_itens_marcados"> </span>?
                         </p>
@@ -325,6 +319,12 @@ if($sessao_validada) {
 
                 <div class="modal-body">
                   <div class="container-fluid">
+                    <div class="row">
+                      <div class="col">
+                        <div id="alerta-janela-editar-evento"> </div>
+                      </div>
+                    </div>
+
                     <div class="row" style="display: none;">
                       <div class="col">
                         <div class="form-group">

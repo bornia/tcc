@@ -81,6 +81,25 @@ function validar_formulario_criar_evento() {
 	return validado;
 }
 
+/** Valida o formulário de edição de eventos verificando se atende aos padrões determinados.
+*/
+function validar_formulario_editar_evento() {
+	var validado = true;
+
+	if(!verifica_campo_vazio('editar-titulo')) {
+		$('#alerta-janela-editar-evento').html(
+			$('#alerta-janela-editar-evento').html() +
+			formatar_texto_alerta('warning', '<u>Dê um <b>título</b></u> ao evento.')
+		);
+
+		$('#editar-titulo').get(0).focus();
+
+		validado = false;
+	}
+
+	return validado;
+}
+
 /* ===================================================================== */
 /* ============================== EVENTOS ============================== */
 /* ===================================================================== */
@@ -214,29 +233,29 @@ function altera_eventoId_botao_editar_evento(element) {
 /**
 */
 function editar_evento(element) {
-	var usuario_id 		= $('#info_usuario_id');
-	var grupo_id 		= $('#info_grupo_id');
-	var alerta 			= $("#alerta_mensagem");
-	var evento_id 		= $('#info-evento-id');
-	var evento_titulo	= $('#editar-titulo');
+	if(validar_formulario_editar_evento()) {
+		var usuario_id 		= $('#info_usuario_id');
+		var grupo_id 		= $('#info_grupo_id');
+		var alerta 			= $("#alerta_mensagem");
+		var evento_id 		= $('#info-evento-id');
+		var evento_titulo	= $('#editar-titulo');
 
-	$.ajax({
-		url: './reqs/editar_evento.php',
-		type: 'POST',
-		data: {evento_id: evento_id.val(), grupo_id: grupo_id.val(), usuario_id: usuario_id.val(), evento_titulo: evento_titulo.val()},
-	})
-	.done(function(mensagem) {
-		if(mensagem.length != 0)
-			alerta.html(formatar_texto_alerta("danger", mensagem));
-		else
-			atualizar_lista_eventos();
-	})
-	.fail(function() {
-		console.log("error");
-	})
-	.always(function() {
-		$('#janela-editar-evento').modal('hide');
-	});
+		$.ajax({
+			url: './reqs/editar_evento.php',
+			type: 'POST',
+			data: {evento_id: evento_id.val(), grupo_id: grupo_id.val(), usuario_id: usuario_id.val(), evento_titulo: evento_titulo.val()},
+		})
+		.done(function(mensagem) {
+			if(mensagem.length != 0)
+				alerta.html(formatar_texto_alerta("danger", mensagem));
+			else
+				atualizar_lista_eventos();
+		})
+		.fail(function() { console.log("error");})
+		.always(function() {
+			$('#janela-editar-evento').modal('hide');
+		});
+	}
 }
 
 /**
@@ -267,6 +286,7 @@ function buscar_grupo_infos() {
 function trigger_exibir_modal_novo_evento() {
 	$('#janela-criar-evento').on('shown.bs.modal', function() {
 		document.getElementById("titulo").focus();
+		$('#nchar_titulo').html(40);
 	})
 }
 
@@ -275,6 +295,7 @@ function trigger_exibir_modal_novo_evento() {
 function trigger_esconder_modal_novo_evento() {
 	$('#janela-criar-evento').on('hidden.bs.modal', function(e) {
 	  limpar_formulario('janela-criar-evento');
+	  $('#alerta-janela-criar-evento').html("");
 	})
 }
 
@@ -299,6 +320,7 @@ function trigger_exibir_modal_excluir_evento() {
 function trigger_exibir_modal_editar_evento() {
 	$('#janela-editar-evento').on('shown.bs.modal', function() {
 		document.getElementById("editar-titulo").focus();
+		$('#nchar-editar-titulo').html(40);
 	})
 }
 
@@ -307,6 +329,7 @@ function trigger_exibir_modal_editar_evento() {
 function trigger_esconder_modal_editar_evento() {
 	$('#janela-editar-evento').on('hidden.bs.modal', function(e) {
 	  limpar_formulario('janela-editar-evento');
+	  $('#alerta-janela-editar-evento').html("");
 	})
 }
 
