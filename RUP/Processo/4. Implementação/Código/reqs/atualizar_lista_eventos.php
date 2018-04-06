@@ -32,7 +32,9 @@ if(!mysqli_num_rows($res)) {
 }
 else {
 	while($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-		$datetime = explode(" ", strval($row['ultima_att']));
+		$datetime = date_create($row['ultima_att']);
+		$datetime = date_format($datetime, 'd/m/Y H:i:s');
+		$datetime = explode(" ", strval($datetime));
 
 		$eventos .= 
 "<tr>
