@@ -50,6 +50,37 @@ function formatar_texto_alerta(tipo, mensagem) {
   return alerta.toString();
 }
 
+/** Verifica se um campo input, conforme o seu id, está vazio.
+ * input_id ID do campo input que será verificado.
+*/
+function verifica_campo_vazio(input_id) {
+	var titulo = $('#' + input_id).val();
+
+	if(titulo.length == 0)
+		return false;
+
+	return true;
+}
+
+/** Valida o formulário de criação de eventos verificando se atende aos padrões determinados.
+*/
+function validar_formulario_criar_evento() {
+	var validado = true;
+
+	if(!verifica_campo_vazio('titulo')) {
+		$('#alerta-janela-criar-evento').html(
+			$('#alerta-janela-criar-evento').html() +
+			formatar_texto_alerta('warning', '<u>Dê um <b>título</b></u> ao evento.')
+		);
+
+		$('#titulo').get(0).focus();
+
+		validado = false;
+	}
+
+	return validado;
+}
+
 /* ===================================================================== */
 /* ============================== EVENTOS ============================== */
 /* ===================================================================== */
@@ -125,20 +156,22 @@ function atualizar_lista_eventos() {
 /** Cadastra um novo evento no banco de dados e, se der errado, emite um alerta.
 */
 function adicionar_novo_evento() {
-	$.ajax({
-		url: './reqs/adicionar_evento.php',
-		type: 'POST',
-		data: {titulo: $('#titulo').val(), grupo_id: $('#info_grupo_id').val()},
-	})
-	.done(function(alerta) {
-		if(alerta.length != 0) {
-			$('#alerta_mensagem').html(
-				formatar_texto_alerta('danger', alerta)
-			);
-		} else {
-			atualizar_lista_eventos();
-		}
-	});
+	if(validar_formulario_criar_evento()) {
+		$.ajax({
+			url: './reqs/adicionar_evento.php',
+			type: 'POST',
+			data: {titulo: $('#titulo').val(), grupo_id: $('#info_grupo_id').val()},
+		})
+		.done(function(alerta) {
+			if(alerta.length != 0) {
+				$('#alerta_mensagem').html(
+					formatar_texto_alerta('danger', alerta)
+				);
+			} else {
+				atualizar_lista_eventos();
+			}
+		});
+	}
 }
 
 /** Obtém os valores de todas os eventos selecionados e faz uma requisição ao Banco de Dados para excluir esses eventos.

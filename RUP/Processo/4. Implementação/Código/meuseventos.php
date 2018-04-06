@@ -247,6 +247,12 @@ if($sessao_validada) {
                   <div class="container-fluid">
                     <div class="row">
                       <div class="col">
+                        <div id="alerta-janela-criar-evento"> </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col">
                         <div class="form-group">
                           <label for="titulo" class="font-weight-bold"> Título do Evento </label>
                           <span id="nchar_titulo" class="badge badge-secondary" aria-label="Caracteres restantes."> 40 </span>
@@ -259,7 +265,7 @@ if($sessao_validada) {
 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary text-size-responsive" data-dismiss="modal"> Cancelar </button>
-                  <button type="button" class="btn btn-success text-size-responsive" onclick="adicionar_novo_evento();" data-dismiss="modal"> Adicionar </button>
+                  <button type="button" class="btn btn-success text-size-responsive" onclick="adicionar_novo_evento();"> Adicionar </button>
                 </div>
               </div> <!-- modal-content -->
             </div> <!-- modal-dialog -->
@@ -280,6 +286,12 @@ if($sessao_validada) {
 
                 <div class="modal-body">
                   <div class="container-fluid">
+                    <div class="row">
+                      <div class="col">
+                        <div id="alerta-janela-excluir-evento"> </div>
+                      </div>
+                    </div>
+
                     <div class="row">
                       <div class="col">
                         <p>
