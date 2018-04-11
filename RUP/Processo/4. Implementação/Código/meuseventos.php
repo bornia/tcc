@@ -131,11 +131,25 @@ if($sessao_validada) {
                 <div class="col">
                   <label class="text-muted font-weight-bold mt-2" for="ordem"> Ordem </label>
 
-                  <select class="form-control text-size-responsive" arial-label="Ordenar eventos de acordo com o critério selecionado." id="ordem" onchange="atualizar_lista_eventos();">
-                    <option value="titulo"> Título </option>
-                    <option value="total"> Total </option>
-                    <option value="modificacao" selected> <small> Última Modificação </small> </option>
-                  </select>
+                  <div class="input-group">
+                    <select class="form-control text-size-responsive" arial-label="Ordenar eventos de acordo com o critério selecionado." id="ordem" onchange="atualizar_lista_eventos();">
+                      <option value="titulo"> Título </option>
+                      <option value="total"> Total </option>
+                      <option value="modificacao" selected> <small> Última Modificação </small> </option>
+                    </select>
+
+                    <div class="input-group-prepend" id="div-btn-ordenar-asc">
+                      <button type="button" class="btn btn-sm btn-none" id="btn-ordenar-asc" title="Ordem crescente." onclick="mostrar_botao_ordenar_desc();" data-ordem="ASC">
+                        <span class="oi oi-arrow-top text-muted font-weight-bold"> </span>
+                      </button>
+                    </div>
+
+                    <div class="input-group-prepend" id="div-btn-ordenar-desc">
+                      <button type="button" class="btn btn-sm btn-none ordem-ativa" id="btn-ordenar-desc" title="Ordem decrescente." onclick="mostrar_botao_ordenar_asc();" data-ordem="DESC">
+                        <span class="oi oi-arrow-bottom text-muted font-weight-bold"> </span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

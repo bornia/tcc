@@ -189,6 +189,9 @@ function adicionar_novo_evento() {
 			} else {
 				atualizar_lista_eventos();
 			}
+		})
+		.always(function() {
+			$('#janela-criar-evento').modal('hide');
 		});
 	}
 }
@@ -262,6 +265,20 @@ function editar_evento(element) {
 */
 function apagar_texto(input_id) {
 	$('#' + input_id).val("");
+}
+
+/**
+*/
+function mostrar_botao_ordenar_asc() {
+	$('#div-btn-ordenar-desc').hide();
+	$('#div-btn-ordenar-asc').fadeIn();
+}
+
+/**
+*/
+function mostrar_botao_ordenar_desc() {
+	$('#div-btn-ordenar-asc').hide();
+	$('#div-btn-ordenar-desc').fadeIn();
 }
 
 /* ===================================================================== */
@@ -339,7 +356,9 @@ function trigger_esconder_modal_editar_evento() {
 
 
 $(document).ready(function() {
-	$('#btn-excluir-evento').hide();
+	mostrar_botao_adicionar_evento()
+	mostrar_botao_ordenar_desc();
+
 	buscar_grupo_infos();
 	atualizar_lista_eventos();
 	$('[data-toggle="tooltip"]').tooltip();
