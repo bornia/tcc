@@ -49,61 +49,21 @@ if($sessao_validada) {
       <input type="text" id="info_usuario_id" readonly value="<?= $_SESSION['id']     ?>" style="display: none;">
       <div id="alerta_mensagem"> </div>
 
-      <!-- ============================ -->
-
-      <section id="resumo-financeiro">
-        <div class="container-wip">
-          <div class="row" >
-            <h1 style="width: 100%;">
-              Resumo do Grupo
-              <small>
-                <small class="text-muted float-right pr-4">
-                  <small class="info_grupo_titulo text-size-responsive" style="vertical-align: bottom;"> </small>
-                </small>
-              </small>
-            </h1>
-          </div>
-
-          <!-- ========== VALOR A SER RECEBIDO ========== -->
-
-          <div class="row">
-            <div class="col" data-toggle="tooltip" data-placement="bottom" title="Clique para saber mais sobre quem deve pagá-lo.">
-              <button class="btn btn-info bg-white btn-block">
-                <span class="oi oi-arrow-thick-top text-success font-weight-bold" aria-labelledby="a-receber"> </span>
-                <span class="text-secondary text-size-responsive" id="a-receber">
-                  A receber <span class="text-success font-weight-bold"> R$ 00,00 reais</span>.
-                </span>
-              </button>
-            </div> 
-
-            <!-- ========== VALOR A SER PAGO ========== -->
-
-            <div class="col" data-toggle="tooltip" data-placement="bottom" title="Clique para saber mais sobre quem você deve pagar.">
-              <button class="btn btn-info bg-white btn-block">
-                <span class="oi oi-arrow-thick-bottom text-danger font-weight-bold" aria-labelledby="a-pagar"> </span>
-                <span class="text-secondary text-size-responsive" id="a-pagar">
-                  A pagar <span class="text-danger font-weight-bold"> R$ 00,00 reais</span>.
-                </span>
-              </button>
-            </div>
-
-          </div> 
-        </div>
-      </section>
-
       <!-- ========== EVENTOS ========== -->
 
       <section id="meus-eventos">
         <div class="container-wip">
-          <div class="row">
-            <h1 style="width: 100%;">
-              Eventos
-             <small>
-                <small class="text-muted float-right pr-4">
-                  <small class="info_grupo_titulo text-size-responsive" style="vertical-align: bottom;"> </small>
-                </small>
-              </small>
-            </h1>
+          <div class="row mb-2">
+            <div class="col col-md-5 no-pl">
+              <h1 class="less-mb"> Eventos </h1>
+            </div>
+
+            <div class="col-12 col-md-7 text-right">
+              <button type="button" class="btn btn-lg btn-none btn-link float-right" aria-describedby="info_grupo_titulo_label" title="Consultar pagadores e devedores." data-toggle="modal" data-target="#janela-consultar-lista">
+                <span class="oi oi-info"> </span>
+                <span class="info_grupo_titulo text-muted text-size-responsive" id="info_grupo_titulo_label"> </span>
+              </button>
+            </div>
           </div> <!-- row -->
 
           <div class="row mb-2">
@@ -194,7 +154,7 @@ if($sessao_validada) {
 
           <div class="row" id="table-events">
             <div class="col-md-12 table-responsive">
-              <table class="table table-stripped table-hover text-size-responsive" summary="Lista de eventos cadastrados com indicações sobre a data da última modificação e sobre o total de gastos em relação a cada evento.">
+              <table class="table table-sm table-stripped table-hover text-size-responsive" summary="Lista de eventos cadastrados com indicações sobre a data da última modificação e sobre o total de gastos em relação a cada evento.">
                 <caption class="sr-only">
                   Lista de Eventos
                 </caption>
@@ -222,7 +182,7 @@ if($sessao_validada) {
 
           <div class="row">
             <div class="col">
-              <nav class="float-right mt-2" aria-label="Barra de navegação das páginas dos eventos.">
+              <nav class="float-right mt-0" aria-label="Barra de navegação das páginas dos eventos.">
                 <ul class="pagination pagination-sm">
                   <li class="page-item disabled">
                     <a class="page-link" href="#" aria-label="Previous">
@@ -242,6 +202,48 @@ if($sessao_validada) {
                 </ul>
               </nav>
             </div>
+          </div>
+
+          <!-- ========== MODAL PARA CONSULTAR A LISTA DE PAGADORES E DEVEDORES ========== -->
+
+          <div class="modal fade" id="janela-consultar-lista" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-bg modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title"> Balanço entre os Membros </h3>
+
+                  <button type="button" class="close" data-dismiss="modal" title="Fechar">
+                    <span aria-hidden="true"> &times; </span>
+                  </button>
+                </div>
+
+                <div class="modal-body">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <div class="ml-2">
+                        <span class="display-10"> Guilherme </span>
+                      </div>
+
+                      <div class="ml-4">
+                        <span class="text-secondary text-size-responsive">
+                          A receber <span class="text-success font-weight-bold"> R$ 00,00 reais</span>.
+                        </span>
+                      </div>
+
+                      <div class="ml-4">
+                        <span class="text-secondary text-size-responsive">
+                          A pagar <span class="text-danger font-weight-bold"> R$ 00,00 reais</span>.
+                        </span>
+                      </div>
+                    </li>
+                  </ul>
+                </div> <!-- modal-body -->
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary text-size-responsive" data-dismiss="modal"> Fechar </button>
+                </div>
+              </div> <!-- modal-content -->
+            </div> <!-- modal-dialog -->
           </div>
 
           <!-- ========== MODAL PARA CRIAR UM NOVO EVENTO ========== -->

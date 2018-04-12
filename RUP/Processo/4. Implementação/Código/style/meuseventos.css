@@ -14,6 +14,7 @@ body {
 h1 {
 	color: #F9775F;
 	font-size: 2.2em;
+	margin-top: 0.3em !important;
 }
 
 .container-wip {
@@ -21,7 +22,7 @@ h1 {
 	-webkit-border-radius: 15px;
 	-moz-border-radius: 15px;
 	background: #FFF;
-	padding: 2.5em 2em;
+	padding: 0.7em 2em;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -29,11 +30,19 @@ h1 {
 }
 
 div.main {
-	padding-top: 4.2em;
-	padding-bottom: 4.2em;
+	padding-top: 2.5em;
+	padding-bottom: 2.5em;
 }
 
 /* MEUS EVENTOS */
+
+.less-mb {
+	margin-bottom: 0 !important;
+}
+
+.no-pl {
+	padding-left: 0 !important;
+}
 
 .btn-none {
 	border: none !important;
@@ -61,12 +70,15 @@ div.main {
 	margin: 0em 0em;
 }
 
-#friend-profile-picture {
-	width: 3.5em;
-	height: 3.5em;
-	border-radius: 3.5em;
-	-webkit-border-radius: 3.5em;
-	-moz-border-radius: 3.5em;
+.list-group-item {
+	margin-left: 0em !important;
+	padding-left: 0em !important;
+}
+
+.display-10 {
+	font-size: 1.1rem;
+	font-weight: 320;
+	line-height: 1rem;
 }
 
 /* TIPOGRAFIA RESPONSIVA */
