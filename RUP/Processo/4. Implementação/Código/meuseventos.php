@@ -60,7 +60,7 @@ if($sessao_validada) {
 
             <div class="col-12 col-md-7 text-right">
               <button type="button" class="btn btn-lg btn-none btn-link float-right" aria-describedby="info_grupo_titulo_label" title="Consultar pagadores e devedores." data-toggle="modal" data-target="#janela-consultar-lista">
-                <span class="oi oi-info"> </span>
+                <small> <span class="oi oi-info mr-1"> </span> </small>
                 <span class="info_grupo_titulo text-muted text-size-responsive" id="info_grupo_titulo_label"> </span>
               </button>
             </div>
@@ -99,13 +99,13 @@ if($sessao_validada) {
                     </select>
 
                     <div class="input-group-prepend" id="div-btn-ordenar-asc">
-                      <button type="button" class="btn btn-sm btn-none" id="btn-ordenar-asc" title="Ordem crescente." onclick="mostrar_botao_ordenar_desc();" data-ordem="ASC">
+                      <button type="button" class="btn btn-sm btn-none" id="btn-ordenar-asc" title="Ordem crescente." onclick="mostrar_botao_ordenar_desc(); atualizar_lista_eventos();" data-tipo-ordem="ASC">
                         <span class="oi oi-arrow-top text-muted font-weight-bold"> </span>
                       </button>
                     </div>
 
                     <div class="input-group-prepend" id="div-btn-ordenar-desc">
-                      <button type="button" class="btn btn-sm btn-none ordem-ativa" id="btn-ordenar-desc" title="Ordem decrescente." onclick="mostrar_botao_ordenar_asc();" data-ordem="DESC">
+                      <button type="button" class="btn btn-sm btn-none ordem-ativa" id="btn-ordenar-desc" title="Ordem decrescente." onclick="mostrar_botao_ordenar_asc(); atualizar_lista_eventos();" data-tipo-ordem="DESC">
                         <span class="oi oi-arrow-bottom text-muted font-weight-bold"> </span>
                       </button>
                     </div>
@@ -222,6 +222,7 @@ if($sessao_validada) {
                     <li class="list-group-item">
                       <div class="ml-2">
                         <span class="display-10"> Guilherme </span>
+                        <small class="text-muted"> gborniam@gmail.com </small>
                       </div>
 
                       <div class="ml-4">

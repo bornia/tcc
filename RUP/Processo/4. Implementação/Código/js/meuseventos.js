@@ -157,7 +157,8 @@ function atualizar_lista_eventos() {
 		data: {
 			grupo_id: 			$('#info_grupo_id').val(),
 			texto_pesquisado: 	$('#barra-de-pesquisa').val(),
-			ordem: 				($('#ordem').val() == 'titulo' ? 'titulo' : ($('#ordem').val() == 'total' ? 'total' : 'ultima_att'))
+			ordem: 				($('#ordem').val() == 'titulo' ? 'titulo' : ($('#ordem').val() == 'total' ? 'total' : 'ultima_att')),
+			tipo_ordem: 		($('#btn-ordenar-asc').is(':visible') ? $('#btn-ordenar-asc').data('tipo-ordem') : $('#btn-ordenar-desc').data('tipo-ordem'))
 		}
 	})
 	.done(function(data) {
@@ -170,6 +171,8 @@ function atualizar_lista_eventos() {
 	});
 
 	$('#checkbox-excluir-todos-eventos').prop('checked', false);
+
+	return true;
 }
 
 /** Cadastra um novo evento no banco de dados e, se der errado, emite um alerta.

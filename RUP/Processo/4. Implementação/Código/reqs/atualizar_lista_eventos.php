@@ -10,9 +10,10 @@ $con = (new db())->conecta_mysql();
 $grupo_id 			= $_POST['grupo_id'];
 $texto_pesquisado 	= $_POST['texto_pesquisado'];
 $ordem 				= $_POST['ordem'];
+$tipo_ordem			= $_POST['tipo_ordem'];
 
 // Busca os eventos pertencentes a um determinado grupo
-$sql = "SELECT evento_id,titulo,ultima_att,total FROM eventos WHERE evento_id IN (SELECT evento_id_ref FROM evento_pertence_grupo WHERE grupo_id_ref = $grupo_id) AND titulo LIKE '%$texto_pesquisado%' ORDER BY $ordem DESC";
+$sql = "SELECT evento_id,titulo,ultima_att,total FROM eventos WHERE evento_id IN (SELECT evento_id_ref FROM evento_pertence_grupo WHERE grupo_id_ref = $grupo_id) AND titulo LIKE '%$texto_pesquisado%' ORDER BY $ordem $tipo_ordem";
 
 // Executa a query
 $res = mysqli_query($con, $sql);
