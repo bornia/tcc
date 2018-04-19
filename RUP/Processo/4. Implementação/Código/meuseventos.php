@@ -45,8 +45,10 @@ if($sessao_validada) {
 
       <!-- ========== AUXILIARES ========== -->
 
-      <input type="text" id="info_grupo_id"   readonly value="<?= $_POST['grupo_id']  ?>" style="display: none;">
-      <input type="text" id="info_usuario_id" readonly value="<?= $_SESSION['id']     ?>" style="display: none;">
+      <input type="hidden" id="registros_por_pagina"  readonly value="6" />
+      <input type="hidden" id="offset"                readonly value="0" />
+      <input type="hidden" id="info_grupo_id"         readonly value="<?= $_POST['grupo_id']  ?>">
+      <input type="hidden" id="info_usuario_id"       readonly value="<?= $_SESSION['id']     ?>">
       <div id="alerta_mensagem"> </div>
 
       <!-- ========== EVENTOS ========== -->
@@ -77,7 +79,7 @@ if($sessao_validada) {
                 <input type="text" class="form-control text-size-responsive" id="barra-de-pesquisa" placeholder="Procure pelo título do evento" aria-label="Barra de pesquisa de eventos." onkeyup="atualizar_lista_eventos();">
                 
                 <div class="input-group-prepend">
-                  <button type="button" class="btn btn-sm btn-none" onclick="apagar_texto('barra-de-pesquisa');" aria-describedby="barra-de-pesquisa-icone">
+                  <button type="button" class="btn btn-sm btn-none" onclick="apagar_texto('barra-de-pesquisa'); atualizar_lista_eventos();" aria-describedby="barra-de-pesquisa-icone">
                     <span class="close" id="barra-de-pesquisa-icone" aria-label="Apagar todo o texto da pesquisa."> &times; </span>
                   </button>
                 </div>
@@ -183,22 +185,8 @@ if($sessao_validada) {
           <div class="row">
             <div class="col">
               <nav class="float-right mt-0" aria-label="Barra de navegação das páginas dos eventos.">
-                <ul class="pagination pagination-sm">
-                  <li class="page-item disabled">
-                    <a class="page-link" href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                  </li>
-                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                      <span class="sr-only">Next</span>
-                    </a>
-                  </li>
+                <ul class="pagination pagination-sm" id="lista_paginas">
+                  
                 </ul>
               </nav>
             </div>

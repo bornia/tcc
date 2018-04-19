@@ -158,13 +158,16 @@ function atualizar_lista_eventos() {
 			grupo_id: 			$('#info_grupo_id').val(),
 			texto_pesquisado: 	$('#barra-de-pesquisa').val(),
 			ordem: 				($('#ordem').val() == 'titulo' ? 'titulo' : ($('#ordem').val() == 'total' ? 'total' : 'ultima_att')),
-			tipo_ordem: 		($('#btn-ordenar-asc').is(':visible') ? $('#btn-ordenar-asc').data('tipo-ordem') : $('#btn-ordenar-desc').data('tipo-ordem'))
+			tipo_ordem: 		($('#btn-ordenar-asc').is(':visible') ? $('#btn-ordenar-asc').data('tipo-ordem') : $('#btn-ordenar-desc').data('tipo-ordem')),
+			regs_por_pagina: 	$('#registros_por_pagina').val(),
+			offset: 			$('#offset').val()
 		}
 	})
 	.done(function(data) {
 		try {
 			var parsed = JSON.parse(data);
 			$('#tabela-corpo-eventos').html(parsed.eventos);
+			$('#lista_paginas').html(parsed.paginas);
 		} catch(e_alerta) {
 			$('#tabela-corpo-eventos').html(data);
 		}
@@ -282,6 +285,23 @@ function mostrar_botao_ordenar_asc() {
 function mostrar_botao_ordenar_desc() {
 	$('#div-btn-ordenar-asc').hide();
 	$('#div-btn-ordenar-desc').fadeIn();
+}
+
+/**
+*/
+function paginar_eventos(element) {
+	var pagina_clicada = $('#' + element.id).data('pagina_clicada');
+	pagina_clicada = pagina_clicada - 1; //necessário para ajusar o parâmetro offset
+
+	//recupera os parametros de paginacao do formulario
+	var registros_por_pagina = $('#registros_por_pagina').val();
+	var pagina_atual = $('#pagina_atual').val();
+
+	var offset_atualizado = pagina_clicada * registros_por_pagina;
+	//aplica o valor atualizado do offset ao campo do form
+	$('#offset').val(offset_atualizado);
+
+	atualizar_lista_eventos();
 }
 
 /* ===================================================================== */
