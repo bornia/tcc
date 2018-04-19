@@ -185,7 +185,11 @@ function adicionar_novo_evento() {
 		$.ajax({
 			url: './reqs/adicionar_evento.php',
 			type: 'POST',
-			data: {titulo: $('#titulo').val(), grupo_id: $('#info_grupo_id').val()},
+			data: {
+				titulo: $('#titulo').val(),
+				grupo_id: $('#info_grupo_id').val(),
+				usuario_id: $('#info_usuario_id').val()
+			}
 		})
 		.done(function(alerta) {
 			if(alerta.length != 0) {

@@ -28,7 +28,7 @@
 
   <body>
     <header role="banner">
-      <?php require("navbar-in.html"); ?> 
+      <?php require("navbar-in.php"); ?> 
     </header>
    
     <div class="main container" role="main">

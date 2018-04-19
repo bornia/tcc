@@ -11,7 +11,7 @@
 			<ul class="navbar-nav">
 				<li class="nav-item dropdown">
 					<a href="#" class="nav-link dropdown-toggle" id="opcoes_de_usuario" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Nome do Usuário <span class="caret"> </span>
+						<?= explode(" ", $_SESSION['nome'])[0] ?> <span class="caret"> </span>
 					</a>
 
 					<div class="dropdown-menu" aria-labelledby="opcoes_de_usuario">

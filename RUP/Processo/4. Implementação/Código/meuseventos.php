@@ -36,12 +36,12 @@ if($sessao_validada) {
 
   <body>
     <header role="banner">
-      <?php require("navbar-in.html"); ?> 
+      <?php require("navbar-in.php"); ?> 
     </header>
 
     <!-- ========== RESUMO FINANCEIRO ========== -->
    
-    <div class="main container" role="main">
+    <div class="main container mt-4" role="main">
 
       <!-- ========== AUXILIARES ========== -->
 
