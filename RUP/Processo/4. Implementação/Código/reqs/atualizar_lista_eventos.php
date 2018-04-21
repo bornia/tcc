@@ -29,7 +29,7 @@ $registro = mysqli_fetch_array($res, MYSQLI_ASSOC);
 $total_registros = $registro['total_registros'];
 
 // Busca os eventos pertencentes a um determinado grupo
-$sql = "SELECT evento_id,titulo,ultima_att,total FROM eventos WHERE evento_id IN (SELECT evento_id_ref FROM evento_pertence_grupo WHERE grupo_id_ref = $grupo_id) AND titulo LIKE '%$texto_pesquisado%' ORDER BY $ordem $tipo_ordem LIMIT $regs_por_pagina OFFSET $offset";
+$sql = "SELECT * FROM eventos WHERE evento_id IN (SELECT evento_id_ref FROM evento_pertence_grupo WHERE grupo_id_ref = $grupo_id) AND titulo LIKE '%$texto_pesquisado%' ORDER BY $ordem $tipo_ordem LIMIT $regs_por_pagina OFFSET $offset";
 
 // Executa a query
 $res = mysqli_query($con, $sql);
@@ -49,17 +49,19 @@ if(!mysqli_num_rows($res)) {
 }
 else {
 	while($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-		$datetime = date_create($row['ultima_att']);
-		$datetime = date_format($datetime, 'd/m/Y H:i:s');
-		$datetime = explode(" ", strval($datetime));
+		$datetime 	= date_create($row['ultima_att']);
+		$datetime 	= date_format($datetime, 'd/m/Y H:i:s');
+		$datetime 	= explode(" ", strval($datetime));
+		$status 	= $row['status'] == 0 ? "<button type='button' class='btn btn-none disabled float-right' title='Evento finalizado.'> <span class='oi oi-ban'> </button>" : "";
 
 		$eventos .= 
 "<tr>
-    <td class='align-middle'> <input aria-label='Marque o item' type='checkbox' name='item' value='" . $row['evento_id'] . "' onchange='verificar_todos_status_checkboxes();'> </td>
+    <td class='align-middle'> <input aria-label='Marque o item' type='checkbox' name='item' value='" . $row['evento_id'] . "' onchange='verificar_valor_checkboxes(); ' data-evento-status='" . $row['status'] . "'> </td>
     <td class='change-cursor align-middle' onclick='return redirect_page();'> " . $row['titulo'] . " </td>
     <td class='change-cursor align-middle text-center' onclick='return redirect_page();'> " . $row['total'] . " </td>
     <td class='change-cursor align-middle text-center' onclick='return redirect_page();'> " . $datetime[0] . " as " . $datetime[1] . " </td>
-    <td class='align-middle'> <button type='button' class='btn btn-warning' id='btn-editar-evento-" . $row['evento_id'] . "' title='Editar evento.' data-toggle='modal' data-target='#janela-editar-evento' data-evento_id='" . $row['evento_id'] . "' onclick='altera_eventoId_botao_editar_evento(this);'> <span class='oi oi-pencil text-white' aria-labelledby='btn-editar-evento' aria-describedby='btn-editar-evento-descricao'> </span> <span class='sr-only' id='btn-editar-evento-descricao'> Editar evento. </span> </button> </td>
+    <td class='align-middle'> <button type='button' class='btn btn-warning' id='btn-editar-evento-" . $row['evento_id'] . "' title='Editar evento.' data-toggle='modal' data-target='#janela-editar-evento' data-evento_id='" . $row['evento_id'] . "' onclick='altera_eventoId_botao_editar_evento(this);'> <span class='oi oi-pencil text-white' aria-labelledby='btn-editar-evento' aria-describedby='btn-editar-evento-descricao'> </span> <span class='sr-only' id='btn-editar-evento-descricao'> Editar evento. </span> </button> $status
+    </td>
 </tr>\n\n";
 	}
 

@@ -8,20 +8,6 @@ function redirect_page() {
 	window.location.href = 'evento.php';
 }
 
-/** Verifica se existe pelo menos um checkbox selecionado na tabela. 
-*/
-function verificar_todos_status_checkboxes() {
-	var todos_selecionados 		= $("input[type=checkbox][name='item']:checked").length;
-	var todos_nao_selecionados 	= $("input[type=checkbox][name='item']:not(:checked)").length;
-
-	if(todos_selecionados > 0) {
-		mostrar_botao_excluir_evento();
-	} else {
-		$('#checkbox-excluir-todos-eventos').prop('checked', false);
-		mostrar_botao_adicionar_evento();
-	}
-}
-
 /** Retorna a quantidade de eventos marcados para exclusão.
 */
 function obtem_quantidade_eventos_marcados() {
@@ -121,6 +107,23 @@ function check_nchar(element_checked, element_nchar, limite) {
 	return true;
 }
 
+/** Verifica se existe pelo menos um checkbox selecionado na tabela. 
+*/
+function verificar_valor_checkboxes() {
+	var todos_selecionados 		= $("input[type=checkbox][name='item']:checked");
+	//var todos_nao_selecionados 	= $("input[type=checkbox][name='item']:not(:checked)").length;
+
+	if(todos_selecionados.length > 0) {
+		mostrar_botao_excluir_evento();
+	} else {
+		$('#checkbox-excluir-todos-eventos').prop('checked', false);
+		mostrar_botao_adicionar_evento();
+	}
+
+	verificar_status_checkboxes(todos_selecionados, 1) == true ? mostrar_botao_fechar_evento() : ocultar_botao_fechar_evento();
+	verificar_status_checkboxes(todos_selecionados, 0) == true ? mostrar_botao_reabrir_evento() : ocultar_botao_reabrir_evento();
+}
+
 /** Marca/desmarca todas os checkboxes do corpo da tabela caso o checkbox do cabeçalho seja marcado/desmarcado.
 */
 function toggle_all_checkboxes(element) {
@@ -132,6 +135,26 @@ function toggle_all_checkboxes(element) {
 		mostrar_botao_excluir_evento();
 	else
 		mostrar_botao_adicionar_evento();
+
+	var todos_selecionados = $("input[type=checkbox][name='item']:checked")
+
+	verificar_status_checkboxes(todos_selecionados, 1) == true ? mostrar_botao_fechar_evento() : ocultar_botao_fechar_evento();
+	verificar_status_checkboxes(todos_selecionados, 0) == true ? mostrar_botao_reabrir_evento() : ocultar_botao_reabrir_evento();
+}
+
+/**
+*/
+function verificar_status_checkboxes(checkboxes_selecionadas, status) {
+	var validado = true;
+
+	checkboxes_selecionadas.each(function() {
+		if($(this).data('evento-status') != status) {
+			validado = false;
+			return;
+		}
+	});
+
+	return validado;
 }
 
 /** Muda a função do botão de adicionar evento para poder excluir os eventos marcados.
@@ -146,6 +169,30 @@ function mostrar_botao_excluir_evento() {
 function mostrar_botao_adicionar_evento() {
 	$('#btn-excluir-evento').hide();
 	$('#btn-criar-evento').fadeIn();
+}
+
+/**
+*/
+function mostrar_botao_fechar_evento() {
+	$('#btn-fechar-evento').fadeIn();
+}
+
+/**
+*/
+function ocultar_botao_fechar_evento() {
+	$('#btn-fechar-evento').fadeOut();
+}
+
+/**
+*/
+function mostrar_botao_reabrir_evento() {
+	$('#btn-reabrir-evento').fadeIn();
+}
+
+/**
+*/
+function ocultar_botao_reabrir_evento() {
+	$('#btn-reabrir-evento').fadeOut();
 }
 
 /** Reescreve o html do body da tabela de eventos incluindo o evento que foi adicionado ao banco de dados.

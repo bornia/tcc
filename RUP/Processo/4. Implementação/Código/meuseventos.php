@@ -138,16 +138,26 @@ if($sessao_validada) {
             <!-- ========== BOTÃO PARA CRIAR UM NOVO EVENTO ========== -->
 
             <div class="col">
-              <button type="button" class="btn btn-success mb-2 float-right" id="btn-criar-evento" title="Criar evento." data-toggle="modal" data-target="#janela-criar-evento">
-                <span class="oi oi-plus text-white" aria-labelledby="btn-criar-evento" aria-describedby="btn-criar-evento-descricao"> </span>
-                <span class="sr-only" id="btn-criar-evento-descricao"> Criar evento. </span>
+              <button type="button" class="btn btn-success ml-3 mb-2 float-right" id="btn-criar-evento" title="Criar evento." data-toggle="modal" data-target="#janela-criar-evento">
+                <span class="oi oi-plus text-white" aria-labelledby="btn-criar-evento"> </span>
               </button>
-
+              
               <!-- ========== BOTÃO PARA EXCLUIR EVENTO(S) ========== -->
 
-              <button type="button" class="btn btn-danger mb-2 float-right" id="btn-excluir-evento" title="Excluir evento." data-toggle="modal" data-target="#janela-excluir-evento">
-                <span class="oi oi-trash text-white" aria-labelledby="btn-excluir-evento" aria-describedby="btn-excluir-evento-descricao"> </span>
-                <span class="sr-only" id="btn-excluir-evento-descricao"> Excluir evento. </span>
+              <button type="button" class="btn btn-danger ml-3 mb-2 float-right" id="btn-excluir-evento" title="Excluir evento." data-toggle="modal" data-target="#janela-excluir-evento">
+                <span class="oi oi-trash text-white" aria-labelledby="btn-excluir-evento"> </span>
+              </button>
+
+              <!-- ========== BOTÃO PARA REABRIR EVENTO(S) ========== -->
+
+              <button type="button" class="btn btn-info mr-2 mb-2 float-right" id="btn-reabrir-evento" title="Reabrir evento." data-toggle="modal" data-target="#janela-reabrir-evento">
+                <span class="oi oi-lock-unlocked text-white" aria-labelledby="btn-reabrir-evento"> </span>
+              </button>
+
+              <!-- ========== BOTÃO PARA FECHAR EVENTO(S) ========== -->
+
+              <button type="button" class="btn btn-dark mr-2 mb-2 float-right" id="btn-fechar-evento" title="Fechar evento." data-toggle="modal" data-target="#janela-fechar-evento">
+                <span class="oi oi-lock-locked text-white" aria-labelledby="btn-fechar-evento"> </span>
               </button>
             </div>
           </div>
