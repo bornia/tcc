@@ -86,6 +86,18 @@ function validar_formulario_editar_evento() {
 	return validado;
 }
 
+/**
+*/
+function exibe_quantidade_eventos_marcados(legenda_modal_id) {
+	var quantidade_eventos_marcados = obtem_quantidade_eventos_marcados();
+
+		if(quantidade_eventos_marcados == 1) {
+			$('#' + legenda_modal_id).html("o evento selecionado");
+		} else {
+			$('#' + legenda_modal_id).html("os <strong>" + quantidade_eventos_marcados + " eventos selecionados</strong>");
+		}
+}
+
 /* ===================================================================== */
 /* ============================== EVENTOS ============================== */
 /* ===================================================================== */
@@ -115,13 +127,14 @@ function verificar_valor_checkboxes() {
 
 	if(todos_selecionados.length > 0) {
 		mostrar_botao_excluir_evento();
+		verificar_status_checkboxes(todos_selecionados, 1) == true ? mostrar_botao_finalizar_evento() 	: ocultar_botao_finalizar_evento();
+		verificar_status_checkboxes(todos_selecionados, 0) == true ? mostrar_botao_reabrir_evento() 	: ocultar_botao_reabrir_evento();
 	} else {
 		$('#checkbox-excluir-todos-eventos').prop('checked', false);
 		mostrar_botao_adicionar_evento();
+		ocultar_botao_reabrir_evento();
+		ocultar_botao_finalizar_evento();
 	}
-
-	verificar_status_checkboxes(todos_selecionados, 1) == true ? mostrar_botao_fechar_evento() : ocultar_botao_fechar_evento();
-	verificar_status_checkboxes(todos_selecionados, 0) == true ? mostrar_botao_reabrir_evento() : ocultar_botao_reabrir_evento();
 }
 
 /** Marca/desmarca todas os checkboxes do corpo da tabela caso o checkbox do cabeçalho seja marcado/desmarcado.
@@ -131,15 +144,18 @@ function toggle_all_checkboxes(element) {
 		item.checked = element.checked;
 	});
 
-	if(element.checked)
+	var todos_selecionados = $("input[type=checkbox][name='item']:checked");
+
+	if(element.checked) {
 		mostrar_botao_excluir_evento();
-	else
+		verificar_status_checkboxes(todos_selecionados, 1) == true ? mostrar_botao_finalizar_evento() 	: ocultar_botao_finalizar_evento();
+		verificar_status_checkboxes(todos_selecionados, 0) == true ? mostrar_botao_reabrir_evento() 	: ocultar_botao_reabrir_evento();
+	}
+	else {
 		mostrar_botao_adicionar_evento();
-
-	var todos_selecionados = $("input[type=checkbox][name='item']:checked")
-
-	verificar_status_checkboxes(todos_selecionados, 1) == true ? mostrar_botao_fechar_evento() : ocultar_botao_fechar_evento();
-	verificar_status_checkboxes(todos_selecionados, 0) == true ? mostrar_botao_reabrir_evento() : ocultar_botao_reabrir_evento();
+		ocultar_botao_reabrir_evento();
+		ocultar_botao_finalizar_evento();
+	}
 }
 
 /**
@@ -173,14 +189,14 @@ function mostrar_botao_adicionar_evento() {
 
 /**
 */
-function mostrar_botao_fechar_evento() {
-	$('#btn-fechar-evento').fadeIn();
+function mostrar_botao_finalizar_evento() {
+	$('#btn-finalizar-evento').fadeIn();
 }
 
 /**
 */
-function ocultar_botao_fechar_evento() {
-	$('#btn-fechar-evento').fadeOut();
+function ocultar_botao_finalizar_evento() {
+	$('#btn-finalizar-evento').fadeOut();
 }
 
 /**
@@ -271,17 +287,82 @@ function excluir_eventos() {
 		data: {eventos_ids: eventos_selecionados, grupo_id: grupo_id.val(), usuario_id: usuario_id.val()},
 	})
 	.done(function(mensagem) {
-		if(mensagem.length != 0)
+		if(mensagem.length != 0) {
 			alerta.html(formatar_texto_alerta("danger", mensagem));
-		else
+		}
+		else {
 			atualizar_lista_eventos();
+			mostrar_botao_adicionar_evento();
+		}
 	})
 	.fail(function() {console.log("error"); })
 	.always(function() {
 		$('#janela-excluir-evento').modal('hide');
-		mostrar_botao_adicionar_evento();
 	});
-	
+}
+
+/** Obtém os valores de todas os eventos selecionados e faz uma requisição ao Banco de Dados para finalizar esses eventos.
+*/
+function finalizar_eventos() {
+	var usuario_id 				= $('#info_usuario_id');
+	var grupo_id 				= $('#info_grupo_id');
+	var alerta 					= $("#alerta_mensagem");
+	var eventos_selecionados 	= [];
+
+	$("input[type=checkbox][name='item']:checked").each(function() {
+		eventos_selecionados.push($(this).val());
+	});
+
+	$.ajax({
+		url: './reqs/finalizar_evento.php',
+		type: 'POST',
+		data: {eventos_ids: eventos_selecionados, grupo_id: grupo_id.val(), usuario_id: usuario_id.val()},
+	})
+	.done(function(mensagem) {
+		if(mensagem.length != 0) {
+			alerta.html(formatar_texto_alerta("danger", mensagem));
+		}
+		else {
+			atualizar_lista_eventos();
+			ocultar_botao_finalizar_evento();
+		}
+	})
+	.fail(function() {console.log("error"); })
+	.always(function() {
+		$('#janela-finalizar-evento').modal('hide');
+	});
+}
+
+/** Obtém os valores de todas os eventos selecionados e faz uma requisição ao Banco de Dados para reabrir esses eventos.
+*/
+function reabrir_eventos() {
+	var usuario_id 				= $('#info_usuario_id');
+	var grupo_id 				= $('#info_grupo_id');
+	var alerta 					= $("#alerta_mensagem");
+	var eventos_selecionados 	= [];
+
+	$("input[type=checkbox][name='item']:checked").each(function() {
+		eventos_selecionados.push($(this).val());
+	});
+
+	$.ajax({
+		url: './reqs/reabrir_evento.php',
+		type: 'POST',
+		data: {eventos_ids: eventos_selecionados, grupo_id: grupo_id.val(), usuario_id: usuario_id.val()},
+	})
+	.done(function(mensagem) {
+		if(mensagem.length != 0) {
+			alerta.html(formatar_texto_alerta("danger", mensagem));
+		}
+		else {
+			atualizar_lista_eventos();
+			ocultar_botao_reabrir_evento();
+		}
+	})
+	.fail(function() {console.log("error"); })
+	.always(function() {
+		$('#janela-reabrir-evento').modal('hide');
+	});
 }
 
 /** Quando o botão para editar um evento é clicado, atualiza-se o id do evento no atributo do botão Editar dentro do modal.
@@ -372,6 +453,10 @@ function buscar_grupo_infos() {
 	});
 }
 
+/* ===================================================================== */
+/* ============================== TRIGGERS ============================= */
+/* ===================================================================== */
+
 /** Quando o modal para adicionar um novo evento é carregado (fim de todas as transições) seta-se o foco para o input do título do evento.
 */
 function trigger_exibir_modal_novo_evento() {
@@ -394,13 +479,7 @@ function trigger_esconder_modal_novo_evento() {
 */
 function trigger_exibir_modal_excluir_evento() {
 	$('#janela-excluir-evento').on('shown.bs.modal', function() {
-		var quantidade_eventos_marcados = obtem_quantidade_eventos_marcados();
-
-		if(quantidade_eventos_marcados == 1) {
-			$('#legenda_quantidade_itens_marcados').html("o evento selecionado");
-		} else {
-			$('#legenda_quantidade_itens_marcados').html("os <strong>" + quantidade_eventos_marcados + " eventos selecionados</strong>");
-		}
+		exibe_quantidade_eventos_marcados('legenda_quantidade_itens_marcados_excluir');
 	
 		document.getElementById("modal-btn-excluir-evento").focus();
 	})
@@ -424,18 +503,39 @@ function trigger_esconder_modal_editar_evento() {
 	})
 }
 
+/** Quando o modal para finalizar um evento é carregado atualiza-se a semântica da mensagem conforme a quantidade de eventos marcados.
+*/
+function trigger_exibir_modal_finalizar_evento() {
+	$('#janela-finalizar-evento').on('shown.bs.modal', function() {
+		exibe_quantidade_eventos_marcados('legenda_quantidade_itens_marcados_finalizar');
+	
+		document.getElementById("modal-btn-finalizar-evento").focus();
+	})
+}
+
+/** Quando o modal para reabrir um evento é carregado atualiza-se a semântica da mensagem conforme a quantidade de eventos marcados.
+*/
+function trigger_exibir_modal_reabrir_evento() {
+	$('#janela-reabrir-evento').on('shown.bs.modal', function() {
+		exibe_quantidade_eventos_marcados('legenda_quantidade_itens_marcados_reabrir');
+	
+		document.getElementById("modal-btn-reabrir-evento").focus();
+	})
+}
+
 /* ===================================================================== */
 /* ============================== OUTROS =============================== */
 /* ===================================================================== */
 
 
 $(document).ready(function() {
-	mostrar_botao_adicionar_evento()
+	mostrar_botao_adicionar_evento();
 	mostrar_botao_ordenar_desc();
+	ocultar_botao_reabrir_evento();
+	ocultar_botao_finalizar_evento();
 
 	buscar_grupo_infos();
 	atualizar_lista_eventos();
-	$('[data-toggle="tooltip"]').tooltip();
 	
 	trigger_exibir_modal_novo_evento();
 	trigger_esconder_modal_novo_evento();
@@ -443,5 +543,8 @@ $(document).ready(function() {
 	trigger_exibir_modal_excluir_evento();
 
 	trigger_exibir_modal_editar_evento();
-	trigger_esconder_modal_editar_evento()
+	trigger_esconder_modal_editar_evento();
+
+	trigger_exibir_modal_finalizar_evento();
+	trigger_exibir_modal_reabrir_evento();
 });

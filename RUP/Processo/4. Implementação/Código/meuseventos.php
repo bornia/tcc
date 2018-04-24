@@ -144,20 +144,20 @@ if($sessao_validada) {
               
               <!-- ========== BOTÃO PARA EXCLUIR EVENTO(S) ========== -->
 
-              <button type="button" class="btn btn-danger ml-3 mb-2 float-right" id="btn-excluir-evento" title="Excluir evento." data-toggle="modal" data-target="#janela-excluir-evento">
+              <button type="button" class="btn btn-danger mb-2 float-right" id="btn-excluir-evento" title="Excluir evento." data-toggle="modal" data-target="#janela-excluir-evento">
                 <span class="oi oi-trash text-white" aria-labelledby="btn-excluir-evento"> </span>
               </button>
 
               <!-- ========== BOTÃO PARA REABRIR EVENTO(S) ========== -->
 
-              <button type="button" class="btn btn-info mr-2 mb-2 float-right" id="btn-reabrir-evento" title="Reabrir evento." data-toggle="modal" data-target="#janela-reabrir-evento">
+              <button type="button" class="btn btn-info mb-2 float-left" id="btn-reabrir-evento" title="Reabrir evento." data-toggle="modal" data-target="#janela-reabrir-evento">
                 <span class="oi oi-lock-unlocked text-white" aria-labelledby="btn-reabrir-evento"> </span>
               </button>
 
               <!-- ========== BOTÃO PARA FECHAR EVENTO(S) ========== -->
 
-              <button type="button" class="btn btn-dark mr-2 mb-2 float-right" id="btn-fechar-evento" title="Fechar evento." data-toggle="modal" data-target="#janela-fechar-evento">
-                <span class="oi oi-lock-locked text-white" aria-labelledby="btn-fechar-evento"> </span>
+              <button type="button" class="btn btn-dark mb-2 float-left" id="btn-finalizar-evento" title="Fechar evento." data-toggle="modal" data-target="#janela-finalizar-evento">
+                <span class="oi oi-lock-locked text-white" aria-labelledby="btn-finalizar-evento"> </span>
               </button>
             </div>
           </div>
@@ -245,6 +245,72 @@ if($sessao_validada) {
             </div> <!-- modal-dialog -->
           </div>
 
+          <!-- ========== MODAL PARA FINALIZAR EVENTOS ========== -->
+
+          <form class="modal fade" id="janela-finalizar-evento" tabindex="-1" role="dialog"> <!-- Modal para adicionar novo evento -->
+            <div class="modal-dialog modal-bg modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title"> Finalizar Evento </h3>
+
+                  <button type="button" class="close" data-dismiss="modal" title="Fechar">
+                    <span aria-hidden="true"> &times; </span>
+                  </button>
+                </div>
+
+                <div class="modal-body">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col">
+                        <p class="text-justify">
+                          Tem certeza que deseja <u>finalizar</u> <span id="legenda_quantidade_itens_marcados_finalizar"> </span>?
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div> <!-- modal-body -->
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary text-size-responsive" data-dismiss="modal"> Cancelar </button>
+                  <button type="button" class="btn btn-dark text-size-responsive" id="modal-btn-finalizar-evento" onclick="finalizar_eventos();"> Finalizar </button>
+                </div>
+              </div> <!-- modal-content -->
+            </div> <!-- modal-dialog -->
+          </form>
+
+          <!-- ========== MODAL PARA REABRIR EVENTOS ========== -->
+
+          <form class="modal fade" id="janela-reabrir-evento" tabindex="-1" role="dialog"> <!-- Modal para adicionar novo evento -->
+            <div class="modal-dialog modal-bg modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title"> Reabrir Evento </h3>
+
+                  <button type="button" class="close" data-dismiss="modal" title="Fechar">
+                    <span aria-hidden="true"> &times; </span>
+                  </button>
+                </div>
+
+                <div class="modal-body">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col">
+                        <p class="text-justify">
+                          Tem certeza que deseja <u>reabrir</u> <span id="legenda_quantidade_itens_marcados_reabrir"> </span>?
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div> <!-- modal-body -->
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary text-size-responsive" data-dismiss="modal"> Cancelar </button>
+                  <button type="button" class="btn btn-info text-size-responsive" id="modal-btn-reabrir-evento" onclick="reabrir_eventos();"> Reabrir </button>
+                </div>
+              </div> <!-- modal-content -->
+            </div> <!-- modal-dialog -->
+          </form>
+
           <!-- ========== MODAL PARA CRIAR UM NOVO EVENTO ========== -->
 
           <form class="modal fade" id="janela-criar-evento" tabindex="-1" role="dialog">
@@ -303,8 +369,8 @@ if($sessao_validada) {
                   <div class="container-fluid">
                     <div class="row">
                       <div class="col">
-                        <p>
-                          Tem certeza que deseja <u>excluir</u> <span id="legenda_quantidade_itens_marcados"> </span>?
+                        <p class="text-justify">
+                          Tem certeza que deseja <u>excluir</u> <span id="legenda_quantidade_itens_marcados_excluir"> </span>?
                         </p>
                       </div>
                     </div>

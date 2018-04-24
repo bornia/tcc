@@ -25,11 +25,11 @@ $usuario_permissao = mysqli_fetch_array($res, MYSQLI_ASSOC)['permissao'];
 
 if($usuario_permissao != 3) {
 	ob_clean();
-	echo '<strong>Apenas o Dono </strong> do grupo pode excluir um evento. Peça para o Dono <u>lhe conceder acesso</u> ou que <u>ele mesmo exclua o(s) evento(s)</u>.';
+	echo '<strong>Apenas o Dono </strong> do grupo pode finalizar um evento. Peça para o Dono <u>lhe conceder acesso</u> ou que <u>ele mesmo finalize o(s) evento(s)</u>.';
 	return false;
 }
 
-$sql = "DELETE FROM evento_pertence_grupo WHERE evento_id_ref IN ($eventos_id) AND grupo_id_ref = $grupo_id;";
+$sql = "UPDATE eventos SET status = 0 WHERE evento_id IN ($eventos_id);";
 
 // Executa a query
 $res = mysqli_query($con, $sql);
@@ -37,19 +37,7 @@ $res = mysqli_query($con, $sql);
 // Se houve algum erro na execução da query
 if(!$res) {
 	ob_clean();
-	echo '<strong>Houve um erro ao tentar excluir as relações entre os eventos e o grupo</strong>. <u>Por favor, contate o suporte urgentemente</u>.';
-	return false;
-}
-
-$sql = "DELETE FROM eventos WHERE evento_id IN ($eventos_id);";
-
-// Executa a query
-$res = mysqli_query($con, $sql);
-
-// Se houve algum erro na execução da query
-if(!$res) {
-	ob_clean();
-	echo '<strong>Houve um erro ao tentar excluir o(s) evento(s) do grupo</strong>. <u>Por favor, contate o suporte urgentemente</u>.';
+	echo '<strong>Houve um erro ao tentar finalizar o(s) evento(s) do grupo</strong>. <u>Por favor, contate o suporte urgentemente</u>.';
 	return false;
 }
 
