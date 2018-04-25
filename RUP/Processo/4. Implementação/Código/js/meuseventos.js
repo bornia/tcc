@@ -223,7 +223,8 @@ function atualizar_lista_eventos() {
 			ordem: 				($('#ordem').val() == 'titulo' ? 'titulo' : ($('#ordem').val() == 'total' ? 'total' : 'ultima_att')),
 			tipo_ordem: 		($('#btn-ordenar-asc').is(':visible') ? $('#btn-ordenar-asc').data('tipo-ordem') : $('#btn-ordenar-desc').data('tipo-ordem')),
 			regs_por_pagina: 	$('#registros_por_pagina').val(),
-			offset: 			$('#offset').val()
+			offset: 			$('#offset').val(),
+			status: 			($('#status').val() != 2 ? "AND status = " + $('#status').val() : "")
 		}
 	})
 	.done(function(data) {

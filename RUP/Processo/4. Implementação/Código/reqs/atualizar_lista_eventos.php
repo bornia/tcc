@@ -13,6 +13,7 @@ $ordem 				= $_POST['ordem'];
 $tipo_ordem			= $_POST['tipo_ordem'];
 $regs_por_pagina 	= $_POST['regs_por_pagina'];
 $offset 			= $_POST['offset'];
+$status 			= $_POST['status'];
 
 // Recupera o total de registros com base no filtro
 $sql = "SELECT COUNT(*) AS total_registros FROM eventos WHERE evento_id IN (SELECT evento_id_ref FROM evento_pertence_grupo WHERE grupo_id_ref = $grupo_id)";
@@ -21,7 +22,7 @@ $res = mysqli_query($con, $sql);
 
 if(!$res) {
 	ob_clean();
-	echo '';
+	echo 'Houve um erro ao tentar <u>recuperar o total de eventos</u>. Por gentileza, <strong>contate o suporte</strong>.';
 	return false;
 }
 
@@ -29,7 +30,7 @@ $registro = mysqli_fetch_array($res, MYSQLI_ASSOC);
 $total_registros = $registro['total_registros'];
 
 // Busca os eventos pertencentes a um determinado grupo
-$sql = "SELECT * FROM eventos WHERE evento_id IN (SELECT evento_id_ref FROM evento_pertence_grupo WHERE grupo_id_ref = $grupo_id) AND titulo LIKE '%$texto_pesquisado%' ORDER BY $ordem $tipo_ordem LIMIT $regs_por_pagina OFFSET $offset";
+$sql = "SELECT * FROM eventos WHERE evento_id IN (SELECT evento_id_ref FROM evento_pertence_grupo WHERE grupo_id_ref = $grupo_id) $status AND titulo LIKE '%$texto_pesquisado%' ORDER BY $ordem $tipo_ordem LIMIT $regs_por_pagina OFFSET $offset";
 
 // Executa a query
 $res = mysqli_query($con, $sql);
@@ -37,7 +38,7 @@ $res = mysqli_query($con, $sql);
 // Se houve algum erro na execução da query
 if(!$res) {
 	ob_clean();
-	echo '<u>Houve um erro ao tentar atualizar a lista de eventos</u>. Por gentileza, <strong>contate o suporte</strong>.';
+	echo '<u>Houve um erro ao tentar atualizar a lista de eventos</u>. Por gentileza, <strong>contate o suporte</strong>.' . $status;
 	return false;
 }
 

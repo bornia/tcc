@@ -123,10 +123,10 @@ if($sessao_validada) {
                 <div class="col">
                   <label class="text-muted font-weight-bold mt-2" for="status"> Status </label>
 
-                  <select class="form-control text-size-responsive" arial-label="" id="status">
-                    <option value="todos"> Todos </option>
-                    <option value="abertos"> Abertos </option>
-                    <option value="fechados"> Fechados </option>
+                  <select class="form-control text-size-responsive" arial-label="Filtre o evento por status." id="status" onchange="atualizar_lista_eventos();">
+                    <option value="2"> Todos </option>
+                    <option value="1"> Abertos </option>
+                    <option value="0"> Fechados </option>
                   </select>
                 </div>
               </div>
