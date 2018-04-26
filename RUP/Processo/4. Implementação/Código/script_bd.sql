@@ -71,3 +71,43 @@ CREATE TABLE evento_pertence_grupo (
 	FOREIGN KEY(grupo_id_ref) REFERENCES grupos(grupo_id),
 	FOREIGN KEY (evento_id_ref) REFERENCES eventos(evento_id)
 );
+
+/* ===================================================================== */
+/* ============================== TRIGGERS ============================= */
+/* ===================================================================== */
+
+DELIMITER //
+
+/* TABELA evento_pertence_grupo */
+
+/** Atualiza a data de quando ocorreu a última modificação (INSERÇÃO) em um grupo
+*/
+CREATE TRIGGER trg_ins_evento_pertence_grupo AFTER INSERT ON evento_pertence_grupo
+FOR EACH ROW
+BEGIN
+	UPDATE grupos SET ultima_att = CURRENT_TIMESTAMP WHERE grupo_id = (
+        SELECT grupo_id_ref FROM evento_pertence_grupo WHERE evento_id_ref = NEW.evento_id_ref GROUP BY grupo_id_ref
+	);
+END //
+
+/** Atualiza a data de quando ocorreu a última modificação (EXCLUSÃO) em um grupo
+*/
+CREATE TRIGGER trg_del_evento_pertence_grupo BEFORE DELETE ON evento_pertence_grupo
+FOR EACH ROW
+BEGIN
+	UPDATE grupos SET ultima_att = CURRENT_TIMESTAMP WHERE grupo_id = (
+        SELECT grupo_id_ref FROM evento_pertence_grupo WHERE evento_id_ref = OLD.evento_id_ref GROUP BY grupo_id_ref
+	);
+END //
+
+/* TABELA eventos */
+
+/** Atualiza a data de quando ocorreu a última modificação (ATUALIZAÇÃO) em um grupo
+*/
+CREATE TRIGGER trg_upd_eventos AFTER UPDATE ON eventos
+FOR EACH ROW
+BEGIN
+	UPDATE grupos SET ultima_att = CURRENT_TIMESTAMP WHERE grupo_id = (
+        SELECT grupo_id_ref FROM evento_pertence_grupo WHERE evento_id_ref = NEW.evento_id GROUP BY grupo_id_ref
+	);
+END //
