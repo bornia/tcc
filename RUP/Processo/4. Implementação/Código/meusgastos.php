@@ -91,7 +91,7 @@ if($sessao_validada) {
           <!-- ========== TABELA DE GASTOS ========== -->
 
             <div class="table-responsive">
-              <table class="table table-stripped table-hover" summary="">
+              <table class="table table-sm table-stripped table-hover" summary="">
                 <caption class="sr-only">
                   Gastos do evento x do grupo y
                 </caption>
@@ -157,9 +157,7 @@ if($sessao_validada) {
                     <div class="form-group row">
                       <label for="categoria-novo-gasto" class="col-sm-2 col-form-label font-weight-bold"> Categoria </label>
                       <div class="col-sm-10">
-                        <select class="form-control text-size-responsive" id="categoria-novo-gasto">
-                          <option> Alimentação </option>
-                        </select>
+                        <?php require('gastos_categorias.html'); ?>
                       </div>
                     </div>
 
