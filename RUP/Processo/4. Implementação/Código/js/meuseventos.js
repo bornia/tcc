@@ -5,7 +5,7 @@
 /** Redireciona o usuário para consultar mais informações acerca do evento clicado na tabela.
 */
 function redirect_page() {
-	window.location.href = 'evento.php';
+	window.location.href = 'meusgastos.php';
 }
 
 /** Retorna a quantidade de eventos marcados para exclusão.

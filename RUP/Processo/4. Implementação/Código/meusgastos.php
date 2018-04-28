@@ -1,3 +1,18 @@
+<?php
+
+$sessao_validada = require_once('reqs/validar_sessao.php'); // sessio_start()
+
+if($sessao_validada) {
+
+  // Se o id do grupo existir então empty() retorna false e o usuário não será redirecionado, pois não há erro.
+  /*if(empty($_POST['grupo_id'])) {
+    header('Location: meusgrupos.php');
+  }*/
+}
+
+?>
+
+
 <!doctype html>
 
 <html lang="pt-br">
@@ -15,7 +30,7 @@
     <!--  -->
     <link href="style/navbar.css" rel="stylesheet" type="text/css">
     <!--  -->
-    <link href="style/evento.css" rel="stylesheet" type="text/css">
+    <link href="style/meusgastos.css" rel="stylesheet" type="text/css">
 
     <title> Gastos • OurBills </title>
   </head>
@@ -245,6 +260,6 @@
 
     <!-- Personal -->
     <!--  -->
-    <script type="text/javascript" src="js/evento.js"> </script>
+    <script type="text/javascript" src="js/meusgastos.js"> </script>
   </body>
 </html>
