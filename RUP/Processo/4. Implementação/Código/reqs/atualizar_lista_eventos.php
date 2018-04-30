@@ -53,15 +53,18 @@ else {
 		$datetime 	= date_create($row['ultima_att']);
 		$datetime 	= date_format($datetime, 'd/m/Y H:i:s');
 		$datetime 	= explode(" ", strval($datetime));
-		$status 	= $row['status'] == 0 ? "<button type='button' class='btn btn-none disabled float-right' title='Evento finalizado.'> <span class='oi oi-ban'> </button>" : "";
+		$status 	= $row['status'] == 0 ? "<span class='oi oi-ban text-muted' aria-label='Evento finalizado.'>" : "<span class='oi oi-check text-muted' aria-label='Evento aberto.'>";
 
 		$eventos .= 
 "<tr>
     <td class='align-middle'> <input aria-label='Marque o item' type='checkbox' name='item' value='" . $row['evento_id'] . "' onchange='verificar_valor_checkboxes(); ' data-evento-status='" . $row['status'] . "'> </td>
-    <td class='change-cursor align-middle' onclick='return redirect_page();'> " . $row['titulo'] . " </td>
-    <td class='change-cursor align-middle text-center' onclick='return redirect_page();'> " . $row['total'] . " </td>
-    <td class='change-cursor align-middle text-center' onclick='return redirect_page();'> " . $datetime[0] . " as " . $datetime[1] . " </td>
-    <td class='align-middle'> <button type='button' class='btn btn-warning' id='btn-editar-evento-" . $row['evento_id'] . "' title='Editar evento.' data-toggle='modal' data-target='#janela-editar-evento' data-evento_id='" . $row['evento_id'] . "' onclick='altera_eventoId_botao_editar_evento(this);'> <span class='oi oi-pencil text-white' aria-labelledby='btn-editar-evento' aria-describedby='btn-editar-evento-descricao'> </span> <span class='sr-only' id='btn-editar-evento-descricao'> Editar evento. </span> </button> $status
+    <td class='align-middle'> " . $row['titulo'] . " </td>
+    <td class='align-middle text-center'> " . $row['total'] . " </td>
+    <td class='align-middle text-center'> " . $datetime[0] . " as " . $datetime[1] . " </td>
+    <td class='align-middle text-center'> " . $status . " </td>
+    <td class='align-middle'> <button type='button' class='btn btn-warning' id='btn-editar-evento-" . $row['evento_id'] . "' title='Editar evento.' data-toggle='modal' data-target='#janela-editar-evento' data-evento_id='" . $row['evento_id'] . "' onclick='altera_eventoId_botao_editar_evento(this);'> <span class='oi oi-pencil text-white' aria-labelledby='btn-editar-evento' aria-describedby='btn-editar-evento-descricao'> </span> <span class='sr-only' id='btn-editar-evento-descricao'> Editar evento. </span> </button>
+
+    <button type='submit' class='btn btn-primary float-right' id='btn-entrar-evento-" . $row['evento_id'] . "' name='evento_id' title='Entrar no evento.' value='" . $row['evento_id'] . "'> <span class='oi oi-account-login text-white' aria-describedby='btn-entrar-evento-descricao'> </span> <span class='sr-only' id='btn-entrar-evento-descricao'> Entrar no evento. </span> </button> 
     </td>
 </tr>\n\n";
 	}

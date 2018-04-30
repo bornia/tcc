@@ -47,7 +47,6 @@ if($sessao_validada) {
 
       <input type="hidden" id="registros_por_pagina"  readonly value="6" />
       <input type="hidden" id="offset"                readonly value="0" />
-      <input type="hidden" id="info_grupo_id"         readonly value="<?= $_POST['grupo_id']  ?>">
       <input type="hidden" id="info_usuario_id"       readonly value="<?= $_SESSION['id']     ?>">
       <div id="alerta_mensagem"> </div>
 
@@ -164,31 +163,36 @@ if($sessao_validada) {
 
           <!-- ========== TABELA DE EVENTOS ========== -->
 
-          <div class="row" id="table-events">
-            <div class="col-md-12 table-responsive">
-              <table class="table table-sm table-stripped table-hover text-size-responsive" summary="Lista de eventos cadastrados com indicações sobre a data da última modificação e sobre o total de gastos em relação a cada evento.">
-                <caption class="sr-only">
-                  Lista de Eventos
-                </caption>
+          <form method="POST" action="meusgastos.php">
+            <input type="hidden" id="info_grupo_id" readonly name='grupo_id' value="<?= $_POST['grupo_id']  ?>">
 
-                <thead>
-                  <tr>
-                    <th class="align-middle">
-                      <input type="checkbox" id="checkbox-excluir-todos-eventos" title="Selecionar todos" value="todo-item-selecionado" onclick="toggle_all_checkboxes(this);">
-                    </th>
-                    <th class="align-middle"> Título              </th>
-                    <th class="align-middle text-center"> Total               </th>
-                    <th class="align-middle text-center"> Última modificação  </th>
-                    <th class="align-middle"> Opções              </th>
-                  </tr>
-                </thead>
+            <div class="row" id="table-events">
+              <div class="col-md-12 table-responsive">
+                <table class="table table-sm table-stripped table-hover text-size-responsive" summary="Lista de eventos cadastrados com indicações sobre a data da última modificação e sobre o total de gastos em relação a cada evento.">
+                  <caption class="sr-only">
+                    Lista de Eventos
+                  </caption>
 
-                <tbody id="tabela-corpo-eventos">
+                  <thead>
+                    <tr>
+                      <th class="align-middle">
+                        <input type="checkbox" id="checkbox-excluir-todos-eventos" title="Selecionar todos" value="todo-item-selecionado" onclick="toggle_all_checkboxes(this);">
+                      </th>
+                      <th class="align-middle"> Título              </th>
+                      <th class="align-middle text-center"> Total               </th>
+                      <th class="align-middle text-center"> Última modificação  </th>
+                      <th class="align-middle text-center"> Status  </th>
+                      <th class="align-middle"> Opções              </th>
+                    </tr>
+                  </thead>
 
-                </tbody>
-              </table>
-            </div>
-          </div> <!-- row -->
+                  <tbody id="tabela-corpo-eventos">
+
+                  </tbody>
+                </table>
+              </div>
+            </div> <!-- row -->
+          </form>
 
           <!-- ========== PAGINAÇÃO DE EVENTOS ========== -->
 
