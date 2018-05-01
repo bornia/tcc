@@ -42,10 +42,11 @@ if($sessao_validada) {
 
     <div class="main container mt-4" role="main">
 
+      <input type='hidden' id="info_usuario_email"  readonly value="<?= $_SESSION['email']; ?>">
       <input type="hidden" id="info_grupo_id"       readonly value="<?= $_POST['grupo_id']  ?>">
       <input type="hidden" id="info_evento_id"      readonly value="<?= $_POST['evento_id']  ?>">
       <input type="hidden" id="info_usuario_id"     readonly value="<?= $_SESSION['id']     ?>">
-      
+
       <div id="alerta_mensagem"> </div>
 
       <section id="gastos">
@@ -116,7 +117,7 @@ if($sessao_validada) {
                   </tr>
                 </thead>
 
-                <tbody>
+                <tbody id="tabela-gastos-corpo">
                   <tr>
                     <td class="align-middle">
                       <input aria-label="Marque o item" type="checkbox" name="item" value="item-selecionado-1">
@@ -152,34 +153,44 @@ if($sessao_validada) {
 
                   <div class="modal-body text-size-responsive">
                     <div class="container-fluid">
-                      <div class="form-group row">
-                        <label for="descricao-novo-gasto" class="col-sm-2 col-form-label font-weight-bold"> Descrição </label>
-
-                        <div class="col">
-                          <input type="text" class="form-control text-size-responsive" id="descricao-novo-gasto" name="name-descricao-novo-gasto" aria-describedby="descricao-novo-gasto-help" maxlength="35" placeholder="Descreva o gasto">
-                        </div>
-
-                        <span id="descricao-novo-gasto-help" class="sr-only"> Se desejar, descreva o gasto em poucas palavras. </span>
+                      <div class="row">
+                        <div class="col" id="alerta_mensagem_adicionar_gasto">
+                          
+                        </div>                        
                       </div>
 
-                      <div class="form-group row">
-                        <label for="categoria-novo-gasto" class="col-sm-2 col-form-label font-weight-bold"> Categoria </label>
+                      <div class="row">
                         <div class="col">
-                          <?php require('gastos_categorias.html'); ?>
-                        </div>
-                      </div>
-
-                      <div class="form-group row">
-                        <label for="prazo-novo-gasto" class="col-sm-2 col-form-label font-weight-bold"> Prazo </label>
-                        <div class="col">
-                          <input type="date" class="form-control text-size-responsive" id="prazo-novo-gasto" name="name-prazo-novo-gasto">
+                          <div class="form-group">
+                            <label for="descricao-novo-gasto" class="font-weight-bold"> Descrição </label>
+                            <input type="text" class="form-control text-size-responsive" id="descricao-novo-gasto" name="name-descricao-novo-gasto" aria-describedby="descricao-novo-gasto-help" maxlength="35" placeholder="Descreva o gasto">
+                            <span id="descricao-novo-gasto-help" class="sr-only"> Se desejar, descreva o gasto em poucas palavras. </span>
+                          </div>
                         </div>
                       </div>
 
-                      <div class="form-group row">
-                        <label for="" class="col-sm-2 col-form-label font-weight-bold"> Valor </label>
+                      <div class="row">
                         <div class="col">
-                          <input type="number" class="form-control text-size-responsive" id="valor-novo-gasto" name="name-valor-novo-gasto" min="0.01" step="0.01" placeholder="ex. 1000,50">
+                          <div class="form-group">
+                            <label for="categoria-novo-gasto" class="font-weight-bold"> Categoria </label>
+                            <?php require('gastos_categorias.html'); ?>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col">
+                          <div class="form-group">
+                            <label for="data-pagamento-novo-gasto" class="font-weight-bold"> Data de Pagamento </label>
+                            <input type="date" class="form-control text-size-responsive" id="data-pagamento-novo-gasto" name="name-data-pagamento-novo-gasto">
+                          </div>
+                        </div>
+
+                        <div class="col">
+                          <div class="form-group">
+                            <label for="valor-novo-gasto" class="font-weight-bold"> Valor </label>
+                            <input type="number" class="form-control text-size-responsive" id="valor-novo-gasto" name="name-valor-novo-gasto" value="00.00" min="0.01" step="0.01" placeholder="ex. 1000,50">
+                          </div>
                         </div>
                       </div>
 
@@ -202,30 +213,9 @@ if($sessao_validada) {
                             </div>
                           </div>
 
-                            <div id="participantes"> 
-                              <div class="row item-participante text-size-responsive form-group">
-                                <div class="col-12 col-md-7">
-                                  <div class="row">
-                                    <div class="col-2">
-                                      <div class="form-check">
-                                        <label for="check-participante-1" class="sr-only"> Selecione esta opção para incluir o participante no novo gasto. </label>
-                                        <input type="checkbox" class="form-check-input" id="check-participante-1" name="retirar-da-lista" value="participante1">
-                                      </div>
-                                    </div>
-
-                                    <div class="col">
-                                      <div class="row">
-                                        <span class="text-truncate"> Membro 1 do Grupo </span>
-                                      </div> 
-
-                                      <div class="row">
-                                        <small class="text-truncate"> email@exemplo.com </small>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div> <!-- 1 participante -->
+                          <div id="todos-participantes-novos">
+                            
+                          </div> <!-- 1 participante -->
                           
                         </div>
                       </div> <!-- participantes -->  
@@ -233,8 +223,8 @@ if($sessao_validada) {
                   </div> <!-- end row -->
 
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
-                    <button type="submit" class="btn btn-success"> Adicionar </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancelar </button>
+                    <button type="button" class="btn btn-success" onclick="adicionar_gasto();"> Adicionar </button>
                   </div>
                 </div> <!-- modal-content -->
               </div> <!-- modal-dialog -->

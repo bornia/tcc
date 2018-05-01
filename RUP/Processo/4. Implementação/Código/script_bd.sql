@@ -72,6 +72,29 @@ CREATE TABLE evento_pertence_grupo (
 	FOREIGN KEY (evento_id_ref) REFERENCES eventos(evento_id)
 );
 
+CREATE TABLE gastos (
+	gasto_id INT NOT NULL AUTO_INCREMENT,
+	descricao VARCHAR(35) NOT NULL,
+	categoria VARCHAR(20) NOT NULL,
+	data_pagamento DATE NOT NULL,
+	valor DECIMAL NOT NULL,
+
+	PRIMARY KEY(gasto_id)
+);
+
+CREATE TABLE gasto_pertence_evento (
+	gasto_evento_id INT NOT NULL AUTO_INCREMENT,
+	usuario_id_ref INT NOT NULL,
+	evento_id_ref INT NOT NULL,
+	gasto_id_ref INT NOT NULL,
+
+	PRIMARY KEY(gasto_evento_id),
+	FOREIGN KEY (usuario_id_ref) REFERENCES usuarios(usuario_id),
+	FOREIGN KEY(evento_id_ref) REFERENCES eventos(evento_id),
+	FOREIGN KEY(gasto_id_ref) REFERENCES gastos(gasto_id)
+);
+
+
 /* ===================================================================== */
 /* ============================== TRIGGERS ============================= */
 /* ===================================================================== */
