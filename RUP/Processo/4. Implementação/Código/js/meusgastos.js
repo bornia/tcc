@@ -398,6 +398,22 @@ function atualizar_lista_gastos() {
 	.always(function() {});
 }
 
+/**
+*/
+function redireciona_para_eventos() {
+	$.ajax({
+		url: 'meuseventos.php',
+		type: 'POST',
+		data: {
+			grupo_id: $('#info_grupo_id').val()
+		},
+		async: false
+	})
+	.done(function() {alert();})
+	.fail(function() {})
+	.always(function() {});
+}
+
 
 /* ===================================================================== */
 /* ============================== TRIGGERS ============================= */

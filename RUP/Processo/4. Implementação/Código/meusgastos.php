@@ -57,20 +57,19 @@ if($sessao_validada) {
             </div>
 
             <div class="col text-right">
-              <a href="meuseventos.php">
-                <div class="d-md-none font-weight-bold">
-                  <h3>
-                    <span class="oi oi-arrow-thick-left" aria-label="Voltar a Meus Eventos"> </span>
-                  </h3>
-                </div>                
+              <form class="d-md-none font-weight-bold" action="meuseventos.php" method="POST">
+                <button type="submit" class="btn btn-link" id="btn-voltar-meus-eventos1" name="grupo_id" value="<?= $_POST['grupo_id']  ?>" title="Voltar a Meus Eventos">
+                  <span class="oi oi-arrow-thick-left" aria-describedby="btn-voltar-meus-eventos1"> </span>
+                  <span id="voltar-meus-eventos1"> Voltar a Meus Eventos </span>
+                </button>
+              </form>                
 
-                <div class="d-none d-md-block">
-                  <h7>
-                    <span class="oi oi-arrow-thick-left" aria-describedby="voltar-meus-eventos"> </span>
-                    <span id="voltar-meus-eventos"> Voltar a Meus Eventos </span>
-                  </h7>
-                </div>
-              </a>
+              <form class="d-none d-md-block" action="meuseventos.php" method="POST">
+                <button type="submit" class="btn btn-link" id="btn-voltar-meus-eventos2" name="grupo_id" value="<?= $_POST['grupo_id']  ?>" title="Voltar a Meus Eventos">
+                  <span class="oi oi-arrow-thick-left" aria-describedby="voltar-meus-eventos2"> </span>
+                  <span id="voltar-meus-eventos2"> Voltar a Meus Eventos </span>
+                </button>
+              </form>
             </div>
           </div>
 

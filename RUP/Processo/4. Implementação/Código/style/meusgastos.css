@@ -38,6 +38,11 @@ div.main {
  * GASTOS
 */
 
+.btn-none {
+	border: none !important;
+	background: none !important;
+}
+
 .change-cursor {
 	cursor: pointer;
 }
