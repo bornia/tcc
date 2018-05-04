@@ -400,16 +400,18 @@ function atualizar_lista_gastos() {
 
 /**
 */
-function redireciona_para_eventos() {
+function buscar_titulo_gasto() {
 	$.ajax({
-		url: 'meuseventos.php',
+		url: './reqs/buscar_titulo_gasto.php',
 		type: 'POST',
 		data: {
-			grupo_id: $('#info_grupo_id').val()
-		},
-		async: false
+			evento_id: $('#info_evento_id').val()
+		}
 	})
-	.done(function() {alert();})
+	.done(function(data) {
+		$('#btn-titulo-gasto').html(data);
+		$('#tabela-gastos-caption').html("Gastos do evento " + data + ".");
+	})
 	.fail(function() {})
 	.always(function() {});
 }
@@ -433,6 +435,7 @@ function trigger_esconder_modal_adicionar_gasto() {
 /* ===================================================================== */
 
 $(document).ready(function() {
+	buscar_titulo_gasto();
 	atualizar_lista_gastos();
 
 	trigger_esconder_modal_adicionar_gasto();

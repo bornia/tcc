@@ -52,24 +52,36 @@ if($sessao_validada) {
       <section id="gastos">
         <div class="container-wip">
           <div class="row">
-            <div class="col-8">
+            <div class="col">
               <h1> Gastos </h1>
             </div>
 
             <div class="col text-right">
-              <form class="d-md-none font-weight-bold" action="meuseventos.php" method="POST">
-                <button type="submit" class="btn btn-link" id="btn-voltar-meus-eventos1" name="grupo_id" value="<?= $_POST['grupo_id']  ?>" title="Voltar a Meus Eventos">
-                  <span class="oi oi-arrow-thick-left" aria-describedby="btn-voltar-meus-eventos1"> </span>
-                  <span id="voltar-meus-eventos1"> Voltar a Meus Eventos </span>
-                </button>
-              </form>                
+              <div class="row">
+                <div class="col">
+                  <button type="button" class="btn btn-lg btn-none text-muted font-weight-bold text-size-responsive" id="btn-titulo-gasto">
+                
+                  </button>
+                </div>
+              </div>
 
-              <form class="d-none d-md-block" action="meuseventos.php" method="POST">
-                <button type="submit" class="btn btn-link" id="btn-voltar-meus-eventos2" name="grupo_id" value="<?= $_POST['grupo_id']  ?>" title="Voltar a Meus Eventos">
-                  <span class="oi oi-arrow-thick-left" aria-describedby="voltar-meus-eventos2"> </span>
-                  <span id="voltar-meus-eventos2"> Voltar a Meus Eventos </span>
-                </button>
-              </form>
+              <div class="row">
+                <div class="col">
+                  <form class="d-md-none font-weight-bold" action="meuseventos.php" method="POST">
+                    <button type="submit" class="btn btn-link float-right" id="btn-voltar-meus-eventos1" name="grupo_id" value="<?= $_POST['grupo_id']  ?>" title="Voltar a Meus Eventos">
+                      <span class="oi oi-arrow-thick-left" aria-describedby="btn-voltar-meus-eventos1"> </span>
+                      <span class="sr-only" id="voltar-meus-eventos1"> Voltar a Meus Eventos </span>
+                    </button>
+                  </form>                
+
+                  <form class="d-none d-md-block" action="meuseventos.php" method="POST">
+                    <button type="submit" class="btn btn-link" id="btn-voltar-meus-eventos2" name="grupo_id" value="<?= $_POST['grupo_id']  ?>" title="Voltar a Meus Eventos">
+                      <span class="oi oi-arrow-thick-left" aria-describedby="voltar-meus-eventos2"> </span>
+                      <span id="voltar-meus-eventos2"> Voltar a Meus Eventos </span>
+                    </button>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -85,22 +97,24 @@ if($sessao_validada) {
                 </select>
               </div>
             </div>
+          </div>
 
-            <div class="col text-right"> <!-- adicionar eventos -->
+          <div class="row">
+            <div class="col offset-sm-11">
               <div class="form-group">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#janela-adicionar-gasto" title="Adicionar novo gasto">
+                <button type="button" class="btn btn-success float-right mb-2" data-toggle="modal" data-target="#janela-adicionar-gasto" title="Adicionar novo gasto">
                   <span class="oi oi-plus text-white"> </span>
                 </button>
               </div>
-            </div>
+            </div>            
           </div>
 
           <!-- ========== TABELA DE GASTOS ========== -->
 
             <div class="table-responsive">
               <table class="table table-sm table-stripped table-hover" summary="">
-                <caption class="sr-only">
-                  Gastos do evento x do grupo y =========================**************
+                <caption class="sr-only" id="tabela-gastos-caption">
+                   
                 </caption>
 
                 <thead>

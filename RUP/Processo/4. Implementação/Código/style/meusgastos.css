@@ -38,6 +38,10 @@ div.main {
  * GASTOS
 */
 
+#btn-titulo-gasto {
+	font-size: 1.3em;
+}
+
 .btn-none {
 	border: none !important;
 	background: none !important;
