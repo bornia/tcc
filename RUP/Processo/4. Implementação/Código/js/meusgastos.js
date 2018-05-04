@@ -318,11 +318,7 @@ function adicionar_gasto() {
 			}
 		})
 		.done(function(novos_membros_emails) {
-			alert(novos_membros_emails);
-			/*
-			var parsed = JSON.parse(novos_membros_emails);
-			enviar_notificacao_email(parsed);
-			atualizar_lista_grupos();*/
+			atualizar_lista_gastos();
 		})
 		.fail(function() {})
 		.always(function() {
@@ -385,12 +381,18 @@ function atualizar_lista_gastos() {
 		url: './reqs/atualizar_lista_gastos.php',
 		type: 'POST',
 		data: {
-			evento_id: $('#info_evento_id').val(),
-			grupo_id: $('#info_grupo_id').val()
+			grupo_id: $('#info_grupo_id').val(),
+			evento_id: $('#info_evento_id').val()
 		}
 	})
 	.done(function(data) {
-		$('#tabela-gastos-corpo').html(data);
+		try {
+			var parsed = JSON.parse(data);
+			$('#tabela-gastos-corpo').html(parsed.gastos);
+			//$('#lista_paginas').html(parsed.paginas);
+		} catch(e_alerta) {
+			$('#tabela-gastos-corpo').html(data);
+		}
 	})
 	.fail(function() {})
 	.always(function() {});
@@ -415,5 +417,7 @@ function trigger_esconder_modal_adicionar_gasto() {
 /* ===================================================================== */
 
 $(document).ready(function() {
+	atualizar_lista_gastos();
+
 	trigger_esconder_modal_adicionar_gasto();
 });

@@ -118,22 +118,7 @@ if($sessao_validada) {
                 </thead>
 
                 <tbody id="tabela-gastos-corpo">
-                  <tr>
-                    <td class="align-middle">
-                      <input aria-label="Marque o item" type="checkbox" name="item" value="item-selecionado-1">
-                    </td>
-                    <td class="change-cursor adjust-width align-middle"> REP </td>
-                    <td class="change-cursor adjust-width align-middle"> Comida </td>
-                    <td class="change-cursor adjust-width align-middle"> 27/10/2017 </td>
-                    <td class="change-cursor adjust-width align-middle"> R$ 32,34 </td>
-                    <td class="align-middle">
-                      <button type="button" class="btn btn-warning" title="Editar gasto">
-                        <span class="sr-only" id="btn-editar-evento-descricao"> Editar gasto. </span>
 
-                        <span class="oi oi-pencil text-white" aria-labelledby="btn-editar-gasto" aria-describedby="btn-editar-evento-descricao"> </span>
-                      </button>
-                    </td>
-                  </tr>
                 </tbody>
               </table>
             </div> <!-- table-responsive -->
