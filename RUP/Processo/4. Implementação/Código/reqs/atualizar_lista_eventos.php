@@ -58,13 +58,42 @@ else {
 		$eventos .= 
 "<tr>
     <td class='align-middle'> <input aria-label='Marque o item' type='checkbox' name='item' value='" . $row['evento_id'] . "' onchange='verificar_valor_checkboxes(); ' data-evento-status='" . $row['status'] . "'> </td>
-    <td class='align-middle'> " . $row['titulo'] . " </td>
-    <td class='align-middle text-center'> " . $row['total'] . " </td>
-    <td class='align-middle text-center'> " . $datetime[0] . " as " . $datetime[1] . " </td>
-    <td class='align-middle text-center'> " . $status . " </td>
-    <td class='align-middle'> <button type='button' class='btn btn-warning' id='btn-editar-evento-" . $row['evento_id'] . "' title='Editar evento.' data-toggle='modal' data-target='#janela-editar-evento' data-evento_id='" . $row['evento_id'] . "' onclick='altera_eventoId_botao_editar_evento(this);'> <span class='oi oi-pencil text-white' aria-labelledby='btn-editar-evento' aria-describedby='btn-editar-evento-descricao'> </span> <span class='sr-only' id='btn-editar-evento-descricao'> Editar evento. </span> </button>
+    <td class='align-middle				text-size-responsive'> " . $row['titulo'] . " </td>
+    <td class='align-middle text-center text-size-responsive'> " . $row['total'] . " </td>
+    <td class='align-middle text-center text-size-responsive'> " . $datetime[0] . " as " . $datetime[1] . " </td>
+    <td class='align-middle text-center text-size-responsive'> " . $status . " </td>
+    <td class='align-middle'>
+    	<div style='display: inline-block;'>
+	    	<div class='d-md-none'>
+		    	<button type='button' class='btn btn-sm btn-warning' id='btn-editar-evento-" . $row['evento_id'] . "' title='Editar evento.' data-toggle='modal' data-target='#janela-editar-evento' data-evento_id='" . $row['evento_id'] . "' onclick='altera_eventoId_botao_editar_evento(this);'>
+		    		<span class='oi oi-pencil text-white text-size-responsive' aria-labelledby='btn-editar-evento' aria-describedby='btn-editar-evento-descricao'> </span>
+		    		<span class='sr-only' id='btn-editar-evento-descricao'> Editar evento. </span>
+				</button>
+			</div>
 
-    <button type='submit' class='btn btn-primary float-right' id='btn-entrar-evento-" . $row['evento_id'] . "' name='evento_id' title='Entrar no evento.' value='" . $row['evento_id'] . "'> <span class='oi oi-account-login text-white' aria-describedby='btn-entrar-evento-descricao'> </span> <span class='sr-only' id='btn-entrar-evento-descricao'> Entrar no evento. </span> </button> 
+			<div class='d-none d-md-block'>
+		    	<button type='button' class='btn btn-warning' id='btn-editar-evento-" . $row['evento_id'] . "' title='Editar evento.' data-toggle='modal' data-target='#janela-editar-evento' data-evento_id='" . $row['evento_id'] . "' onclick='altera_eventoId_botao_editar_evento(this);'>
+		    		<span class='oi oi-pencil text-white text-size-responsive' aria-labelledby='btn-editar-evento' aria-describedby='btn-editar-evento-descricao'> </span>
+		    		<span class='sr-only' id='btn-editar-evento-descricao'> Editar evento. </span>
+				</button>
+			</div>
+		</div>
+
+		<div style='display: inline-block;'>
+			<div class='d-md-none'>
+		    	<button type='submit' class='btn btn-sm btn-primary mt-1' id='btn-entrar-evento-" . $row['evento_id'] . "' name='evento_id' title='Entrar no evento.' value='" . $row['evento_id'] . "'>
+		    		<span class='oi oi-account-login text-white text-size-responsive' aria-describedby='btn-entrar-evento-descricao'> </span>
+		    		<span class='sr-only' id='btn-entrar-evento-descricao'> Entrar no evento. </span>
+				</button>
+			</div>
+
+			<div class='d-none d-md-block'>
+		    	<button type='submit' class='btn btn-primary' id='btn-entrar-evento-" . $row['evento_id'] . "' name='evento_id' title='Entrar no evento.' value='" . $row['evento_id'] . "'>
+		    		<span class='oi oi-account-login text-white text-size-responsive' aria-describedby='btn-entrar-evento-descricao'> </span>
+		    		<span class='sr-only' id='btn-entrar-evento-descricao'> Entrar no evento. </span>
+				</button>
+			</div>
+		</div>
     </td>
 </tr>\n\n";
 	}

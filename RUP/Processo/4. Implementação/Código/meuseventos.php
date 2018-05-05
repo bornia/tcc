@@ -178,11 +178,11 @@ if($sessao_validada) {
                       <th class="align-middle">
                         <input type="checkbox" id="checkbox-excluir-todos-eventos" title="Selecionar todos" value="todo-item-selecionado" onclick="toggle_all_checkboxes(this);">
                       </th>
-                      <th class="align-middle"> Título              </th>
-                      <th class="align-middle text-center"> Total               </th>
-                      <th class="align-middle text-center"> Última modificação  </th>
-                      <th class="align-middle text-center"> Status  </th>
-                      <th class="align-middle"> Opções              </th>
+                      <th class="align-middle text-size-responsive"> Título              </th>
+                      <th class="align-middle text-center text-size-responsive"> Total               </th>
+                      <th class="align-middle text-center text-size-responsive"> Última modificação  </th>
+                      <th class="align-middle text-center text-size-responsive"> Status  </th>
+                      <th class="align-middle text-size-responsive"> Opções              </th>
                     </tr>
                   </thead>
 
