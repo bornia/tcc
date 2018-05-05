@@ -27,7 +27,7 @@ CREATE TABLE grupos (
 	grupo_id INT NOT NULL AUTO_INCREMENT,
 	titulo VARCHAR(30) NOT NULL,
 	descricao VARCHAR(100) NULL,
-	ultima_att DATETIME DEFAULT CURRENT_TIMESTAMP,
+	ultima_att DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
 
 	PRIMARY KEY(grupo_id)
 );
@@ -52,8 +52,8 @@ CREATE TABLE eventos (
 	evento_id INT NOT NULL AUTO_INCREMENT,
 	titulo VARCHAR(40) NOT NULL,
 	ultima_att DATETIME DEFAULT CURRENT_TIMESTAMP,
-	total DECIMAL(10,2) DEFAULT 0,
-	status TINYINT DEFAULT 1,
+	total DECIMAL(10,2) DEFAULT 0 NOT NULL,
+	status TINYINT DEFAULT 1 NOT NULL,
 	/*
 		0 ------ Evento fechado/finalizado
 		1 ------ Evento aberto/funcionando

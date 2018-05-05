@@ -52,8 +52,9 @@ if(!mysqli_num_rows($res)) {
 }
 else {
 	while($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-		$payment_date 	= date_create($row['data_pagamento']);
-		$payment_date 	= date_format($payment_date, 'd/m/Y');
+		$data_pagamento 	= date_create($row['data_pagamento']);
+		$data_pagamento 	= date_format($data_pagamento, 'd/m/Y');
+		$valor_formatado	= str_replace(".", ",", $row['valor']);
 
 		$gastos .= 
 "<tr>
@@ -62,8 +63,8 @@ else {
 	</td>
 	<td class='align-middle 			text-size-responsive'> " . $row['descricao'] 	. " </td>
 	<td class='align-middle text-center text-size-responsive'> " . $row['categoria'] 	. " </td>
-	<td class='align-middle text-center text-size-responsive'> " . $payment_date 		. " </td>
-	<td class='align-middle text-center text-size-responsive'> " . $row['valor'] 		. " </td>
+	<td class='align-middle text-center text-size-responsive'> " . $data_pagamento 		. " </td>
+	<td class='align-middle text-center text-size-responsive'> " . $valor_formatado		. " </td>
 	<td class='align-middle'>
 		<div class='d-md-none'>
 			<button type='button' class='btn btn-sm btn-warning' title='Editar gasto'>

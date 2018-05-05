@@ -50,18 +50,19 @@ if(!mysqli_num_rows($res)) {
 }
 else {
 	while($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-		$datetime 	= date_create($row['ultima_att']);
-		$datetime 	= date_format($datetime, 'd/m/Y H:i:s');
-		$datetime 	= explode(" ", strval($datetime));
-		$status 	= $row['status'] == 0 ? "<span class='oi oi-ban text-muted' aria-label='Evento finalizado.'>" : "<span class='oi oi-check text-muted' aria-label='Evento aberto.'>";
+		$datetime 			= date_create($row['ultima_att']);
+		$datetime 			= date_format($datetime, 'd/m/Y H:i:s');
+		$datetime 			= explode(" ", strval($datetime));
+		$status 			= $row['status'] == 0 ? "<span class='oi oi-ban text-muted' aria-label='Evento finalizado.'>" : "<span class='oi oi-check text-muted' aria-label='Evento aberto.'>";
+		$total_formatado	= str_replace(".", ",", $row['total']);
 
 		$eventos .= 
 "<tr>
     <td class='align-middle'> <input aria-label='Marque o item' type='checkbox' name='item' value='" . $row['evento_id'] . "' onchange='verificar_valor_checkboxes(); ' data-evento-status='" . $row['status'] . "'> </td>
-    <td class='align-middle				text-size-responsive'> " . $row['titulo'] . " </td>
-    <td class='align-middle text-center text-size-responsive'> " . $row['total'] . " </td>
-    <td class='align-middle text-center text-size-responsive'> " . $datetime[0] . " as " . $datetime[1] . " </td>
-    <td class='align-middle text-center text-size-responsive'> " . $status . " </td>
+    <td class='align-middle				text-size-responsive'> " . $row['titulo'] 	. " </td>
+    <td class='align-middle text-center text-size-responsive'> " . $total_formatado . " </td>
+    <td class='align-middle text-center text-size-responsive'> " . $datetime[0] 	. " as " . $datetime[1] . " </td>
+    <td class='align-middle text-center text-size-responsive'> " . $status 			. " </td>
     <td class='align-middle'>
     	<div style='display: inline-block;'>
 	    	<div class='d-md-none'>
