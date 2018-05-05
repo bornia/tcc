@@ -43,17 +43,26 @@ else {
 		$gastos .= 
 "<tr>
 	<td class='align-middle'>
-		<input aria-label='Marque o item' type='checkbox' name='item' value='item-selecionado-" . $row['gasto_id'] . "'>
+		<input aria-label='Marque o item' type='checkbox' name='item' value='" . $row['gasto_id'] . "' onclick='verificar_valor_checkboxes();'>
 	</td>
-	<td class='change-cursor adjust-width align-middle'> " . $row['descricao'] 	. " </td>
-	<td class='change-cursor adjust-width align-middle'> " . $row['categoria'] 	. " </td>
-	<td class='change-cursor adjust-width align-middle'> " . $payment_date 		. " </td>
-	<td class='change-cursor adjust-width align-middle'> " . $row['valor'] 		. " </td>
+	<td class='align-middle 			text-size-responsive'> " . $row['descricao'] 	. " </td>
+	<td class='align-middle text-center text-size-responsive'> " . $row['categoria'] 	. " </td>
+	<td class='align-middle text-center text-size-responsive'> " . $payment_date 		. " </td>
+	<td class='align-middle text-center text-size-responsive'> " . $row['valor'] 		. " </td>
 	<td class='align-middle'>
-		<button type='button' class='btn btn-warning' title='Editar gasto'>
-			<span class='sr-only' id='btn-editar-evento-descricao-" . $row['gasto_id'] . "'> Editar gasto. </span>
-			<span class='oi oi-pencil text-white' aria-describedby='btn-editar-evento-descricao-" . $row['gasto_id'] . "'> </span>
-		</button>
+		<div class='d-md-none'>
+			<button type='button' class='btn btn-sm btn-warning' title='Editar gasto'>
+				<span class='sr-only' id='btn-editar-evento-descricao-" . $row['gasto_id'] . "'> Editar gasto. </span>
+				<span class='oi oi-pencil text-white text-size-responsive' aria-describedby='btn-editar-evento-descricao-" . $row['gasto_id'] . "'> </span>
+			</button>
+		</div>
+
+		<div class='d-none d-md-block'>
+			<button type='button' class='btn btn-warning' title='Editar gasto'>
+				<span class='sr-only' id='btn-editar-evento-descricao-" . $row['gasto_id'] . "'> Editar gasto. </span>
+				<span class='oi oi-pencil text-white text-size-responsive' aria-describedby='btn-editar-evento-descricao-" . $row['gasto_id'] . "'> </span>
+			</button>
+		</div>
 	</td>
 </tr>\n\n";
 	}

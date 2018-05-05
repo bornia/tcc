@@ -207,6 +207,24 @@ function validar_formulario() {
 	return validado;
 }
 
+/** Retorna a quantidade de gastos marcados para exclusão.
+*/
+function obtem_quantidade_gastos_marcados() {
+	return $("input[type=checkbox][name='item']:checked").length;;
+}
+
+/** Mostra quantos itens foram marcados para exclusão e atualiza o body do modal.
+*/
+function exibe_quantidade_eventos_marcados(legenda_modal_id) {
+	var quantidade_eventos_marcados = obtem_quantidade_gastos_marcados();
+
+		if(quantidade_eventos_marcados == 1) {
+			$('#' + legenda_modal_id).html("o gasto selecionado");
+		} else {
+			$('#' + legenda_modal_id).html("os <strong>" + quantidade_eventos_marcados + " gastos selecionados</strong>");
+		}
+}
+
 /* ===================================================================== */
 /* ============================== EVENTOS ============================== */
 /* ===================================================================== */
@@ -395,6 +413,41 @@ function mostrar_botao_excluir_gasto() {
 	$('#btn-excluir-gasto').fadeIn();
 }
 
+/** Envia uma requisição ao banco de dados para excluir os eventos selecionados.
+*/
+function excluir_gastos() {
+	var gastos_selecionados = [];
+
+	$("input[type=checkbox][name='item']:checked").each(function() {
+		gastos_selecionados.push($(this).val());
+	});
+
+	$.ajax({
+		url: './reqs/deletar_gastos.php',
+		type: 'POST',
+		data: {
+			usuario_id: $('#info_usuario_id').val(),
+			grupo_id: 	$('#info_grupo_id').val(),
+			evento_id: 	$('#info_evento_id').val(),
+			gastos_ids: gastos_selecionados
+		}
+	})
+	.done(function(mensagem) {
+		if(mensagem.length != 0) {
+			$('#alerta_mensagem').html(formatar_texto_alerta("danger", mensagem));
+		}
+		else {
+			atualizar_lista_gastos();
+			mostrar_botao_adicionar_gasto();
+			$('#checkbox-excluir-todos-gastos').prop('checked', false);
+		}
+	})
+	.fail(function() {console.log("error"); })
+	.always(function() {
+		$('#janela-excluir-gasto').modal('hide');
+	});
+}
+
 /* ===================================================================== */
 /* ======================== OUTRAS REQUISIÇÕES ========================= */
 /* ===================================================================== */
@@ -470,11 +523,29 @@ function buscar_titulo_gasto() {
 /* ============================== TRIGGERS ============================= */
 /* ===================================================================== */
 
-/** Quando o modal para adicionar um novo evento termina de ocultar-se (fim de todas as transições) limpa-se todo os campos do modal.
+/** Quando o modal para adicionar um novo gasto é carregado atribui-se o foco ao primeiro campo do formulário.
+*/
+function trigger_exibir_modal_adicionar_gasto() {
+	$('#janela-adicionar-gasto').on('shown.bs.modal', function() {	
+		document.getElementById("descricao-novo-gasto").focus();
+	})
+}
+
+/** Quando o modal para adicionar um novo gasto termina de ocultar-se (fim de todas as transições) limpa-se todo os campos do modal.
 */
 function trigger_esconder_modal_adicionar_gasto() {
 	$('#janela-adicionar-gasto').on('hidden.bs.modal', function(e) {
 	  limpar_formulario();
+	})
+}
+
+/** Quando o modal para excluir um gasto é carregado atualiza-se a semântica da mensagem conforme a quantidade de gastos marcados.
+*/
+function trigger_exibir_modal_excluir_evento() {
+	$('#janela-excluir-gasto').on('shown.bs.modal', function() {
+		exibe_quantidade_eventos_marcados('legenda_quantidade_itens_marcados_excluir');
+	
+		document.getElementById("modal-btn-excluir-gasto").focus();
 	})
 }
 
@@ -488,5 +559,7 @@ $(document).ready(function() {
 	atualizar_lista_gastos();
 	mostrar_botao_adicionar_gasto();
 
+	trigger_exibir_modal_adicionar_gasto();
 	trigger_esconder_modal_adicionar_gasto();
+	trigger_exibir_modal_excluir_evento();
 });

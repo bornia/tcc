@@ -86,24 +86,45 @@ if($sessao_validada) {
           </div>
 
           <div class="row">
-            <div class="col-8 col-md-3"> <!-- ordena eventos -->
+            <div class="col-12 col-md-3"> <!-- ordena eventos -->
               <div class="form-group">
-                <label for="ordem" class="font-weight-bold text-muted"> Ordem </label>
+                <label for="ordem" class="font-weight-bold text-muted text-size-responsive"> Ordem </label>
 
                 <select class="form-control text-size-responsive" arial-label="Ordenar eventos de acordo com o critério selecionado." id="ordem">
-                  <option value="" selected> Data de Pagamento </option>
-                  <option value=""> Descrição </option>
-                  <option value=""> Valor </option>
+                  <option value="data" selected>  Data de Pagamento </option>
+                  <option value="descricao">      Descrição </option>
+                  <option value="valor">          Valor </option>
                 </select>
               </div>
             </div>
+
+            <div class="col-12 col-md-2">
+              <div class="form-group">
+                <label for="" class="font-weight-bold text-muted text-size-responsive"> Itens por Página </label>
+
+                <select class="form-control text-size-responsive" aria-label="Indica quantas linhas aparecerão na tabela.">
+                  <option value="05"> 05 </option>
+                  <option value="10"> 10 </option>
+                  <option value="15"> 15 </option>
+                  <option value="20"> 20 </option>
+                  <option value="25"> 25 </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col">
+            </div>
           </div>
 
-          <div class="row">
-            <div class="col offset-sm-11">
+          <div class="row mb-2">
+            <div class="col-12">
               <div class="form-group">
-                <button type="button" class="btn btn-success float-right mb-2" data-toggle="modal" data-target="#janela-adicionar-gasto" title="Adicionar novo gasto">
+                <button type="button" class="btn btn-success float-right" id="btn-adicionar-gasto" title="Adicionar novo gasto" data-toggle="modal" data-target="#janela-adicionar-gasto" >
                   <span class="oi oi-plus text-white"> </span>
+                </button>
+
+                <button type="button" class="btn btn-danger float-right" id="btn-excluir-gasto" title="Excluir gasto." data-toggle="modal" data-target="#janela-excluir-gasto">
+                  <span class="oi oi-trash text-white" aria-labelledby="btn-excluir-gasto"> </span>
                 </button>
               </div>
             </div>            
@@ -120,13 +141,13 @@ if($sessao_validada) {
                 <thead>
                   <tr>
                     <th class="align-middle" aria-label="Marque para excluir um ou mais itens">
-                      <input type="checkbox" value="todo-item-selecionado" onclick="return toggle_all_checkboxes(this);">
+                      <input type="checkbox" id="checkbox-excluir-todos-gastos" value="todo-item-selecionado" onclick="return toggle_all_checkboxes(this);">
                     </th>
-                    <th class="align-middle"> Descrição </th>
-                    <th class="align-middle"> Categoria </th>
-                    <th class="align-middle"> Data de Pagamento </th>
-                    <th class="align-middle"> Valor </th>
-                    <th class="align-middle"> Opções </th>
+                    <th class="align-middle text-center text-size-responsive"> Descrição </th>
+                    <th class="align-middle text-center text-size-responsive"> Categoria </th>
+                    <th class="align-middle text-center text-size-responsive"> Data de Pagamento </th>
+                    <th class="align-middle text-center text-size-responsive"> Valor </th>
+                    <th class="align-middle text-center text-size-responsive"> Opções </th>
                   </tr>
                 </thead>
 
@@ -242,12 +263,21 @@ if($sessao_validada) {
                 </div>
 
                 <div class="modal-body">
-                  <p> Tem certeza que deseja excluir o gasto selecionado? </p>
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col">
+                        <p class="text-justify">
+                          Tem certeza que deseja <u>excluir</u> <span id="legenda_quantidade_itens_marcados_excluir"> </span>?
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
                 </div> <!-- modal-body -->
 
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
-                  <button type="submit" class="btn btn-danger"> Excluir </button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancelar </button>
+                  <button type="button" class="btn btn-danger" id="modal-btn-excluir-gasto" onclick="excluir_gastos();"> Excluir </button>
                 </div>
               </div> <!-- modal-content -->
             </div> <!-- modal-dialog -->
