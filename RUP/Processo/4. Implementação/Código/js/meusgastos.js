@@ -429,7 +429,7 @@ function excluir_gastos() {
 			usuario_id: $('#info_usuario_id').val(),
 			grupo_id: 	$('#info_grupo_id').val(),
 			evento_id: 	$('#info_evento_id').val(),
-			gastos_ids: gastos_selecionados
+			gastos_ids: gastos_selecionados,
 		}
 	})
 	.done(function(mensagem) {
@@ -446,6 +446,23 @@ function excluir_gastos() {
 	.always(function() {
 		$('#janela-excluir-gasto').modal('hide');
 	});
+}
+
+/**
+*/
+function paginar_gastos(element) {
+	var pagina_clicada = $('#' + element.id).data('pagina_clicada');
+	pagina_clicada = pagina_clicada - 1; //necessário para ajusar o parâmetro offset
+
+	//recupera os parametros de paginacao do formulario
+	var registros_por_pagina = $('#registros_por_pagina').val();
+	var pagina_atual = $('#pagina_atual').val();
+
+	var offset_atualizado = pagina_clicada * registros_por_pagina;
+	//aplica o valor atualizado do offset ao campo do form
+	$('#offset').val(offset_atualizado);
+
+	atualizar_lista_gastos();
 }
 
 /* ===================================================================== */
@@ -483,15 +500,17 @@ function atualizar_lista_gastos() {
 		url: './reqs/atualizar_lista_gastos.php',
 		type: 'POST',
 		data: {
-			grupo_id: $('#info_grupo_id').val(),
-			evento_id: $('#info_evento_id').val()
+			grupo_id: 			$('#info_grupo_id').val(),
+			evento_id: 			$('#info_evento_id').val(),
+			regs_por_pagina: 	$('#registros_por_pagina').val(),
+			offset: 			$('#offset').val()
 		}
 	})
 	.done(function(data) {
 		try {
 			var parsed = JSON.parse(data);
 			$('#tabela-gastos-corpo').html(parsed.gastos);
-			//$('#lista_paginas').html(parsed.paginas);
+			$('#lista_paginas').html(parsed.paginas);
 		} catch(e_alerta) {
 			$('#tabela-gastos-corpo').html(data);
 		}

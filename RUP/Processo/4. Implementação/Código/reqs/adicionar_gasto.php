@@ -11,7 +11,7 @@ $usuario_id 				= $_POST['usuario_id'];
 $novo_gasto_descricao 		= $_POST['novo_gasto_descricao'];
 $novo_gasto_categoria 		= $_POST['novo_gasto_categoria'];
 $novo_gasto_data_pagamento 	= $_POST['novo_gasto_data_pagamento'];
-$novo_gasto_valor 			= $_POST['novo_gasto_valor'];
+$novo_gasto_valor 			= str_replace(",", ".", $_POST['novo_gasto_valor']);
 $participantes 				= $_POST['participantes'];
 //$participantes 				= implode(",", $_POST['participantes']);
 

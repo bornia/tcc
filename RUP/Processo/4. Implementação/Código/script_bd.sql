@@ -52,7 +52,7 @@ CREATE TABLE eventos (
 	evento_id INT NOT NULL AUTO_INCREMENT,
 	titulo VARCHAR(40) NOT NULL,
 	ultima_att DATETIME DEFAULT CURRENT_TIMESTAMP,
-	total DECIMAL DEFAULT 0,
+	total DECIMAL(10,2) DEFAULT 0,
 	status TINYINT DEFAULT 1,
 	/*
 		0 ------ Evento fechado/finalizado
@@ -77,7 +77,7 @@ CREATE TABLE gastos (
 	descricao VARCHAR(35) NOT NULL,
 	categoria VARCHAR(20) NOT NULL,
 	data_pagamento DATE NOT NULL,
-	valor DECIMAL NOT NULL,
+	valor DECIMAL(10,2) NOT NULL,
 
 	PRIMARY KEY(gasto_id)
 );

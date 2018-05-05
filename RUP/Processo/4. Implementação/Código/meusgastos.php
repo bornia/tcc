@@ -42,6 +42,7 @@ if($sessao_validada) {
 
     <div class="main container mt-4" role="main">
 
+      <input type="hidden" id="offset"              readonly value="0" />
       <input type='hidden' id="info_usuario_email"  readonly value="<?= $_SESSION['email']; ?>">
       <input type="hidden" id="info_grupo_id"       readonly value="<?= $_POST['grupo_id']  ?>">
       <input type="hidden" id="info_evento_id"      readonly value="<?= $_POST['evento_id']  ?>">
@@ -102,7 +103,7 @@ if($sessao_validada) {
               <div class="form-group">
                 <label for="" class="font-weight-bold text-muted text-size-responsive"> Itens por Página </label>
 
-                <select class="form-control text-size-responsive" aria-label="Indica quantas linhas aparecerão na tabela.">
+                <select class="form-control text-size-responsive" id="registros_por_pagina" aria-label="Indica quantas linhas aparecerão na tabela." onchange="atualizar_lista_gastos();">
                   <option value="05"> 05 </option>
                   <option value="10"> 10 </option>
                   <option value="15"> 15 </option>
@@ -132,124 +133,136 @@ if($sessao_validada) {
 
           <!-- ========== TABELA DE GASTOS ========== -->
 
-            <div class="table-responsive">
-              <table class="table table-sm table-stripped table-hover" summary="">
-                <caption class="sr-only" id="tabela-gastos-caption">
-                   
-                </caption>
+          <div class="table-responsive">
+            <table class="table table-sm table-stripped table-hover" summary="">
+              <caption class="sr-only" id="tabela-gastos-caption">
+                 
+              </caption>
 
-                <thead>
-                  <tr>
-                    <th class="align-middle" aria-label="Marque para excluir um ou mais itens">
-                      <input type="checkbox" id="checkbox-excluir-todos-gastos" value="todo-item-selecionado" onclick="return toggle_all_checkboxes(this);">
-                    </th>
-                    <th class="align-middle text-center text-size-responsive"> Descrição </th>
-                    <th class="align-middle text-center text-size-responsive"> Categoria </th>
-                    <th class="align-middle text-center text-size-responsive"> Data de Pagamento </th>
-                    <th class="align-middle text-center text-size-responsive"> Valor </th>
-                    <th class="align-middle text-center text-size-responsive"> Opções </th>
-                  </tr>
-                </thead>
+              <thead>
+                <tr>
+                  <th class="align-middle" aria-label="Marque para excluir um ou mais itens">
+                    <input type="checkbox" id="checkbox-excluir-todos-gastos" value="todo-item-selecionado" onclick="return toggle_all_checkboxes(this);">
+                  </th>
+                  <th class="align-middle text-center text-size-responsive"> Descrição </th>
+                  <th class="align-middle text-center text-size-responsive"> Categoria </th>
+                  <th class="align-middle text-center text-size-responsive"> Data de Pagamento </th>
+                  <th class="align-middle text-center text-size-responsive"> Valor </th>
+                  <th class="align-middle text-center text-size-responsive"> Opções </th>
+                </tr>
+              </thead>
 
-                <tbody id="tabela-gastos-corpo">
+              <tbody id="tabela-gastos-corpo">
 
-                </tbody>
-              </table>
-            </div> <!-- table-responsive -->
+              </tbody>
+            </table>
+          </div> <!-- table-responsive -->
 
-            <!-- ========== MODAL PARA ADICIONAR NOVO GASTO ========== -->
+          <!-- ========== PAGINAÇÃO DE EVENTOS ========== -->
 
-            <form class="modal fade" id="janela-adicionar-gasto" tabindex="-1" role="dialog" aria-label="Janela para adicionar um novo gasto no evento." aria-hidden="true">
-              <div class="modal-dialog modal-bg modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h3 class="modal-title"> Novo Gasto </h3>
+          <div class="row">
+            <div class="col">
+              <nav class="float-right mt-0" aria-label="Barra de navegação das páginas dos eventos.">
+                <ul class="pagination pagination-sm" id="lista_paginas">
+                  
+                </ul>
+              </nav>
+            </div>
+          </div>
 
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span> &times; </span>
-                    </button>    
-                  </div>
+          <!-- ========== MODAL PARA ADICIONAR NOVO GASTO ========== -->
 
-                  <div class="modal-body text-size-responsive">
-                    <div class="container-fluid">
-                      <div class="row">
-                        <div class="col" id="alerta_mensagem_adicionar_gasto">
-                          
-                        </div>                        
-                      </div>
+          <form class="modal fade" id="janela-adicionar-gasto" tabindex="-1" role="dialog" aria-label="Janela para adicionar um novo gasto no evento." aria-hidden="true">
+            <div class="modal-dialog modal-bg modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title"> Novo Gasto </h3>
 
-                      <div class="row">
-                        <div class="col">
-                          <div class="form-group">
-                            <label for="descricao-novo-gasto" class="font-weight-bold"> Descrição </label>
-                            <input type="text" class="form-control text-size-responsive" id="descricao-novo-gasto" name="name-descricao-novo-gasto" aria-describedby="descricao-novo-gasto-help" maxlength="35" placeholder="Descreva o gasto">
-                            <span id="descricao-novo-gasto-help" class="sr-only"> Se desejar, descreva o gasto em poucas palavras. </span>
-                          </div>
-                        </div>
-                      </div>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span> &times; </span>
+                  </button>    
+                </div>
 
-                      <div class="row">
-                        <div class="col">
-                          <div class="form-group">
-                            <label for="categoria-novo-gasto" class="font-weight-bold"> Categoria </label>
-                            <?php require('gastos_categorias.html'); ?>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col">
-                          <div class="form-group">
-                            <label for="data-pagamento-novo-gasto" class="font-weight-bold"> Data de Pagamento </label>
-                            <input type="date" class="form-control text-size-responsive" id="data-pagamento-novo-gasto" name="name-data-pagamento-novo-gasto">
-                          </div>
-                        </div>
-
-                        <div class="col">
-                          <div class="form-group">
-                            <label for="valor-novo-gasto" class="font-weight-bold"> Valor </label>
-                            <input type="number" class="form-control text-size-responsive" id="valor-novo-gasto" name="name-valor-novo-gasto" value="00.00" min="0.01" step="0.01" placeholder="ex. 1000,50">
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- ========== LISTA DE PARTICIPANTES ========== -->
-
-                      <div class="row">
-                        <div class="col">
-                          <div class="form-group">
-                            <label for="buscar-email-participante" class="font-weight-bold" aria-describedby="aria-quem-dividira">
-                              Participantes
-                              <small class="text-muted" id="aria-quem-dividira"> Entre quem será dividido? </small>
-                            </label>
-
-                            <input type="text" class="form-control text-size-responsive" id="buscar-email-participante" placeholder="Busque pelo e-mail e dê Enter" onkeyup="return buscar_entre_participantes(this.id);" onkeypress="incluir_participante(event);">
-
-                            <div class="row" id="caixa-pesquisa-usuarios">
-                              <ul id="lista-pesquisa-usuarios">
-
-                              </ul>
-                            </div>
-                          </div>
-
-                          <div id="todos-participantes-novos">
-                            
-                          </div> <!-- 1 participante -->
-                          
-                        </div>
-                      </div> <!-- participantes -->  
+                <div class="modal-body text-size-responsive">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col" id="alerta_mensagem_adicionar_gasto">
+                        
+                      </div>                        
                     </div>
-                  </div> <!-- end row -->
 
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancelar </button>
-                    <button type="button" class="btn btn-success" onclick="adicionar_gasto();"> Adicionar </button>
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="descricao-novo-gasto" class="font-weight-bold"> Descrição </label>
+                          <input type="text" class="form-control text-size-responsive" id="descricao-novo-gasto" name="name-descricao-novo-gasto" aria-describedby="descricao-novo-gasto-help" maxlength="35" placeholder="Descreva o gasto">
+                          <span id="descricao-novo-gasto-help" class="sr-only"> Se desejar, descreva o gasto em poucas palavras. </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="categoria-novo-gasto" class="font-weight-bold"> Categoria </label>
+                          <?php require('gastos_categorias.html'); ?>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="data-pagamento-novo-gasto" class="font-weight-bold"> Data de Pagamento </label>
+                          <input type="date" class="form-control text-size-responsive" id="data-pagamento-novo-gasto" name="name-data-pagamento-novo-gasto">
+                        </div>
+                      </div>
+
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="valor-novo-gasto" class="font-weight-bold"> Valor </label>
+                          <input type="number" class="form-control text-size-responsive" id="valor-novo-gasto" name="name-valor-novo-gasto" value="00.00" min="0.01" step="0.01" placeholder="ex. 1000,50">
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- ========== LISTA DE PARTICIPANTES ========== -->
+
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="buscar-email-participante" class="font-weight-bold" aria-describedby="aria-quem-dividira">
+                            Participantes
+                            <small class="text-muted" id="aria-quem-dividira"> Entre quem será dividido? </small>
+                          </label>
+
+                          <input type="text" class="form-control text-size-responsive" id="buscar-email-participante" placeholder="Busque pelo e-mail e dê Enter" onkeyup="return buscar_entre_participantes(this.id);" onkeypress="incluir_participante(event);">
+
+                          <div class="row" id="caixa-pesquisa-usuarios">
+                            <ul id="lista-pesquisa-usuarios">
+
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div id="todos-participantes-novos">
+                          
+                        </div> <!-- 1 participante -->
+                        
+                      </div>
+                    </div> <!-- participantes -->  
                   </div>
-                </div> <!-- modal-content -->
-              </div> <!-- modal-dialog -->
-            </form>
+                </div> <!-- end row -->
 
-            <!-- ========== MODAL PARA EXCLUIR GASTO ========== -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancelar </button>
+                  <button type="button" class="btn btn-success" onclick="adicionar_gasto();"> Adicionar </button>
+                </div>
+              </div> <!-- modal-content -->
+            </div> <!-- modal-dialog -->
+          </form>
+
+          <!-- ========== MODAL PARA EXCLUIR GASTO ========== -->
 
           <form class="modal fade" id="janela-excluir-gasto" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
