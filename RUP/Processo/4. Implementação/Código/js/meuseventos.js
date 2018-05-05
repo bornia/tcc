@@ -123,7 +123,7 @@ function check_nchar(element_checked, element_nchar, limite) {
 */
 function verificar_valor_checkboxes() {
 	var todos_selecionados 		= $("input[type=checkbox][name='item']:checked");
-	//var todos_nao_selecionados 	= $("input[type=checkbox][name='item']:not(:checked)").length;
+	var todos_nao_selecionados 	= $("input[type=checkbox][name='item']:not(:checked)");
 
 	if(todos_selecionados.length > 0) {
 		mostrar_botao_excluir_evento();
@@ -134,6 +134,10 @@ function verificar_valor_checkboxes() {
 		mostrar_botao_adicionar_evento();
 		ocultar_botao_reabrir_evento();
 		ocultar_botao_finalizar_evento();
+	}
+
+	if(todos_nao_selecionados.length == 0) {
+		$('#checkbox-excluir-todos-eventos').prop('checked', true);
 	}
 }
 

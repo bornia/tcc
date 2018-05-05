@@ -346,6 +346,55 @@ function limpar_formulario() {
 	contador_participantes = 1;
 }
 
+/** Marca/desmarca todas os checkboxes do corpo da tabela caso o checkbox do cabeçalho seja marcado/desmarcado.
+*/
+function toggle_all_checkboxes(element) {
+	var todos_selecionados = $("input[type=checkbox][name='item']:checked");
+
+	$("input[type=checkbox][name='item']").each(function(index, item) {
+		item.checked = element.checked;
+	});
+
+	if(element.checked) {
+		mostrar_botao_excluir_gasto();
+	}
+	else {
+		mostrar_botao_adicionar_gasto();
+	}
+}
+
+/** Verifica se existe pelo menos um checkbox selecionado na tabela. 
+*/
+function verificar_valor_checkboxes() {
+	var todos_selecionados 		= $("input[type=checkbox][name='item']:checked");
+	var todos_nao_selecionados 	= $("input[type=checkbox][name='item']:not(:checked)");
+
+	if(todos_selecionados.length > 0) {
+		mostrar_botao_excluir_gasto();
+	} else {
+		$('#checkbox-excluir-todos-gastos').prop('checked', false);
+		mostrar_botao_adicionar_gasto();
+	}
+
+	if(todos_nao_selecionados.length == 0) {
+		$('#checkbox-excluir-todos-gastos').prop('checked', true);
+	}
+}
+
+/** Devolve a função do botão de adicionar gasto.
+*/
+function mostrar_botao_adicionar_gasto() {
+	$('#btn-excluir-gasto').hide();
+	$('#btn-adicionar-gasto').fadeIn();
+}
+
+/** Muda a função do botão de adicionar gasto para poder excluir os gastos marcados.
+*/
+function mostrar_botao_excluir_gasto() {
+	$('#btn-adicionar-gasto').hide();
+	$('#btn-excluir-gasto').fadeIn();
+}
+
 /* ===================================================================== */
 /* ======================== OUTRAS REQUISIÇÕES ========================= */
 /* ===================================================================== */
@@ -437,6 +486,7 @@ function trigger_esconder_modal_adicionar_gasto() {
 $(document).ready(function() {
 	buscar_titulo_gasto();
 	atualizar_lista_gastos();
+	mostrar_botao_adicionar_gasto();
 
 	trigger_esconder_modal_adicionar_gasto();
 });
