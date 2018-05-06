@@ -60,7 +60,7 @@ td.adjust-width {
 	max-width: 10em;
 }
 
-#caixa-pesquisa-usuarios {
+.caixa-pesquisa-usuarios {
 	height: auto;
 	background: #fff;
 	border-radius: 5px;
@@ -72,7 +72,7 @@ td.adjust-width {
 	margin: 0 0;
 }
 
-#lista-pesquisa-usuarios {
+.lista-pesquisa-usuarios {
 	height: auto;
 	float: left;
 	list-style: none;
@@ -80,11 +80,11 @@ td.adjust-width {
 	padding: 0;
 }
 
-#lista-pesquisa-usuarios li {
+.lista-pesquisa-usuarios li {
 	border-bottom: 1px solid #DDD;
 }
 
-#lista-pesquisa-usuarios li:hover {
+.lista-pesquisa-usuarios li:hover {
 	background-color: rgba(135,206,250, 0.2);
 	cursor: pointer;
 }

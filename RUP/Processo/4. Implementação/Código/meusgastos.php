@@ -238,7 +238,19 @@ if($sessao_validada) {
                       <div class="col">
                         <div class="form-group">
                           <label for="categoria-novo-gasto" class="font-weight-bold"> Categoria </label>
-                          <?php require('gastos_categorias.html'); ?>
+                          
+                          <select class="form-control text-size-responsive" id="categoria-novo-gasto" name="name-categoria-novo-gasto" required>
+                            <option value="" disabled selected> Categorize o gasto... </option>
+                            <option value="Habitação"> Habitação </option>
+                            <option value="Transporte"> Transporte </option>
+                            <option value="Saúde"> Saúde </option>
+                            <option value="Educação"> Educação </option>
+                            <option value="Imposto"> Imposto </option>
+                            <option value="Alimentação"> Alimentação </option>
+                            <option value="Cuidados Pessoais"> Cuidados Pessoais </option>
+                            <option value="Manutenção/Reforma"> Manutenção/Reforma </option>
+                            <option value="Lazer"> Lazer </option>
+                          </select>
                         </div>
                       </div>
                     </div>
@@ -264,21 +276,25 @@ if($sessao_validada) {
                     <div class="row">
                       <div class="col">
                         <div class="form-group">
-                          <label for="buscar-email-participante" class="font-weight-bold" aria-describedby="aria-quem-dividira">
+                          <label for="buscar-email-participante-novo-gasto" class="font-weight-bold" aria-describedby="aria-quem-dividira">
                             Participantes
                             <small class="text-muted" id="aria-quem-dividira"> Entre quem será dividido? </small>
                           </label>
 
-                          <input type="text" class="form-control text-size-responsive" id="buscar-email-participante" placeholder="Busque pelo e-mail e dê Enter" onkeyup="return buscar_entre_participantes(this.id);" onkeypress="incluir_participante(event);">
+                          <input type="text" class="form-control text-size-responsive" id="buscar-email-participante-novo-gasto" placeholder="Busque pelo e-mail e dê Enter" onkeyup="return buscar_entre_participantes_novo_gasto(this.id);" onkeypress="incluir_participante_novo_gasto(event);">
 
-                          <div class="row" id="caixa-pesquisa-usuarios">
-                            <ul id="lista-pesquisa-usuarios">
+                          <div class="row">
+                            <div class="col">
+                              <div class="caixa-pesquisa-usuarios" id="caixa-pesquisa-usuarios-novo-gasto">
+                                <ul class="lista-pesquisa-usuarios" id="lista-pesquisa-usuarios-novo-gasto">
 
-                            </ul>
+                                </ul>
+                              </div>
+                            </div>
                           </div>
                         </div>
 
-                        <div id="todos-participantes-novos">
+                        <div id="todos-participantes-novo-gasto">
                           
                         </div> <!-- 1 participante -->
                         
@@ -328,6 +344,115 @@ if($sessao_validada) {
               </div> <!-- modal-content -->
             </div> <!-- modal-dialog -->
           </form>
+
+          <!-- ========== MODAL PARA EDITAR GASTO ========== -->
+
+          <form class="modal fade" id="janela-editar-gasto" tabindex="-1" role="dialog" aria-label="Janela para editar gasto do evento." aria-hidden="true">
+            <div class="modal-dialog modal-bg modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title"> Editar Gasto </h3>
+
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span> &times; </span>
+                  </button>    
+                </div>
+
+                <div class="modal-body text-size-responsive">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col" id="alerta_mensagem_editar_gasto">
+                        
+                      </div>                        
+                    </div>
+
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="descricao-editar-gasto" class="font-weight-bold"> Descrição </label>
+                          <input type="text" class="form-control text-size-responsive" id="descricao-editar-gasto" name="name-descricao-editar-gasto" aria-describedby="descricao-editar-gasto-help" maxlength="35" placeholder="Descreva o gasto">
+                          <span id="descricao-editar-gasto-help" class="sr-only"> Atualize a descrição do gasto utilizando poucas palavras. </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="categoria-editar-gasto" class="font-weight-bold"> Categoria </label>
+                          
+                          <select class="form-control text-size-responsive" id="categoria-editar-gasto" name="name-categoria-editar-gasto" required>
+                            <option value="" disabled selected> Categorize o gasto... </option>
+                            <option value="Habitação"> Habitação </option>
+                            <option value="Transporte"> Transporte </option>
+                            <option value="Saúde"> Saúde </option>
+                            <option value="Educação"> Educação </option>
+                            <option value="Imposto"> Imposto </option>
+                            <option value="Alimentação"> Alimentação </option>
+                            <option value="Cuidados Pessoais"> Cuidados Pessoais </option>
+                            <option value="Manutenção/Reforma"> Manutenção/Reforma </option>
+                            <option value="Lazer"> Lazer </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="data-pagamento-editar-gasto" class="font-weight-bold"> Data de Pagamento </label>
+                          <input type="date" class="form-control text-size-responsive" id="data-pagamento-editar-gasto" name="name-data-pagamento-editar-gasto">
+                        </div>
+                      </div>
+
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="valor-editar-gasto" class="font-weight-bold"> Valor </label>
+                          <input type="number" class="form-control text-size-responsive" id="valor-editar-gasto" name="name-valor-editar-gasto" value="00.00" min="0.01" step="0.01" placeholder="ex. 1000,50">
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- ========== LISTA DE PARTICIPANTES ========== -->
+
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="buscar-email-participante-editar-gasto" class="font-weight-bold" aria-describedby="aria-quem-dividira">
+                            Participantes
+                            <small class="text-muted" id="aria-quem-dividira"> Entre quem será dividido? </small>
+                          </label>
+
+                          <input type="text" class="form-control text-size-responsive" id="buscar-email-participante-editar-gasto" placeholder="Busque pelo e-mail e dê Enter" onkeyup="return buscar_entre_participantes_editar_gasto(this.id);" onkeypress="incluir_participante_editar_gasto(event);">
+
+                          <div class="row">
+                            <div class="col">
+                              <div class="caixa-pesquisa-usuarios" id="caixa-pesquisa-usuarios-editar-gasto">
+                                <ul class="lista-pesquisa-usuarios" id="lista-pesquisa-usuarios-editar-gasto">
+
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div id="todos-participantes-editar-gasto">
+                          
+                        </div> <!-- 1 participante -->
+                        
+                      </div>
+                    </div> <!-- participantes -->  
+                  </div>
+                </div> <!-- end row -->
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancelar </button>
+                  <button type="button" class="btn btn-success" onclick="editar_gasto();"> Adicionar </button>
+                </div>
+              </div> <!-- modal-content -->
+            </div> <!-- modal-dialog -->
+          </form>
+
         </div>
       </section>
     </div>

@@ -23,9 +23,9 @@ function formatar_texto_alerta(tipo, mensagem) {
 /**
 */
 function seleciona_pesquisa_usuario(email) {
-	$('#buscar-email-participante').val(email);
-	$('#caixa-pesquisa-usuarios').hide();
-	$('#buscar-email-participante').get(0).focus();
+	$('#buscar-email-participante-novo-gasto').val(email);
+	$('#caixa-pesquisa-usuarios-novo-gasto').hide();
+	document.getElementById("buscar-email-participante-novo-gasto").focus();
 }
 
 /** Testa se o texto de um e-mail segue o padrão estabelecido.
@@ -51,7 +51,7 @@ function verificar_email(object) {
 /**
 */
 function verifica_novos_participantes_adicionados() {
-	var novo_email_obj = $('#buscar-email-participante');
+	var novo_email_obj = $('#buscar-email-participante-novo-gasto');
 	var email_ja_existe = true;
 
 	$("input[type='text'][name='participantes[]'").each(function(index, element) {
@@ -137,7 +137,7 @@ function verifica_valores_inteiros_e_zero(input_id) {
 
 /** Valida o formulário verificando se atende aos padrões determinados.
 */
-function validar_formulario() {
+function validar_formulario_novo_gasto() {
 	var validado = true;
 
 	if(!verifica_campo_vazio('descricao-novo-gasto')) {
@@ -231,11 +231,11 @@ function exibe_quantidade_eventos_marcados(legenda_modal_id) {
 
 /**
 */
-function buscar_entre_participantes(id) {
+function buscar_entre_participantes_novo_gasto(id) {
 	var email = $('#' + id);
 
 	if(email.val() == '') {
-		$('#caixa-pesquisa-usuarios').hide();
+		$('#caixa-pesquisa-usuarios-novo-gasto').hide();
 		return false;
 	}
 
@@ -249,12 +249,46 @@ function buscar_entre_participantes(id) {
 	})
 	.done(function(data) {
 		if(data == '') {
-			$('#lista-pesquisa-usuarios').html('');
-			$('#caixa-pesquisa-usuarios').hide();
+			$('#lista-pesquisa-usuarios-novo-gasto').html('');
+			$('#caixa-pesquisa-usuarios-novo-gasto').hide();
 		}
 		else {
-			$('#caixa-pesquisa-usuarios').show();
-			$('#lista-pesquisa-usuarios').html(data);
+			$('#caixa-pesquisa-usuarios-novo-gasto').show();
+			$('#lista-pesquisa-usuarios-novo-gasto').html(data);
+		}
+	})
+	.fail(function() {})
+	.always(function() {});
+
+	return true;
+}
+
+/**
+*/
+function buscar_entre_participantes_editar_gasto(id) {
+	var email = $('#' + id);
+
+	if(email.val() == '') {
+		$('#caixa-pesquisa-usuarios-editar-gasto').hide();
+		return false;
+	}
+
+	$.ajax({
+		url: './reqs/buscar_entre_participantes.php',
+		type: 'POST',
+		data: {
+			membro_email: 	email.val(),
+			grupo_id: 		$('#info_grupo_id').val()
+		}
+	})
+	.done(function(data) {
+		if(data == '') {
+			$('#lista-pesquisa-usuarios-editar-gasto').html('');
+			$('#caixa-pesquisa-usuarios-editar-gasto').hide();
+		}
+		else {
+			$('#caixa-pesquisa-usuarios-editar-gasto').show();
+			$('#lista-pesquisa-usuarios-editar-gasto').html(data);
 		}
 	})
 	.fail(function() {})
@@ -266,9 +300,9 @@ function buscar_entre_participantes(id) {
 /** Insere um novo membro na lista de membros do novo grupo quando a tecla Enter for pressionada.
  * event Referência ao evento do teclado.
 */
-function incluir_participante(event) {
+function incluir_participante_novo_gasto(event) {
 	var key = event.which || event.keyCode;
-	var novo_email_obj = $('#buscar-email-participante');
+	var novo_email_obj = $('#buscar-email-participante-novo-gasto');
 	var alerta_mensagem_obj = $('#alerta_mensagem_adicionar_gasto');
 
 	if(key == 13) {
@@ -299,7 +333,7 @@ function incluir_participante(event) {
 		if(contador_participantes > 1) // Verifica se existe mais de um membro para inserir um hr para separá-lo do novo membro
 			$('#separador-participante-' + (contador_participantes - 1)).css('display', 'block');
 
-		$('#todos-participantes-novos').append( // Acrescenta o novo membro a lista
+		$('#todos-participantes-novo-gasto').append( // Acrescenta o novo membro a lista
 			formatar_texto_novo_membro(contador_participantes, novo_email_obj.val())
 		);
 
@@ -320,7 +354,7 @@ function adicionar_gasto() {
 		participantes_adicionados.push($(this).val());
 	});
 
-	if(validar_formulario()) {
+	if(validar_formulario_novo_gasto()) {
 		$.ajax({
 			url: './reqs/adicionar_gasto.php',
 			type: 'POST',
@@ -342,14 +376,14 @@ function adicionar_gasto() {
 		.always(function() {
 			$('#janela-adicionar-gasto').modal('hide');
 
-			limpar_formulario();
+			limpar_formulario_novo_gasto();
 		});
 	}
 }
 
 /**
 */
-function limpar_formulario() {
+function limpar_formulario_novo_gasto() {
 	$('#janela-adicionar-gasto').each(function() { this.reset();	});
 
 	for(contador_participantes; contador_participantes > 0; contador_participantes--) {
@@ -573,11 +607,28 @@ function trigger_exibir_modal_adicionar_gasto() {
 	})
 }
 
+/** Quando o modal para adicionar um novo gasto é carregado atribui-se o foco ao primeiro campo do formulário.
+*/
+function trigger_exibir_modal_adicionar_gasto() {
+	$('#janela-adicionar-gasto').on('shown.bs.modal', function() {	
+		document.getElementById("descricao-novo-gasto").focus();
+	})
+}
+
 /** Quando o modal para adicionar um novo gasto termina de ocultar-se (fim de todas as transições) limpa-se todo os campos do modal.
 */
 function trigger_esconder_modal_adicionar_gasto() {
 	$('#janela-adicionar-gasto').on('hidden.bs.modal', function(e) {
 	  limpar_formulario();
+	})
+}
+
+/** Quando o modal para editar um gasto é carregado atribui-se o foco ao primeiro campo do formulário e carrega-se os dados do gasto no formulário.
+*/
+function trigger_exibir_modal_editar_gasto() {
+	$('#janela-editar-gasto').on('shown.bs.modal', function() {	
+		document.getElementById("descricao-editar-gasto").focus();
+		alert($('#janela-editar-gasto > #categoria-novo-gasto').val());
 	})
 }
 
@@ -605,4 +656,5 @@ $(document).ready(function() {
 	trigger_exibir_modal_adicionar_gasto();
 	trigger_esconder_modal_adicionar_gasto();
 	trigger_exibir_modal_excluir_evento();
+	trigger_exibir_modal_editar_gasto();
 });

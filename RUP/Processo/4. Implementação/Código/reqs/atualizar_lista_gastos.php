@@ -61,10 +61,10 @@ else {
 	<td class='align-middle'>
 		<input aria-label='Marque o item' type='checkbox' name='item' value='" . $row['gasto_id'] . "' onclick='verificar_valor_checkboxes();'>
 	</td>
-	<td class='align-middle 			text-size-responsive'> " . $row['descricao'] 	. " </td>
-	<td class='align-middle text-center text-size-responsive'> " . $row['categoria'] 	. " </td>
-	<td class='align-middle text-center text-size-responsive'> " . $data_pagamento 		. " </td>
-	<td class='align-middle text-center text-size-responsive'> " . $valor_formatado		. " </td>
+	<td class='align-middle adjust-width text-size-responsive'> " 				. $row['descricao'] 	. " </td>
+	<td class='align-middle adjust-width text-center text-size-responsive'> " 	. $row['categoria'] 	. " </td>
+	<td class='align-middle adjust-width text-center text-size-responsive'> " 	. $data_pagamento 		. " </td>
+	<td class='align-middle adjust-width text-center text-size-responsive'> " 	. $valor_formatado		. " </td>
 	<td class='align-middle'>
 		<div class='d-md-none'>
 			<button type='button' class='btn btn-sm btn-warning' title='Editar gasto'>
@@ -74,7 +74,7 @@ else {
 		</div>
 
 		<div class='d-none d-md-block'>
-			<button type='button' class='btn btn-warning' title='Editar gasto'>
+			<button type='button' class='btn btn-warning' title='Editar gasto' data-toggle='modal' data-target='#janela-editar-gasto'>
 				<span class='sr-only' id='btn-editar-evento-descricao-" . $row['gasto_id'] . "'> Editar gasto. </span>
 				<span class='oi oi-pencil text-white text-size-responsive' aria-describedby='btn-editar-evento-descricao-" . $row['gasto_id'] . "'> </span>
 			</button>
