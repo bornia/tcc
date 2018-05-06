@@ -465,6 +465,26 @@ function paginar_gastos(element) {
 	atualizar_lista_gastos();
 }
 
+/**
+*/
+function mostrar_botao_ordenar_asc() {
+	$('#div-btn-ordenar-desc').hide();
+	$('#div-btn-ordenar-asc').fadeIn();
+}
+
+/**
+*/
+function mostrar_botao_ordenar_desc() {
+	$('#div-btn-ordenar-asc').hide();
+	$('#div-btn-ordenar-desc').fadeIn();
+}
+
+/**
+*/
+function apagar_texto(input_id) {
+	$('#' + input_id).val("");
+}
+
 /* ===================================================================== */
 /* ======================== OUTRAS REQUISIÇÕES ========================= */
 /* ===================================================================== */
@@ -503,7 +523,10 @@ function atualizar_lista_gastos() {
 			grupo_id: 			$('#info_grupo_id').val(),
 			evento_id: 			$('#info_evento_id').val(),
 			regs_por_pagina: 	$('#registros_por_pagina').val(),
-			offset: 			$('#offset').val()
+			offset: 			$('#offset').val(),
+			ordem: 				$('#ordem').val(),
+			tipo_ordem: 		($('#btn-ordenar-asc').is(':visible') ? $('#btn-ordenar-asc').data('tipo-ordem') : $('#btn-ordenar-desc').data('tipo-ordem')),
+			texto_pesquisado: 	$('#barra-de-pesquisa').val()
 		}
 	})
 	.done(function(data) {
@@ -575,6 +598,7 @@ function trigger_exibir_modal_excluir_evento() {
 
 $(document).ready(function() {
 	buscar_titulo_gasto();
+	mostrar_botao_ordenar_desc();
 	atualizar_lista_gastos();
 	mostrar_botao_adicionar_gasto();
 

@@ -87,17 +87,51 @@ if($sessao_validada) {
           </div>
 
           <div class="row">
-            <div class="col-12 col-md-3"> <!-- ordena eventos -->
+            <!-- ========== BARRA DE PESQUISA DE GASTOS ========== -->
+
+            <div class="col-12 col-md-4">
+              <label for="barra-de-pesquisa-label" class="text-muted font-weight-bold"> Pesquisa </label>
+
+              <div class="input-group" id="barra-de-pesquisa-label">
+                <input type="text" class="form-control text-size-responsive" id="barra-de-pesquisa" placeholder="Procure pela descrição do gasto." aria-label="Barra de pesquisa de gastos." onkeyup="atualizar_lista_gastos();">
+                
+                <div class="input-group-prepend">
+                  <button type="button" class="btn btn-sm btn-none" onclick="apagar_texto('barra-de-pesquisa'); atualizar_lista_gastos();" aria-describedby="barra-de-pesquisa-icone">
+                    <span class="close" id="barra-de-pesquisa-icone" aria-label="Apagar todo o texto da pesquisa."> &times; </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- ========== ORDENAR GASTOS ========== -->
+
+            <div class="col-12 col-md-3">
               <div class="form-group">
                 <label for="ordem" class="font-weight-bold text-muted text-size-responsive"> Ordem </label>
 
-                <select class="form-control text-size-responsive" arial-label="Ordenar eventos de acordo com o critério selecionado." id="ordem">
-                  <option value="data" selected>  Data de Pagamento </option>
-                  <option value="descricao">      Descrição </option>
-                  <option value="valor">          Valor </option>
-                </select>
+                <div class="input-group">
+                  <select class="form-control text-size-responsive" arial-label="Ordenar eventos de acordo com o critério selecionado." id="ordem" onchange="atualizar_lista_gastos();">
+                    <option value="data_pagamento" selected>  Data de Pagamento </option>
+                    <option value="descricao">                Descrição </option>
+                    <option value="valor">                    Valor </option>
+                  </select>
+
+                  <div class="input-group-prepend" id="div-btn-ordenar-asc">
+                    <button type="button" class="btn btn-sm btn-none" id="btn-ordenar-asc" title="Ordem crescente." onclick="mostrar_botao_ordenar_desc(); atualizar_lista_gastos();" data-tipo-ordem="ASC">
+                      <span class="oi oi-arrow-top text-muted font-weight-bold"> </span>
+                    </button>
+                  </div>
+
+                  <div class="input-group-prepend" id="div-btn-ordenar-desc">
+                    <button type="button" class="btn btn-sm btn-none ordem-ativa" id="btn-ordenar-desc" title="Ordem decrescente." onclick="mostrar_botao_ordenar_asc(); atualizar_lista_gastos();" data-tipo-ordem="DESC">
+                      <span class="oi oi-arrow-bottom text-muted font-weight-bold"> </span>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
+
+            <!-- ========== ITENS POR PÁGINA ========== -->
 
             <div class="col-12 col-md-2">
               <div class="form-group">
@@ -112,10 +146,9 @@ if($sessao_validada) {
                 </select>
               </div>
             </div>
-
-            <div class="col">
-            </div>
           </div>
+
+          <!-- ========== ADICIONAR E EXCLUIR GASTOS ========== -->
 
           <div class="row mb-2">
             <div class="col-12">
