@@ -1,4 +1,4 @@
-<<?php
+<?php
 
 session_start();
 
@@ -33,7 +33,7 @@ else {
 		$email = $data['email'];
 
 		$usuarios .= "" .
-			"<li onclick='seleciona_pesquisa_usuario(\"$email\");'>
+			"<li onclick='seleciona_pesquisa_usuario_editar_gasto(\"$email\");'>
 				<div> <small> " . $data['email'] . " </small> </div>
 				<div class='text-muted'> <small> " . $data['nome'] . " </small> </div>
 			</li>"

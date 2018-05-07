@@ -366,6 +366,16 @@ if($sessao_validada) {
                       </div>                        
                     </div>
 
+                    <div class="row" style="display: none;">
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="info-gasto-id" class="font-weight-bold sr-only"> ID do gasto </label>
+                          <input type="hidden" class="form-control" id="info-gasto-id" aria-describedby="info-gasto-id-help" placeholder="Novo título do gasto" readonly>
+                          <small id="info-gasto-id-help" class="form-text text-muted sr-only">Campo criado apenas para auxiliar com o ID do gasto selecionado.</small>
+                        </div>
+                      </div>
+                    </div>
+
                     <div class="row">
                       <div class="col">
                         <div class="form-group">
@@ -447,7 +457,7 @@ if($sessao_validada) {
 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancelar </button>
-                  <button type="button" class="btn btn-success" onclick="editar_gasto();"> Adicionar </button>
+                  <button type="button" class="btn btn-warning" onclick="editar_gasto();"> Editar </button>
                 </div>
               </div> <!-- modal-content -->
             </div> <!-- modal-dialog -->

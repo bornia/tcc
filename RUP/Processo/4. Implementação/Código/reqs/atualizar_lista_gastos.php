@@ -67,14 +67,14 @@ else {
 	<td class='align-middle adjust-width text-center text-size-responsive'> " 	. $valor_formatado		. " </td>
 	<td class='align-middle'>
 		<div class='d-md-none'>
-			<button type='button' class='btn btn-sm btn-warning' title='Editar gasto'>
+			<button type='button' class='btn btn-sm btn-warning' id='btn-editar-gasto-" . $row['gasto_id'] . "' title='Editar gasto' data-toggle='modal' data-target='#janela-editar-gasto' data-gasto_id='" . $row['gasto_id'] . "' onclick='altera_gastoId_botao_editar_gasto(this)';>
 				<span class='sr-only' id='btn-editar-evento-descricao-" . $row['gasto_id'] . "'> Editar gasto. </span>
 				<span class='oi oi-pencil text-white text-size-responsive' aria-describedby='btn-editar-evento-descricao-" . $row['gasto_id'] . "'> </span>
 			</button>
 		</div>
 
 		<div class='d-none d-md-block'>
-			<button type='button' class='btn btn-warning' title='Editar gasto' data-toggle='modal' data-target='#janela-editar-gasto'>
+			<button type='button' class='btn btn-warning' id='btn-editar-gasto-" . $row['gasto_id'] . "' title='Editar gasto' data-toggle='modal' data-target='#janela-editar-gasto' data-gasto_id='" . $row['gasto_id'] . "' onclick='altera_gastoId_botao_editar_gasto(this)';>
 				<span class='sr-only' id='btn-editar-evento-descricao-" . $row['gasto_id'] . "'> Editar gasto. </span>
 				<span class='oi oi-pencil text-white text-size-responsive' aria-describedby='btn-editar-evento-descricao-" . $row['gasto_id'] . "'> </span>
 			</button>
