@@ -93,7 +93,7 @@ if($sessao_validada) {
               <label for="barra-de-pesquisa-label" class="text-muted font-weight-bold"> Pesquisa </label>
 
               <div class="input-group" id="barra-de-pesquisa-label">
-                <input type="text" class="form-control text-size-responsive" id="barra-de-pesquisa" placeholder="Procure pela descrição do gasto." aria-label="Barra de pesquisa de gastos." onkeyup="atualizar_lista_gastos();">
+                <input type="text" class="form-control text-size-responsive" id="barra-de-pesquisa" placeholder="Descrição do gasto." aria-label="Barra de pesquisa de gastos." onkeyup="atualizar_lista_gastos();">
                 
                 <div class="input-group-prepend">
                   <button type="button" class="btn btn-sm btn-none" onclick="apagar_texto('barra-de-pesquisa'); atualizar_lista_gastos();" aria-describedby="barra-de-pesquisa-icone">
@@ -133,7 +133,7 @@ if($sessao_validada) {
 
             <!-- ========== ITENS POR PÁGINA ========== -->
 
-            <div class="col-12 col-md-2">
+            <div class="col-12 col-md-3">
               <div class="form-group">
                 <label for="" class="font-weight-bold text-muted text-size-responsive"> Itens por Página </label>
 

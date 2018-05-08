@@ -6,6 +6,7 @@ require_once ('classes/db.class.php');
 $con = (new db())->conecta_mysql();
 
 $grupo_id 				= $_POST['grupo_id'];
+$evento_id 				= $_POST['evento_id'];
 $gasto_id 				= $_POST['gasto_id'];
 $usuario_id 			= $_POST['usuario_id'];
 $gasto_descricao 		= $_POST['gasto_descricao'];
@@ -35,6 +36,63 @@ if($usuario_permissao == 1) {
 	return false;
 }
 
+
+$sql = "SELECT usuario_id_ref FROM gasto_pertence_evento WHERE gasto_id_ref = $gasto_id;";
+
+// Executa a query
+$res = mysqli_query($con, $sql);
+
+// Se houve algum erro na execução da query
+if(!$res) {
+	ob_clean();
+	echo '<strong>Houve um erro ao tentar recuperar os IDs dos participantes do grupo</strong> no Banco de Dados. <u>Por favor, contate o suporte urgentemente</u>.';
+	return false;
+}
+
+$usuarios_ids = array();
+
+while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+	array_push($usuarios_ids, $row['usuario_id_ref']);
+}
+
+
+foreach ($participantes as $participante_email) {
+	$sql = "SELECT usuario_id FROM usuarios WHERE email = '$participante_email';";
+
+	// Executa a query
+	$res = mysqli_query($con, $sql);
+
+	// Se houve algum erro na execução da query
+	if(!$res) {
+		ob_clean();
+		echo '<u>Houve um erro ao tentar encontrar o e-mail do participante</u>. Por gentileza, <strong>contate o suporte</strong>.';
+		return false;
+	}
+
+	$participante_id = mysqli_fetch_array($res, MYSQLI_ASSOC)['usuario_id'];
+	$validado = TRUE;
+
+	foreach ($usuarios_ids as $usuario_id) {
+		if($participante_id == $usuario_id) {
+			$validado = FALSE;
+		}
+	}
+
+	if($validado) {
+		$sql = "INSERT INTO gasto_pertence_evento(usuario_id_ref, evento_id_ref, gasto_id_ref) VALUES ($participante_id, $evento_id, $gasto_id);";
+
+		// Executa a query
+		$res = mysqli_query($con, $sql);
+
+		// Se houve algum erro na execução da query
+		if(!$res) {
+			ob_clean();
+			echo '<u>Houve um erro ao tentar adicionar o novo participante ao gasto</u> no Banco de Dados. Por gentileza, <strong>contate o suporte</strong>.';
+			return false;
+		}
+	}
+}
+
 $sql = "UPDATE gastos SET descricao = '$gasto_descricao', categoria = '$gasto_categoria', data_pagamento = '$gasto_data_pagamento', valor = $gasto_valor WHERE gasto_id = $gasto_id;";
 
 // Executa a query
@@ -46,20 +104,10 @@ if(!$res) {
 	echo '<u>Houve um erro ao tentar editar o gasto</u>. Por gentileza, <strong>contate o suporte</strong>.';
 	return false;
 }
-/* ======== PAROU AQUI =========*/
-$sql = "UPDATE gasto_pertence_evento SET descricao = '$gasto_descricao', categoria = '$gasto_categoria', data_pagamento = '$gasto_data_pagamento', valor = $gasto_valor WHERE gasto_id = $gasto_id;";
 
-// Executa a query
-$res = mysqli_query($con, $sql);
-
-// Se houve algum erro na execução da query
-if(!$res) {
-	ob_clean();
-	echo '<u>Houve um erro ao tentar editar o gasto</u>. Por gentileza, <strong>contate o suporte</strong>.';
-	return false;
-}
-
+echo 'Gasto editado com <strong>sucesso</strong>.';
 ob_clean();
+
 return true;
 
 ?>

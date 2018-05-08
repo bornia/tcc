@@ -564,7 +564,8 @@ function editar_gasto() {
 			type: 'POST',
 			data: {
 				grupo_id: 				$('#info_grupo_id').val(),
-				gasto_id: 				$('#info-gasto-id').val()
+				evento_id: 				$('#info_evento_id').val(),
+				gasto_id: 				$('#info-gasto-id').val(),
 				usuario_id: 			$('#info_usuario_id').val(),
 				gasto_descricao: 		$('#descricao-editar-gasto').val(),
 				gasto_categoria: 		$('#categoria-editar-gasto').val(),
