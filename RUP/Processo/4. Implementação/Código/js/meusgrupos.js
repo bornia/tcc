@@ -492,6 +492,38 @@ function marcar_excluir_grupos() {
 	return true;
 }
 
+/** Devolve a função do botão de adicionar gasto.
+*/
+function mostrar_botao_criar_grupo() {
+	$('#btn-excluir-grupo-marcado').hide();
+	$('#btn-criar-grupo').fadeIn();
+}
+
+/** Muda a função do botão de adicionar gasto para poder excluir os gastos marcados.
+*/
+function mostrar_botao_excluir_grupo() {
+	$('#btn-criar-grupo').hide();
+	$('#btn-excluir-grupo-marcado').fadeIn();
+}
+
+/** Verifica se existe pelo menos um checkbox selecionado na tabela. 
+*/
+function verificar_valor_checkboxes() {
+	var todos_selecionados 		= $("input[type=checkbox][name='lista-exclusao-grupos']:checked");
+	//var todos_nao_selecionados 	= $("input[type=checkbox][name='lista-exclusao-grupos']:not(:checked)");
+
+	if(todos_selecionados.length > 0) {
+		mostrar_botao_excluir_grupo();
+	} else {
+		//$('#checkbox-excluir-todos-gastos').prop('checked', false);
+		mostrar_botao_criar_grupo();
+	}
+
+	/*if(todos_nao_selecionados.length == 0) {
+		$('#checkbox-excluir-todos-gastos').prop('checked', true);
+	}*/
+}
+
 /* ===================================================================== */
 /* ===================== AUXILIARES DE REQUISIÇÕES ===================== */
 /* ===================================================================== */
@@ -503,6 +535,7 @@ function marcar_excluir_grupos() {
 /* ===================================================================== */
 
 $(document).ready(function() {
+	mostrar_botao_criar_grupo();
 	atualizar_lista_grupos();
 	$('#caixa-pesquisa-usuarios').hide();
 	

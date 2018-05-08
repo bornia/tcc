@@ -9,7 +9,7 @@ $con = (new db())->conecta_mysql();
 
 $usuario_id = $_SESSION['id'];
 
-$sql = "SELECT * FROM grupos WHERE grupo_id IN (SELECT grupo_id_ref FROM usuario_pertence_grupo WHERE usuario_id_ref = $usuario_id);";
+$sql = "SELECT * FROM grupos WHERE grupo_id IN (SELECT grupo_id_ref FROM usuario_pertence_grupo WHERE usuario_id_ref = $usuario_id) ORDER BY titulo ASC;";
 
 // Executa a query
 $res = mysqli_query($con, $sql);
@@ -46,7 +46,7 @@ else {
   		</th>
 
 	  	<td>
-	    	<input class='align-middle' type='checkbox' id='check-grupo" . $grupo_id . "'  name='lista-exclusao-grupos' value='" . $grupo_id . "' >
+	    	<input class='align-middle' type='checkbox' id='check-grupo" . $grupo_id . "'  name='lista-exclusao-grupos' value='" . $grupo_id . "' onclick='verificar_valor_checkboxes();'>
   		</td>
 	</tr>
 \n\n";
@@ -100,7 +100,7 @@ else {
   		</th>
 
 	  	<td>
-	    	<input class='align-middle' type='checkbox' id='check-grupo" . $data['grupo_id'] . "'  name='lista-exclusao-grupos' value='" . $data['grupo_id'] . "' >
+	    	<input class='align-middle' type='checkbox' id='check-grupo" . $data['grupo_id'] . "'  name='lista-exclusao-grupos' value='" . $data['grupo_id'] . "' onclick='verificar_valor_checkboxes();'>
   		</td>
 	</tr>
 \n\n";
