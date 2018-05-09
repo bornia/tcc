@@ -1,4 +1,5 @@
 var contador_membros = 1; // Indica a ordem de inclusão dos participantes na lista
+var contador_membros_editar_grupo = 1; // Indica a ordem de inclusão dos participantes na lista
 
 /* ===================================================================== */
 /* ======================== FUNÇÕES AUXILIARES ========================= */
@@ -50,7 +51,7 @@ function verificar_email(object) {
 * ordem Indica qual é a posição do membro na lista. Serve de ID para o membro.
 * email É o e-mail do membro.
 */
-function formatar_texto_novo_membro(ordem, email) {
+function formatar_texto_membro_novo_grupo(ordem, email) {
 	var membro =
 		"<div class='row' id='item-membro-"+ ordem +"'>" +
             "<div class='col-10'>" +
@@ -79,13 +80,58 @@ function formatar_texto_novo_membro(ordem, email) {
 
             "<div class='col-2'>" +
               "<div class='form-check'>" +
-                "<button type='button' class='close btn-sm' id='"+ ordem +"' onclick='retirar_membro(this)' aria-label='Retirar membro da lista do grupo.'>" +
+                "<button type='button' class='close btn-sm' id='btn-retirar-membro-novo-grupo-"+ ordem +"' onclick='retirar_membro_novo_grupo(this)' aria-label='Retirar membro da lista do grupo.'>" +
                   "&times;" +
                 "</button>" +
               "</div>" +
             "</div>" +
 
             "<hr id='separador-membro-"+ ordem +"' width='85%' style='display: none;'> </div>" +
+      	"</div> <!-- item-participante -->";
+
+ 	return membro;
+}
+
+/** Formata o texto de cada "item de membro" adicionado na lista de editar grupo.
+* ordem Indica qual é a posição do membro na lista. Serve de ID para o membro.
+* email É o e-mail do membro.
+*/
+function formatar_texto_membro_editar_grupo(ordem, email) {
+	var membro =
+		"<div class='row' id='item-membro-editar-grupo-"+ ordem +"'>" +
+            "<div class='col-10'>" +
+              "<div class='row'>" +
+                "<div class='col-12 col-md-7'>" +
+                  "<label for='email-membro-editar-grupo-"+ ordem +"' class='col-form-label sr-only'>" +
+                    "Membro "+ ordem +
+                  "</label>" +
+
+                  "<input type='text' readonly class='form-control-sm form-control-plaintext text-truncate text-size-responsive' id='email-membro-editar-grupo-"+ ordem +"' name='membros_editar_grupo[]' value='"+ email +"'>" +
+                "</div>" +
+
+                "<div class='col-12 col-md-5'>" +
+                  "<label class='sr-only' for='dpbox-permissoes'>" +
+                    "Defina as permissões do usuário:" +
+                  "</label>" +
+
+                  "<select class='form-control form-control-sm text-size-responsive' id='dpbox-permissoes' name='permissoes_editar_grupo[]'>" +
+                    "<option value='1'> Pode ver </option>" +
+                    "<option value='2'> Pode editar </option>" +
+                    "<option value='3'> É dono </option>" +
+                  "</select>" +
+                "</div>" +
+              "</div>" +
+            "</div>" +
+
+            "<div class='col-2'>" +
+              "<div class='form-check'>" +
+                "<button type='button' class='close btn-sm' id='btn-retirar-membro-editar-grupo-"+ ordem +"' onclick='retirar_membro_editar_grupo(this)' aria-label='Retirar membro da lista do grupo.'>" +
+                  "&times;" +
+                "</button>" +
+              "</div>" +
+            "</div>" +
+
+            "<hr id='separador-membro-editar-grupo-"+ ordem +"' width='85%' style='display: none;'> </div>" +
       	"</div> <!-- item-participante -->";
 
  	return membro;
@@ -182,7 +228,7 @@ function buscar_entre_membros(id) {
 	var email = $('#' + id);
 
 	if(email.val() == '') {
-		$('#caixa-pesquisa-usuarios').hide();
+		$('#caixa-pesquisa-usuarios-novo-grupo').hide();
 		return false;
 	}
 
@@ -193,12 +239,12 @@ function buscar_entre_membros(id) {
 	})
 	.done(function(data) {
 		if(data == '') {
-			$('#lista-pesquisa-usuarios').html('');
-			$('#caixa-pesquisa-usuarios').hide();
+			$('#lista-pesquisa-usuarios-novo-grupo').html('');
+			$('#caixa-pesquisa-usuarios-novo-grupo').hide();
 		}
 		else {
-			$('#caixa-pesquisa-usuarios').show();
-			$('#lista-pesquisa-usuarios').html(data);
+			$('#caixa-pesquisa-usuarios-novo-grupo').show();
+			$('#lista-pesquisa-usuarios-novo-grupo').html(data);
 		}
 	})
 	.fail(function() {})
@@ -209,10 +255,49 @@ function buscar_entre_membros(id) {
 
 /**
 */
-function seleciona_pesquisa_usuario(email) {
+function buscar_entre_membros_editar_grupo(id) {
+	var email = $('#' + id);
+
+	if(email.val() == '') {
+		$('#caixa-pesquisa-usuarios-editar-grupo').hide();
+		return false;
+	}
+
+	$.ajax({
+		url: './reqs/buscar_entre_usuarios_editar_grupo.php',
+		type: 'POST',
+		data: {usuario_email: email.val()}
+	})
+	.done(function(data) {
+		if(data == '') {
+			$('#lista-pesquisa-usuarios-editar-grupo').html('');
+			$('#caixa-pesquisa-usuarios-editar-grupo').hide();
+		}
+		else {
+			$('#caixa-pesquisa-usuarios-editar-grupo').show();
+			$('#lista-pesquisa-usuarios-editar-grupo').html(data);
+		}
+	})
+	.fail(function() {})
+	.always(function() {});
+
+	return true;
+}
+
+/**
+*/
+function seleciona_pesquisa_usuario_novo_grupo(email) {
 	$('#buscar-email-participante').val(email);
-	$('#caixa-pesquisa-usuarios').hide();
+	$('#caixa-pesquisa-usuarios-novo-grupo').hide();
 	$('#buscar-email-participante').get(0).focus();
+}
+
+/**
+*/
+function seleciona_pesquisa_usuario_editar_grupo(email) {
+	$('#buscar-email-participante-editar-grupo').val(email);
+	$('#caixa-pesquisa-usuarios-editar-grupo').hide();
+	$('#buscar-email-participante-editar-grupo').get(0).focus();
 }
 
 /**
@@ -237,11 +322,11 @@ function buscar_membro(email) {
 
 /**
 */
-function verifica_novos_membros_adicionados() {
-	var novo_email_obj = $('#buscar-email-participante');
+function verifica_novos_membros_adicionados(campo_id, tag_name) {
+	var novo_email_obj = $('#' + campo_id);
 	var email_ja_existe = true;
 
-	$("input[type='text'][name='membros[]'").each(function(index, element) {
+	$("input[type='text'][name='" + tag_name + "[]'").each(function(index, element) {
 		if(novo_email_obj.val() == $(element).val()) {
 			email_ja_existe =  false;
 			return true;
@@ -284,7 +369,7 @@ function incluir_membro(event) {
 			return false;
 		}
 
-		if(!verifica_novos_membros_adicionados()) {
+		if(!verifica_novos_membros_adicionados('buscar-email-participante', 'membros')) {
 			alerta_mensagem_obj.html( // Exibe um alerta
 				formatar_texto_alerta('warning', 'Esse membro <u>já foi adicionado</u>.')
 			);
@@ -296,7 +381,7 @@ function incluir_membro(event) {
 			$('#separador-membro-' + (contador_membros - 1)).css('display', 'block');
 
 		$('#todos-membros-novos').append( // Acrescenta o novo membro a lista
-			formatar_texto_novo_membro(contador_membros, novo_email_obj.val())
+			formatar_texto_membro_novo_grupo(contador_membros, novo_email_obj.val())
 		);
 
 		contador_membros++;
@@ -307,16 +392,88 @@ function incluir_membro(event) {
 	}
 }
 
+/** Insere um novo membro na lista de membros do novo grupo quando a tecla Enter for pressionada.
+ * event Referência ao evento do teclado.
+*/
+function incluir_membro_editar_grupo(event) {
+	var key = event.which || event.keyCode;
+	var novo_email_obj = $('#buscar-email-participante-editar-grupo');
+	var alerta_mensagem_obj = $('#alerta-mensagem-editar-grupo');
+
+	if(key == 13) {
+		if(!verificar_email(novo_email_obj)) { // Verifica se o e-mail foi digitado corretamente
+			alerta_mensagem_obj.html( // Exibe um alerta
+				formatar_texto_alerta('warning', 'Digite um <u>e-mail válido</u>.')
+			);
+
+			return false;
+		}
+
+		if($('#aux_usuario_email').val() == novo_email_obj.val()) { // Verifica se o usuário está adicionando ele próprio
+			alerta_mensagem_obj.html( // Exibe um alerta
+				formatar_texto_alerta('warning', 'Você será <u>automaticamente incluído</u> no grupo. <strong>Adicione os outros membros</strong>.')
+			);
+
+			return false;
+		}
+
+		if(!buscar_membro(novo_email_obj.val())) { // Verifica se o usuário está cadastrado no Banco de Dados
+			alerta_mensagem_obj.html( // Exibe um alerta
+				formatar_texto_alerta('warning', '<strong>Não existe um usuário com esse e-mail</strong>. <u>Escolha outro entre as opções disponíveis na caixa de pesquisa</u>.')
+			);
+
+			return false;
+		}
+
+		if(!verifica_novos_membros_adicionados('buscar-email-participante-editar-grupo', 'membros_editar_grupo')) {
+			alerta_mensagem_obj.html( // Exibe um alerta
+				formatar_texto_alerta('warning', 'Esse membro <u>já foi adicionado</u>.')
+			);
+
+			return false;
+		}
+		
+		if(contador_membros_editar_grupo > 1) // Verifica se existe mais de um membro para inserir um hr para separá-lo do novo membro
+			$('#separador-membro-editar-grupo-' + (contador_membros_editar_grupo - 1)).css('display', 'block');
+
+		$('#todos-membros-editar-grupo').append( // Acrescenta o novo membro a lista
+			formatar_texto_membro_editar_grupo(contador_membros_editar_grupo, novo_email_obj.val())
+		);
+
+		contador_membros_editar_grupo++;
+
+		novo_email_obj.val('');
+
+		return true;
+	}
+}
+
 /** Retira um membro da lista de membros do novo grupo.
  * membro Referência ao atributo this passado como argumento ao clicar no botão.
 */
-function retirar_membro(membro) {
-	$('#item-membro-' + membro.id).remove();
+function retirar_membro_novo_grupo(membro) {
+	var membro_id = $('#' + membro.id).attr('id').replace("btn-retirar-membro-novo-grupo-", "");
 
-	if(membro.id == contador_membros - 1) // Esconde a hr do item anterior
-		$('#separador-membro-' + (membro.id - 1)).css('display', 'none');
+	$('#item-membro-' + membro_id).remove();
+
+	if(membro_id == contador_membros - 1) // Esconde a hr do item anterior
+		$('#separador-membro-' + (membro_id - 1)).css('display', 'none');
 
 	contador_membros--;
+}
+
+/** Retira um membro da lista de membros do novo grupo.
+ * membro Referência ao atributo this passado como argumento ao clicar no botão.
+*/
+function retirar_membro_editar_grupo(membro) {
+	var membro_id = $('#' + membro.id).attr('id').replace("btn-retirar-membro-editar-grupo-", "");
+	alert(membro_id);
+	$('#item-membro-editar-grupo-' + membro_id).remove();
+
+	if(membro_id == contador_membros_editar_grupo - 1) // Esconde a hr do item anterior
+		$('#separador-membro-editar-grupo' + (membro_id - 1)).css('display', 'none');
+
+	contador_membros_editar_grupo--;
 }
 
 /**
@@ -333,7 +490,28 @@ function limpar_formulario() {
 	$('#nchar_nome').html("30");
 	$('#nchar_descricao').html("100");
 
+	$('#caixa-pesquisa-usuarios-novo-grupo').hide();
+
 	contador_membros = 1;
+}
+
+/**
+*/
+function limpar_formulario_editar_grupo() {
+	$('#janela-editar-grupo').each(function() { this.reset();	});
+
+	for(contador_membros_editar_grupo; contador_membros_editar_grupo > 0; contador_membros_editar_grupo--) {
+		$('#item-membro-editar-grupo-' + contador_membros_editar_grupo).remove();
+	}
+
+	$('#alerta-mensagem-editar-grupo').html("");
+
+	$('#nchar_nome_editar_grupo').html("30");
+	$('#nchar_descricao_editar_grupo').html("100");
+
+	$('#caixa-pesquisa-usuarios-editar-grupo').hide();
+
+	contador_membros_editar_grupo = 1;
 }
 
 /** Faz a inserção do novo grupo no banco de dados e atualiza a lista de grupos bem como seus dados.
@@ -524,11 +702,57 @@ function verificar_valor_checkboxes() {
 	}*/
 }
 
+function buscar_info_grupo() {	
+	$.ajax({
+		url: './reqs/recuperar_info_grupo.php',
+		type: 'POST',
+		data: {
+			grupo_id: $('.bg-primary').attr('id').replace("linha-grupo", ""),
+			usuario_id: $('#info_usuario_id').val()
+		}
+	})
+	.done(function(data) {
+		try {
+			var parsed = JSON.parse(data);
+			
+			$('#titulo-editar-grupo').val(parsed.titulo);
+			$('#descricao-editar-grupo').val(parsed.descricao);
+			$('#todos-membros-editar-grupo').html(parsed.membros);
+			contador_membros_editar_grupo = parsed.contador;
+		} catch(e_alerta) {
+			$('#alerta-mensagem-editar-grupo').html(
+				formatar_texto_alerta('warning', data)
+			);
+		}
+	})
+	.fail(function() {})
+	.always(function() {});
+}
+
 /* ===================================================================== */
 /* ===================== AUXILIARES DE REQUISIÇÕES ===================== */
 /* ===================================================================== */
 
 
+/* ===================================================================== */
+/* ============================= TRIGGERS ============================== */
+/* ===================================================================== */
+
+/** Quando o modal para editar um gasto é carregado atribui-se o foco ao primeiro campo do formulário e carrega-se os dados do gasto no formulário.
+*/
+function trigger_exibir_modal_editar_grupo() {
+	$('#janela-editar-grupo').on('shown.bs.modal', function() {	
+		document.getElementById("titulo-editar-grupo").focus();
+	})
+}
+
+/** Quando o modal para editar um gasto termina de ocultar-se (fim de todas as transições) limpa-se todo os campos do modal.
+*/
+function trigger_esconder_modal_editar_grupo() {
+	$('#janela-editar-grupo').on('hidden.bs.modal', function() {	
+		limpar_formulario_editar_grupo();
+	})
+}
 
 /* ===================================================================== */
 /* ============================== OUTROS =============================== */
@@ -537,13 +761,17 @@ function verificar_valor_checkboxes() {
 $(document).ready(function() {
 	mostrar_botao_criar_grupo();
 	atualizar_lista_grupos();
-	$('#caixa-pesquisa-usuarios').hide();
+
+	$('.caixa-pesquisa-usuarios').hide();
 	
   	$('html>body').click(function(event) {
-  		if($('#caixa-pesquisa-usuarios').css('display') != 'none') {
-  			$('#caixa-pesquisa-usuarios').hide();
+  		if($('.caixa-pesquisa-usuarios').css('display') != 'none') {
+  			$('.caixa-pesquisa-usuarios').hide();
   		}
   	});
 
   	trigger_exibir_modal_novo_grupo();
+
+  	trigger_exibir_modal_editar_grupo();
+  	trigger_esconder_modal_editar_grupo();
 });

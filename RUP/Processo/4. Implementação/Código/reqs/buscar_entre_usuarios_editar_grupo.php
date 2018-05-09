@@ -32,7 +32,7 @@ else {
 		$email = $data['email'];
 
 		$usuarios .= "" .
-			"<li onclick='seleciona_pesquisa_usuario_novo_grupo(\"$email\");'>
+			"<li onclick='seleciona_pesquisa_usuario_editar_grupo(\"$email\");'>
 				<div> <small> " . $data['email'] . " </small> </div>
 				<div class='text-muted'> <small> " . $data['nome'] . " </small> </div>
 			</li>"

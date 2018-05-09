@@ -74,6 +74,13 @@ if($sessao_validada) {
                   <span class="text-size-responsive" id="btn-excluir-grupo-titulo"> Excluir Grupo </span>
                 </button>
               </div>
+
+              <div class="col">
+                <button type="button" class="btn btn-sm btn-warning mb-1 btn-block float-right" id="btn-editar-grupo" data-toggle="modal" data-target="#janela-editar-grupo" aria-labelledby="janela-editar-grupo-titulo" onclick="buscar_info_grupo();">
+                  <span class="oi oi-pencil text-size-responsive"> </span>
+                  <span class="text-size-responsive" id="btn-excluir-grupo-titulo"> Editar Grupo </span>
+                </button>
+              </div>
             </div>
 
             <!-- ========== LISTA DE GRUPOS ========== -->
@@ -155,10 +162,14 @@ if($sessao_validada) {
 
                         <input type="text" placeholder="Insira o e-mail e tecle Enter" class="form-control text-size-responsive" id="buscar-email-participante" onkeyup="return buscar_entre_membros(this.id);" onkeypress="incluir_membro(event);" data-toggle="tooltip" data-placement="top" title="Ao pressionar Enter, o membro será incluído na lista abaixo.">
 
-                        <div class="row" id="caixa-pesquisa-usuarios">
-                          <ul id="lista-pesquisa-usuarios">
+                        <div class="row">
+                          <div class="col">
+                            <div class="caixa-pesquisa-usuarios" id="caixa-pesquisa-usuarios-novo-grupo">
+                              <ul class="lista-pesquisa-usuarios" id="lista-pesquisa-usuarios-novo-grupo">
 
-                          </ul>
+                              </ul>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -199,6 +210,87 @@ if($sessao_validada) {
             </div>
           </div>
         </form>
+
+        <!-- ========== MODAL PARA EDITAR GRUPO ========== -->
+
+        <form class="modal fade" id="janela-editar-grupo" tabindex="-1" role="dialog" aria-labelledby="janela-editar-grupo-titulo" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="janela-editar-grupo-titulo"> Editar Grupo </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                  <span aria-hidden="true"> &times; </span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="container-fluid">
+
+                  <input type="hidden" id="info_usuario_id" readonly value="<?= $_SESSION['id'] ?>">
+
+                  <div class="row"> <div class="col"> <div class="text-justify" id="alerta-mensagem-editar-grupo"> </div> </div> </div>
+
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="titulo-editar-grupo" class="font-weight-bold"> Título do Grupo </label>
+
+                        <span id="nchar_nome_editar_grupo" class="badge badge-secondary" aria-label="Caracteres restantes."> <?= $limite_nome_grupo ?> </span>
+                        
+
+                        <input type="text" class="form-control text-size-responsive" id="titulo-editar-grupo" name="titulo_grupo" maxlength="<?= $limite_nome_grupo ?>" onkeyup="return check_nchar('titulo-editar-grupo', 'nchar_nome_editar_grupo', <?= $limite_nome_grupo ?>);">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="descricao-editar-grupo" class="font-weight-bold"> Descrição </label>
+
+                        <span id="nchar_descricao_editar_grupo" class="badge badge-secondary" aria-label="Caracteres restantes."> <?= $limite_descricao_grupo ?> </span>
+
+                        <textarea class="form-control text-size-responsive" id="descricao-editar-grupo" name="descricao-editar-grupo" rows="3" maxlength="<?= $limite_descricao_grupo ?>)" onkeyup="return check_nchar('descricao-editar-grupo', 'nchar_descricao_editar_grupo', <?= $limite_descricao_grupo ?>);"> </textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-4">
+                      <label for="todos-membros-editar-grupo" class="font-weight-bold"> Membros </label>
+                    </div>
+
+                    <div class="col">
+                      <div class="form-group">
+                        <label class="sr-only" for="buscar-email-participante-editar-grupo">
+                          Buscar e-mail do membro:
+                        </label>
+
+                        <input type="text" placeholder="Insira o e-mail e tecle Enter" class="form-control text-size-responsive" id="buscar-email-participante-editar-grupo" onkeyup="return buscar_entre_membros_editar_grupo(this.id);" onkeypress="incluir_membro_editar_grupo(event);" data-toggle="tooltip" data-placement="top" title="Ao pressionar Enter, o membro será incluído na lista abaixo.">
+
+                        <div class="row">
+                          <div class="col">
+                            <div class="caixa-pesquisa-usuarios" id="caixa-pesquisa-usuarios-editar-grupo">
+                              <ul class="lista-pesquisa-usuarios" id="lista-pesquisa-usuarios-editar-grupo">
+
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="todos-membros-editar-grupo"> </div> <!-- participantes -->
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-disabled="false"> Cancelar </button>
+                <button type="button" class="btn btn-warning" id="btn-excluir-grupo" aria-disabled="false" onclick=""> Editar Grupo </button>
+              </div>
+            </div>
+          </div>
+        </form>
+
       </section>
     </div>
 

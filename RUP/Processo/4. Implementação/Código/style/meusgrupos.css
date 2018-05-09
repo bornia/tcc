@@ -88,7 +88,7 @@ table {
 	max-height: 6em;
 }
 
-#caixa-pesquisa-usuarios {
+.caixa-pesquisa-usuarios {
 	height: auto;
 	background: #fff;
 	border-radius: 5px;
@@ -100,7 +100,7 @@ table {
 	margin: 0 0;
 }
 
-#lista-pesquisa-usuarios {
+.lista-pesquisa-usuarios {
 	height: auto;
 	float: left;
 	list-style: none;
@@ -108,11 +108,11 @@ table {
 	padding: 0;
 }
 
-#lista-pesquisa-usuarios li {
+.lista-pesquisa-usuarios li {
 	border-bottom: 1px solid #DDD;
 }
 
-#lista-pesquisa-usuarios li:hover {
+.lista-pesquisa-usuarios li:hover {
 	background-color: rgba(135,206,250, 0.2);
 	cursor: pointer;
 }
