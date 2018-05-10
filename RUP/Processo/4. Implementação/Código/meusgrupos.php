@@ -41,17 +41,17 @@ if($sessao_validada) {
 
       <!-- ========== MENSAGEM DE ALERTA ========== -->
 
-      <div id="alerta_info_grupos"> </div>
+      <div class="mt-4" id="alerta_info_grupos"> </div>
 
       <!-- ========== CONTAINER-WIP ========== -->
 
       <section class="container-wip" role="main" style="">
         <div class="row">
           <h1> Grupos </h1>
-          <div style="display: none;">
-            <input id="aux_usuario_email" type='text' value="<?= $_SESSION['email']; ?>" readonly>
-          </div>
         </div>
+
+        <input type='hidden' id="aux_usuario_email" value="<?= $_SESSION['email']; ?>" readonly>
+        <input type='hidden' id="info_usuario_id"   value="<?= $_SESSION['id']; ?>" readonly>
 
         <!-- ========== GRUPOS E SEUS DADOS ========== -->
 
@@ -60,16 +60,14 @@ if($sessao_validada) {
 
             <!-- ========== BOTÕES ========== -->
 
-            <div class="row">
+            <div class="row mb-1">
               <div class="col">
-                <button type="button" class="btn btn-sm btn-success mb-1 btn-block" id="btn-criar-grupo" data-toggle="modal" data-target="#janela_novo_grupo" aria-labelledby="btn-novo-grupo">
+                <button type="button" class="btn btn-sm btn-success btn-block" id="btn-criar-grupo" data-toggle="modal" data-target="#janela_novo_grupo" aria-labelledby="btn-novo-grupo">
                   <span class="oi oi-plus text-size-responsive" aria-labelledby="novo-grupo"> </span>
                   <span id="btn-novo-grupo" class="text-size-responsive"> Criar Grupo </span>
                 </button>
-              </div>
-
-              <div class="col">
-                <button type="button" class="btn btn-sm btn-danger mb-1 btn-block float-right" id="btn-excluir-grupo-marcado" data-toggle="modal" data-target="#janela_excluir_grupo" aria-labelledby="btn-excluir-grupo-titulo" onclick="marcar_excluir_grupos();">
+              
+                <button type="button" class="btn btn-sm btn-danger btn-block mt-0" id="btn-excluir-grupo-marcado" data-toggle="modal" data-target="#janela_excluir_grupo" aria-labelledby="btn-excluir-grupo-titulo" onclick="marcar_excluir_grupos();">
                   <span class="oi oi-trash text-size-responsive"> </span>
                   <span class="text-size-responsive" id="btn-excluir-grupo-titulo"> Excluir Grupo </span>
                 </button>
@@ -237,7 +235,7 @@ if($sessao_validada) {
                         <span id="nchar_nome_editar_grupo" class="badge badge-secondary" aria-label="Caracteres restantes."> <?= $limite_nome_grupo ?> </span>
                         
 
-                        <input type="text" class="form-control text-size-responsive" id="titulo-editar-grupo" name="titulo_grupo" maxlength="<?= $limite_nome_grupo ?>" onkeyup="return check_nchar('titulo-editar-grupo', 'nchar_nome_editar_grupo', <?= $limite_nome_grupo ?>);">
+                        <input type="text" class="form-control text-size-responsive" id="titulo-editar-grupo" name="titulo-editar-grupo" maxlength="<?= $limite_nome_grupo ?>" onkeyup="return check_nchar('titulo-editar-grupo', 'nchar_nome_editar_grupo', <?= $limite_nome_grupo ?>);">
                       </div>
                     </div>
                   </div>
@@ -285,7 +283,7 @@ if($sessao_validada) {
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-disabled="false"> Cancelar </button>
-                <button type="button" class="btn btn-warning" id="btn-excluir-grupo" aria-disabled="false" onclick=""> Editar Grupo </button>
+                <button type="button" class="btn btn-warning" id="btn-excluir-grupo" aria-disabled="false" onclick="editar_grupo();"> Editar Grupo </button>
               </div>
             </div>
           </div>

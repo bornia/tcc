@@ -8,7 +8,7 @@ $con = (new db())->conecta_mysql();
 $grupo_id 	= $_POST['grupo_id'];
 $usuario_id = $_POST['usuario_id'];
 
-$sql = "SELECT titulo, descricao, ultima_att FROM grupos WHERE grupo_id = $grupo_id;";
+$sql = "SELECT titulo, descricao FROM grupos WHERE grupo_id = $grupo_id;";
 
 // Executa a query
 $res = mysqli_query($con, $sql);
@@ -20,8 +20,9 @@ if(!$res) {
 	return false;
 }
 
-$titulo = mysqli_fetch_array($res, MYSQLI_ASSOC)['titulo'];
-$descricao = mysqli_fetch_array($res, MYSQLI_ASSOC)['descricao'];
+$row		= mysqli_fetch_array($res, MYSQLI_ASSOC);
+$titulo 	= $row['titulo'];
+$descricao 	= $row['descricao'];
 
 $sql = "SELECT usuario_id_ref FROM usuario_pertence_grupo WHERE grupo_id_ref = $grupo_id;";
 
@@ -57,6 +58,8 @@ $membros = "";
 $contador_membros = 1;
 
 while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+	$permissao = $row['permissao'];
+
 	$membros .=
 		"<div class='row' id='item-membro-editar-grupo-". $contador_membros ."'>" .
             "<div class='col-10'>" .
@@ -75,9 +78,9 @@ while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
 						"</label>" .
 
 						"<select class='form-control form-control-sm text-size-responsive' id='dpbox-permissoes' name='permissoes_editar_grupo[]'>" .
-							"<option value='1'> Pode ver </option>" .
-							"<option value='2'> Pode editar </option>" .
-							"<option value='3'> É dono </option>" .
+							"<option value='1' " . ($permissao==1 ? 'selected':'') . "> Pode ver </option>" .
+							"<option value='2' " . ($permissao==2 ? 'selected':'') . "> Pode editar </option>" .
+							"<option value='3' " . ($permissao==3 ? 'selected':'') . "> É dono </option>" .
 						"</select>" .
 					"</div>" .
 				"</div>" .

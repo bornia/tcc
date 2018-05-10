@@ -177,6 +177,34 @@ function validar_formulario() {
 	return validado;
 }
 
+/** Valida o formulário verificando se atende aos padrões determinados.
+*/
+function validar_formulario_editar_grupo() {
+	var validado = true;
+
+	if(!verifica_campo_vazio('titulo-editar-grupo')) {
+		$('#alerta-mensagem-editar-grupo').html(
+			$('#alerta-mensagem-editar-grupo').html() +
+			formatar_texto_alerta('warning', '<u>Dê um <b>título</b></u> ao novo grupo.')
+		);
+
+		$('#titulo-editar-grupo').focus();
+
+		validado = false;
+	}
+
+	if(contador_membros_editar_grupo < 2) { // Verifica se tem pelo menos 1 membro no grupo
+		$('#alerta-mensagem-editar-grupo').html(
+			$('#alerta-mensagem-editar-grupo').html() +
+			formatar_texto_alerta('warning', 'Inclua <u>pelo menos <b>um membro</b></u> ao novo grupo.')
+		);
+
+		validado = false;
+	}
+
+	return validado;
+}
+
 /**
 */
 function seleciona_linha_grupo(grupoId) {
@@ -196,14 +224,6 @@ function seleciona_detalhe_grupo(grupoId) {
 /* ===================================================================== */
 /* ============================== EVENTOS ============================== */
 /* ===================================================================== */
-
-/**
-*/
-function trigger_exibir_modal_novo_grupo() {
-	$('#janela_novo_grupo').on('shown.bs.modal', function() {
-		document.getElementById("nome_grupo").focus();
-	})
-}
 
 /** Verifica quantos caracteres ainda podem ser digitados baseado no limite determinado.
  * element_checked O texto do ID referente ao campo que terá seus caracteres contados.
@@ -467,7 +487,7 @@ function retirar_membro_novo_grupo(membro) {
 */
 function retirar_membro_editar_grupo(membro) {
 	var membro_id = $('#' + membro.id).attr('id').replace("btn-retirar-membro-editar-grupo-", "");
-	alert(membro_id);
+	
 	$('#item-membro-editar-grupo-' + membro_id).remove();
 
 	if(membro_id == contador_membros_editar_grupo - 1) // Esconde a hr do item anterior
@@ -534,6 +554,55 @@ function criar_grupo() {
 
 			limpar_formulario();
 		});
+	}
+}
+
+/** 
+*/
+function editar_grupo() {
+	var membros		= [];
+	var permissoes 	= [];
+
+	$("input[type='text'][name='membros_editar_grupo[]'").each(function() {
+		membros.push($(this).val());
+	});
+
+	$("select[name='permissoes_editar_grupo[]'").each(function() {
+		permissoes.push($(this).val());
+	});
+
+	if(validar_formulario_editar_grupo()) {
+		$.ajax({
+			url: './reqs/editar_grupo.php',
+			type: 'POST',
+			data: {
+				grupo_id: 			$('.bg-primary').attr('id').replace("linha-grupo", ""),
+				usuario_id: 		$('#info_usuario_id').val(),
+				titulo_grupo: 		$('#titulo-editar-grupo').val(),
+				descricao_grupo: 	$('#descricao-editar-grupo').val(),
+				permissoes_grupo: 	permissoes,
+				emails_grupo: 		membros
+			}
+		})
+		.done(function(data) {
+			try {
+				var parsed = JSON.parse(data);
+				
+				if(parseInt(parsed.erro_id) != 0) {
+					$('#alerta-mensagem-editar-grupo').html(formatar_texto_alerta('warning', parsed.erro_mensagem));
+				} else {
+					$('#alerta_info_grupos').html(formatar_texto_alerta('success', parsed.sucesso_mensagem));
+					atualizar_lista_grupos();
+					$('#janela-editar-grupo').modal('hide');
+				}
+			} catch(e_alerta) {
+				$('#alerta-mensagem-editar-grupo').html(
+					formatar_texto_alerta('warning', data)
+				);
+			}
+		})
+		.fail(function() {})
+		.always(function() {});
 	}
 }
 
@@ -714,7 +783,7 @@ function buscar_info_grupo() {
 	.done(function(data) {
 		try {
 			var parsed = JSON.parse(data);
-			
+
 			$('#titulo-editar-grupo').val(parsed.titulo);
 			$('#descricao-editar-grupo').val(parsed.descricao);
 			$('#todos-membros-editar-grupo').html(parsed.membros);
@@ -737,6 +806,14 @@ function buscar_info_grupo() {
 /* ===================================================================== */
 /* ============================= TRIGGERS ============================== */
 /* ===================================================================== */
+
+/**
+*/
+function trigger_exibir_modal_novo_grupo() {
+	$('#janela_novo_grupo').on('shown.bs.modal', function() {
+		document.getElementById("nome_grupo").focus();
+	})
+}
 
 /** Quando o modal para editar um gasto é carregado atribui-se o foco ao primeiro campo do formulário e carrega-se os dados do gasto no formulário.
 */
