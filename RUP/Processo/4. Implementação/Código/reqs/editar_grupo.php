@@ -108,7 +108,7 @@ foreach ($membros_emails as $key => $membro_email) {
 	// Se houve algum erro na execução da query
 	if(!$res) {
 		ob_clean();
-		echo json_encode(array('erro_id' => $contador_erros, 'erro_mensagem' => '<u>Houve um erro ao tentar editar a permissão do usuário no grupo</u>. Por gentileza, <strong>contate o suporte</strong>.' . $sql));
+		echo json_encode(array('erro_id' => $contador_erros, 'erro_mensagem' => '<u>Houve um erro ao tentar editar a permissão do usuário no grupo</u>. Por gentileza, <strong>contate o suporte</strong>.'));
 		$contador_erros++;
 		return false;
 	}

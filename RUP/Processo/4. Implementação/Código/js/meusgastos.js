@@ -574,15 +574,26 @@ function editar_gasto() {
 				participantes: 			participantes_adicionados
 			}
 		})
-		.done(function() {
-			atualizar_lista_gastos();
+		.done(function(data) {
+			try {
+				var parsed = JSON.parse(data);
+				
+				if(parseInt(parsed.erro_id) != 0) {
+					$('#alerta_mensagem_editar_gasto').html(formatar_texto_alerta('warning', parsed.erro_mensagem));
+				} else {
+					$('#alerta_mensagem').html(formatar_texto_alerta('success', parsed.sucesso_mensagem));
+					atualizar_lista_gastos();
+					$('#janela-editar-gasto').modal('hide');
+					limpar_formulario_editar_gasto();
+				}
+			} catch(e_alerta) {
+				$('#alerta_mensagem_editar_gasto').html(
+					formatar_texto_alerta('warning', "Erro ao converter para JSON.")
+				);
+			}
 		})
 		.fail(function() {})
-		.always(function() {
-			$('#janela-editar-gasto').modal('hide');
-
-			limpar_formulario_editar_gasto();
-		});
+		.always(function() {});
 	}
 }
 
@@ -916,4 +927,12 @@ $(document).ready(function() {
 	trigger_exibir_modal_excluir_evento();
 	trigger_exibir_modal_editar_gasto();
 	trigger_esconder_modal_editar_gasto();
+
+	$('.caixa-pesquisa-usuarios').hide();
+	
+	$('html>body').click(function(event) {
+		if($('.caixa-pesquisa-usuarios').css('display') != 'none') {
+			$('.caixa-pesquisa-usuarios').hide();
+		}
+	});
 });

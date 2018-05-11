@@ -40,7 +40,7 @@ if($sessao_validada) {
       <?php require("navbar-in.php"); ?> 
     </header>
 
-    <div class="main container mt-4" role="main">
+    <div class="main container" role="main">
 
       <input type="hidden" id="offset"              readonly value="0" />
       <input type='hidden' id="info_usuario_email"  readonly value="<?= $_SESSION['email']; ?>">
@@ -48,7 +48,7 @@ if($sessao_validada) {
       <input type="hidden" id="info_evento_id"      readonly value="<?= $_POST['evento_id']  ?>">
       <input type="hidden" id="info_usuario_id"     readonly value="<?= $_SESSION['id']     ?>">
 
-      <div id="alerta_mensagem"> </div>
+      <div class="mt-4" id="alerta_mensagem"> </div>
 
       <section id="gastos">
         <div class="container-wip">
