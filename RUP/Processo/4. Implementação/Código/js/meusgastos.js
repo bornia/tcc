@@ -73,6 +73,35 @@ function verifica_novos_participantes_adicionados(campo_email_id, itens_name_tag
 	return email_ja_existe;
 }
 
+function ajusta_total_novo_gasto() {
+	var valor_total = 0; 
+
+	$("input[type='number'][name='valor_participante_novo_gasto[]'").each(function(index, element) {
+		valor_total += parseFloat($(element).val());
+	});
+
+	$('#valor-novo-gasto').val(parseFloat(valor_total));
+}
+
+function ajusta_total_editar_gasto() {
+	var valor_total = 0;
+
+	$("input[type='number'][name='valor_participante_editar_gasto[]'").each(function(index, element) {
+		valor_total += parseFloat($(element).val());
+	});
+
+	$('#valor-editar-gasto').val(parseFloat(valor_total));
+}
+
+function formata_numero(event) {
+	var key = event.which || event.keyCode;
+
+	if(key == 43 || key == 45 || key == 46)
+		return false;
+
+	return true;
+}
+
 /** Formata o texto de cada "item de participante" adicionado na lista do novo grupo.
 * ordem Indica qual é a posição do participante na lista. Serve de ID para o participante.
 * email É o e-mail do participante.
@@ -80,15 +109,27 @@ function verifica_novos_participantes_adicionados(campo_email_id, itens_name_tag
 function formatar_texto_membro_novo_gasto(ordem, email) {
 	var participante =
 		"<div class='row' id='item-participante-novo-gasto-"+ ordem +"'>" +
-			"<div class='col-9'>" +
-				"<label for='email-participante-"+ ordem +"' class='text-muted font-weight-bold mb-0 text-size-responsive'>" +
-	                "Participante "+ ordem + ": " +
-	          	"</label>" +
+			"<div class='col-10'>" +
+				"<div class='row'>" +
+                	"<div class='col-12 col-md-7'>" +
+						"<label for='email-participante-"+ ordem +"' class='text-muted font-weight-bold mb-0 text-size-responsive'>" +
+			                "Participante "+ ordem + ": " +
+			          	"</label>" +
 
-              	"<input type='text' readonly class='form-control-sm form-control-plaintext text-truncate text-size-responsive' id='email-participante-"+ ordem +"' name='participantes_novo_gasto[]' value='"+ email +"'>" +
+              			"<input type='text' readonly class='form-control-sm form-control-plaintext text-truncate text-size-responsive' id='email-participante-"+ ordem +"' name='participantes_novo_gasto[]' value='"+ email +"'>" +
+            		"</div>" +
+
+            		"<div class='col-12 col-md-5'>" +
+	                	"<label class='text-muted font-weight-bold mb-0 text-size-responsive' for='valor-participante-novo-gasto'>" +
+	                    	"Quantia Paga:" +
+	                	"</label>" +
+
+                  		"<input type='number' class='form-control form-control-sm text-size-responsive' id='valor-participante-novo-gasto' name='valor_participante_novo_gasto[]' value='00.00' min='0.01' step='0.01' placeholder='ex. 20,50' onfocusout='ajusta_total_novo_gasto();' onkeypress='return formata_numero(event);'>" +
+		           	"</div>" +
+            	"</div>" +
             "</div>" +
 
-            "<div class='col'>" +
+            "<div class='col-2'>" +
                 "<button type='button' class='close btn-sm' id='"+ ordem +"' onclick='retirar_participante_novo_gasto(this)' aria-label='Retirar participante da lista do gasto.'>" +
                   	"&times;" +
                 "</button>" +
@@ -107,22 +148,35 @@ function formatar_texto_membro_novo_gasto(ordem, email) {
 function formatar_texto_membro_editar_gasto(ordem, email) {
 	var participante =
 		"<div class='row' id='item-participante-editar-gasto-"+ ordem +"'>" +
-			"<div class='col-9'>" +
-				"<label for='email-participante-"+ ordem +"' class='text-muted font-weight-bold mb-0 text-size-responsive'>" +
-	                "Participante "+ ordem + ": " +
-	          	"</label>" +
+			"<div class='col-10'>" +
+				"<div class='row'>" +
+                	"<div class='col-12 col-md-7'>" +
+						"<label for='email-participante-editar-gasto-"+ ordem +"' class='text-muted font-weight-bold mb-0 text-size-responsive'>" +
+			                "Participante "+ ordem + ": " +
+			          	"</label>" +
 
-              	"<input type='text' readonly class='form-control-sm form-control-plaintext text-truncate text-size-responsive' id='email-participante-"+ ordem +"' name='participantes_editar_gasto[]' value='"+ email +"'>" +
+              			"<input type='text' readonly class='form-control-sm form-control-plaintext text-truncate text-size-responsive' id='email-participante-editar-gasto-"+ ordem +"' name='participantes_editar_gasto[]' value='"+ email +"'>" +
+            		"</div>" +
+
+            		"<div class='col-12 col-md-5'>" +
+	                	"<label class='text-muted font-weight-bold mb-0 text-size-responsive' for='valor-participante-editar-gasto-"+ ordem +"'>" +
+	                    	"Quantia Paga:" +
+	                	"</label>" +
+
+                  		"<input type='number' class='form-control form-control-sm text-size-responsive' id='valor-participante-editar-gasto-"+ ordem +"' name='valor_participante_editar_gasto[]' value='00.00' min='0.01' step='0.01' placeholder='ex. 20,50' onfocusout='ajusta_total_editar_gasto();' onkeypress='return formata_numero(event);'>" +
+		           	"</div>" +
+            	"</div>" +
             "</div>" +
 
-            "<div class='col'>" +
-                "<button type='button' class='close btn-sm' id='"+ ordem +"' onclick='retirar_participante_editar_gasto(this)' aria-label='Retirar participante da lista do gasto.'>" +
+            "<div class='col-2'>" +
+                "<button type='button' class='close btn-sm' id='"+ ordem +"' onclick='retirar_participante_editar_gasto(this);' aria-label='Retirar participante da lista do gasto.'>" +
                   	"&times;" +
                 "</button>" +
           	"</div>" +
 
           	"<hr class='mb-2 mt-2' id='separador-participante-editar-gasto-"+ ordem +"' width='85%' style='display: none;'> </div>" +
-      	"</div>";
+      	"</div>"
+  	;
 
  	return participante;
 }
@@ -137,6 +191,7 @@ function retirar_participante_novo_gasto(participante) {
 		$('#separador-participante-novo-gasto-' + (participante.id - 1)).css('display', 'none');
 
 	contador_participantes_novo_gasto--;
+	ajusta_total_novo_gasto();
 }
 
 /** Retira um participante da lista de participante do editar gasto.
@@ -149,6 +204,7 @@ function retirar_participante_editar_gasto(participante) {
 		$('#separador-participante-editar-gasto-' + (participante.id - 1)).css('display', 'none');
 
 	contador_participantes_editar_gasto--;
+	ajusta_total_editar_gasto();
 }
 
 /** Verifica se um campo input, conforme o seu id, está vazio.
@@ -516,10 +572,15 @@ function incluir_participante_editar_gasto(event) {
 /** Faz a inserção do novo gasto no banco de dados e atualiza a lista de gastos bem como seus dados.
 */
 function adicionar_gasto() {
-	var participantes_adicionados = [];
+	var participantes_adicionados	 	= [];
+	var valores_participantes		 	= [];
 
 	$("input[type='text'][name='participantes_novo_gasto[]'").each(function() {
 		participantes_adicionados.push($(this).val());
+	});	
+
+	$("input[type='number'][name='valor_participante_novo_gasto[]'").each(function() {
+		valores_participantes.push($(this).val());
 	});
 
 	if(validar_formulario_novo_gasto()) {
@@ -527,35 +588,52 @@ function adicionar_gasto() {
 			url: './reqs/adicionar_gasto.php',
 			type: 'POST',
 			data: {
-				evento_id: $('#info_evento_id').val(),
-				grupo_id: $('#info_grupo_id').val(),
-				usuario_id: $('#info_usuario_id').val(),
-				novo_gasto_descricao: $('#descricao-novo-gasto').val(),
-				novo_gasto_categoria: $('#categoria-novo-gasto').val(),
-				novo_gasto_data_pagamento: $('#data-pagamento-novo-gasto').val(),
-				novo_gasto_valor: $('#valor-novo-gasto').val(),
-				participantes: participantes_adicionados
+				evento_id: 					$('#info_evento_id').val(),
+				grupo_id: 					$('#info_grupo_id').val(),
+				usuario_id: 				$('#info_usuario_id').val(),
+				novo_gasto_descricao: 		$('#descricao-novo-gasto').val(),
+				novo_gasto_categoria: 		$('#categoria-novo-gasto').val(),
+				novo_gasto_data_pagamento: 	$('#data-pagamento-novo-gasto').val(),
+				novo_gasto_valor: 			$('#valor-novo-gasto').val(),
+				participantes: 				participantes_adicionados,
+				valores: 					valores_participantes
 			}
 		})
-		.done(function() {
-			atualizar_lista_gastos();
+		.done(function(data) {
+			try {
+				var parsed = JSON.parse(data);
+				
+				if(parseInt(parsed.erro_id) != 0) {
+					$('#alerta_mensagem_adicionar_gasto').html(formatar_texto_alerta('warning', parsed.erro_mensagem));
+				} else {
+					$('#alerta_mensagem').html(formatar_texto_alerta('success', parsed.sucesso_mensagem));
+					$('#janela-adicionar-gasto').modal('hide');
+					atualizar_lista_gastos();
+					limpar_formulario_novo_gasto();
+				}
+			} catch(e_alerta) {
+				$('#alerta_mensagem_adicionar_gasto').html(
+					formatar_texto_alerta('warning', "Erro ao converter para JSON.")
+				);
+			}	
 		})
 		.fail(function() {})
-		.always(function() {
-			$('#janela-adicionar-gasto').modal('hide');
-
-			limpar_formulario_novo_gasto();
-		});
+		.always(function() {});
 	}
 }
 
 /** Edita o gasto no banco de dados e atualiza a tabela de gastos bem como seus dados.
 */
 function editar_gasto() {
-	var participantes_adicionados = [];
+	var participantes_adicionados 	= [];
+	var valores_participantes		= [];
 
 	$("input[type='text'][name='participantes_editar_gasto[]'").each(function() {
 		participantes_adicionados.push($(this).val());
+	});
+
+	$("input[type='number'][name='valor_participante_editar_gasto[]'").each(function() {
+		valores_participantes.push($(this).val());
 	});
 
 	if(validar_formulario_editar_gasto()) {
@@ -571,7 +649,8 @@ function editar_gasto() {
 				gasto_categoria: 		$('#categoria-editar-gasto').val(),
 				gasto_data_pagamento: 	$('#data-pagamento-editar-gasto').val(),
 				gasto_valor: 			$('#valor-editar-gasto').val(),
-				participantes: 			participantes_adicionados
+				participantes: 			participantes_adicionados,
+				valores: 				valores_participantes
 			}
 		})
 		.done(function(data) {
@@ -853,6 +932,7 @@ function buscar_infos_gasto() {
 			$('#data-pagamento-editar-gasto').val(parsed.data_pagamento);
 			$('#valor-editar-gasto').val(parsed.valor);
 			$('#todos-participantes-editar-gasto').html(parsed.participantes);
+			//
 
 			contador_participantes_editar_gasto = parsed.contador;
 		} catch(e_alerta) {

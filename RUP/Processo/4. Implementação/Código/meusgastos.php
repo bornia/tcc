@@ -264,9 +264,9 @@ if($sessao_validada) {
                       </div>
 
                       <div class="col">
-                        <div class="form-group">
-                          <label for="valor-novo-gasto" class="font-weight-bold"> Valor </label>
-                          <input type="number" class="form-control text-size-responsive" id="valor-novo-gasto" name="name-valor-novo-gasto" value="00.00" min="0.01" step="0.01" placeholder="ex. 1000,50">
+                        <div class="form-group text-center">
+                          <label for="valor-novo-gasto" class="font-weight-bold"> Valor Total </label>
+                          <input type="text" class="form-control-plaintext text-size-responsive text-center" id="valor-novo-gasto" name="name-valor-novo-gasto" value="00.00" placeholder="ex. 1000,50" readonly>
                         </div>
                       </div>
                     </div>
@@ -278,7 +278,7 @@ if($sessao_validada) {
                         <div class="form-group">
                           <label for="buscar-email-participante-novo-gasto" class="font-weight-bold" aria-describedby="aria-quem-dividira">
                             Participantes
-                            <small class="text-muted" id="aria-quem-dividira"> Entre quem será dividido? </small>
+                            <small class="text-muted" id="aria-quem-dividira"> Quanto cada um pagou? </small>
                           </label>
 
                           <input type="text" class="form-control text-size-responsive" id="buscar-email-participante-novo-gasto" placeholder="Busque pelo e-mail e dê Enter" onkeyup="return buscar_entre_participantes_novo_gasto(this.id);" onkeypress="incluir_participante_novo_gasto(event);">
@@ -416,9 +416,9 @@ if($sessao_validada) {
                       </div>
 
                       <div class="col">
-                        <div class="form-group">
-                          <label for="valor-editar-gasto" class="font-weight-bold"> Valor </label>
-                          <input type="number" class="form-control text-size-responsive" id="valor-editar-gasto" name="name-valor-editar-gasto" value="00.00" min="0.01" step="0.01" placeholder="ex. 1000,50">
+                        <div class="form-group text-center">
+                          <label for="valor-editar-gasto" class="font-weight-bold"> Valor Total </label>
+                          <input type="text" class="form-control-plaintext text-size-responsive text-center" id="valor-editar-gasto" name="name-valor-editar-gasto" value="00.00" placeholder="ex. 1000,50">
                         </div>
                       </div>
                     </div>

@@ -26,7 +26,7 @@ $row = mysqli_fetch_array($res, MYSQLI_ASSOC);
 $descricao 		= $row['descricao'];
 $categoria 		= $row['categoria'];
 $data_pagamento = $row['data_pagamento'];
-$valor 			= $row['valor'];
+$valor 			= $row['total'];
 
 //
 $sql = "SELECT usuario_id_ref FROM gasto_pertence_evento WHERE gasto_id_ref = $gasto_id;";
@@ -51,7 +51,7 @@ $participantes_ids = implode(",", $participantes_ids);
 
 
 //
-$sql = "SELECT email FROM usuarios WHERE usuario_id IN ($participantes_ids);";
+$sql = "SELECT email, valor FROM usuarios INNER JOIN gasto_pertence_evento ON usuario_id = usuario_id_ref WHERE usuario_id IN ($participantes_ids);";
 
 // Executa a query
 $res = mysqli_query($con, $sql);
@@ -68,23 +68,36 @@ $contador_membros = 1;
 
 while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
 	$participantes_html .=
-"<div class='row' id='item-participante-editar-gasto-". $contador_membros ."'>" .
-	"<div class='col-9'>" .
-		"<label for='email-participante-". $contador_membros ."' class='text-muted font-weight-bold mb-0 text-size-responsive'>" .
-            "Participante ". $contador_membros . ": " .
-      	"</label>" .
+		"<div class='row' id='item-participante-editar-gasto-". $contador_membros ."'>" .
+			"<div class='col-10'>" .
+				"<div class='row'>" .
+                	"<div class='col-12 col-md-7'>" .
+						"<label for='email-participante-editar-gasto-". $contador_membros ."' class='text-muted font-weight-bold mb-0 text-size-responsive'>" .
+			                "Participante ". $contador_membros . ": " .
+			          	"</label>" .
 
-      	"<input type='text' readonly class='form-control-sm form-control-plaintext text-truncate text-size-responsive' id='email-participante-". $contador_membros ."' name='participantes_editar_gasto[]' value='". $row['email'] ."'>" .
-    "</div>" .
+              			"<input type='text' readonly class='form-control-sm form-control-plaintext text-truncate text-size-responsive' id='email-participante-editar-gasto-". $contador_membros ."' name='participantes_editar_gasto[]' value='". $row['email'] ."'>" .
+            		"</div>" .
 
-    "<div class='col'>" .
-        "<button type='button' class='close btn-sm' id='". $contador_membros ."' onclick='retirar_participante_editar_gasto(this)' aria-label='Retirar participante da lista do gasto.'>" .
-          	"&times;" .
-        "</button>" .
-  	"</div>" .
+            		"<div class='col-12 col-md-5'>" .
+	                	"<label class='text-muted font-weight-bold mb-0 text-size-responsive' for='valor-participante-editar-gasto-". $contador_membros ."'>" .
+	                    	"Quantia Paga:" .
+	                	"</label>" .
 
-  	"<hr class='mb-2 mt-2' id='separador-participante-editar-gasto-". $contador_membros ."' width='85%' style='display: none;'> </div>" .
-"</div>\n\n";
+                  		"<input type='number' class='form-control form-control-sm text-size-responsive' id='valor-participante-editar-gasto-". $contador_membros ."' name='valor_participante_editar_gasto[]' value='". $row['valor'] ."' min='0.01' step='0.01' placeholder='ex. 20,50' onfocusout='ajusta_total_editar_gasto();' onkeypress='return formata_numero(event);'>" .
+		           	"</div>" .
+            	"</div>" .
+            "</div>" .
+
+            "<div class='col-2'>" .
+                "<button type='button' class='close btn-sm' id='". $contador_membros ."' onclick='retirar_participante_editar_gasto(this);' aria-label='Retirar participante da lista do gasto.'>" .
+                  	"&times;" .
+                "</button>" .
+          	"</div>" .
+
+          	"<hr class='mb-2 mt-2' id='separador-participante-editar-gasto-". $contador_membros ."' width='85%' style='display: none;'> </div>" .
+      	"</div>\n\n"
+  	;
 
 	$contador_membros++;
 }

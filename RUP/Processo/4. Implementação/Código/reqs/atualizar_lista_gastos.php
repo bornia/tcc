@@ -54,7 +54,7 @@ else {
 	while($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
 		$data_pagamento 	= date_create($row['data_pagamento']);
 		$data_pagamento 	= date_format($data_pagamento, 'd/m/Y');
-		$valor_formatado	= str_replace(".", ",", $row['valor']);
+		$valor_formatado	= str_replace(".", ",", $row['total']);
 
 		$gastos .= 
 "<tr>
