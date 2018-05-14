@@ -102,6 +102,18 @@ CREATE TABLE gasto_pertence_evento (
 
 DELIMITER //
 
+/* TABELA eventos */
+
+/** Atualiza a data de quando ocorreu a última modificação (ATUALIZAÇÃO) em um grupo
+*/
+CREATE TRIGGER trg_upd_eventos AFTER UPDATE ON eventos
+FOR EACH ROW
+BEGIN
+	UPDATE grupos SET ultima_att = CURRENT_TIMESTAMP WHERE grupo_id = (
+        SELECT grupo_id_ref FROM evento_pertence_grupo WHERE evento_id_ref = NEW.evento_id GROUP BY grupo_id_ref
+	);
+END //
+
 /* TABELA evento_pertence_grupo */
 
 /** Atualiza a data de quando ocorreu a última modificação (INSERÇÃO) em um grupo
@@ -124,14 +136,46 @@ BEGIN
 	);
 END //
 
-/* TABELA eventos */
+/* TABELA gastos */
 
-/** Atualiza a data de quando ocorreu a última modificação (ATUALIZAÇÃO) em um grupo
+/** Atualiza a data de quando ocorreu a última modificação (ATUALIZAÇÃO) em um evento
 */
-CREATE TRIGGER trg_upd_eventos AFTER UPDATE ON eventos
+CREATE TRIGGER trg_upd_gastos AFTER UPDATE ON gastos
 FOR EACH ROW
 BEGIN
-	UPDATE grupos SET ultima_att = CURRENT_TIMESTAMP WHERE grupo_id = (
-        SELECT grupo_id_ref FROM evento_pertence_grupo WHERE evento_id_ref = NEW.evento_id GROUP BY grupo_id_ref
+	UPDATE eventos SET ultima_att = CURRENT_TIMESTAMP WHERE evento_id = (
+        SELECT evento_id_ref FROM gasto_pertence_evento WHERE gasto_id_ref = NEW.gasto_id GROUP BY evento_id_ref
+	);
+END //
+
+/* TABELA gasto_pertence_evento */
+
+/** Atualiza a data de quando ocorreu a última modificação (ATUALIZAÇÃO) em um evento
+*/
+CREATE TRIGGER trg_upd_gasto_pertence_grupo AFTER UPDATE ON gasto_pertence_evento
+FOR EACH ROW
+BEGIN
+	UPDATE eventos SET ultima_att = CURRENT_TIMESTAMP WHERE evento_id = (
+        SELECT evento_id_ref FROM gasto_pertence_evento WHERE gasto_id_ref = NEW.gasto_id_ref GROUP BY evento_id_ref
+	);
+END //
+
+/** Atualiza a data de quando ocorreu a última modificação (INSERÇÃO) em um evento
+*/
+CREATE TRIGGER trg_ins_gasto_pertence_grupo AFTER INSERT ON gasto_pertence_evento
+FOR EACH ROW
+BEGIN
+	UPDATE eventos SET ultima_att = CURRENT_TIMESTAMP WHERE evento_id = (
+        SELECT evento_id_ref FROM gasto_pertence_evento WHERE gasto_id_ref = NEW.gasto_id_ref GROUP BY evento_id_ref
+	);
+END //
+
+/** Atualiza a data de quando ocorreu a última modificação (EXCLUSÃO) em um evento
+*/
+CREATE TRIGGER trg_del_gasto_pertence_grupo AFTER DELETE ON gasto_pertence_evento
+FOR EACH ROW
+BEGIN
+	UPDATE eventos SET ultima_att = CURRENT_TIMESTAMP WHERE evento_id = (
+        SELECT evento_id_ref FROM gasto_pertence_evento WHERE gasto_id_ref = OLD.gasto_id_ref GROUP BY evento_id_ref
 	);
 END //

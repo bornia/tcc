@@ -30,8 +30,10 @@ if(!mysqli_num_rows($res)) {
 }
 else {
 	while($data = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-		$datetime = explode(" ", strval($data['ultima_att']));
-		$grupo_id = $data['grupo_id'];
+		$datetime 			= explode(" ", strval($data['ultima_att']));
+		$data_modificacao 	= date_format(date_create($datetime[0]), "d/m/Y");
+		$tempo_modificacao 	= $datetime[1];
+		$grupo_id 			= $data['grupo_id'];
 
 		$sql = "SELECT COUNT(usuario_id_ref) AS qtd_membros FROM usuario_pertence_grupo WHERE grupo_id_ref = $grupo_id;";
 		$res2 = mysqli_query($con, $sql);
@@ -77,7 +79,7 @@ else {
 		<div class='card-footer border-light'>
 		  	<div class='row'>
 		    	<div class='col-12 col-md-5'>
-		      		<small class='text-muted' id='ultima-atualizacao'> Última atualização: " . $datetime[0] . " as " . $datetime[1] . ". </small>
+		      		<small class='text-muted' id='ultima-atualizacao'> Última atualização: " . $data_modificacao . " as " . $tempo_modificacao . ". </small>
 		    	</div>
 
 		    	<div class='col-12 col-md-7'>
