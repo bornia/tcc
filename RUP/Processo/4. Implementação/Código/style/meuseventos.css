@@ -34,7 +34,7 @@ div.main {
 	padding-bottom: 2.5em;
 }
 
-/* MEUS EVENTOS */
+/* LISTA DE EVENTOS */
 
 .less-mb {
 	margin-bottom: 0 !important;
@@ -52,6 +52,20 @@ div.main {
 #paginacao {
 	text-align: right;
 	font-weight: bold;
+}
+
+/* SALDO */
+
+.no-border-top-color {
+	border-top-color: transparent !important;
+}
+
+.total-row {
+	border-top: 4px double gray;
+}
+
+#tabela-saldo tbody>tr:hover {
+	cursor: pointer;
 }
 
 /* MODAL ADICIONA EVENTO */

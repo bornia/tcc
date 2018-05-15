@@ -161,12 +161,12 @@ BEGIN
 
 	UPDATE eventos SET total = (
         SELECT SUM(valor) FROM gasto_pertence_evento WHERE evento_id_ref = NEW.evento_id_ref 
-	);
+	) WHERE evento_id = NEW.evento_id_ref;
 END //
 
 /** Atualiza a data de quando ocorreu a última modificação (EXCLUSÃO) em um evento
 */
-CREATE TRIGGER trg_ins_gastos AFTER INSERT ON gasto_pertence_evento
+CREATE TRIGGER trg_ins_gasto_pertence_grupo AFTER INSERT ON gasto_pertence_evento
 FOR EACH ROW
 BEGIN
 	UPDATE eventos SET ultima_att = CURRENT_TIMESTAMP WHERE evento_id = (
@@ -175,12 +175,12 @@ BEGIN
 
 	UPDATE eventos SET total = (
         SELECT SUM(valor) FROM gasto_pertence_evento WHERE evento_id_ref = NEW.evento_id_ref 
-	);
+	) WHERE evento_id = NEW.evento_id_ref;
 END //
 
 /** Atualiza a data de quando ocorreu a última modificação (EXCLUSÃO) em um evento
 */
-CREATE TRIGGER trg_del_gastos AFTER DELETE ON gasto_pertence_evento
+CREATE TRIGGER trg_del_gasto_pertence_grupo AFTER DELETE ON gasto_pertence_evento
 FOR EACH ROW
 BEGIN
 	UPDATE eventos SET ultima_att = CURRENT_TIMESTAMP WHERE evento_id = (
@@ -189,5 +189,5 @@ BEGIN
 
 	UPDATE eventos SET total = (
         SELECT SUM(valor) FROM gasto_pertence_evento WHERE evento_id_ref = OLD.evento_id_ref 
-	);
+	) WHERE evento_id = OLD.evento_id_ref;
 END //

@@ -98,6 +98,35 @@ function exibe_quantidade_eventos_marcados(legenda_modal_id) {
 		}
 }
 
+/**
+*/
+function atualizar_tabela_saldo() {
+	$.ajax({
+			url: './reqs/atualizar_saldo.php',
+			type: 'POST',
+			data: {
+				grupo_id: $("#info_grupo_id").val()
+			}
+		})
+		.done(function(data) {
+			try {
+				var parsed = JSON.parse(data);
+				
+				if(parseInt(parsed.erro_id) != 0) {
+					$('#alerta_mensagem').html(formatar_texto_alerta('warning', parsed.erro_mensagem));
+				} else {
+					$('#tabela-corpo-saldo').html(parsed.tbody_saldo);
+				}
+			} catch(e_alerta) {
+				$('#alerta_mensagem_adicionar_gasto').html(
+					formatar_texto_alerta('warning', "Erro ao converter para JSON.")
+				);
+			}	
+		})
+		.fail(function() {})
+		.always(function() {});
+}
+
 /* ===================================================================== */
 /* ============================== EVENTOS ============================== */
 /* ===================================================================== */
@@ -528,6 +557,16 @@ function trigger_exibir_modal_reabrir_evento() {
 	})
 }
 
+/**
+*/
+function trigger_exibir_tab_saldo() {
+	$('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+		if($(e.target).attr('id') == "saldo-tab") {
+			atualizar_tabela_saldo();
+		}
+	})
+}
+
 /* ===================================================================== */
 /* ============================== OUTROS =============================== */
 /* ===================================================================== */
@@ -552,4 +591,6 @@ $(document).ready(function() {
 
 	trigger_exibir_modal_finalizar_evento();
 	trigger_exibir_modal_reabrir_evento();
+
+	trigger_exibir_tab_saldo();
 });
