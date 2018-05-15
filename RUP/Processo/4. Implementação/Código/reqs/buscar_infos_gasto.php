@@ -51,7 +51,7 @@ $participantes_ids = implode(",", $participantes_ids);
 
 
 //
-$sql = "SELECT email, valor FROM usuarios INNER JOIN gasto_pertence_evento ON usuario_id = usuario_id_ref WHERE usuario_id IN ($participantes_ids);";
+$sql = "SELECT email, valor FROM usuarios INNER JOIN gasto_pertence_evento ON usuario_id = usuario_id_ref WHERE usuario_id IN ($participantes_ids) AND gasto_id_ref = $gasto_id;";
 
 // Executa a query
 $res = mysqli_query($con, $sql);
