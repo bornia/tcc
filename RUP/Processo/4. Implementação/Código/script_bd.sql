@@ -20,7 +20,7 @@ CREATE TABLE usuarios (
 	*/
 	conheceu_ferramenta 	VARCHAR(10) NOT NULL,
 
-	PRIMARY KEY (usr_id),
+	PRIMARY KEY (usuario_id)
 );
 
 CREATE TABLE grupos (
@@ -158,24 +158,36 @@ BEGIN
 	UPDATE eventos SET ultima_att = CURRENT_TIMESTAMP WHERE evento_id = (
         SELECT evento_id_ref FROM gasto_pertence_evento WHERE gasto_id_ref = NEW.gasto_id_ref GROUP BY evento_id_ref
 	);
-END //
 
-/** Atualiza a data de quando ocorreu a última modificação (INSERÇÃO) em um evento
-*/
-CREATE TRIGGER trg_ins_gasto_pertence_grupo AFTER INSERT ON gasto_pertence_evento
-FOR EACH ROW
-BEGIN
-	UPDATE eventos SET ultima_att = CURRENT_TIMESTAMP WHERE evento_id = (
-        SELECT evento_id_ref FROM gasto_pertence_evento WHERE gasto_id_ref = NEW.gasto_id_ref GROUP BY evento_id_ref
+	UPDATE eventos SET total = (
+        SELECT SUM(valor) FROM gasto_pertence_evento WHERE evento_id_ref = NEW.evento_id_ref 
 	);
 END //
 
 /** Atualiza a data de quando ocorreu a última modificação (EXCLUSÃO) em um evento
 */
-CREATE TRIGGER trg_del_gasto_pertence_grupo AFTER DELETE ON gasto_pertence_evento
+CREATE TRIGGER trg_ins_gastos AFTER INSERT ON gasto_pertence_evento
+FOR EACH ROW
+BEGIN
+	UPDATE eventos SET ultima_att = CURRENT_TIMESTAMP WHERE evento_id = (
+        SELECT evento_id_ref FROM gasto_pertence_evento WHERE gasto_id_ref = NEW.gasto_id_ref GROUP BY evento_id_ref
+	);
+
+	UPDATE eventos SET total = (
+        SELECT SUM(valor) FROM gasto_pertence_evento WHERE evento_id_ref = NEW.evento_id_ref 
+	);
+END //
+
+/** Atualiza a data de quando ocorreu a última modificação (EXCLUSÃO) em um evento
+*/
+CREATE TRIGGER trg_del_gastos AFTER DELETE ON gasto_pertence_evento
 FOR EACH ROW
 BEGIN
 	UPDATE eventos SET ultima_att = CURRENT_TIMESTAMP WHERE evento_id = (
         SELECT evento_id_ref FROM gasto_pertence_evento WHERE gasto_id_ref = OLD.gasto_id_ref GROUP BY evento_id_ref
+	);
+
+	UPDATE eventos SET total = (
+        SELECT SUM(valor) FROM gasto_pertence_evento WHERE evento_id_ref = OLD.evento_id_ref 
 	);
 END //
