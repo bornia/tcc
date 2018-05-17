@@ -359,6 +359,7 @@ function finalizar_eventos() {
 		else {
 			atualizar_lista_eventos();
 			ocultar_botao_finalizar_evento();
+			mostrar_botao_adicionar_evento();
 		}
 	})
 	.fail(function() {console.log("error"); })
@@ -391,6 +392,7 @@ function reabrir_eventos() {
 		else {
 			atualizar_lista_eventos();
 			ocultar_botao_reabrir_evento();
+			mostrar_botao_adicionar_evento();
 		}
 	})
 	.fail(function() {console.log("error"); })
